@@ -4,6 +4,7 @@
 import sys
 import os
 import network_convert
+import yaml
 
 if __name__ == "__main__":
 	handle = open(sys.argv[1])
@@ -23,19 +24,25 @@ if __name__ == "__main__":
 			for path in gr.node[n]['pathway']:
 				pathways[path] = True
 	
-	
-	for i, path in enumerate(pathways):
-		pathid = "TMP%d" % (i+1)
+	i = 1
+	for path in pathways:
+		if path in name_tab:
+			pathid = "PID%s" % (name_tab[path][0])
+		else:
+			pathid = "TMP%d" % (i)
+			i += 1
 		print pathid
 		pathdir = os.path.join(outdir, pathid)
 		if not os.path.exists(pathdir):
 			os.mkdir(pathdir)
+		config = {"DESC" : str(path)}
+		if path in name_tab:
+			config["PID"] = int(name_tab[path][0])
+			config["SOURCE"] = str(name_tab[path][1])
+		
 		handle = open(os.path.join(pathdir, "INFO"), "w")
 		print path
-		handle.write(u"DESC=%s\n" % (unicode(path)))
-		if path in name_tab:
-			handle.write("PID=%s\n" %(name_tab[path][0]))
-			handle.write("SOURCE=%s\n" %(name_tab[path][1]))
+		handle.write(yaml.dump(config, default_flow_style=False))
 		handle.close()
 		nodes = {}
 		for n in gr.node:
@@ -47,7 +54,7 @@ if __name__ == "__main__":
 		for s in nodes:
 			for t in gr.edge[s]:
 				if t in nodes:
-					handle.write("%s\t%s\t%s\n" % (s, t, gr.edge[s][t]))
+					handle.write("%s\t%s\t%s\n" % (s, t, gr.edge[s][t]['interaction']))
 		handle.close()
 		
 	

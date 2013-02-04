@@ -19,7 +19,7 @@ def read_paradigm_graph(handle):
             gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
     return gr
 
-def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='type', edge_type_default='-a>'):
+def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
     for e in sorted(gr.node):
         handle.write("%s\t%s\n" % (gr.node[e].get(node_type_field, node_type_default), e))
 

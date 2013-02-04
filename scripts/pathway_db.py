@@ -4,6 +4,8 @@ import argparse
 import sys
 import os
 import re
+import shutil
+import subprocess
 
 reKeyValue = re.compile(r'^(\S+)\s*=\s*(.*)$')
 
@@ -21,13 +23,28 @@ def check_repo(basedir):
 	conf = parse_config(handle)
 	handle.close()
 	
+	if 'PID' not in conf:
+		raise Exception("Missing required PID field")
+
 	if 'DESC' not in conf:
 		raise Exception("Missing required DESC description field")
 		
 	if 'SOURCE' not in conf:
 		raise Exception("Missing required SOURCE field")
 	
-	
+	return conf
+
+def add_repo(input, conf, basedir):
+	pathway_name = "PID%s" % (conf['PID'])
+	dstdir = os.path.join(basedir, pathway_name)
+	if os.path.exists(dstdir):
+		raise Exception("Pathway PID%s already exists" % (conf['PID']))
+	print "Adding", dstdir
+	os.mkdir(dstdir)
+	for f in ['INFO', 'graph']:
+		shutil.copy(os.path.join(input, f), dstdir)
+	subprocess.check_call("cd %s; git add %s; git commit -m 'Adding Pathway %s'" % (basedir, pathway_name, pathway_name), shell=True)
+
 
 def main_add(args):
 	parser = argparse.ArgumentParser(prog="pathway_db add")
@@ -41,11 +58,13 @@ def main_add(args):
 		sys.exit(1)
 	
 	try:
-		check_repo(args.input)
+		conf = check_repo(args.input)
+		add_repo(args.input, conf, args.base_dir)
 	except Exception, e:
 		sys.stderr.write("Pathway Check Error: %s : %s\n" % (args.input, str(e)))
 		sys.exit(1)
-		
+	
+
 if __name__ == "__main__":
 	mode = sys.argv[1]
 
