@@ -4,23 +4,15 @@ import argparse
 import sys
 import os
 import re
+import yaml
 import shutil
 import subprocess
 
 reKeyValue = re.compile(r'^(\S+)\s*=\s*(.*)$')
 
-def parse_config(handle):
-	config = {}
-	for line in handle:
-		res = reKeyValue.search(line)
-		if res:
-			key, value = res.groups()
-			config[key] = value
-	return config
-
 def check_repo(basedir):
 	handle = open(os.path.join(basedir, "INFO"))
-	conf = parse_config(handle)
+	conf = yaml.load(handle.read())
 	handle.close()
 	
 	if 'PID' not in conf:
