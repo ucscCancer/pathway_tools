@@ -20,11 +20,18 @@ if __name__ == "__main__":
         if n not in gr2.node:
             sys.stderr.write( "Graph2 Missing Node:" + n + "\n" )
             gr.add_node(n)
-        else:
-            for t in gr1.edge[n]:
-                if t not in gr2.edge[n]:
-                    gr.add_edge(n, t)
-                    sys.stderr.write( "Graph2 Missing Edge:" + str((n,t)) + "\n")
+            gr.node[n] = gr1.node[n]
+    for n in gr1.node:
+        for t in gr1.edge[n]:
+            if n not in gr2.node or t not in gr2.edge[n]:
+                for e in [n,t]:
+                    if e not in gr.node:
+                        gr.add_node(e)
+                        gr.node[e] = gr1.node[e]
+
+                gr.add_edge(n,t)
+                gr.edge[n][t] = gr1.edge[n][t]
+                sys.stderr.write( "Graph2 Missing Edge:" + str((n,t)) + "\n")
     for n in gr2.node:
         if n not in gr1.node:
             sys.stderr.write( "Graph1 Missing Node:" + n + "\n" )
