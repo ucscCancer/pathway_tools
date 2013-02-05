@@ -13,6 +13,8 @@ import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--append', help="Default Edge Type", action="append")
+    parser.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)
+    
     parser.add_argument('basedir', help="Base Dir")
     
     args = parser.parse_args()
@@ -46,4 +48,7 @@ if __name__ == "__main__":
             elif len(tmp) == 3:
                 gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
         handle.close()
-    network_convert.write_xgmml(gr, sys.stdout)
+    if args.paradigm:
+        network_convert.write_paradigm_graph(gr, sys.stdout)
+    else:        
+        network_convert.write_xgmml(gr, sys.stdout)

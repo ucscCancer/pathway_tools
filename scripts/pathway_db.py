@@ -68,9 +68,14 @@ def main_sync(args):
 		sys.stderr.write("Define Pathway REPO\n")
 		sys.exit(1)
 
-	subprocess.check_call("git clone %s %s" % 
-			(CENTRAL_REPO, args.base_dir), 
-		shell=True)
+	if not os.path.exists(args.base_dir):
+		subprocess.check_call("git clone %s %s" % 
+				(CENTRAL_REPO, args.base_dir), 
+			shell=True)
+
+	subprocess.check_call("cd %s ; git pull origin" % 
+				(args.base_dir), 
+			shell=True)
 
 
 if __name__ == "__main__":

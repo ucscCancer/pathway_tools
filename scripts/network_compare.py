@@ -10,7 +10,7 @@ if __name__ == "__main__":
     handle1.close()
     
     handle2 = open(sys.argv[2])
-    gr2 = network_convert.read_xgmml(handle2)
+    gr2 = network_convert.read_paradigm_graph(handle2)
     handle2.close()
     
 
