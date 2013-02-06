@@ -9,6 +9,8 @@ import networkx
 from glob import glob
 import argparse
 
+def log(message):
+    sys.stderr.write(message + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -48,6 +50,8 @@ if __name__ == "__main__":
             elif len(tmp) == 3:
                 gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
         handle.close()
+    log("Node Count: %d" % (len(gr.nodes())))
+    log("Edge Count: %d" % (len(gr.edges())))
     if args.paradigm:
         network_convert.write_paradigm_graph(gr, sys.stdout)
     else:        
