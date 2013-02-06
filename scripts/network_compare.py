@@ -16,6 +16,9 @@ if __name__ == "__main__":
 
     gr = networkx.DiGraph()
 
+    sys.stderr.write("Node Counts %d %d\n" % (len(gr1.nodes()), len(gr2.nodes())))
+    sys.stderr.write("Edge Counts %d %d\n" % (len(gr1.edges()), len(gr2.edges())))
+
     for n in gr1.node:
         if n not in gr2.node:
             sys.stderr.write( "Graph2 Missing Node:" + n + "\n" )

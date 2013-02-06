@@ -9,6 +9,9 @@ import zipfile
 import os
 from glob import glob
 
+class FormatException(Exception):
+    pass
+
 def read_paradigm_graph(handle):
     gr = networkx.DiGraph()
     for line in handle:
@@ -17,6 +20,8 @@ def read_paradigm_graph(handle):
             gr.add_node( tmp[1], type=tmp[0] )
         elif len(tmp) == 3:
             gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
+        else:
+            raise FormatException("Bad line: %s" % (line))
     return gr
 
 def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
