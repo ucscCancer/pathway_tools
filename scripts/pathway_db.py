@@ -22,7 +22,7 @@ reKeyValue = re.compile(r'^(\S+)\s*=\s*(.*)$')
 
 LOCAL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CENTRAL_REPO = "hgwdev.soe.ucsc.edu:/hive/groups/cancerGB/paradigm/superpathway_db.git"
+CENTRAL_REPO = "git://github.com/ucscCancer/superpathway_db.git"
 LOCAL_REPO = os.path.join(LOCAL_DIR, "superpathway_db")
 DATA_REPO = os.path.join(LOCAL_DIR, "data")
 
@@ -134,7 +134,7 @@ def main_compile(args):
     
     args = parser.parse_args(args)
 
-    gr = networkx.DiGraph()
+    gr = networkx.MultiDiGraph()
     base_dir = args.base_dir
 
     paths = glob(os.path.join(base_dir, "[A-Z]*"))
@@ -169,12 +169,14 @@ def main_compile(args):
                     raise Exception("Missing Node Declaration: %s" % (tmp[0]))
                 if tmp[1] not in gr.node:
                     raise Exception("Missing Node Declaration: %s" % (tmp[1]))
-                if tmp[1] not in gr.edge[tmp[0]]:
-                    gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
+                has_edge = False
+                if tmp[1] in gr.edge[tmp[0]]:
+                    for i in gr.edge[tmp[0]][tmp[1]]:
+                        if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
+                            has_edge = True
+                if not has_edge:
+                    gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
                 else:
-                    #log("Duplicate Edge: %s %s (%s)" % (tmp[0], tmp[1], tmp[2]))
-                    if gr.edge[tmp[0]][tmp[1]]['interaction'] != tmp[2]:
-                        log("Mismatch Edge Declaration: %s %s : %s --> %s" % (tmp[0], tmp[1], gr.edge[tmp[0]][tmp[1]]['interaction'], tmp[2] ))
                     duplicate_edges += 1
         handle.close()
     log("Node Count: %d" % (len(gr.nodes())))
