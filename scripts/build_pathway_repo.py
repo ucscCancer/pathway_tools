@@ -54,7 +54,8 @@ if __name__ == "__main__":
 		for s in nodes:
 			for t in gr.edge[s]:
 				if t in nodes:
-					handle.write("%s\t%s\t%s\n" % (s, t, gr.edge[s][t]['interaction']))
+					for e in gr.edge[s][t]:
+						handle.write("%s\t%s\t%s\n" % (s, t, gr.edge[s][t][e]['interaction']))
 		handle.close()
 		
 	

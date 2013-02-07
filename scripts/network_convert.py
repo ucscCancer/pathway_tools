@@ -13,7 +13,7 @@ class FormatException(Exception):
     pass
 
 def read_paradigm_graph(handle):
-    gr = networkx.DiGraph()
+    gr = networkx.MultiDiGraph()
     for line in handle:
         tmp = line.rstrip().split("\t")
         if len(tmp) == 2:
@@ -30,7 +30,8 @@ def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='
 
     for src in gr.edge:
         for dst in gr.edge[src]:
-            handle.write("%s\t%s\t%s\n" % (src, dst, gr.edge[src][dst].get(edge_type_field, edge_type_default)))
+            for edge in gr.edge[src][dst]:
+                handle.write("%s\t%s\t%s\n" % (src, dst, gr.edge[src][dst][edge].get(edge_type_field, edge_type_default)))
 
 
 def load_paradigm_dir(base_dir):
@@ -43,7 +44,7 @@ def load_paradigm_dir(base_dir):
             unicode(tmp[2], 'ascii', errors="ignore")
         ]   
     handle.close()
-    gr = networkx.DiGraph()
+    gr = networkx.MultiDiGraph()
     for a in glob(os.path.join(base_dir, "pid*.tab")):
         pid_name = os.path.basename(a).split("_")[1]
         handle = open(a)
@@ -76,11 +77,11 @@ def write_xgmml(gr, handle):
     for i, n in enumerate(gr.node):
         name_map[n] = i
         node = doc.createElement('node')
-        node.setAttribute('label', n)
+        node.setAttribute('label', str(n))
         node.setAttribute('id', str(i))
         for key, value in gr.node[n].items():
             att_node = doc.createElement('att')
-            att_node.setAttribute('name', key)
+            att_node.setAttribute('name', str(key))
             if type(value) == float:
                 att_node.setAttribute('value', str(value))
                 att_node.setAttribute('type', "real")
@@ -91,7 +92,7 @@ def write_xgmml(gr, handle):
                 att_node.setAttribute('type', "list")
                 for elm in value:
                     list_node = doc.createElement("att")
-                    list_node.setAttribute("name", key)
+                    list_node.setAttribute("name", str(key))
                     list_node.setAttribute('value', str(elm))
                     if type(elm) == float:
                         list_node.setAttribute("type", "real")
@@ -108,28 +109,29 @@ def write_xgmml(gr, handle):
 
     for source in gr.edge:
         for target in gr.edge[source]:
-            edge = doc.createElement("edge")
-            edge.setAttribute("label", "%s - %s" % (source, target))
-            edge.setAttribute("source", str(name_map[source]))
-            edge.setAttribute("target", str(name_map[target]))
-            for key, value in gr.edge[source][target].items():
-                att_node = doc.createElement('att')
-                att_node.setAttribute('name', key)
-                att_node.setAttribute('value', str(value))
-                if type(value) == float:
-                    att_node.setAttribute('type', "real")
-                elif type(value) == int:
-                    att_node.setAttribute('type', "integer")
-                else:
-                    att_node.setAttribute('type', "string")
-                edge.appendChild(att_node)
-            graph_node.appendChild(edge)
+            for edge in gr.edge[source][target]:
+                edge_node = doc.createElement("edge")
+                edge_node.setAttribute("label", "%s - %s" % (source, target))
+                edge_node.setAttribute("source", str(name_map[source]))
+                edge_node.setAttribute("target", str(name_map[target]))
+                for key, value in gr.edge[source][target][edge].items():
+                    att_node = doc.createElement('att')
+                    att_node.setAttribute('name', key)
+                    att_node.setAttribute('value', str(value))
+                    if type(value) == float:
+                        att_node.setAttribute('type', "real")
+                    elif type(value) == int:
+                        att_node.setAttribute('type', "integer")
+                    else:
+                        att_node.setAttribute('type', "string")
+                    edge_node.appendChild(att_node)
+                graph_node.appendChild(edge_node)
 
     doc.writexml(handle, addindent=" ", newl="\n")
 
 class GraphComp:
     def __init__(self, parser, attrs):
-        self.graph = networkx.DiGraph()
+        self.graph = networkx.MultiDiGraph()
 
     def pop(self):
         return self.graph
@@ -154,10 +156,13 @@ class EdgeComp:
         self.parent = parent
         self.src = parser.id_map[attrs.getValue('source')]
         self.target = parser.id_map[attrs.getValue('target')]
+        self.key = 0
+        if self.target in parent.graph.edge[self.src]:
+            self.key=len(parent.graph.edge[self.src][self.target])
         parent.graph.add_edge(self.src,self.target)
 
     def add_att(self, name, value):
-        self.parent.graph.edge[self.src][self.target][name] =  value
+        self.parent.graph.edge[self.src][self.target][self.key][name] =  value
 
     def pop(self):
         pass
