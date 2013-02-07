@@ -13,37 +13,58 @@ git clone git://github.com/ucscCancer/pathway_tools.git
 
 Once you have the pathway toolkit:
 
-==========================
+========================
+==The pathway_db tool
+========================
+
+----------
 
 Get a copy of the database
 ./scripts/pathway_db.py sync
 
-==========================
+----------
 
-Compile to a superpathway
+Compile to a superpathway (paradigm format)
  ./scripts/pathway_db.py compile --paradigm > superpathway.pid 
 
-==========================
-
-Compare to the old super pathway
-./scripts/network_compare.py <path/to/pid_110725_pathway.tab> pid_all_pathway.tab
-
-==========================
+----------
 
 Check status of local Pathway Database
 ./scripts/pathway_db.py status
 
-==========================
+----------
 
 Syncronize local copy of HUGO
 ./scripts/pathway_db.py hugo_sync
 
-==========================
+----------
 
 Run checks on pathway record
 ./scripts/pathway_db.py check PID45669
 
-==========================
+----------
 
 Commit changes done on pathway
 ./scripts/pathway_db.py commit PID45669
+
+
+========================
+==The network comparision tool
+========================
+
+Compare to the old super pathway
+./scripts/network_compare.py <path/to/pid_110725_pathway.tab> pid_all_pathway.tab
+
+
+========================
+==The network converter tool 
+========================
+
+
+Convert Superpathway file, with GMT file into XGMML
+./paradigm_network_convert.py -in-paradigm pid_110725_pathway.tab -in-gmt output.gmt  -out-xgmml super.xgmml
+
+----------
+
+Convert XGMML file to paradigm network and gmt file
+./paradigm_network_convert.py -in-xgmml super.xgmml -out-gmt test.gmt -out-paradigm test.tab
