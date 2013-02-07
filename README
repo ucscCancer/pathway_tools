@@ -11,16 +11,39 @@ pip install networkx
 To get the code:
 git clone  hgwdev.soe.ucsc.edu:/hive/groups/cancerGB/paradigm/pathway_compiler.git
 
-Once you have compiler:
+Once you have the pathway toolkit:
+
+==========================
 
 Get a copy of the database
 ./scripts/pathway_db.py sync
 
+==========================
+
 Compile to a superpathway
  ./scripts/pathway_db.py compile --paradigm > superpathway.pid 
 
-Compare to the old super pathway
+==========================
 
+Compare to the old super pathway
 ./scripts/network_compare.py <path/to/pid_110725_pathway.tab> pid_all_pathway.tab
 
-Please help me to start testing this data and figuring out what functions we need to write.
+==========================
+
+Check status of local Pathway Database
+./scripts/pathway_db.py status
+
+==========================
+
+Syncronize local copy of HUGO
+./scripts/pathway_db.py hugo_sync
+
+==========================
+
+Run checks on pathway record
+./scripts/pathway_db.py check PID45669
+
+==========================
+
+Commit changes done on pathway
+./scripts/pathway_db.py commit PID45669
