@@ -1,0 +1,26 @@
+
+UCSC SuperPathway Database Toolkit
+
+
+To get the dependencies
+
+pip install pyaml
+pip install networkx
+
+
+To get the code:
+git clone  hgwdev.soe.ucsc.edu:/hive/groups/cancerGB/paradigm/pathway_compiler.git
+
+Once you have compiler:
+
+Get a copy of the database
+./scripts/pathway_db.py sync
+
+Compile to a superpathway
+ ./scripts/pathway_db.py compile --paradigm > superpathway.pid 
+
+Compare to the old super pathway
+
+./scripts/network_compare.py <path/to/pid_110725_pathway.tab> pid_all_pathway.tab
+
+Please help me to start testing this data and figuring out what functions we need to write.
