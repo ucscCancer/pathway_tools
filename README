@@ -9,7 +9,7 @@ pip install networkx
 
 
 To get the code:
-git clone  hgwdev.soe.ucsc.edu:/hive/groups/cancerGB/paradigm/pathway_compiler.git
+git clone git://github.com/ucscCancer/pathway_tools.git
 
 Once you have the pathway toolkit:
 
