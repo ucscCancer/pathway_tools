@@ -109,15 +109,11 @@ def main_new(args):
 
 
 
-def add_repo(input, conf, basedir):
-    pathway_name = "PID%s" % (conf['PID'])
+def add_repo(basedir, pathway_name, conf):
     dstdir = os.path.join(basedir, pathway_name)
-    if os.path.exists(dstdir):
-        raise Exception("Pathway PID%s already exists" % (conf['PID']))
-    print "Adding", dstdir
-    os.mkdir(dstdir)
-    for f in ['INFO', 'graph']:
-        shutil.copy(os.path.join(input, f), dstdir)
+    if not os.path.exists(dstdir):
+        raise Exception("Pathway PID%s doesn't exists" % (pathway_name))
+    print "Adding", pathway_name
     subprocess.check_call("cd %s; git add %s; git commit -m 'Adding Pathway %s'" % (basedir, pathway_name, pathway_name), shell=True)
 
 
@@ -150,8 +146,7 @@ def main_add(args):
                 raise Exception("Directory not found")
         repocheck = RepoChecker(args.base_dir)
         conf = repocheck.check_project(pid_name)
-        return
-        add_repo(args.input, conf, args.base_dir)
+        add_repo(args.base_dir, pid_name, conf)
     except Exception, e:
         sys.stderr.write("Pathway Check Error: %s : %s\n" % (args.input, str(e)))
         sys.exit(1)
