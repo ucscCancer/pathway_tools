@@ -27,10 +27,21 @@ LOCAL_REPO = os.path.join(LOCAL_DIR, "superpathway_db")
 DATA_REPO = os.path.join(LOCAL_DIR, "data")
 
 
+class Dogma:
+    def __init__(self):
+        self.data = None
+
+    def read(self, handle):
+        self.data = yaml.load(handle.read())
+
+    def get_dogma(self, name):
+        return self.data['dogma'].get(name, None)
+
 class RepoChecker:
     def __init__(self, repo):
         self.repo = repo
         self.hugo_map = None
+        self.dogma = None
 
     def load_hugomap(self, path):
         handle = open(path)
@@ -47,6 +58,12 @@ class RepoChecker:
                 for col in header:
                     o[col] = row[header[col]]
                 self.hugo_map[ row[header["Approved Symbol"]] ] = o
+        handle.close()
+
+    def load_dogma(self, path):
+        handle = open(path)
+        self.dogma = Dogma()
+        self.dogma.read(handle)
         handle.close()
 
     
@@ -75,6 +92,12 @@ class RepoChecker:
                     if node not in self.hugo_map:
                         errors.append(Exception("Gene Symbol not found:\t%s" % (node)))
 
+        if self.dogma is not None:
+            for node in gr.node:
+                ntype = gr.node[node]['type']
+                if self.dogma.get_dogma(ntype) == None:
+                    errors.append(Exception("No dogma for node %s type %s" % (node, ntype)))
+
         return errors
 
     def suggest_nodes(self, project):
@@ -86,10 +109,17 @@ class RepoChecker:
             for node in gr.node:
                 if gr.node[node]['type'] == 'protein':
                     if node not in self.hugo_map:
+                        found = False
                         for alt in self.hugo_map:
                             for src_namespace in self.hugo_map[alt]:
                                 if self.hugo_map[alt][src_namespace] == node:
                                     out.append( [node, src_namespace, alt] )
+                                    found = True
+                        if not found:
+                            for alt in self.hugo_map:
+                                if len(alt) > 2:    
+                                    if node.startswith(alt):
+                                        out.append( [node, 'name prefix', alt] )
         return out
 
 
@@ -340,6 +370,13 @@ def main_check(args):
         checker.load_hugomap(hugo_path)
     else:
         log("Skipping HUGO check")
+
+    dogma_path = os.path.join(DATA_REPO, "standard_dogma.yaml")
+    if os.path.exists(dogma_path):
+        checker.load_dogma(dogma_path)
+    else:
+        log("Skipping Dogma check")
+
     for project in projects:
         try:
             errors = checker.check_project(project)
