@@ -49,7 +49,6 @@ class RepoChecker:
                 self.hugo_map[ row[header["Approved Symbol"]] ] = o
         handle.close()
 
-
     
     def check_project(self, project):
 
@@ -74,9 +73,25 @@ class RepoChecker:
             for node in gr.node:
                 if gr.node[node]['type'] == 'protein':
                     if node not in self.hugo_map:
-                        errors.append(Exception("Gene Symbol not found: %s" % (node)))
+                        errors.append(Exception("Gene Symbol not found:\t%s" % (node)))
 
         return errors
+
+    def suggest_nodes(self, project):
+        handle = open(os.path.join(self.repo, project, "graph"))
+        gr = network_convert.read_paradigm_graph(handle)
+        handle.close()
+        out = []
+        if self.hugo_map is not None:
+            for node in gr.node:
+                if gr.node[node]['type'] == 'protein':
+                    if node not in self.hugo_map:
+                        for alt in self.hugo_map:
+                            for src_namespace in self.hugo_map[alt]:
+                                if self.hugo_map[alt][src_namespace] == node:
+                                    out.append( [node, src_namespace, alt] )
+        return out
+
 
 
 def main_new(args):
@@ -332,10 +347,40 @@ def main_check(args):
                 print "OK: %s" % (project)
             else:
                 for e in errors:
-                    print "CheckError: %s : %s" % (project, str(e))
+                    print "CheckError:\t%s\t%s" % (project, str(e))
                 print "BAD: %s" % (project)
         except Exception, e:
             sys.stderr.write("Pathway Check Error: %s : %s\n" % (project, str(e)))
+
+def main_suggest(args):
+    parser = argparse.ArgumentParser(prog="pathway_db check")
+    parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser.add_argument("project", help="Project List", nargs="*")
+
+    args = parser.parse_args(args)
+
+    projects = []
+    if len(args.project) == 0:
+        projects = get_project_list(args.base_dir)
+    else:
+        projects = args.project
+
+    checker = RepoChecker(args.base_dir)
+    hugo_path = os.path.join(DATA_REPO, "hugo.tab")
+    if os.path.exists(hugo_path):
+        checker.load_hugomap(hugo_path)
+    else:
+        log("Can't make suggestions until hugo synced")
+        sys.exit(1)
+
+    for project in projects:
+        try:
+            suggestions = checker.suggest_nodes(project)
+            for sug in suggestions:
+                print "For %s :  instead of %s (from:%s) try %s" % (project, sug[0], sug[1], sug[2])
+        except Exception, e:
+            sys.stderr.write("Pathway Check Error: %s : %s\n" % (project, str(e)))
+
 
 
 def main_commit(args):
@@ -398,6 +443,9 @@ mode_map = {
     },
     'check' : {
         'method' : main_check
+    },
+    'suggest' : {
+        'method' : main_suggest
     },
     'commit' : {
         'method' : main_commit
