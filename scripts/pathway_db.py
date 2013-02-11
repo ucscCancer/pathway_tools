@@ -78,15 +78,42 @@ class RepoChecker:
 
         return errors
 
-def add_repo(input, conf, basedir):
-    pathway_name = "PID%s" % (conf['PID'])
-    dstdir = os.path.join(basedir, pathway_name)
-    if os.path.exists(dstdir):
-        raise Exception("Pathway PID%s already exists" % (conf['PID']))
-    print "Adding", dstdir
+
+def main_new(args):
+    parser = argparse.ArgumentParser(prog="pathway_db new")
+    parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser.add_argument("-m", "--manual-id", help="Manual ID", default=None)
+    args = parser.parse_args(args)    
+
+    pid = None
+    if pid is None:
+        pid = 0
+        for p in get_project_list(args.base_dir):
+            pid = max(int(p.replace("PID", "")), pid)
+        pid += 1 
+    else:
+        pid = int(args.manual_id.replace("PID", ""))
+
+    pid_name = "PID%s" % (pid)
+    dstdir = os.path.join(args.base_dir, pid_name)
     os.mkdir(dstdir)
-    for f in ['INFO', 'graph']:
-        shutil.copy(os.path.join(input, f), dstdir)
+
+    config = {
+        'PID' : pid,
+        'DESC' : ''
+    }
+
+    store_config(args.base_dir, pid_name, config)
+    print pid_name
+
+
+
+
+def add_repo(basedir, pathway_name, conf):
+    dstdir = os.path.join(basedir, pathway_name)
+    if not os.path.exists(dstdir):
+        raise Exception("Pathway PID%s doesn't exists" % (pathway_name))
+    print "Adding", pathway_name
     subprocess.check_call("cd %s; git add %s; git commit -m 'Adding Pathway %s'" % (basedir, pathway_name, pathway_name), shell=True)
 
 
@@ -101,14 +128,31 @@ def main_add(args):
         sys.exit(1)
     
     try:
-        conf = check_repo(args.input)
-        add_repo(args.input, conf, args.base_dir)
+        pid_name = None
+        dstdir = os.path.join(args.base_dir, args.input)
+        if os.path.exists(dstdir):
+            pid_name = args.input
+        else:
+            if os.path.exists(args.input):                
+                handle = open(os.path.join(args.input, "INFO"))
+                conf = yaml.load(handle.read())
+                handle.close()
+                pid_name = "PID%s" % (conf['PID'])
+                dstdir = os.path.join(args.base_dir, pid_name)
+                os.mkdir(dstdir)
+                for f in ['INFO', 'graph']:
+                    shutil.copy(os.path.join(args.input, f), dstdir)
+            else:
+                raise Exception("Directory not found")
+        repocheck = RepoChecker(args.base_dir)
+        conf = repocheck.check_project(pid_name)
+        add_repo(args.base_dir, pid_name, conf)
     except Exception, e:
         sys.stderr.write("Pathway Check Error: %s : %s\n" % (args.input, str(e)))
         sys.exit(1)
 
 def main_sync(args):
-    parser = argparse.ArgumentParser(prog="pathway_db add")
+    parser = argparse.ArgumentParser(prog="pathway_db sync")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     args = parser.parse_args(args)
     
@@ -127,7 +171,7 @@ def main_sync(args):
 
 
 def main_compile(args):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog="pathway_db compile")
     parser.add_argument('-a', '--append', help="Default Edge Type", action="append")
     parser.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
@@ -163,7 +207,9 @@ def main_compile(args):
                         raise Exception("Mismatch Node Type: %s :%s --> %s" % (node_name, gr.node[node_name]['type'], node_type ))
                 if 'pathway' not in gr.node[node_name]:
                     gr.node[node_name]['pathway'] = []
+                    gr.node[node_name]['pid'] = []                    
                 gr.node[node_name]['pathway'].append(info['DESC'])
+                gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
             elif len(tmp) == 3:
                 if tmp[0] not in gr.node:
                     raise Exception("Missing Node Declaration: %s" % (tmp[0]))
@@ -195,12 +241,20 @@ def get_modified(base_dir):
 
     pid_list = {}
     outs = StringIO(output)
+    untracked = False
     for line in outs:
-        tmp = line.rstrip().split("\t")
-        if len(tmp) == 2 and tmp[0] == "#" and tmp[1].startswith('modified:'):
-            fname = re.sub(r'^modified:\s*', '', tmp[1])
-            pid_list[os.path.dirname(fname)] = True    
-    return pid_list.keys()
+        if line.startswith("# Untracked files"):
+            untracked = True
+        if not untracked:
+            tmp = line.rstrip().split("\t")
+            if len(tmp) == 2 and tmp[0] == "#" and tmp[1].startswith('modified:'):
+                fname = re.sub(r'^modified:\s*', '', tmp[1])
+                pid_list[os.path.dirname(fname)] = 'modified'
+        else:
+            tmp = line.rstrip().split("\t")
+            if len(tmp) == 2 and tmp[0] == '#' and tmp[1].startswith("PID"):
+                pid_list[os.path.dirname(tmp[1])] = 'untracked'
+    return pid_list
 
 def get_project_list(base_dir):
     pid_list = []
@@ -230,14 +284,14 @@ def store_config(base_dir, project, config):
     ohandle.close()
 
 def main_status(args):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog="pathway_db status")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     args = parser.parse_args(args)
 
     pid_list = get_modified(args.base_dir)
 
     for pid in pid_list:
-        print "modified:\t%s" % (pid)
+        print "%s:\t%s" % (pid_list[pid], pid)
 
 def main_hugosync(args):
     src_url = "http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_hgnc_id&col=gd_app_sym&col=gd_app_name&col=gd_status&col=gd_prev_sym&col=gd_prev_name&col=gd_aliases&col=gd_name_aliases&col=gd_pub_chrom_map&col=gd_pub_acc_ids&col=gd_enz_ids&col=gd_pub_eg_id&col=gd_pubmed_ids&col=gd_pub_refseq_ids&col=gd_ccds_ids&col=md_eg_id&col=md_mim_id&col=md_refseq_id&col=md_prot_id&col=md_ensembl_id&col=md_ucsc_id&col=md_mgd_id&col=md_rgd_id&status=Approved&status=Entry+Withdrawn&status_opt=2&where=&order_by=gd_hgnc_id&format=text&limit=&hgnc_dbtag=on&submit=submit"
@@ -253,7 +307,7 @@ def main_hugosync(args):
 
 
 def main_check(args):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog="pathway_db check")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser.add_argument("project", help="Project List", nargs="*")
 
@@ -285,7 +339,7 @@ def main_check(args):
 
 
 def main_commit(args):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog="pathway_db commit")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser.add_argument("-f", "--force", help="Force Commit", action="store_true", default=False)
     parser.add_argument("-m", "--message", help="Message", default=None)
@@ -323,30 +377,48 @@ def main_commit(args):
                 (args.base_dir, message, args.project), 
             shell=True)
 
+mode_map = {
+    'add' : {
+        'method' : main_add
+    },
+    'sync' : {
+        'method' : main_sync
+    },
+    'compile' : {
+        'method' : main_compile
+    },
+    'status' : {
+        'method' : main_status
+    },
+    'add' : {
+        'method' : main_add
+    },
+    'hugo_sync' : {
+        'method' : main_hugosync
+    },
+    'check' : {
+        'method' : main_check
+    },
+    'commit' : {
+        'method' : main_commit
+    },
+    'new' : {
+        'method' : main_new
+    },
+    
+
+
+}
 
 if __name__ == "__main__":
-    mode = sys.argv[1]
+    mode = None
+    if len(sys.argv) > 1:
+        mode = sys.argv[1]
 
-    if mode == 'add':
-        main_add(sys.argv[2:])
-
-    if mode == 'sync':
-        main_sync(sys.argv[2:])
-
-    if mode == 'compile':
-        main_compile(sys.argv[2:])
-
-    if mode == "status":
-        main_status(sys.argv[2:])
-
-    if mode == "hugo_sync":
-        main_hugosync(sys.argv[2:])
-
-    if mode == "check":
-        main_check(sys.argv[2:])
-
-    if mode == "commit":
-        main_commit(sys.argv[2:])
-
-
+    if mode in mode_map:
+        mode_map[mode]['method'](sys.argv[2:])
+    else:
+        print "Modes:"
+        for m in mode_map:
+            print "\t%s" % (m)
 
