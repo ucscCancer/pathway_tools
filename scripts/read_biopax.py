@@ -5,7 +5,8 @@ import rdflib
 import rdflib.term
 import os
 from glob import glob
-
+import networkx
+import network_convert
 
 TYPE_PRED = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 BIOPAX_BASE = "http://www.biopax.org/release/biopax-level3.owl#"
@@ -78,12 +79,13 @@ class BioPax:
 			self.graph[subj_text][pred_text].append( obj_text )
 			
 
-	def toNetTab(self):
+	def toNet(self):
 		pathway_list = {}
 		for a in self.query(src_type=BIOPAX_BASE + "Pathway"):
 			pathway_list[a.src] = True
 
 		for pathway in pathway_list:
+			gr = networkx.MultiDiGraph()
 			log("Pathway: " + pathway)
 			name = None
 			for a in self.query(src=pathway, predicate= BIOPAX_BASE + "displayName"):
@@ -106,13 +108,17 @@ class BioPax:
 						right.append( elem )
 					
 					for l in left:
-						print "#%s\t%s" % (l.type, l.name)
+						if l.name not in gr.node:
+							gr.add_node(l.name, type=l.type)
+
 					for r in right:
-						print "#%s\t%s" % (r.type, r.name)
+						if r.name not in gr.node:
+							gr.add_node(r.name, type=r.type)
 						
 					for l in left:
 						for r in right:
-							print "%s\t->\t%s" % (l.name, r.name)
+							interaction = "-a>"
+							gr.add_edge( l.name, r.name, None, {'interaction' : interaction} )
 					
 				elif  component_list[component] == BIOPAX_BASE + "Catalysis":
 					pass
@@ -121,6 +127,7 @@ class BioPax:
 				#for c_info in self.query(src=component):
 				#	print c_info
 				#print component, component_list[component]
+			yield gr
 	
 	def get_node_type(self, node):
 		return self.graph.get(node, {}).get(TYPE_PRED, [None])[0]
@@ -166,4 +173,5 @@ if __name__ == "__main__":
 	b = BioPax()
 	b.load(sys.argv[1])
 	
-	b.toNetTab()
+	for gr in b.toNet():
+		network_convert.write_paradigm_graph(gr, sys.stdout)
