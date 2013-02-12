@@ -532,8 +532,8 @@ def isTerminal(node, interactions):
     if node in rinteractions:
         nLinks += len(rinteractions[nodes].keys())
     if nLinks > 1:
-        return False:
-    else
+        return False
+    else:
         return True
     
 def removeNode(node, pNodes, pInteractions):

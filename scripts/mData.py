@@ -3,7 +3,16 @@
 ## Last Updated: 9/28/11
 import re, sys, urllib2, os, random, math
 from copy import deepcopy
-import mCalculate
+
+
+
+def median(mylist):
+    sorts = sorted(mylist)
+    length = len(sorts)
+    if not length % 2:
+        return (sorts[length / 2] + sorts[length / 2 - 1]) / 2.0
+    return sorts[length / 2]
+
 
 def log(msg, die = False):
     """logger function"""
@@ -345,7 +354,7 @@ def wMeta(inf, col, method = "discrete", mparams = "-;-1;0,+;1", name = None, sa
                 elif label+1 == len(labelList):
                     vals.append("NULL")
     elif method == "quartile":
-        medVal = mCalculate.median(cData[i].values())
+        medVal = median(cData[i].values())
         for j in samples:
             try:
                 if float(cData[i][j]) > medVal:
