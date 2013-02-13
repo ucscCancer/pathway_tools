@@ -133,6 +133,9 @@ class GraphComp:
     def __init__(self, parser, attrs):
         self.graph = networkx.MultiDiGraph()
 
+    def add_att(self, name, value):
+        self.graph.graph[name] =  value
+
     def pop(self):
         return self.graph
 
@@ -175,7 +178,7 @@ class AttComp:
         if attrs.has_key('value'):
             parent.add_att(attrs.getValue('name'), attrs.getValue('value'))
         self.att_list = None
-        if attrs.getValue("type") == "list":
+        if attrs.has_key('type') and attrs.getValue("type") == "list":
             self.att_list = []
 
     def add_att(self, name, value):
@@ -208,7 +211,9 @@ class XGMMLHandler(xml.sax.ContentHandler):
             
  
     def endElement(self, name):
-        self.last_value = self.elem_stack.pop().pop()
+        last_node = self.elem_stack.pop()
+        if last_node is not None:
+            self.last_value = last_node.pop()
 
     def result(self):
         return self.last_value
