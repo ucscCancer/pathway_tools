@@ -12,11 +12,17 @@ dogma:
         - [ promoter,mRNA,    -cTp> ]
         - [ tlreg   protein -cTl> ]
         - [ actreg  active  -cAct> ]
-    'smallmolecule':
-        - [active ]
-    '*':
+    'chemical':
         - [ active ]
-
+    'family':
+        - [ active ]
+    'complex':
+        - [ active ]
+    'abstract':
+        - [ active ]
+    'miRNA':
+        - [ active ]
+    
 
 #interactions define how the sub-elements of two templates are connected
 #interactions format:
