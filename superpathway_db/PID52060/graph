@@ -1,0 +1,159 @@
+protein	ST3GAL1
+protein	ST3GAL2
+protein	B3GALT5
+protein	NAGA
+protein	A4GALT
+protein	HEXA
+protein	HEXB
+protein	ST8SIA1
+protein	FUT9
+protein	FUT1
+protein	FUT2
+protein	NAT8
+protein	B3GALNT1
+protein	GBGT1
+chemical	mol:gl:G00181
+chemical	mol:gl:G00107
+chemical	mol:gl:G00096
+chemical	mol:gl:G00099
+chemical	mol:gl:G00100
+chemical	mol:gl:G00101
+chemical	mol:gl:G00098
+chemical	mol:gl:G00097
+chemical	mol:gl:G00104
+chemical	mol:gl:G00103
+chemical	mol:gl:G00102
+chemical	mol:gl:G00106
+chemical	mol:gl:G00105
+chemical	mol:gl:G00094
+chemical	mol:gl:G00095
+chemical	mol:gl:G00093
+chemical	mol:gl:G00092
+family	ST3GAL1/ST3GAL2
+family	HEXA/HEXB
+family	FUT1/FUT2
+ST3GAL1	ST3GAL1/ST3GAL2	member>
+ST3GAL2	ST3GAL1/ST3GAL2	member>
+HEXA	HEXA/HEXB	member>
+HEXB	HEXA/HEXB	member>
+FUT1	FUT1/FUT2	member>
+FUT2	FUT1/FUT2	member>
+complex	B3GALT5/mol:gl:G00094
+complex	B3GALT5/mol:gl:G00097
+complex	NAGA/mol:gl:G00095
+complex	NAGA/mol:gl:G00094
+complex	A4GALT/mol:gl:G00092
+complex	A4GALT/mol:gl:G00093
+complex	HEXA/HEXB/mol:gl:G00094
+complex	HEXA/HEXB/mol:gl:G00093
+complex	ST3GAL1/ST3GAL2/mol:gl:G00097
+complex	ST3GAL1/ST3GAL2/mol:gl:G00098
+complex	FUT9/mol:gl:G00103
+complex	FUT9/mol:gl:G00104
+complex	FUT1/FUT2/mol:gl:G00097
+complex	FUT1/FUT2/mol:gl:G00099
+complex	NAT8/mol:gl:G00093
+complex	NAT8/mol:gl:G00092
+complex	B3GALNT1/mol:gl:G00093
+complex	B3GALNT1/mol:gl:G00094
+complex	GBGT1/mol:gl:G00094
+complex	GBGT1/mol:gl:G00095
+complex	FUT1/FUT2/mol:gl:G00097
+complex	FUT1/FUT2/mol:gl:G00099
+complex	GBGT1/mol:gl:G00094
+complex	GBGT1/mol:gl:G00095
+complex	B3GALT5/mol:gl:G00094
+complex	B3GALT5/mol:gl:G00097
+complex	A4GALT/mol:gl:G00092
+complex	A4GALT/mol:gl:G00093
+complex	ST3GAL1/ST3GAL2/mol:gl:G00097
+complex	ST3GAL1/ST3GAL2/mol:gl:G00098
+complex	B3GALNT1/mol:gl:G00093
+complex	B3GALNT1/mol:gl:G00094
+complex	FUT9/mol:gl:G00103
+complex	FUT9/mol:gl:G00104
+B3GALT5	B3GALT5/mol:gl:G00094	component>
+mol:gl:G00094	B3GALT5/mol:gl:G00094	component>
+mol:gl:G00097	B3GALT5/mol:gl:G00097	component>
+NAGA	NAGA/mol:gl:G00095	component>
+mol:gl:G00095	NAGA/mol:gl:G00095	component>
+mol:gl:G00094	NAGA/mol:gl:G00094	component>
+A4GALT	A4GALT/mol:gl:G00092	component>
+mol:gl:G00092	A4GALT/mol:gl:G00092	component>
+mol:gl:G00093	A4GALT/mol:gl:G00093	component>
+HEXA/HEXB	HEXA/HEXB/mol:gl:G00094	component>
+mol:gl:G00094	HEXA/HEXB/mol:gl:G00094	component>
+mol:gl:G00093	HEXA/HEXB/mol:gl:G00093	component>
+ST3GAL1/ST3GAL2	ST3GAL1/ST3GAL2/mol:gl:G00097	component>
+mol:gl:G00097	ST3GAL1/ST3GAL2/mol:gl:G00097	component>
+mol:gl:G00098	ST3GAL1/ST3GAL2/mol:gl:G00098	component>
+FUT9	FUT9/mol:gl:G00103	component>
+mol:gl:G00103	FUT9/mol:gl:G00103	component>
+mol:gl:G00104	FUT9/mol:gl:G00104	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00097	component>
+mol:gl:G00097	FUT1/FUT2/mol:gl:G00097	component>
+mol:gl:G00099	FUT1/FUT2/mol:gl:G00099	component>
+NAT8	NAT8/mol:gl:G00093	component>
+mol:gl:G00093	NAT8/mol:gl:G00093	component>
+mol:gl:G00092	NAT8/mol:gl:G00092	component>
+B3GALNT1	B3GALNT1/mol:gl:G00093	component>
+mol:gl:G00093	B3GALNT1/mol:gl:G00093	component>
+mol:gl:G00094	B3GALNT1/mol:gl:G00094	component>
+GBGT1	GBGT1/mol:gl:G00094	component>
+mol:gl:G00094	GBGT1/mol:gl:G00094	component>
+mol:gl:G00095	GBGT1/mol:gl:G00095	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00097	component>
+mol:gl:G00097	FUT1/FUT2/mol:gl:G00097	component>
+mol:gl:G00099	FUT1/FUT2/mol:gl:G00099	component>
+GBGT1	GBGT1/mol:gl:G00094	component>
+mol:gl:G00094	GBGT1/mol:gl:G00094	component>
+mol:gl:G00095	GBGT1/mol:gl:G00095	component>
+B3GALT5	B3GALT5/mol:gl:G00094	component>
+mol:gl:G00094	B3GALT5/mol:gl:G00094	component>
+mol:gl:G00097	B3GALT5/mol:gl:G00097	component>
+A4GALT	A4GALT/mol:gl:G00092	component>
+mol:gl:G00092	A4GALT/mol:gl:G00092	component>
+mol:gl:G00093	A4GALT/mol:gl:G00093	component>
+ST3GAL1/ST3GAL2	ST3GAL1/ST3GAL2/mol:gl:G00097	component>
+mol:gl:G00097	ST3GAL1/ST3GAL2/mol:gl:G00097	component>
+mol:gl:G00098	ST3GAL1/ST3GAL2/mol:gl:G00098	component>
+B3GALNT1	B3GALNT1/mol:gl:G00093	component>
+mol:gl:G00093	B3GALNT1/mol:gl:G00093	component>
+mol:gl:G00094	B3GALNT1/mol:gl:G00094	component>
+FUT9	FUT9/mol:gl:G00103	component>
+mol:gl:G00103	FUT9/mol:gl:G00103	component>
+mol:gl:G00104	FUT9/mol:gl:G00104	component>
+B3GALT5/mol:gl:G00094	mol:gl:G00097	-a>
+B3GALT5/mol:gl:G00097	mol:gl:G00094	-a>
+NAGA/mol:gl:G00095	mol:gl:G00094	-a>
+NAGA/mol:gl:G00094	mol:gl:G00095	-a>
+A4GALT/mol:gl:G00092	mol:gl:G00093	-a>
+A4GALT/mol:gl:G00093	mol:gl:G00092	-a>
+HEXA/HEXB/mol:gl:G00094	mol:gl:G00093	-a>
+HEXA/HEXB/mol:gl:G00093	mol:gl:G00094	-a>
+ST3GAL1/ST3GAL2/mol:gl:G00097	mol:gl:G00098	-a>
+ST3GAL1/ST3GAL2/mol:gl:G00098	mol:gl:G00097	-a>
+FUT9/mol:gl:G00103	mol:gl:G00104	-a>
+FUT9/mol:gl:G00104	mol:gl:G00103	-a>
+FUT1/FUT2/mol:gl:G00097	mol:gl:G00099	-a>
+FUT1/FUT2/mol:gl:G00099	mol:gl:G00097	-a>
+NAT8/mol:gl:G00093	mol:gl:G00092	-a>
+NAT8/mol:gl:G00092	mol:gl:G00093	-a>
+B3GALNT1/mol:gl:G00093	mol:gl:G00094	-a>
+B3GALNT1/mol:gl:G00094	mol:gl:G00093	-a>
+GBGT1/mol:gl:G00094	mol:gl:G00095	-a>
+GBGT1/mol:gl:G00095	mol:gl:G00094	-a>
+FUT1/FUT2/mol:gl:G00097	mol:gl:G00099	-a>
+FUT1/FUT2/mol:gl:G00099	mol:gl:G00097	-a>
+GBGT1/mol:gl:G00094	mol:gl:G00095	-a>
+GBGT1/mol:gl:G00095	mol:gl:G00094	-a>
+B3GALT5/mol:gl:G00094	mol:gl:G00097	-a>
+B3GALT5/mol:gl:G00097	mol:gl:G00094	-a>
+A4GALT/mol:gl:G00092	mol:gl:G00093	-a>
+A4GALT/mol:gl:G00093	mol:gl:G00092	-a>
+ST3GAL1/ST3GAL2/mol:gl:G00097	mol:gl:G00098	-a>
+ST3GAL1/ST3GAL2/mol:gl:G00098	mol:gl:G00097	-a>
+B3GALNT1/mol:gl:G00093	mol:gl:G00094	-a>
+B3GALNT1/mol:gl:G00094	mol:gl:G00093	-a>
+FUT9/mol:gl:G00103	mol:gl:G00104	-a>
+FUT9/mol:gl:G00104	mol:gl:G00103	-a>

@@ -1,0 +1,75 @@
+protein	BPNT1
+protein	CHST13
+protein	CHST11
+protein	CHST12
+protein	SULT1E1
+protein	SULT2B1
+protein	SULT1A4
+protein	SULT1A2
+protein	SULT1A1
+protein	SULT1A3
+protein	PAPSS2
+protein	PAPSS1
+protein	SUOX
+chemical	mol:cpd:C00065
+chemical	mol:cpd:C00979
+chemical	mol:cpd:C00097
+chemical	mol:cpd:C00033
+chemical	mol:cpd:C00155
+chemical	mol:cpd:C00542
+chemical	mol:cpd:C01118
+chemical	mol:cpd:C00263
+chemical	mol:cpd:C01077
+chemical	mol:cpd:C00283
+chemical	mol:cpd:C01861
+chemical	mol:cpd:C00320
+chemical	mol:cpd:C00094
+chemical	mol:cpd:C00059
+chemical	mol:cpd:C00054
+chemical	mol:cpd:C00087
+chemical	mol:cpd:C00053
+chemical	mol:cpd:C00224
+family	CHST13/CHST11/CHST12
+family	SULT1A4/SULT1A2/SULT1A1/SULT1A3
+family	PAPSS2/PAPSS1
+CHST13	CHST13/CHST11/CHST12	member>
+CHST11	CHST13/CHST11/CHST12	member>
+CHST12	CHST13/CHST11/CHST12	member>
+SULT1A4	SULT1A4/SULT1A2/SULT1A1/SULT1A3	member>
+SULT1A2	SULT1A4/SULT1A2/SULT1A1/SULT1A3	member>
+SULT1A1	SULT1A4/SULT1A2/SULT1A1/SULT1A3	member>
+SULT1A3	SULT1A4/SULT1A2/SULT1A1/SULT1A3	member>
+PAPSS2	PAPSS2/PAPSS1	member>
+PAPSS1	PAPSS2/PAPSS1	member>
+complex	CHST13/CHST11/CHST12/mol:cpd:C00053
+complex	SULT1E1/mol:cpd:C00053
+complex	SULT2B1/mol:cpd:C00053
+complex	SULT1A4/SULT1A2/SULT1A1/SULT1A3/mol:cpd:C00053
+complex	PAPSS2/PAPSS1/mol:cpd:C00224
+complex	BPNT1/mol:cpd:C00053
+complex	SUOX/mol:cpd:C00094
+complex	PAPSS2/PAPSS1/mol:cpd:C00059
+CHST13/CHST11/CHST12	CHST13/CHST11/CHST12/mol:cpd:C00053	component>
+mol:cpd:C00053	CHST13/CHST11/CHST12/mol:cpd:C00053	component>
+SULT1E1	SULT1E1/mol:cpd:C00053	component>
+mol:cpd:C00053	SULT1E1/mol:cpd:C00053	component>
+SULT2B1	SULT2B1/mol:cpd:C00053	component>
+mol:cpd:C00053	SULT2B1/mol:cpd:C00053	component>
+SULT1A4/SULT1A2/SULT1A1/SULT1A3	SULT1A4/SULT1A2/SULT1A1/SULT1A3/mol:cpd:C00053	component>
+mol:cpd:C00053	SULT1A4/SULT1A2/SULT1A1/SULT1A3/mol:cpd:C00053	component>
+PAPSS2/PAPSS1	PAPSS2/PAPSS1/mol:cpd:C00224	component>
+mol:cpd:C00224	PAPSS2/PAPSS1/mol:cpd:C00224	component>
+BPNT1	BPNT1/mol:cpd:C00053	component>
+mol:cpd:C00053	BPNT1/mol:cpd:C00053	component>
+SUOX	SUOX/mol:cpd:C00094	component>
+mol:cpd:C00094	SUOX/mol:cpd:C00094	component>
+PAPSS2/PAPSS1	PAPSS2/PAPSS1/mol:cpd:C00059	component>
+mol:cpd:C00059	PAPSS2/PAPSS1/mol:cpd:C00059	component>
+CHST13/CHST11/CHST12/mol:cpd:C00053	mol:cpd:C00054	-a>
+SULT1E1/mol:cpd:C00053	mol:cpd:C00054	-a>
+SULT2B1/mol:cpd:C00053	mol:cpd:C00054	-a>
+SULT1A4/SULT1A2/SULT1A1/SULT1A3/mol:cpd:C00053	mol:cpd:C00054	-a>
+PAPSS2/PAPSS1/mol:cpd:C00224	mol:cpd:C00053	-a>
+BPNT1/mol:cpd:C00053	mol:cpd:C00224	-a>
+SUOX/mol:cpd:C00094	mol:cpd:C00059	-a>
+PAPSS2/PAPSS1/mol:cpd:C00059	mol:cpd:C00224	-a>

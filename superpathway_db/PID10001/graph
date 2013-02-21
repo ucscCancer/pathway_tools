@@ -1,0 +1,745 @@
+protein	ABCA4
+protein	ACCN4
+protein	ACSM1
+protein	ADAM17
+protein	ADRA1A
+protein	ADRB3
+protein	AFF3
+protein	AKT3
+protein	AMBP
+protein	AMOTL2
+protein	AMPH
+protein	ANKS1B
+protein	ANXA1
+protein	ANXA7
+protein	APBB3
+protein	APOA4
+protein	APOC4
+protein	ARHGAP11A
+protein	ARHGAP29
+protein	ARHGEF16
+protein	ARL6IP1
+protein	ASIP
+protein	ATP5G3
+protein	ATXN1
+protein	AVPR1B
+protein	B3GNT3
+protein	BAZ1A
+protein	BCL2
+protein	BLVRB
+protein	BOK
+protein	BRD8
+protein	BTAF1
+protein	BTG2
+protein	C11orf9
+protein	C12orf43
+protein	C16orf70
+protein	C5
+protein	CA5A
+protein	CACNB2
+protein	CACNG4
+protein	CALB1
+protein	CALML3
+protein	CAMKV
+protein	CAPN11
+protein	CAST
+protein	CBLB
+protein	CCL17
+protein	CCNJL
+protein	CCNT1
+protein	CCT3
+protein	CD34
+protein	CD3D
+protein	CDC23
+protein	CDC25A
+protein	CDH10
+protein	CDH8
+protein	CEMP1
+protein	CENPC1
+protein	CETN1
+protein	CFDP1
+protein	CHL1
+protein	CHRNA4
+protein	CIITA
+protein	CKAP2
+protein	CLCN2
+protein	CLDN15
+protein	CLU
+protein	CNTN1
+protein	COPS5
+protein	COX6C
+protein	CPNE6
+protein	CS
+protein	CSTF1
+protein	CUX1
+protein	CXADR
+protein	CYP2A6
+protein	CYP4A11
+protein	CYP4F12
+protein	DAAM1
+protein	DAB1
+protein	DDOST
+protein	DDX18
+protein	DDX31
+protein	DEK
+protein	DHX8
+protein	DIAPH1
+protein	DLAT
+protein	DLEU2
+protein	DMD
+protein	DNAJB1
+protein	DNM2
+protein	DPM1
+protein	DPYSL2
+protein	DRG2
+protein	DUSP10
+protein	DUSP22
+protein	DYNC1LI2
+protein	ECE1
+protein	EGR1
+protein	ELK1
+protein	ELMO1
+protein	ENO2
+protein	ENPP2
+protein	ENTPD2
+protein	EPB41L2
+protein	EPHB6
+protein	EPS15
+protein	EPS8L3
+protein	ERAL1
+protein	ERN2
+protein	ESRRA
+protein	EVI5
+protein	EVPL
+protein	EVX1
+protein	EXOC1
+protein	F11
+protein	FABP5
+protein	FAM178A
+protein	FAM3A
+protein	FAM5C
+protein	FAM69A
+protein	FANCC
+protein	FBXW11
+protein	FGF14
+protein	FHL3
+protein	FN1
+protein	FTSJ1
+protein	FUBP3
+protein	FURIN
+protein	FYN
+protein	GABRA2
+protein	GALNT11
+protein	GALNT8
+protein	GATA2
+protein	GCLM
+protein	GDF9
+protein	GDPD5
+protein	GFRA4
+protein	GNAI3
+protein	GOLGB1
+protein	GPATCH3
+protein	GPC3
+protein	GRIA2
+protein	GRID2
+protein	GRIN2B
+protein	GSN
+protein	GTF2B
+protein	GUSB
+protein	H2AFZ
+protein	HBP1
+protein	HDAC1
+protein	HDAC5
+protein	HERC1
+protein	HNF1B
+protein	HNF4A
+protein	HOXA6
+protein	HOXB1
+protein	HS2ST1
+protein	HSPA8
+protein	HSPG2
+protein	IKZF4
+protein	IL22RA1
+protein	IMPG1
+protein	IQGAP1
+protein	IQGAP2
+protein	IRF5
+protein	ITGB3BP
+protein	ITIH3
+protein	ITK
+protein	JAKMIP2
+protein	JRK
+protein	KAZALD1
+protein	KCNC3
+protein	KCND2
+protein	KCNQ1
+protein	KCNQ4
+protein	KHDRBS2
+protein	KHK
+protein	KIAA0020
+protein	KIAA0317
+protein	KIAA0664
+protein	KIAA0913
+protein	KIAA1614
+protein	KIF5A
+protein	KLHL11
+protein	KLHL18
+protein	LAD1
+protein	LBP
+protein	LCP2
+protein	LMNB1
+protein	LMTK2
+protein	LRP1B
+protein	LY75
+protein	MAP1B
+protein	MAP2
+protein	MAP3K11
+protein	MAP3K7
+protein	MAPK10
+protein	MASP1
+protein	MASP2
+protein	MCM10
+protein	MCM3
+protein	MEIS1
+protein	MFSD1
+protein	MLN
+protein	MMP17
+protein	MNAT1
+protein	MOCS3
+protein	MPP3
+protein	MR1
+protein	MRPL9
+protein	MRPS15
+protein	MRPS30
+protein	MTERF
+protein	MTERFD1
+protein	MTMR4
+protein	MYH10
+protein	MYO7A
+protein	NAT6
+protein	NCOR1
+protein	NEBL
+protein	NLGN1
+protein	NOLC1
+protein	NR1H4
+protein	NR6A1
+protein	NTRK1
+protein	NUP37
+protein	OTUD7B
+protein	P2RX1
+protein	PAFAH1B1
+protein	PARK7
+protein	PAX2
+protein	PAX5
+protein	PAX8
+protein	PCDHGA1
+protein	PCM1
+protein	PCSK1
+protein	PDE11A
+protein	PDE6D
+protein	PEX13
+protein	PGR
+protein	PHKA2
+protein	PHLDB1
+protein	PIK3C3
+protein	PIK3R2
+protein	PIPOX
+protein	PITX3
+protein	PKD2L1
+protein	PKD2L2
+protein	PKMYT1
+protein	PLA2G2E
+protein	PLCB1
+protein	PLCG2
+protein	PLEKHG3
+protein	PNLIPRP1
+protein	POLA2
+protein	POLD3
+protein	POLD4
+protein	POLR1C
+protein	POLR2H
+protein	POU3F2
+protein	POU5F1
+protein	PPIE
+protein	PPIL2
+protein	PPM1H
+protein	PRKCI
+protein	PRKG1
+protein	PRLR
+protein	PRODH2
+protein	PRPF3
+protein	PRRG3
+protein	PSMB2
+protein	PTGS1
+protein	PTPLB
+protein	PTPN7
+protein	PTPRC
+protein	PTPRO
+protein	PUM1
+protein	RAB11FIP2
+protein	RAB3GAP1
+protein	RACGAP1
+protein	RAD54B
+protein	RAP1GAP
+protein	RBM3
+protein	RIF1
+protein	RIMS2
+protein	ROCK2
+protein	ROS1
+protein	RPL19
+protein	RPL30
+protein	RPRM
+protein	RPS11
+protein	RPS12
+protein	RUNX1
+protein	RUNX3
+protein	SAMD4B
+protein	SARS
+protein	SCAMP2
+protein	SCHIP1
+protein	SCN3A
+protein	SELL
+protein	SERPINA7
+protein	SERPINF2
+protein	SGMS1
+protein	SHPK
+protein	SIRT2
+protein	SLC17A7
+protein	SLC24A2
+protein	SLC25A42
+protein	SLC26A10
+protein	SLC2A2
+protein	SLC4A10
+protein	SLC6A13
+protein	SLIT2
+protein	SMARCE1
+protein	SNAPC2
+protein	SOX5
+protein	SRPK2
+protein	SS18
+protein	SS18L1
+protein	ST3GAL2
+protein	STAG3
+protein	STAM
+protein	STIP1
+protein	STK10
+protein	STYXL1
+protein	SYNPO
+protein	TAF1
+protein	TAPT1
+protein	TBL1XR1
+protein	TESK2
+protein	TFAP2A
+protein	TIMM10
+protein	TM4SF5
+protein	TMEFF1
+protein	TMPRSS6
+protein	TNFSF10
+protein	TNR
+protein	TNRC6B
+protein	TOPBP1
+protein	TP53
+protein	TPX2
+protein	TRIM2
+protein	TSC22D1
+protein	TSHZ2
+protein	TUBA1C
+protein	TUT1
+protein	TXN
+protein	UBOX5
+protein	UGT8
+protein	UNC93B1
+protein	USP1
+protein	VAC14
+protein	VIL1
+protein	WDR37
+protein	XPNPEP2
+protein	XPO6
+protein	YSK4
+protein	ZFHX4
+protein	ZMIZ1
+protein	ZNF219
+protein	ZNF302
+protein	ZNF335
+protein	ZNF343
+protein	ZNF365
+protein	ZNF384
+protein	ZNF408
+protein	ZNF444
+protein	ZNF460
+protein	ZNF710
+CUX1	DLEU2	-t|
+CUX1	DUSP10	-t|
+CUX1	DUSP22	-t>
+CUX1	EGR1	-t>
+CUX1	ELMO1	-t>
+CUX1	GOLGB1	-t>
+CUX1	GUSB	-t>
+CUX1	HBP1	-t>
+CUX1	HERC1	-t>
+CUX1	MEIS1	-t>
+CUX1	MTMR4	-t|
+CUX1	P2RX1	-t>
+CUX1	PHKA2	-t>
+CUX1	PLCB1	-t>
+CUX1	PLCG2	-t>
+CUX1	PTGS1	-t>
+CUX1	PTPRC	-t|
+CUX1	PUM1	-t>
+CUX1	RUNX3	-t|
+CUX1	SELL	-t>
+CUX1	SLC26A10	-t>
+CUX1	STAG3	-t|
+CUX1	TESK2	-t>
+CUX1	TP53	-t|
+CUX1	XPO6	-t|
+CUX1	APBB3	-t>
+CUX1	BTG2	-t>
+CUX1	CFDP1	-t|
+ELK1	CCNT1	-t>
+ELK1	MOCS3	-t>
+ELK1	PCDHGA1	-t>
+ELK1	PIK3R2	-t>
+POU3F2	AMPH	-t>
+POU3F2	ANKS1B	-t>
+POU3F2	CACNB2	-t>
+POU3F2	CALB1	-t>
+POU3F2	CDH8	-t>
+POU3F2	CHL1	-t>
+POU3F2	CNTN1	-t>
+POU3F2	CXADR	-t>
+POU3F2	DMD	-t>
+POU3F2	DYNC1LI2	-t>
+POU3F2	ELMO1	-t>
+POU3F2	ENPP2	-t>
+POU3F2	EPHB6	-t>
+POU3F2	FAM5C	-t>
+POU3F2	FGF14	-t>
+POU3F2	GABRA2	-t>
+POU3F2	IMPG1	-t>
+POU3F2	JAKMIP2	-t>
+POU3F2	KCND2	-t>
+POU3F2	KHDRBS2	-t>
+POU3F2	LRP1B	-t>
+POU3F2	MAP2	-t>
+POU3F2	MAPK10	-t>
+POU3F2	NEBL	-t>
+POU3F2	NLGN1	-t>
+POU3F2	PCSK1	-t>
+POU3F2	PTPRO	-t>
+POU3F2	RAB11FIP2	-t>
+POU3F2	RIMS2	-t>
+POU3F2	SCHIP1	-t>
+POU3F2	SCN3A	-t>
+POU3F2	SLC4A10	-t>
+POU3F2	SLIT2	-t>
+POU3F2	SOX5	-t>
+POU3F2	SRPK2	-t>
+POU3F2	TMEFF1	-t>
+POU3F2	TRIM2	-t>
+POU3F2	UGT8	-t>
+POU3F2	ZNF365	-t>
+POU3F2	ZFHX4	-t>
+POU3F2	RPRM	-t>
+POU3F2	GRIA2	-t>
+POU3F2	CDH10	-t>
+POU3F2	ATXN1	-t>
+GATA2	PTPN7	-t|
+GATA2	PRRG3	-t>
+GATA2	PPM1H	-t>
+GATA2	TNRC6B	-t|
+GATA2	STK10	-t>
+GATA2	KLHL18	-t>
+GATA2	CD34	-t>
+GATA2	CS	-t|
+GATA2	BLVRB	-t>
+GATA2	NTRK1	-t>
+GATA2	MFSD1	-t>
+GATA2	MEIS1	-t>
+GATA2	KIAA1614	-t>
+GATA2	IQGAP2	-t>
+GATA2	HSPG2	-t>
+GATA2	GDPD5	-t>
+POU5F1	DDX31	-t>
+POU5F1	EVX1	-t>
+POU5F1	HOXA6	-t>
+POU5F1	NR6A1	-t>
+POU5F1	SLC24A2	-t>
+POU5F1	ACCN4	-t>
+POU5F1	ADRA1A	-t>
+POU5F1	PAX2	-t>
+POU5F1	RAD54B	-t|
+POU5F1	PIPOX	-t>
+POU5F1	HOXB1	-t>
+POU5F1	GPC3	-t>
+POU5F1	GALNT8	-t>
+HNF4A	CYP4F12	-t>
+HNF4A	FURIN	-t>
+HNF4A	C5	-t>
+HNF4A	SCAMP2	-t>
+HNF4A	SAMD4B	-t>
+HNF4A	C11orf9	-t>
+HNF4A	CPNE6	-t>
+HNF4A	BOK	-t>
+HNF4A	BCL2	-t>
+HNF4A	FHL3	-t>
+HNF4A	B3GNT3	-t>
+HNF4A	AVPR1B	-t>
+HNF4A	ROS1	-t>
+HNF4A	ASIP	-t>
+HNF4A	ARHGEF16	-t>
+HNF4A	APOC4	-t>
+HNF4A	APOA4	-t>
+HNF4A	AMBP	-t>
+HNF4A	FAM3A	-t>
+HNF4A	HNF1B	-t>
+HNF4A	AFF3	-t>
+HNF4A	ADRB3	-t>
+HNF4A	F11	-t>
+HNF4A	ACSM1	-t>
+HNF4A	ABCA4	-t>
+HNF4A	ZNF710	-t>
+HNF4A	CLCN2	-t>
+HNF4A	ZNF219	-t>
+HNF4A	MPP3	-t>
+HNF4A	MMP17	-t>
+HNF4A	ECE1	-t>
+HNF4A	MLN	-t>
+HNF4A	DRG2	-t>
+HNF4A	LAD1	-t>
+HNF4A	GPATCH3	-t>
+HNF4A	GRID2	-t>
+HNF4A	IL22RA1	-t>
+HNF4A	MYO7A	-t>
+HNF4A	NAT6	-t>
+HNF4A	CAPN11	-t>
+HNF4A	CAMKV	-t>
+HNF4A	CA5A	-t>
+HNF4A	CYP4A11	-t>
+HNF4A	DAB1	-t>
+HNF4A	PPIL2	-t>
+HNF4A	EPS8L3	-t>
+HNF4A	DDX31	-t>
+HNF4A	DIAPH1	-t>
+HNF4A	ERN2	-t>
+HNF4A	DNM2	-t>
+HNF4A	SLC6A13	-t>
+HNF4A	YSK4	-t>
+HNF4A	XPNPEP2	-t>
+HNF4A	ESRRA	-t>
+HNF4A	UNC93B1	-t>
+HNF4A	TAF1	-t>
+HNF4A	PRKG1	-t>
+HNF4A	ST3GAL2	-t>
+HNF4A	EVPL	-t>
+HNF4A	EVI5	-t>
+HNF4A	POLD4	-t>
+HNF4A	CACNG4	-t>
+HNF4A	CALML3	-t>
+HNF4A	PLA2G2E	-t>
+HNF4A	PKD2L1	-t>
+HNF4A	PKD2L2	-t>
+HNF4A	CCNJL	-t>
+HNF4A	PITX3	-t>
+HNF4A	CEMP1	-t>
+HNF4A	PHLDB1	-t>
+HNF4A	CETN1	-t>
+HNF4A	CHRNA4	-t>
+HNF4A	CIITA	-t>
+HNF4A	CLDN15	-t>
+HNF4A	ENTPD2	-t>
+HNF4A	PAX5	-t>
+HNF4A	FANCC	-t>
+HNF4A	OTUD7B	-t>
+HNF4A	C16orf70	-t>
+HNF4A	ZNF460	-t>
+HNF4A	ZNF408	-t>
+HNF4A	IKZF4	-t>
+HNF4A	UBOX5	-t>
+HNF4A	TAPT1	-t>
+HNF4A	STYXL1	-t>
+HNF4A	SLC25A42	-t>
+HNF4A	SLC17A7	-t|
+HNF4A	SIRT2	-t>
+HNF4A	SHPK	-t>
+HNF4A	GRIN2B	-t>
+HNF4A	SERPINF2	-t>
+HNF4A	RUNX1	-t>
+HNF4A	IRF5	-t>
+HNF4A	RPS11	-t>
+HNF4A	LMTK2	-t>
+HNF4A	ITIH3	-t>
+HNF4A	MAP3K11	-t>
+HNF4A	MASP1	-t>
+HNF4A	MASP2	-t>
+HNF4A	GFRA4	-t>
+HNF4A	KLHL11	-t>
+HNF4A	NR6A1	-t>
+HNF4A	MR1	-t>
+HNF4A	KIAA0913	-t>
+HNF4A	NR1H4	-t>
+HNF4A	KIAA0664	-t>
+HNF4A	PAX8	-t>
+HNF4A	PDE11A	-t>
+HNF4A	KHK	-t>
+HNF4A	PKMYT1	-t>
+HNF4A	KCNQ4	-t>
+HNF4A	KCNQ1	-t>
+HNF4A	PLEKHG3	-t>
+HNF4A	PNLIPRP1	-t>
+HNF4A	KCNC3	-t>
+HNF4A	KAZALD1	-t>
+HNF4A	JRK	-t>
+HNF4A	PRODH2	-t>
+HNF4A	GDF9	-t>
+HNF4A	RAP1GAP	-t>
+HNF4A	CYP2A6	-t>
+HNF4A	LBP	-t>
+HNF4A	SERPINA7	-t>
+HNF4A	SLC2A2	-t>
+HNF4A	SNAPC2	-t>
+HNF4A	TM4SF5	-t>
+HNF4A	TMPRSS6	-t>
+HNF4A	TNR	-t>
+HNF4A	TSHZ2	-t>
+HNF4A	TUT1	-t>
+HNF4A	VAC14	-t>
+HNF4A	VIL1	-t>
+HNF4A	ZNF335	-t>
+HNF4A	ZNF343	-t>
+HNF4A	ZNF384	-t>
+HNF4A	ZNF444	-t>
+CUX1	DDOST	-t|
+CUX1	DDX18	-t|
+CUX1	DEK	-t|
+CUX1	DLAT	-t|
+CUX1	DNAJB1	-t|
+CUX1	DPM1	-t|
+CUX1	ENO2	-t|
+CUX1	ERAL1	-t|
+CUX1	FABP5	-t|
+CUX1	FTSJ1	-t|
+CUX1	GCLM	-t|
+CUX1	GNAI3	-t|
+CUX1	GSN	-t>
+CUX1	H2AFZ	-t|
+CUX1	HDAC1	-t|
+CUX1	HSPA8	-t|
+CUX1	ITGB3BP	-t|
+CUX1	ITK	-t|
+CUX1	LMNB1	-t|
+CUX1	MAP3K7	-t|
+CUX1	MCM10	-t|
+CUX1	MCM3	-t|
+CUX1	MNAT1	-t|
+CUX1	MRPL9	-t|
+CUX1	MRPS15	-t|
+CUX1	MRPS30	-t|
+CUX1	MTERF	-t|
+CUX1	NOLC1	-t|
+CUX1	NUP37	-t|
+CUX1	PARK7	-t|
+CUX1	PDE6D	-t|
+CUX1	PGR	-t>
+CUX1	POLA2	-t|
+CUX1	POLD3	-t|
+CUX1	POLR1C	-t|
+CUX1	POLR2H	-t|
+CUX1	PPIE	-t|
+CUX1	PSMB2	-t|
+CUX1	RACGAP1	-t|
+CUX1	RBM3	-t|
+CUX1	RIF1	-t|
+CUX1	SARS	-t|
+CUX1	SS18	-t|
+CUX1	STIP1	-t|
+CUX1	TIMM10	-t|
+CUX1	TNFSF10	-t>
+CUX1	TOPBP1	-t|
+CUX1	TPX2	-t|
+CUX1	TXN	-t|
+CUX1	USP1	-t|
+CUX1	ANXA7	-t|
+CUX1	ARHGAP11A	-t|
+CUX1	ATP5G3	-t|
+CUX1	CAST	-t>
+CUX1	CCL17	-t|
+CUX1	CCT3	-t|
+CUX1	CD3D	-t|
+CUX1	CDC23	-t|
+CUX1	CDC25A	-t|
+CUX1	CKAP2	-t|
+CUX1	CLU	-t>
+CUX1	COPS5	-t|
+CUX1	COX6C	-t|
+CUX1	CSTF1	-t|
+ELK1	ADAM17	-t|
+ELK1	ANXA1	-t|
+ELK1	BTAF1	-t|
+ELK1	CENPC1	-t|
+ELK1	DHX8	-t|
+ELK1	IQGAP1	-t|
+ELK1	LCP2	-t|
+ELK1	PRPF3	-t|
+ELK1	RPL19	-t|
+ELK1	RPL30	-t|
+ELK1	RPS12	-t|
+ELK1	WDR37	-t|
+TFAP2A	KCNQ1	-t|
+TFAP2A	HDAC5	-t>
+TFAP2A	ZNF335	-t|
+POU3F2	ANXA1	-t|
+POU3F2	ARHGAP29	-t|
+POU3F2	BAZ1A	-t|
+POU3F2	CAST	-t|
+POU3F2	PIK3C3	-t|
+POU3F2	SMARCE1	-t|
+POU3F2	KIAA0020	-t|
+POU3F2	GTF2B	-t|
+POU3F2	FN1	-t|
+POU3F2	CBLB	-t|
+GATA2	TUBA1C	-t|
+GATA2	SYNPO	-t>
+GATA2	ARL6IP1	-t|
+GATA2	FAM69A	-t|
+GATA2	RAP1GAP	-t|
+GATA2	MAP1B	-t|
+GATA2	KIF5A	-t|
+POU5F1	FBXW11	-t|
+POU5F1	TBL1XR1	-t|
+POU5F1	PEX13	-t|
+HNF4A	FYN	-t|
+HNF4A	GALNT11	-t|
+HNF4A	FUBP3	-t|
+HNF4A	C12orf43	-t|
+HNF4A	RAB3GAP1	-t|
+HNF4A	AMOTL2	-t|
+HNF4A	FAM178A	-t|
+HNF4A	AKT3	-t|
+HNF4A	RACGAP1	-t|
+HNF4A	DPYSL2	-t|
+HNF4A	HS2ST1	-t|
+HNF4A	DAAM1	-t|
+HNF4A	LY75	-t>
+HNF4A	PTPLB	-t|
+HNF4A	PRLR	-t>
+HNF4A	PRKCI	-t|
+HNF4A	SGMS1	-t|
+HNF4A	EXOC1	-t|
+HNF4A	BRD8	-t|
+HNF4A	CFDP1	-t|
+HNF4A	PCM1	-t|
+HNF4A	EPB41L2	-t|
+HNF4A	EPS15	-t|
+HNF4A	ZNF302	-t|
+HNF4A	ZMIZ1	-t|
+HNF4A	TSC22D1	-t|
+HNF4A	ROCK2	-t|
+HNF4A	MYH10	-t|
+HNF4A	MTERFD1	-t|
+HNF4A	KIAA0317	-t|
+HNF4A	MTMR4	-t|
+HNF4A	NCOR1	-t|
+HNF4A	PAFAH1B1	-t|
+HNF4A	SS18L1	-t|
+HNF4A	STAM	-t|

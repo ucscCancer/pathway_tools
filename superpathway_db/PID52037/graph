@@ -1,0 +1,19 @@
+protein	DAO
+chemical	mol:cpd:C03564
+chemical	mol:cpd:C01110
+chemical	mol:cpd:C03341
+chemical	mol:cpd:C03943
+chemical	mol:cpd:C03771
+chemical	mol:cpd:C00077
+chemical	mol:cpd:C00515
+chemical	mol:cpd:C01667
+chemical	mol:cpd:C00062
+chemical	mol:cpd:C00792
+complex	DAO/mol:cpd:C00515
+complex	DAO/mol:cpd:C00792
+DAO	DAO/mol:cpd:C00515	component>
+mol:cpd:C00515	DAO/mol:cpd:C00515	component>
+DAO	DAO/mol:cpd:C00792	component>
+mol:cpd:C00792	DAO/mol:cpd:C00792	component>
+DAO/mol:cpd:C00515	mol:cpd:C01110	-a>
+DAO/mol:cpd:C00792	mol:cpd:C03771	-a>

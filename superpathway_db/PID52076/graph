@@ -1,0 +1,288 @@
+the molecule is already in the list mol:cpd:C14818
+the molecule is already in the list mol:cpd:C14819
+protein	CPOX
+protein	GUSB
+protein	UGT2B11
+protein	UGT2A1
+protein	UGT2B28
+protein	UGT1A10
+protein	UGT1A8
+protein	UGT1A7
+protein	UGT1A6
+protein	UGT1A5
+protein	UGT1A9
+protein	UGT1A4
+protein	UGT1A1
+protein	UGT1A3
+protein	UGT2A2
+protein	UGT2B4
+protein	UGT2B7
+protein	UGT2B10
+protein	UGT2B15
+protein	UGT2B17
+protein	UGT2A3
+protein	BLVRA
+protein	BLVRB
+protein	HCCS
+protein	COX10
+protein	FECH
+protein	CP
+protein	FTH1
+protein	FTL
+protein	FTMT
+protein	PPOX
+protein	UROD
+protein	UROS
+protein	HMBS
+protein	ALAD
+protein	ALAS1
+protein	ALAS2
+protein	EARS2
+protein	EPRS
+protein	MMAB
+protein	COX15
+protein	HMOX1
+protein	HMOX2
+chemical	mol:cpd:C05774
+chemical	mol:cpd:C16243
+chemical	mol:cpd:C16244
+chemical	mol:cpd:C15670
+chemical	mol:cpd:C15672
+chemical	mol:cpd:C00037
+chemical	mol:cpd:C04122
+chemical	mol:cpd:C12147
+chemical	mol:cpd:C00188
+chemical	mol:cpd:C11851
+chemical	mol:cpd:C11850
+chemical	mol:cpd:C11830
+chemical	mol:cpd:C11829
+chemical	mol:cpd:C05793
+chemical	mol:cpd:C05794
+chemical	mol:cpd:C05789
+chemical	mol:cpd:C05790
+chemical	mol:cpd:C05777
+chemical	mol:cpd:C11630
+chemical	mol:cpd:C05770
+chemical	mol:cpd:C00931
+chemical	mol:cpd:C00032
+chemical	mol:cpd:C00992
+chemical	mol:cpd:C05795
+chemical	mol:cpd:C05787
+chemical	mol:cpd:C06508
+chemical	mol:cpd:C05791
+chemical	mol:cpd:C03194
+chemical	mol:cpd:C06320
+chemical	mol:cpd:C03516
+chemical	mol:cpd:C11538
+chemical	mol:cpd:C00748
+chemical	mol:cpd:C06406
+chemical	mol:cpd:C06509
+chemical	mol:cpd:C06510
+chemical	mol:cpd:C00194
+chemical	mol:cpd:C03114
+chemical	mol:cpd:C04778
+chemical	mol:cpd:C05775
+chemical	mol:cpd:C00541
+chemical	mol:cpd:C02463
+chemical	mol:cpd:C00025
+chemical	mol:cpd:C02987
+chemical	mol:cpd:C03741
+chemical	mol:cpd:C02800
+chemical	mol:cpd:C01024
+chemical	mol:cpd:C05766
+chemical	mol:cpd:C01051
+chemical	mol:cpd:C05767
+chemical	mol:cpd:C05769
+chemical	mol:cpd:C05768
+chemical	mol:cpd:C02469
+chemical	mol:cpd:C14818
+chemical	mol:cpd:C03263
+chemical	mol:cpd:C01079
+chemical	mol:cpd:C05779
+chemical	mol:cpd:C14819
+chemical	mol:cpd:C03029
+chemical	mol:cpd:C00500
+chemical	mol:cpd:C05913
+chemical	mol:cpd:C05786
+chemical	mol:cpd:C00486
+chemical	mol:cpd:C05912
+chemical	mol:cpd:C04536
+chemical	mol:cpd:C05772
+chemical	mol:cpd:C06416
+chemical	mol:cpd:C00430
+chemical	mol:cpd:C16242
+chemical	mol:cpd:C11540
+chemical	mol:cpd:C02880
+chemical	mol:cpd:C11545
+chemical	mol:cpd:C05798
+chemical	mol:cpd:C06407
+chemical	mol:cpd:C06505
+chemical	mol:cpd:C17401
+chemical	mol:cpd:C05778
+chemical	mol:cpd:C06507
+chemical	mol:cpd:C05797
+chemical	mol:cpd:C05307
+chemical	mol:cpd:C06319
+chemical	mol:cpd:C11543
+chemical	mol:cpd:C11542
+chemical	mol:cpd:C01708
+chemical	mol:cpd:C05781
+chemical	mol:cpd:C06408
+chemical	mol:cpd:C02139
+chemical	mol:cpd:C06399
+chemical	mol:cpd:C06506
+chemical	mol:cpd:C02823
+chemical	mol:cpd:C06503
+chemical	mol:cpd:C05773
+chemical	mol:cpd:C05785
+chemical	mol:cpd:C00524
+chemical	mol:cpd:C05782
+chemical	mol:cpd:C05783
+chemical	mol:cpd:C05784
+chemical	mol:cpd:C05780
+chemical	mol:cpd:C03179
+chemical	mol:cpd:C00853
+chemical	mol:cpd:C06504
+chemical	mol:cpd:C05306
+chemical	mol:cpd:C02191
+chemical	mol:cpd:C11539
+chemical	mol:cpd:C11832
+chemical	mol:cpd:C11831
+chemical	mol:cpd:C18021
+chemical	mol:cpd:C18022
+chemical	mol:cpd:C18098
+chemical	mol:cpd:C16541
+chemical	mol:cpd:C18151
+chemical	mol:cpd:C16540
+chemical	mol:cpd:C18152
+chemical	mol:cpd:C18154
+chemical	mol:cpd:C18153
+chemical	mol:cpd:C18155
+chemical	mol:cpd:C11242
+chemical	mol:cpd:C18157
+chemical	mol:cpd:C18160
+chemical	mol:cpd:C18162
+chemical	mol:cpd:C18161
+chemical	mol:cpd:C18163
+chemical	mol:cpd:C18156
+chemical	mol:cpd:C11243
+chemical	mol:cpd:C18064
+family	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3
+family	BLVRA/BLVRB
+family	CP/FTH1/FTL/FTMT
+family	ALAS1/ALAS2
+family	EARS2/EPRS
+family	HMOX1/HMOX2
+UGT2B11	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2A1	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B28	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A10	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A8	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A7	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A6	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A5	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A9	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A4	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A1	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT1A3	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2A2	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B4	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B7	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B10	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B15	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2B17	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+UGT2A3	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	member>
+BLVRA	BLVRA/BLVRB	member>
+BLVRB	BLVRA/BLVRB	member>
+CP	CP/FTH1/FTL/FTMT	member>
+FTH1	CP/FTH1/FTL/FTMT	member>
+FTL	CP/FTH1/FTL/FTMT	member>
+FTMT	CP/FTH1/FTL/FTMT	member>
+ALAS1	ALAS1/ALAS2	member>
+ALAS2	ALAS1/ALAS2	member>
+EARS2	EARS2/EPRS	member>
+EPRS	EARS2/EPRS	member>
+HMOX1	HMOX1/HMOX2	member>
+HMOX2	HMOX1/HMOX2	member>
+complex	MMAB/mol:cpd:C05774
+complex	COX15/mol:cpd:C15672
+complex	COX10/mol:cpd:C00032
+complex	ALAS1/ALAS2/mol:cpd:C00037
+complex	GUSB/mol:cpd:C05787
+complex	MMAB/mol:cpd:C06505
+complex	CP/FTH1/FTL/FTMT/mol:cpd:C14818
+complex	HMOX1/HMOX2/mol:cpd:C01708
+complex	BLVRA/BLVRB/mol:cpd:C00500
+complex	PPOX/mol:cpd:C01079
+complex	CPOX/mol:cpd:C03263
+complex	UROD/mol:cpd:C01051
+complex	UROS/mol:cpd:C01024
+complex	HMBS/mol:cpd:C00931
+complex	ALAD/mol:cpd:C00430
+complex	UROD/mol:cpd:C05766
+complex	EARS2/EPRS/mol:cpd:C00025
+complex	HCCS/mol:cpd:C00032
+complex	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3/mol:cpd:C00486
+complex	FECH/mol:cpd:C02191/mol:cpd:C14818
+MMAB	MMAB/mol:cpd:C05774	component>
+mol:cpd:C05774	MMAB/mol:cpd:C05774	component>
+COX15	COX15/mol:cpd:C15672	component>
+mol:cpd:C15672	COX15/mol:cpd:C15672	component>
+COX10	COX10/mol:cpd:C00032	component>
+mol:cpd:C00032	COX10/mol:cpd:C00032	component>
+ALAS1/ALAS2	ALAS1/ALAS2/mol:cpd:C00037	component>
+mol:cpd:C00037	ALAS1/ALAS2/mol:cpd:C00037	component>
+GUSB	GUSB/mol:cpd:C05787	component>
+mol:cpd:C05787	GUSB/mol:cpd:C05787	component>
+MMAB	MMAB/mol:cpd:C06505	component>
+mol:cpd:C06505	MMAB/mol:cpd:C06505	component>
+CP/FTH1/FTL/FTMT	CP/FTH1/FTL/FTMT/mol:cpd:C14818	component>
+mol:cpd:C14818	CP/FTH1/FTL/FTMT/mol:cpd:C14818	component>
+HMOX1/HMOX2	HMOX1/HMOX2/mol:cpd:C01708	component>
+mol:cpd:C01708	HMOX1/HMOX2/mol:cpd:C01708	component>
+BLVRA/BLVRB	BLVRA/BLVRB/mol:cpd:C00500	component>
+mol:cpd:C00500	BLVRA/BLVRB/mol:cpd:C00500	component>
+PPOX	PPOX/mol:cpd:C01079	component>
+mol:cpd:C01079	PPOX/mol:cpd:C01079	component>
+CPOX	CPOX/mol:cpd:C03263	component>
+mol:cpd:C03263	CPOX/mol:cpd:C03263	component>
+UROD	UROD/mol:cpd:C01051	component>
+mol:cpd:C01051	UROD/mol:cpd:C01051	component>
+UROS	UROS/mol:cpd:C01024	component>
+mol:cpd:C01024	UROS/mol:cpd:C01024	component>
+HMBS	HMBS/mol:cpd:C00931	component>
+mol:cpd:C00931	HMBS/mol:cpd:C00931	component>
+ALAD	ALAD/mol:cpd:C00430	component>
+mol:cpd:C00430	ALAD/mol:cpd:C00430	component>
+UROD	UROD/mol:cpd:C05766	component>
+mol:cpd:C05766	UROD/mol:cpd:C05766	component>
+EARS2/EPRS	EARS2/EPRS/mol:cpd:C00025	component>
+mol:cpd:C00025	EARS2/EPRS/mol:cpd:C00025	component>
+HCCS	HCCS/mol:cpd:C00032	component>
+mol:cpd:C00032	HCCS/mol:cpd:C00032	component>
+UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3/mol:cpd:C00486	component>
+mol:cpd:C00486	UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3/mol:cpd:C00486	component>
+FECH	FECH/mol:cpd:C02191/mol:cpd:C14818	component>
+mol:cpd:C02191	FECH/mol:cpd:C02191/mol:cpd:C14818	component>
+mol:cpd:C14818	FECH/mol:cpd:C02191/mol:cpd:C14818	component>
+MMAB/mol:cpd:C05774	mol:cpd:C06508	-a>
+COX15/mol:cpd:C15672	mol:cpd:C15670	-a>
+COX10/mol:cpd:C00032	mol:cpd:C15672	-a>
+ALAS1/ALAS2/mol:cpd:C00037	mol:cpd:C00430	-a>
+GUSB/mol:cpd:C05787	mol:cpd:C05791	-a>
+MMAB/mol:cpd:C06505	mol:cpd:C06506	-a>
+CP/FTH1/FTL/FTMT/mol:cpd:C14818	mol:cpd:C14819	-a>
+HMOX1/HMOX2/mol:cpd:C01708	mol:cpd:C00500	-a>
+HMOX1/HMOX2/mol:cpd:C01708	mol:cpd:C14819	-a>
+BLVRA/BLVRB/mol:cpd:C00500	mol:cpd:C00486	-a>
+PPOX/mol:cpd:C01079	mol:cpd:C02191	-a>
+CPOX/mol:cpd:C03263	mol:cpd:C01079	-a>
+UROD/mol:cpd:C01051	mol:cpd:C03263	-a>
+UROS/mol:cpd:C01024	mol:cpd:C01051	-a>
+HMBS/mol:cpd:C00931	mol:cpd:C01024	-a>
+ALAD/mol:cpd:C00430	mol:cpd:C00931	-a>
+UROD/mol:cpd:C05766	mol:cpd:C05768	-a>
+EARS2/EPRS/mol:cpd:C00025	mol:cpd:C02987	-a>
+HCCS/mol:cpd:C00032	mol:cpd:C00524	-a>
+UGT2B11/UGT2A1/UGT2B28/UGT1A10/UGT1A8/UGT1A7/UGT1A6/UGT1A5/UGT1A9/UGT1A4/UGT1A1/UGT1A3/UGT2A2/UGT2B4/UGT2B7/UGT2B10/UGT2B15/UGT2B17/UGT2A3/mol:cpd:C00486	mol:cpd:C05787	-a>
+FECH/mol:cpd:C02191/mol:cpd:C14818	mol:cpd:C00032	-a>

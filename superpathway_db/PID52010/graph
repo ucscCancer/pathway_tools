@@ -1,0 +1,58 @@
+protein	HMGCS1
+protein	HMGCS2
+protein	HMGCL
+protein	ACAT1
+protein	SOAT2
+protein	BDH2
+protein	BDH1
+protein	OXCT1
+protein	OXCT2
+chemical	mol:cpd:C00332
+chemical	mol:cpd:C00356
+chemical	mol:cpd:C00207
+chemical	mol:cpd:C00164
+chemical	mol:cpd:C01089
+chemical	mol:cpd:C00024
+family	HMGCS1/HMGCS2
+family	ACAT1/SOAT2
+family	BDH2/BDH1
+family	OXCT1/OXCT2
+HMGCS1	HMGCS1/HMGCS2	member>
+HMGCS2	HMGCS1/HMGCS2	member>
+ACAT1	ACAT1/SOAT2	member>
+SOAT2	ACAT1/SOAT2	member>
+BDH2	BDH2/BDH1	member>
+BDH1	BDH2/BDH1	member>
+OXCT1	OXCT1/OXCT2	member>
+OXCT2	OXCT1/OXCT2	member>
+complex	HMGCS1/HMGCS2/mol:cpd:C00332/mol:cpd:C00024
+complex	HMGCL/mol:cpd:C00356
+complex	ACAT1/SOAT2/mol:cpd:C00024
+complex	ACAT1/SOAT2/mol:cpd:C00332
+complex	BDH2/BDH1/mol:cpd:C01089
+complex	BDH2/BDH1/mol:cpd:C00164
+complex	OXCT1/OXCT2/mol:cpd:C00164
+complex	OXCT1/OXCT2/mol:cpd:C00332
+HMGCS1/HMGCS2	HMGCS1/HMGCS2/mol:cpd:C00332/mol:cpd:C00024	component>
+mol:cpd:C00332	HMGCS1/HMGCS2/mol:cpd:C00332/mol:cpd:C00024	component>
+mol:cpd:C00024	HMGCS1/HMGCS2/mol:cpd:C00332/mol:cpd:C00024	component>
+HMGCL	HMGCL/mol:cpd:C00356	component>
+mol:cpd:C00356	HMGCL/mol:cpd:C00356	component>
+ACAT1/SOAT2	ACAT1/SOAT2/mol:cpd:C00024	component>
+mol:cpd:C00024	ACAT1/SOAT2/mol:cpd:C00024	component>
+mol:cpd:C00332	ACAT1/SOAT2/mol:cpd:C00332	component>
+BDH2/BDH1	BDH2/BDH1/mol:cpd:C01089	component>
+mol:cpd:C01089	BDH2/BDH1/mol:cpd:C01089	component>
+mol:cpd:C00164	BDH2/BDH1/mol:cpd:C00164	component>
+OXCT1/OXCT2	OXCT1/OXCT2/mol:cpd:C00164	component>
+mol:cpd:C00164	OXCT1/OXCT2/mol:cpd:C00164	component>
+mol:cpd:C00332	OXCT1/OXCT2/mol:cpd:C00332	component>
+HMGCS1/HMGCS2/mol:cpd:C00332/mol:cpd:C00024	mol:cpd:C00356	-a>
+HMGCL/mol:cpd:C00356	mol:cpd:C00024	-a>
+HMGCL/mol:cpd:C00356	mol:cpd:C00164	-a>
+ACAT1/SOAT2/mol:cpd:C00024	mol:cpd:C00332	-a>
+ACAT1/SOAT2/mol:cpd:C00332	mol:cpd:C00024	-a>
+BDH2/BDH1/mol:cpd:C01089	mol:cpd:C00164	-a>
+BDH2/BDH1/mol:cpd:C00164	mol:cpd:C01089	-a>
+OXCT1/OXCT2/mol:cpd:C00164	mol:cpd:C00332	-a>
+OXCT1/OXCT2/mol:cpd:C00332	mol:cpd:C00164	-a>

@@ -1,0 +1,167 @@
+protein	FTCD
+protein	GART
+protein	MTHFD2
+protein	MTHFD2L
+protein	DHFR
+protein	MTHFR
+protein	MTHFD1
+protein	MTHFS
+protein	AMT
+protein	MTFMT
+protein	ALDH1L1
+protein	ALDH1L2
+protein	MTHFD1L
+protein	ATIC
+protein	TYMS
+protein	MTR
+protein	SHMT1
+protein	SHMT2
+chemical	mol:cpd:C00504
+chemical	mol:cpd:C00415
+chemical	mol:cpd:C03479
+chemical	mol:cpd:C00143
+chemical	mol:cpd:C00440
+chemical	mol:cpd:C00664
+chemical	mol:cpd:C00234
+chemical	mol:cpd:C00445
+chemical	mol:cpd:C00101
+family	MTHFD2/MTHFD2L
+family	MTHFD2/MTHFD2L/MTHFD1
+family	ALDH1L1/ALDH1L2
+family	MTHFD1L/MTHFD1
+family	SHMT1/SHMT2
+MTHFD2	MTHFD2/MTHFD2L	member>
+MTHFD2L	MTHFD2/MTHFD2L	member>
+MTHFD1	MTHFD2/MTHFD2L/MTHFD1	member>
+ALDH1L1	ALDH1L1/ALDH1L2	member>
+ALDH1L2	ALDH1L1/ALDH1L2	member>
+MTHFD1L	MTHFD1L/MTHFD1	member>
+SHMT1	SHMT1/SHMT2	member>
+SHMT2	SHMT1/SHMT2	member>
+complex	TYMS/mol:cpd:C00143
+complex	TYMS/mol:cpd:C00415
+complex	MTR/mol:cpd:C00440
+complex	MTR/mol:cpd:C00101
+complex	FTCD/mol:cpd:C00664
+complex	FTCD/mol:cpd:C00101
+complex	GART/mol:cpd:C00445
+complex	FTCD/mol:cpd:C00445
+complex	FTCD/mol:cpd:C00664
+complex	MTHFD2/MTHFD2L/mol:cpd:C00143
+complex	MTHFD2/MTHFD2L/mol:cpd:C00445
+complex	MTHFS/mol:cpd:C03479
+complex	AMT/mol:cpd:C00445
+complex	MTFMT/mol:cpd:C00234
+complex	ALDH1L1/ALDH1L2/mol:cpd:C00234
+complex	MTHFD1L/MTHFD1/mol:cpd:C00101
+complex	GART/mol:cpd:C00234
+complex	GART/mol:cpd:C00101
+complex	ATIC/mol:cpd:C00234
+complex	ATIC/mol:cpd:C00101
+complex	DHFR/mol:cpd:C00415
+complex	DHFR/mol:cpd:C00101
+complex	DHFR/mol:cpd:C00504
+complex	DHFR/mol:cpd:C00415
+complex	FTCD/mol:cpd:C03479
+complex	SHMT1/SHMT2/mol:cpd:C00143
+complex	SHMT1/SHMT2/mol:cpd:C00101
+complex	AMT/mol:cpd:C00101
+complex	AMT/mol:cpd:C00143
+complex	MTHFR/mol:cpd:C00143
+complex	MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00445
+complex	MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00234
+complex	MTHFD1/mol:cpd:C00143
+complex	MTHFD1/mol:cpd:C00445
+complex	DHFR/mol:cpd:C00504
+TYMS	TYMS/mol:cpd:C00143	component>
+mol:cpd:C00143	TYMS/mol:cpd:C00143	component>
+mol:cpd:C00415	TYMS/mol:cpd:C00415	component>
+MTR	MTR/mol:cpd:C00440	component>
+mol:cpd:C00440	MTR/mol:cpd:C00440	component>
+mol:cpd:C00101	MTR/mol:cpd:C00101	component>
+FTCD	FTCD/mol:cpd:C00664	component>
+mol:cpd:C00664	FTCD/mol:cpd:C00664	component>
+mol:cpd:C00101	FTCD/mol:cpd:C00101	component>
+GART	GART/mol:cpd:C00445	component>
+mol:cpd:C00445	GART/mol:cpd:C00445	component>
+FTCD	FTCD/mol:cpd:C00445	component>
+mol:cpd:C00445	FTCD/mol:cpd:C00445	component>
+mol:cpd:C00664	FTCD/mol:cpd:C00664	component>
+MTHFD2/MTHFD2L	MTHFD2/MTHFD2L/mol:cpd:C00143	component>
+mol:cpd:C00143	MTHFD2/MTHFD2L/mol:cpd:C00143	component>
+mol:cpd:C00445	MTHFD2/MTHFD2L/mol:cpd:C00445	component>
+MTHFS	MTHFS/mol:cpd:C03479	component>
+mol:cpd:C03479	MTHFS/mol:cpd:C03479	component>
+AMT	AMT/mol:cpd:C00445	component>
+mol:cpd:C00445	AMT/mol:cpd:C00445	component>
+MTFMT	MTFMT/mol:cpd:C00234	component>
+mol:cpd:C00234	MTFMT/mol:cpd:C00234	component>
+ALDH1L1/ALDH1L2	ALDH1L1/ALDH1L2/mol:cpd:C00234	component>
+mol:cpd:C00234	ALDH1L1/ALDH1L2/mol:cpd:C00234	component>
+MTHFD1L/MTHFD1	MTHFD1L/MTHFD1/mol:cpd:C00101	component>
+mol:cpd:C00101	MTHFD1L/MTHFD1/mol:cpd:C00101	component>
+GART	GART/mol:cpd:C00234	component>
+mol:cpd:C00234	GART/mol:cpd:C00234	component>
+mol:cpd:C00101	GART/mol:cpd:C00101	component>
+ATIC	ATIC/mol:cpd:C00234	component>
+mol:cpd:C00234	ATIC/mol:cpd:C00234	component>
+mol:cpd:C00101	ATIC/mol:cpd:C00101	component>
+DHFR	DHFR/mol:cpd:C00415	component>
+mol:cpd:C00415	DHFR/mol:cpd:C00415	component>
+mol:cpd:C00101	DHFR/mol:cpd:C00101	component>
+DHFR	DHFR/mol:cpd:C00504	component>
+mol:cpd:C00504	DHFR/mol:cpd:C00504	component>
+mol:cpd:C00415	DHFR/mol:cpd:C00415	component>
+FTCD	FTCD/mol:cpd:C03479	component>
+mol:cpd:C03479	FTCD/mol:cpd:C03479	component>
+SHMT1/SHMT2	SHMT1/SHMT2/mol:cpd:C00143	component>
+mol:cpd:C00143	SHMT1/SHMT2/mol:cpd:C00143	component>
+mol:cpd:C00101	SHMT1/SHMT2/mol:cpd:C00101	component>
+AMT	AMT/mol:cpd:C00101	component>
+mol:cpd:C00101	AMT/mol:cpd:C00101	component>
+mol:cpd:C00143	AMT/mol:cpd:C00143	component>
+MTHFR	MTHFR/mol:cpd:C00143	component>
+mol:cpd:C00143	MTHFR/mol:cpd:C00143	component>
+MTHFD2/MTHFD2L/MTHFD1	MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00445	component>
+mol:cpd:C00445	MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00445	component>
+mol:cpd:C00234	MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00234	component>
+MTHFD1	MTHFD1/mol:cpd:C00143	component>
+mol:cpd:C00143	MTHFD1/mol:cpd:C00143	component>
+mol:cpd:C00445	MTHFD1/mol:cpd:C00445	component>
+DHFR	DHFR/mol:cpd:C00504	component>
+mol:cpd:C00504	DHFR/mol:cpd:C00504	component>
+TYMS/mol:cpd:C00143	mol:cpd:C00415	-a>
+TYMS/mol:cpd:C00415	mol:cpd:C00143	-a>
+MTR/mol:cpd:C00440	mol:cpd:C00101	-a>
+MTR/mol:cpd:C00101	mol:cpd:C00440	-a>
+FTCD/mol:cpd:C00664	mol:cpd:C00101	-a>
+FTCD/mol:cpd:C00101	mol:cpd:C00664	-a>
+GART/mol:cpd:C00445	mol:cpd:C00101	-a>
+FTCD/mol:cpd:C00445	mol:cpd:C00664	-a>
+FTCD/mol:cpd:C00664	mol:cpd:C00445	-a>
+MTHFD2/MTHFD2L/mol:cpd:C00143	mol:cpd:C00445	-a>
+MTHFD2/MTHFD2L/mol:cpd:C00445	mol:cpd:C00143	-a>
+MTHFS/mol:cpd:C03479	mol:cpd:C00445	-a>
+AMT/mol:cpd:C00445	mol:cpd:C03479	-a>
+MTFMT/mol:cpd:C00234	mol:cpd:C00101	-a>
+ALDH1L1/ALDH1L2/mol:cpd:C00234	mol:cpd:C00101	-a>
+MTHFD1L/MTHFD1/mol:cpd:C00101	mol:cpd:C00234	-a>
+GART/mol:cpd:C00234	mol:cpd:C00101	-a>
+GART/mol:cpd:C00101	mol:cpd:C00234	-a>
+ATIC/mol:cpd:C00234	mol:cpd:C00101	-a>
+ATIC/mol:cpd:C00101	mol:cpd:C00234	-a>
+DHFR/mol:cpd:C00415	mol:cpd:C00101	-a>
+DHFR/mol:cpd:C00101	mol:cpd:C00415	-a>
+DHFR/mol:cpd:C00504	mol:cpd:C00415	-a>
+DHFR/mol:cpd:C00415	mol:cpd:C00504	-a>
+FTCD/mol:cpd:C03479	mol:cpd:C00101	-a>
+SHMT1/SHMT2/mol:cpd:C00143	mol:cpd:C00101	-a>
+SHMT1/SHMT2/mol:cpd:C00101	mol:cpd:C00143	-a>
+AMT/mol:cpd:C00101	mol:cpd:C00143	-a>
+AMT/mol:cpd:C00143	mol:cpd:C00101	-a>
+MTHFR/mol:cpd:C00143	mol:cpd:C00440	-a>
+MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00445	mol:cpd:C00234	-a>
+MTHFD2/MTHFD2L/MTHFD1/mol:cpd:C00234	mol:cpd:C00445	-a>
+MTHFD1/mol:cpd:C00143	mol:cpd:C00445	-a>
+MTHFD1/mol:cpd:C00445	mol:cpd:C00143	-a>
+DHFR/mol:cpd:C00504	mol:cpd:C00101	-a>

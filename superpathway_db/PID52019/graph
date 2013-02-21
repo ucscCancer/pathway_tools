@@ -1,0 +1,210 @@
+the molecule is already in the list mol:cpd:C00014
+protein	ASPA
+protein	ACY3
+protein	NIT2
+protein	ASNS
+protein	IL4I1
+protein	GOT1
+protein	GOT2
+protein	DDO
+protein	ASS1
+protein	ADSSL1
+protein	ADSS
+protein	ASL
+protein	ADSL
+protein	AGXT
+protein	AGXT2
+protein	GPT
+protein	GPT2
+protein	DFFB
+protein	ALDH5A1
+protein	GLUD1
+protein	GLUD2
+protein	ABAT
+protein	GAD1
+protein	GAD2
+protein	GLUL
+protein	GLS2
+protein	CYP21A2
+protein	ALDH4A1
+protein	GFPT1
+protein	GFPT2
+protein	PPAT
+chemical	mol:cpd:C00122
+chemical	mol:cpd:C00042
+chemical	mol:cpd:C00036
+chemical	mol:cpd:C00026
+chemical	mol:cpd:C00041
+chemical	mol:cpd:C00049
+chemical	mol:cpd:C00152
+chemical	mol:cpd:C00402
+chemical	mol:cpd:C02362
+chemical	mol:cpd:C01042
+chemical	mol:cpd:C03794
+chemical	mol:cpd:C03406
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C00438
+chemical	mol:cpd:C00232
+chemical	mol:cpd:C00025
+chemical	mol:cpd:C00334
+chemical	mol:cpd:C00064
+chemical	mol:cpd:C00014
+chemical	mol:cpd:C00169
+chemical	mol:cpd:C00940
+chemical	mol:cpd:C03912
+chemical	mol:cpd:C00352
+chemical	mol:cpd:C03090
+family	ASPA/ACY3
+family	GOT1/GOT2
+family	ADSSL1/ADSS
+family	AGXT/AGXT2
+family	GPT/GPT2
+family	GLUD1/GLUD2
+family	GAD1/GAD2
+family	GLS2/GLS2
+family	GFPT1/GFPT2
+ASPA	ASPA/ACY3	member>
+ACY3	ASPA/ACY3	member>
+GOT1	GOT1/GOT2	member>
+GOT2	GOT1/GOT2	member>
+ADSSL1	ADSSL1/ADSS	member>
+ADSS	ADSSL1/ADSS	member>
+AGXT	AGXT/AGXT2	member>
+AGXT2	AGXT/AGXT2	member>
+GPT	GPT/GPT2	member>
+GPT2	GPT/GPT2	member>
+GLUD1	GLUD1/GLUD2	member>
+GLUD2	GLUD1/GLUD2	member>
+GAD1	GAD1/GAD2	member>
+GAD2	GAD1/GAD2	member>
+GLS2	GLS2/GLS2	member>
+GFPT1	GFPT1/GFPT2	member>
+GFPT2	GFPT1/GFPT2	member>
+complex	ASPA/ACY3/mol:cpd:C01042
+complex	NIT2/mol:cpd:C02362
+complex	ASNS/mol:cpd:C00049
+complex	ASNS/mol:cpd:C00152
+complex	IL4I1/mol:cpd:C00049
+complex	GOT1/GOT2/mol:cpd:C00049
+complex	GOT1/GOT2/mol:cpd:C00036
+complex	DDO/mol:cpd:C00402
+complex	ASS1/mol:cpd:C00049
+complex	ADSSL1/ADSS/mol:cpd:C00049
+complex	ASL/mol:cpd:C03406
+complex	ADSL/mol:cpd:C03794
+complex	AGXT/AGXT2/mol:cpd:C00041
+complex	GPT/GPT2/mol:cpd:C00041
+complex	GPT/GPT2/mol:cpd:C00022
+complex	DFFB/mol:cpd:C00049
+complex	ALDH5A1/mol:cpd:C00232
+complex	ALDH5A1/mol:cpd:C00042
+complex	GLUD1/GLUD2/mol:cpd:C00025
+complex	GLUD1/GLUD2/mol:cpd:C00026/mol:cpd:C00014
+complex	ABAT/mol:cpd:C00334
+complex	ABAT/mol:cpd:C00232
+complex	GAD1/GAD2/mol:cpd:C00025
+complex	GLUL/mol:cpd:C00025
+complex	GLS2/GLS2/mol:cpd:C00064
+complex	GLS2/GLS2/mol:cpd:C00025/mol:cpd:C00014
+complex	DFFB/mol:cpd:C00064
+complex	CYP21A2/mol:cpd:C00014
+complex	NIT2/mol:cpd:C00940
+complex	ALDH4A1/mol:cpd:C03912
+complex	ALDH4A1/mol:cpd:C00025
+complex	GFPT1/GFPT2/mol:cpd:C00064
+complex	PPAT/mol:cpd:C00064
+ASPA/ACY3	ASPA/ACY3/mol:cpd:C01042	component>
+mol:cpd:C01042	ASPA/ACY3/mol:cpd:C01042	component>
+NIT2	NIT2/mol:cpd:C02362	component>
+mol:cpd:C02362	NIT2/mol:cpd:C02362	component>
+ASNS	ASNS/mol:cpd:C00049	component>
+mol:cpd:C00049	ASNS/mol:cpd:C00049	component>
+mol:cpd:C00152	ASNS/mol:cpd:C00152	component>
+IL4I1	IL4I1/mol:cpd:C00049	component>
+mol:cpd:C00049	IL4I1/mol:cpd:C00049	component>
+GOT1/GOT2	GOT1/GOT2/mol:cpd:C00049	component>
+mol:cpd:C00049	GOT1/GOT2/mol:cpd:C00049	component>
+mol:cpd:C00036	GOT1/GOT2/mol:cpd:C00036	component>
+DDO	DDO/mol:cpd:C00402	component>
+mol:cpd:C00402	DDO/mol:cpd:C00402	component>
+ASS1	ASS1/mol:cpd:C00049	component>
+mol:cpd:C00049	ASS1/mol:cpd:C00049	component>
+ADSSL1/ADSS	ADSSL1/ADSS/mol:cpd:C00049	component>
+mol:cpd:C00049	ADSSL1/ADSS/mol:cpd:C00049	component>
+ASL	ASL/mol:cpd:C03406	component>
+mol:cpd:C03406	ASL/mol:cpd:C03406	component>
+ADSL	ADSL/mol:cpd:C03794	component>
+mol:cpd:C03794	ADSL/mol:cpd:C03794	component>
+AGXT/AGXT2	AGXT/AGXT2/mol:cpd:C00041	component>
+mol:cpd:C00041	AGXT/AGXT2/mol:cpd:C00041	component>
+GPT/GPT2	GPT/GPT2/mol:cpd:C00041	component>
+mol:cpd:C00041	GPT/GPT2/mol:cpd:C00041	component>
+mol:cpd:C00022	GPT/GPT2/mol:cpd:C00022	component>
+DFFB	DFFB/mol:cpd:C00049	component>
+mol:cpd:C00049	DFFB/mol:cpd:C00049	component>
+ALDH5A1	ALDH5A1/mol:cpd:C00232	component>
+mol:cpd:C00232	ALDH5A1/mol:cpd:C00232	component>
+mol:cpd:C00042	ALDH5A1/mol:cpd:C00042	component>
+GLUD1/GLUD2	GLUD1/GLUD2/mol:cpd:C00025	component>
+mol:cpd:C00025	GLUD1/GLUD2/mol:cpd:C00025	component>
+mol:cpd:C00026	GLUD1/GLUD2/mol:cpd:C00026/mol:cpd:C00014	component>
+mol:cpd:C00014	GLUD1/GLUD2/mol:cpd:C00026/mol:cpd:C00014	component>
+ABAT	ABAT/mol:cpd:C00334	component>
+mol:cpd:C00334	ABAT/mol:cpd:C00334	component>
+mol:cpd:C00232	ABAT/mol:cpd:C00232	component>
+GAD1/GAD2	GAD1/GAD2/mol:cpd:C00025	component>
+mol:cpd:C00025	GAD1/GAD2/mol:cpd:C00025	component>
+GLUL	GLUL/mol:cpd:C00025	component>
+mol:cpd:C00025	GLUL/mol:cpd:C00025	component>
+GLS2/GLS2	GLS2/GLS2/mol:cpd:C00064	component>
+mol:cpd:C00064	GLS2/GLS2/mol:cpd:C00064	component>
+mol:cpd:C00025	GLS2/GLS2/mol:cpd:C00025/mol:cpd:C00014	component>
+mol:cpd:C00014	GLS2/GLS2/mol:cpd:C00025/mol:cpd:C00014	component>
+DFFB	DFFB/mol:cpd:C00064	component>
+mol:cpd:C00064	DFFB/mol:cpd:C00064	component>
+CYP21A2	CYP21A2/mol:cpd:C00014	component>
+mol:cpd:C00014	CYP21A2/mol:cpd:C00014	component>
+NIT2	NIT2/mol:cpd:C00940	component>
+mol:cpd:C00940	NIT2/mol:cpd:C00940	component>
+ALDH4A1	ALDH4A1/mol:cpd:C03912	component>
+mol:cpd:C03912	ALDH4A1/mol:cpd:C03912	component>
+mol:cpd:C00025	ALDH4A1/mol:cpd:C00025	component>
+GFPT1/GFPT2	GFPT1/GFPT2/mol:cpd:C00064	component>
+mol:cpd:C00064	GFPT1/GFPT2/mol:cpd:C00064	component>
+PPAT	PPAT/mol:cpd:C00064	component>
+mol:cpd:C00064	PPAT/mol:cpd:C00064	component>
+ASPA/ACY3/mol:cpd:C01042	mol:cpd:C00049	-a>
+NIT2/mol:cpd:C02362	mol:cpd:C00036	-a>
+ASNS/mol:cpd:C00049	mol:cpd:C00152	-a>
+ASNS/mol:cpd:C00152	mol:cpd:C00049	-a>
+IL4I1/mol:cpd:C00049	mol:cpd:C00036	-a>
+GOT1/GOT2/mol:cpd:C00049	mol:cpd:C00036	-a>
+GOT1/GOT2/mol:cpd:C00036	mol:cpd:C00049	-a>
+DDO/mol:cpd:C00402	mol:cpd:C00036	-a>
+ASS1/mol:cpd:C00049	mol:cpd:C03406	-a>
+ADSSL1/ADSS/mol:cpd:C00049	mol:cpd:C03794	-a>
+ASL/mol:cpd:C03406	mol:cpd:C00122	-a>
+ADSL/mol:cpd:C03794	mol:cpd:C00122	-a>
+AGXT/AGXT2/mol:cpd:C00041	mol:cpd:C00022	-a>
+GPT/GPT2/mol:cpd:C00041	mol:cpd:C00022	-a>
+GPT/GPT2/mol:cpd:C00022	mol:cpd:C00041	-a>
+DFFB/mol:cpd:C00049	mol:cpd:C00438	-a>
+ALDH5A1/mol:cpd:C00232	mol:cpd:C00042	-a>
+ALDH5A1/mol:cpd:C00042	mol:cpd:C00232	-a>
+GLUD1/GLUD2/mol:cpd:C00025	mol:cpd:C00026	-a>
+GLUD1/GLUD2/mol:cpd:C00025	mol:cpd:C00014	-a>
+GLUD1/GLUD2/mol:cpd:C00026/mol:cpd:C00014	mol:cpd:C00025	-a>
+ABAT/mol:cpd:C00334	mol:cpd:C00232	-a>
+ABAT/mol:cpd:C00232	mol:cpd:C00334	-a>
+GAD1/GAD2/mol:cpd:C00025	mol:cpd:C00334	-a>
+GLUL/mol:cpd:C00025	mol:cpd:C00064	-a>
+GLS2/GLS2/mol:cpd:C00064	mol:cpd:C00025	-a>
+GLS2/GLS2/mol:cpd:C00064	mol:cpd:C00014	-a>
+GLS2/GLS2/mol:cpd:C00025/mol:cpd:C00014	mol:cpd:C00064	-a>
+DFFB/mol:cpd:C00064	mol:cpd:C00169	-a>
+CYP21A2/mol:cpd:C00014	mol:cpd:C00169	-a>
+NIT2/mol:cpd:C00940	mol:cpd:C00026	-a>
+ALDH4A1/mol:cpd:C03912	mol:cpd:C00025	-a>
+ALDH4A1/mol:cpd:C00025	mol:cpd:C03912	-a>
+GFPT1/GFPT2/mol:cpd:C00064	mol:cpd:C00352	-a>
+PPAT/mol:cpd:C00064	mol:cpd:C03090	-a>

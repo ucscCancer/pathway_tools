@@ -1,0 +1,375 @@
+protein	ALDOA
+protein	ALDOB
+protein	ALDOC
+protein	ALDH2
+protein	ALDH1B1
+protein	ALDH9A1
+protein	ALDH3A2
+protein	ALDH7A1
+protein	ALDH3A1
+protein	ALDH1A3
+protein	ALDH3B1
+protein	ALDH3B2
+protein	AKR1A1
+protein	ADH1A
+protein	ADH1B
+protein	ADH1C
+protein	ADH4
+protein	ADH5
+protein	ADH6
+protein	ADH7
+protein	PDHA1
+protein	PDHA2
+protein	PDHB
+protein	DLAT
+protein	LDHAL6A
+protein	LDHA
+protein	LDHB
+protein	LDHC
+protein	LDHAL6B
+protein	PKLR
+protein	PKM2
+protein	ENO1
+protein	ENO2
+protein	ENO3
+protein	PGAM4
+protein	PGAM2
+protein	BPGM
+protein	GAPDH
+protein	GAPDHS
+protein	TPI1
+protein	PFKL
+protein	PFKM
+protein	PFKP
+protein	FBP1
+protein	KHSRP
+protein	GPI
+protein	PGM1
+protein	PGM2
+protein	KCNA4
+protein	KIF2A
+protein	HOOK3
+protein	HKDC1
+protein	MAP4K2
+protein	GALM
+protein	G6PC
+protein	G6PC2
+protein	DLD
+protein	PGK1
+protein	PGK2
+protein	PCK1
+protein	PCK2
+protein	ACSS2
+protein	ACSS1
+protein	ADPGK
+chemical	mol:cpd:C00033
+chemical	mol:cpd:C00031
+chemical	mol:cpd:C00103
+chemical	mol:cpd:C00631
+chemical	mol:cpd:C00267
+chemical	mol:cpd:C00221
+chemical	mol:cpd:C00111
+chemical	mol:cpd:C01172
+chemical	mol:cpd:C00668
+chemical	mol:cpd:C05345
+chemical	mol:cpd:C00074
+chemical	mol:cpd:C00197
+chemical	mol:cpd:C00236
+chemical	mol:cpd:C00186
+chemical	mol:cpd:C15972
+chemical	mol:cpd:C00469
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C05125
+chemical	mol:cpd:C00024
+chemical	mol:cpd:C00084
+chemical	mol:cpd:C16255
+chemical	mol:cpd:C15973
+chemical	mol:cpd:C05378
+chemical	mol:cpd:C06186
+chemical	mol:cpd:C06187
+chemical	mol:cpd:C06188
+chemical	mol:cpd:C01451
+chemical	mol:cpd:C00036
+chemical	mol:cpd:C01159
+chemical	mol:cpd:C00118
+chemical	mol:cpd:C00068
+family	ALDOA/ALDOB/ALDOC
+family	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1
+family	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2
+family	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7
+family	PDHA1/PDHA2/PDHB
+family	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B
+family	PKLR/PKM2
+family	ENO1/ENO2/ENO3
+family	PGAM4/PGAM4/PGAM2/BPGM
+family	GAPDH/GAPDHS
+family	PFKL/PFKM/PFKP
+family	FBP1/KHSRP
+family	PGM1/PGM2
+family	KCNA4/KIF2A/HOOK3/HKDC1
+family	G6PC/G6PC2
+family	PGK1/PGK2
+family	PCK1/PCK2
+family	ACSS2/ACSS1
+ALDOA	ALDOA/ALDOB/ALDOC	member>
+ALDOB	ALDOA/ALDOB/ALDOC	member>
+ALDOC	ALDOA/ALDOB/ALDOC	member>
+ALDH2	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	member>
+ALDH1B1	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	member>
+ALDH9A1	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	member>
+ALDH3A2	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	member>
+ALDH7A1	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	member>
+ALDH3A1	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2	member>
+ALDH1A3	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2	member>
+ALDH3B1	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2	member>
+ALDH3B2	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2	member>
+ADH1A	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH1B	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH1C	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH4	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH5	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH6	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+ADH7	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	member>
+PDHA1	PDHA1/PDHA2/PDHB	member>
+PDHA2	PDHA1/PDHA2/PDHB	member>
+PDHB	PDHA1/PDHA2/PDHB	member>
+LDHAL6A	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	member>
+LDHA	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	member>
+LDHB	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	member>
+LDHC	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	member>
+LDHAL6B	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	member>
+PKLR	PKLR/PKM2	member>
+PKM2	PKLR/PKM2	member>
+ENO1	ENO1/ENO2/ENO3	member>
+ENO2	ENO1/ENO2/ENO3	member>
+ENO3	ENO1/ENO2/ENO3	member>
+PGAM4	PGAM4/PGAM4/PGAM2/BPGM	member>
+PGAM2	PGAM4/PGAM4/PGAM2/BPGM	member>
+BPGM	PGAM4/PGAM4/PGAM2/BPGM	member>
+GAPDH	GAPDH/GAPDHS	member>
+GAPDHS	GAPDH/GAPDHS	member>
+PFKL	PFKL/PFKM/PFKP	member>
+PFKM	PFKL/PFKM/PFKP	member>
+PFKP	PFKL/PFKM/PFKP	member>
+FBP1	FBP1/KHSRP	member>
+KHSRP	FBP1/KHSRP	member>
+PGM1	PGM1/PGM2	member>
+PGM2	PGM1/PGM2	member>
+KCNA4	KCNA4/KIF2A/HOOK3/HKDC1	member>
+KIF2A	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HOOK3	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HKDC1	KCNA4/KIF2A/HOOK3/HKDC1	member>
+G6PC	G6PC/G6PC2	member>
+G6PC2	G6PC/G6PC2	member>
+PGK1	PGK1/PGK2	member>
+PGK2	PGK1/PGK2	member>
+PCK1	PCK1/PCK2	member>
+PCK2	PCK1/PCK2	member>
+ACSS2	ACSS2/ACSS1	member>
+ACSS1	ACSS2/ACSS1	member>
+complex	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00084
+complex	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00033
+complex	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00084
+complex	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00033
+complex	AKR1A1/mol:cpd:C00469
+complex	AKR1A1/mol:cpd:C00084
+complex	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00469
+complex	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00084
+complex	PDHA1/PDHA2/PDHB/mol:cpd:C00068/mol:cpd:C00022
+complex	PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972
+complex	DLAT/mol:cpd:C00024/mol:cpd:C15973
+complex	DLAT/mol:cpd:C16255
+complex	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00186
+complex	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00022
+complex	PKLR/PKM2/mol:cpd:C00074
+complex	ENO1/ENO2/ENO3/mol:cpd:C00631
+complex	ENO1/ENO2/ENO3/mol:cpd:C00074
+complex	PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00631
+complex	PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00197
+complex	GAPDH/GAPDHS/mol:cpd:C00118
+complex	GAPDH/GAPDHS/mol:cpd:C00236
+complex	TPI1/mol:cpd:C00118
+complex	TPI1/mol:cpd:C00111
+complex	ALDOA/ALDOB/ALDOC/mol:cpd:C05378
+complex	ALDOA/ALDOB/ALDOC/mol:cpd:C00111/mol:cpd:C00118
+complex	PFKL/PFKM/PFKP/mol:cpd:C05345
+complex	FBP1/KHSRP/mol:cpd:C05378
+complex	GPI/mol:cpd:C00668
+complex	GPI/mol:cpd:C05345
+complex	PGM1/PGM2/mol:cpd:C00103
+complex	PGM1/PGM2/mol:cpd:C00668
+complex	GPI/mol:cpd:C01172
+complex	GPI/mol:cpd:C05345
+complex	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00221
+complex	MAP4K2/mol:cpd:C00221
+complex	GPI/mol:cpd:C00668
+complex	GPI/mol:cpd:C01172
+complex	GALM/mol:cpd:C00267
+complex	GALM/mol:cpd:C00221
+complex	MAP4K2/mol:cpd:C00267
+complex	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267
+complex	G6PC/G6PC2/mol:cpd:C00668
+complex	DLD/mol:cpd:C15973
+complex	DLD/mol:cpd:C15972
+complex	PGK1/PGK2/mol:cpd:C00197
+complex	PGK1/PGK2/mol:cpd:C00236
+complex	PCK1/PCK2/mol:cpd:C00036
+complex	BPGM/mol:cpd:C01159
+complex	BPGM/mol:cpd:C00197
+complex	BPGM/mol:cpd:C00236
+complex	BPGM/mol:cpd:C01159
+complex	ACSS2/ACSS1/mol:cpd:C00033
+complex	ADPGK/mol:cpd:C00267
+complex	ADPGK/mol:cpd:C00221
+complex	ADPGK/mol:cpd:C01172
+ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00084	component>
+mol:cpd:C00084	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00084	component>
+mol:cpd:C00033	ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00033	component>
+ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00084	component>
+mol:cpd:C00084	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00084	component>
+mol:cpd:C00033	ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00033	component>
+AKR1A1	AKR1A1/mol:cpd:C00469	component>
+mol:cpd:C00469	AKR1A1/mol:cpd:C00469	component>
+mol:cpd:C00084	AKR1A1/mol:cpd:C00084	component>
+ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00469	component>
+mol:cpd:C00469	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00469	component>
+mol:cpd:C00084	ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00084	component>
+PDHA1/PDHA2/PDHB	PDHA1/PDHA2/PDHB/mol:cpd:C00068/mol:cpd:C00022	component>
+mol:cpd:C00068	PDHA1/PDHA2/PDHB/mol:cpd:C00068/mol:cpd:C00022	component>
+mol:cpd:C00022	PDHA1/PDHA2/PDHB/mol:cpd:C00068/mol:cpd:C00022	component>
+PDHA1/PDHA2/PDHB	PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972	component>
+mol:cpd:C05125	PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972	component>
+mol:cpd:C15972	PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972	component>
+DLAT	DLAT/mol:cpd:C00024/mol:cpd:C15973	component>
+mol:cpd:C00024	DLAT/mol:cpd:C00024/mol:cpd:C15973	component>
+mol:cpd:C15973	DLAT/mol:cpd:C00024/mol:cpd:C15973	component>
+mol:cpd:C16255	DLAT/mol:cpd:C16255	component>
+LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00186	component>
+mol:cpd:C00186	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00186	component>
+mol:cpd:C00022	LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00022	component>
+PKLR/PKM2	PKLR/PKM2/mol:cpd:C00074	component>
+mol:cpd:C00074	PKLR/PKM2/mol:cpd:C00074	component>
+ENO1/ENO2/ENO3	ENO1/ENO2/ENO3/mol:cpd:C00631	component>
+mol:cpd:C00631	ENO1/ENO2/ENO3/mol:cpd:C00631	component>
+mol:cpd:C00074	ENO1/ENO2/ENO3/mol:cpd:C00074	component>
+PGAM4/PGAM4/PGAM2/BPGM	PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00631	component>
+mol:cpd:C00631	PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00631	component>
+mol:cpd:C00197	PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00197	component>
+GAPDH/GAPDHS	GAPDH/GAPDHS/mol:cpd:C00118	component>
+mol:cpd:C00118	GAPDH/GAPDHS/mol:cpd:C00118	component>
+mol:cpd:C00236	GAPDH/GAPDHS/mol:cpd:C00236	component>
+TPI1	TPI1/mol:cpd:C00118	component>
+mol:cpd:C00118	TPI1/mol:cpd:C00118	component>
+mol:cpd:C00111	TPI1/mol:cpd:C00111	component>
+ALDOA/ALDOB/ALDOC	ALDOA/ALDOB/ALDOC/mol:cpd:C05378	component>
+mol:cpd:C05378	ALDOA/ALDOB/ALDOC/mol:cpd:C05378	component>
+mol:cpd:C00111	ALDOA/ALDOB/ALDOC/mol:cpd:C00111/mol:cpd:C00118	component>
+mol:cpd:C00118	ALDOA/ALDOB/ALDOC/mol:cpd:C00111/mol:cpd:C00118	component>
+PFKL/PFKM/PFKP	PFKL/PFKM/PFKP/mol:cpd:C05345	component>
+mol:cpd:C05345	PFKL/PFKM/PFKP/mol:cpd:C05345	component>
+FBP1/KHSRP	FBP1/KHSRP/mol:cpd:C05378	component>
+mol:cpd:C05378	FBP1/KHSRP/mol:cpd:C05378	component>
+GPI	GPI/mol:cpd:C00668	component>
+mol:cpd:C00668	GPI/mol:cpd:C00668	component>
+mol:cpd:C05345	GPI/mol:cpd:C05345	component>
+PGM1/PGM2	PGM1/PGM2/mol:cpd:C00103	component>
+mol:cpd:C00103	PGM1/PGM2/mol:cpd:C00103	component>
+mol:cpd:C00668	PGM1/PGM2/mol:cpd:C00668	component>
+GPI	GPI/mol:cpd:C01172	component>
+mol:cpd:C01172	GPI/mol:cpd:C01172	component>
+mol:cpd:C05345	GPI/mol:cpd:C05345	component>
+KCNA4/KIF2A/HOOK3/HKDC1	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00221	component>
+mol:cpd:C00221	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00221	component>
+MAP4K2	MAP4K2/mol:cpd:C00221	component>
+mol:cpd:C00221	MAP4K2/mol:cpd:C00221	component>
+GPI	GPI/mol:cpd:C00668	component>
+mol:cpd:C00668	GPI/mol:cpd:C00668	component>
+mol:cpd:C01172	GPI/mol:cpd:C01172	component>
+GALM	GALM/mol:cpd:C00267	component>
+mol:cpd:C00267	GALM/mol:cpd:C00267	component>
+mol:cpd:C00221	GALM/mol:cpd:C00221	component>
+MAP4K2	MAP4K2/mol:cpd:C00267	component>
+mol:cpd:C00267	MAP4K2/mol:cpd:C00267	component>
+KCNA4/KIF2A/HOOK3/HKDC1	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	component>
+mol:cpd:C00267	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	component>
+G6PC/G6PC2	G6PC/G6PC2/mol:cpd:C00668	component>
+mol:cpd:C00668	G6PC/G6PC2/mol:cpd:C00668	component>
+DLD	DLD/mol:cpd:C15973	component>
+mol:cpd:C15973	DLD/mol:cpd:C15973	component>
+mol:cpd:C15972	DLD/mol:cpd:C15972	component>
+PGK1/PGK2	PGK1/PGK2/mol:cpd:C00197	component>
+mol:cpd:C00197	PGK1/PGK2/mol:cpd:C00197	component>
+mol:cpd:C00236	PGK1/PGK2/mol:cpd:C00236	component>
+PCK1/PCK2	PCK1/PCK2/mol:cpd:C00036	component>
+mol:cpd:C00036	PCK1/PCK2/mol:cpd:C00036	component>
+BPGM	BPGM/mol:cpd:C01159	component>
+mol:cpd:C01159	BPGM/mol:cpd:C01159	component>
+mol:cpd:C00197	BPGM/mol:cpd:C00197	component>
+BPGM	BPGM/mol:cpd:C00236	component>
+mol:cpd:C00236	BPGM/mol:cpd:C00236	component>
+mol:cpd:C01159	BPGM/mol:cpd:C01159	component>
+ACSS2/ACSS1	ACSS2/ACSS1/mol:cpd:C00033	component>
+mol:cpd:C00033	ACSS2/ACSS1/mol:cpd:C00033	component>
+ADPGK	ADPGK/mol:cpd:C00267	component>
+mol:cpd:C00267	ADPGK/mol:cpd:C00267	component>
+ADPGK	ADPGK/mol:cpd:C00221	component>
+mol:cpd:C00221	ADPGK/mol:cpd:C00221	component>
+mol:cpd:C01172	ADPGK/mol:cpd:C01172	component>
+ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00084	mol:cpd:C00033	-a>
+ALDH2/ALDH1B1/ALDH9A1/ALDH3A2/ALDH7A1/mol:cpd:C00033	mol:cpd:C00084	-a>
+ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00084	mol:cpd:C00033	-a>
+ALDH3A1/ALDH1A3/ALDH3B1/ALDH3B2/mol:cpd:C00033	mol:cpd:C00084	-a>
+AKR1A1/mol:cpd:C00469	mol:cpd:C00084	-a>
+AKR1A1/mol:cpd:C00084	mol:cpd:C00469	-a>
+ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00469	mol:cpd:C00084	-a>
+ADH1A/ADH1B/ADH1C/ADH4/ADH5/ADH6/ADH7/mol:cpd:C00084	mol:cpd:C00469	-a>
+PDHA1/PDHA2/PDHB/mol:cpd:C00068/mol:cpd:C00022	mol:cpd:C05125	-a>
+PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972	mol:cpd:C16255	-a>
+PDHA1/PDHA2/PDHB/mol:cpd:C05125/mol:cpd:C15972	mol:cpd:C00068	-a>
+DLAT/mol:cpd:C00024/mol:cpd:C15973	mol:cpd:C16255	-a>
+DLAT/mol:cpd:C16255	mol:cpd:C00024	-a>
+DLAT/mol:cpd:C16255	mol:cpd:C15973	-a>
+LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00186	mol:cpd:C00022	-a>
+LDHAL6A/LDHA/LDHB/LDHC/LDHAL6B/mol:cpd:C00022	mol:cpd:C00186	-a>
+PKLR/PKM2/mol:cpd:C00074	mol:cpd:C00022	-a>
+ENO1/ENO2/ENO3/mol:cpd:C00631	mol:cpd:C00074	-a>
+ENO1/ENO2/ENO3/mol:cpd:C00074	mol:cpd:C00631	-a>
+PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00631	mol:cpd:C00197	-a>
+PGAM4/PGAM4/PGAM2/BPGM/mol:cpd:C00197	mol:cpd:C00631	-a>
+GAPDH/GAPDHS/mol:cpd:C00118	mol:cpd:C00236	-a>
+GAPDH/GAPDHS/mol:cpd:C00236	mol:cpd:C00118	-a>
+TPI1/mol:cpd:C00118	mol:cpd:C00111	-a>
+TPI1/mol:cpd:C00111	mol:cpd:C00118	-a>
+ALDOA/ALDOB/ALDOC/mol:cpd:C05378	mol:cpd:C00111	-a>
+ALDOA/ALDOB/ALDOC/mol:cpd:C05378	mol:cpd:C00118	-a>
+ALDOA/ALDOB/ALDOC/mol:cpd:C00111/mol:cpd:C00118	mol:cpd:C05378	-a>
+PFKL/PFKM/PFKP/mol:cpd:C05345	mol:cpd:C05378	-a>
+FBP1/KHSRP/mol:cpd:C05378	mol:cpd:C05345	-a>
+GPI/mol:cpd:C00668	mol:cpd:C05345	-a>
+GPI/mol:cpd:C05345	mol:cpd:C00668	-a>
+PGM1/PGM2/mol:cpd:C00103	mol:cpd:C00668	-a>
+PGM1/PGM2/mol:cpd:C00668	mol:cpd:C00103	-a>
+GPI/mol:cpd:C01172	mol:cpd:C05345	-a>
+GPI/mol:cpd:C05345	mol:cpd:C01172	-a>
+KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00221	mol:cpd:C01172	-a>
+MAP4K2/mol:cpd:C00221	mol:cpd:C01172	-a>
+GPI/mol:cpd:C00668	mol:cpd:C01172	-a>
+GPI/mol:cpd:C01172	mol:cpd:C00668	-a>
+GALM/mol:cpd:C00267	mol:cpd:C00221	-a>
+GALM/mol:cpd:C00221	mol:cpd:C00267	-a>
+MAP4K2/mol:cpd:C00267	mol:cpd:C00668	-a>
+KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	mol:cpd:C00668	-a>
+G6PC/G6PC2/mol:cpd:C00668	mol:cpd:C00267	-a>
+DLD/mol:cpd:C15973	mol:cpd:C15972	-a>
+DLD/mol:cpd:C15972	mol:cpd:C15973	-a>
+PGK1/PGK2/mol:cpd:C00197	mol:cpd:C00236	-a>
+PGK1/PGK2/mol:cpd:C00236	mol:cpd:C00197	-a>
+PCK1/PCK2/mol:cpd:C00036	mol:cpd:C00074	-a>
+BPGM/mol:cpd:C01159	mol:cpd:C00197	-a>
+BPGM/mol:cpd:C00197	mol:cpd:C01159	-a>
+BPGM/mol:cpd:C00236	mol:cpd:C01159	-a>
+BPGM/mol:cpd:C01159	mol:cpd:C00236	-a>
+ACSS2/ACSS1/mol:cpd:C00033	mol:cpd:C00024	-a>
+ADPGK/mol:cpd:C00267	mol:cpd:C00668	-a>
+ADPGK/mol:cpd:C00221	mol:cpd:C01172	-a>
+ADPGK/mol:cpd:C01172	mol:cpd:C00221	-a>

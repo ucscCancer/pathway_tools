@@ -1,0 +1,35 @@
+protein	GLUD1
+protein	GLUD2
+protein	GLS2
+chemical	mol:cpd:C00064
+chemical	mol:cpd:C00819
+chemical	mol:cpd:C03933
+chemical	mol:cpd:C05723
+chemical	mol:cpd:C00025
+chemical	mol:cpd:C00217
+chemical	mol:cpd:C02671
+chemical	mol:cpd:C00692
+chemical	mol:cpd:C01212
+chemical	mol:cpd:C01050
+chemical	mol:cpd:C02237
+chemical	mol:cpd:C00026
+family	GLUD1/GLUD2
+family	GLS2/GLS2
+GLUD1	GLUD1/GLUD2	member>
+GLUD2	GLUD1/GLUD2	member>
+GLS2	GLS2/GLS2	member>
+complex	GLUD1/GLUD2/mol:cpd:C00025
+complex	GLUD1/GLUD2/mol:cpd:C00026
+complex	GLS2/GLS2/mol:cpd:C00819
+complex	GLS2/GLS2/mol:cpd:C00064
+GLUD1/GLUD2	GLUD1/GLUD2/mol:cpd:C00025	component>
+mol:cpd:C00025	GLUD1/GLUD2/mol:cpd:C00025	component>
+mol:cpd:C00026	GLUD1/GLUD2/mol:cpd:C00026	component>
+GLS2/GLS2	GLS2/GLS2/mol:cpd:C00819	component>
+mol:cpd:C00819	GLS2/GLS2/mol:cpd:C00819	component>
+GLS2/GLS2	GLS2/GLS2/mol:cpd:C00064	component>
+mol:cpd:C00064	GLS2/GLS2/mol:cpd:C00064	component>
+GLUD1/GLUD2/mol:cpd:C00025	mol:cpd:C00026	-a>
+GLUD1/GLUD2/mol:cpd:C00026	mol:cpd:C00025	-a>
+GLS2/GLS2/mol:cpd:C00819	mol:cpd:C00217	-a>
+GLS2/GLS2/mol:cpd:C00064	mol:cpd:C00025	-a>

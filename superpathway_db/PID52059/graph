@@ -1,0 +1,483 @@
+protein	B3GNT3
+protein	FUT9
+protein	FUT4
+protein	FUT3
+protein	FUT5
+protein	FUT6
+protein	B4GALT4
+protein	B4GALT3
+protein	B4GALT2
+protein	B3GNT4
+protein	FUT7
+protein	ABO
+protein	FUT1
+protein	FUT2
+protein	ST3GAL6
+protein	B3GNT2
+protein	GCNT2
+protein	ST8SIA1
+protein	B4GALT1
+protein	B3GNT5
+protein	B3GALT1
+protein	B3GALT2
+protein	B3GALT5
+protein	ST3GAL3
+protein	ST3GAL4
+chemical	mol:gl:G00078
+chemical	mol:gl:G00057
+chemical	mol:gl:G00090
+chemical	mol:gl:G00091
+chemical	mol:gl:G00089
+chemical	mol:gl:G00088
+chemical	mol:gl:G00087
+chemical	mol:gl:G00086
+chemical	mol:gl:G00067
+chemical	mol:gl:G00085
+chemical	mol:gl:G00084
+chemical	mol:gl:G00069
+chemical	mol:gl:G00064
+chemical	mol:gl:G00062
+chemical	mol:gl:G00063
+chemical	mol:gl:G00066
+chemical	mol:gl:G00061
+chemical	mol:gl:G00060
+chemical	mol:gl:G00083
+chemical	mol:gl:G00080
+chemical	mol:gl:G00075
+chemical	mol:gl:G00074
+chemical	mol:gl:G00073
+chemical	mol:gl:G00072
+chemical	mol:gl:G00071
+chemical	mol:gl:G00082
+chemical	mol:gl:G00081
+chemical	mol:gl:G00079
+chemical	mol:gl:G00092
+chemical	mol:gl:G00077
+chemical	mol:gl:G00068
+chemical	mol:gl:G00076
+chemical	mol:gl:G00056
+chemical	mol:gl:G00055
+chemical	mol:gl:G00052
+chemical	mol:gl:G00051
+chemical	mol:gl:G00050
+chemical	mol:gl:G00036
+chemical	mol:gl:G00054
+chemical	mol:gl:G00059
+chemical	mol:gl:G00058
+chemical	mol:gl:G00037
+chemical	mol:gl:G00038
+chemical	mol:gl:G00039
+chemical	mol:gl:G00044
+chemical	mol:gl:G00040
+chemical	mol:gl:G00045
+chemical	mol:gl:G00042
+chemical	mol:gl:G00043
+chemical	mol:gl:G00046
+chemical	mol:gl:G00047
+chemical	mol:gl:G00048
+family	FUT3/FUT5/FUT6
+family	B3GNT3/B3GNT4
+family	FUT4/FUT7
+family	FUT1/FUT2
+family	B3GNT2/B3GNT2
+family	ST3GAL4/ST3GAL3
+family	B3GALT5/B3GALT2/B3GALT1
+family	B3GNT3/B3GNT2/B3GNT2/B3GNT4
+family	FUT9/FUT3/FUT4/FUT5/FUT6/FUT7
+family	B4GALT1/B4GALT4/B4GALT3
+FUT3	FUT3/FUT5/FUT6	member>
+FUT5	FUT3/FUT5/FUT6	member>
+FUT6	FUT3/FUT5/FUT6	member>
+B3GNT4	B3GNT3/B3GNT4	member>
+FUT7	FUT4/FUT7	member>
+FUT1	FUT1/FUT2	member>
+FUT2	FUT1/FUT2	member>
+B3GNT2	B3GNT2/B3GNT2	member>
+complex	B3GNT3/mol:gl:G00067
+complex	FUT9/mol:gl:G00067
+complex	FUT9/mol:gl:G00085
+complex	FUT9/mol:gl:G00084
+complex	FUT9/mol:gl:G00081
+complex	FUT4/mol:gl:G00089
+complex	FUT3/FUT5/FUT6/mol:gl:G00089
+complex	FUT3/FUT5/FUT6/mol:gl:G00084
+complex	FUT3/FUT5/FUT6/mol:gl:G00085
+complex	FUT3/FUT5/FUT6/mol:gl:G00067
+complex	FUT3/FUT5/FUT6/mol:gl:G00081
+complex	B4GALT4/mol:gl:G00066
+complex	B4GALT3/mol:gl:G00066
+complex	B4GALT4/mol:gl:G00036
+complex	B4GALT3/mol:gl:G00036
+complex	B4GALT2/mol:gl:G00036
+complex	B3GNT3/B3GNT4/mol:gl:G00050
+complex	FUT4/mol:gl:G00069
+complex	FUT4/mol:gl:G00067
+complex	FUT4/mol:gl:G00071
+complex	FUT4/mol:gl:G00055
+complex	FUT4/FUT7/mol:gl:G00062
+complex	FUT4/mol:gl:G00050
+complex	FUT3/FUT5/FUT6/mol:gl:G00067
+complex	FUT3/FUT5/FUT6/mol:gl:G00069
+complex	FUT3/FUT5/FUT6/mol:gl:G00071
+complex	FUT3/FUT5/FUT6/mol:gl:G00055
+complex	FUT3/FUT5/FUT6/mol:gl:G00050
+complex	FUT9/mol:gl:G00089
+complex	ABO/mol:gl:G00074
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	FUT9/mol:gl:G00067
+complex	FUT4/mol:gl:G00084
+complex	FUT9/mol:gl:G00069
+complex	FUT4/mol:gl:G00067
+complex	ST3GAL6/mol:gl:G00067
+complex	FUT4/mol:gl:G00085
+complex	FUT4/mol:gl:G00081
+complex	ABO/mol:gl:G00071
+complex	FUT1/FUT2/mol:gl:G00073
+complex	B3GNT2/B3GNT2/mol:gl:G00067
+complex	ABO/mol:gl:G00071
+complex	GCNT2/mol:gl:G00067
+complex	FUT9/mol:gl:G00071
+complex	ST8SIA1/mol:gl:G00062
+complex	FUT3/FUT5/FUT6/mol:gl:G00062
+complex	ST3GAL6/mol:gl:G00050
+complex	FUT9/mol:gl:G00050
+complex	B3GNT2/B3GNT2/mol:gl:G00050
+complex	B4GALT1/mol:gl:G00066
+complex	ABO/mol:gl:G00055
+complex	FUT1/FUT2/mol:gl:G00050
+complex	FUT1/FUT2/mol:gl:G00051
+complex	B3GNT5/mol:gl:G00092
+complex	FUT9/mol:gl:G00055
+complex	ABO/mol:gl:G00055
+complex	FUT1/FUT2/mol:gl:G00067
+complex	ABO/mol:gl:G00058
+complex	B4GALT1/mol:gl:G00036
+complex	FUT1/FUT2/mol:gl:G00057
+complex	B3GALT1/mol:gl:G00036
+complex	B3GALT2/mol:gl:G00036
+complex	B3GALT5/mol:gl:G00036
+complex	FUT1/FUT2/mol:gl:G00037
+complex	FUT1/FUT2/mol:gl:G00038
+complex	ABO/mol:gl:G00044
+complex	FUT3/mol:gl:G00044
+complex	FUT3/mol:gl:G00039
+complex	ABO/mol:gl:G00044
+complex	FUT3/mol:gl:G00042
+complex	FUT3/mol:gl:G00037
+complex	ST3GAL3/mol:gl:G00037
+complex	ST3GAL4/mol:gl:G00037
+complex	FUT3/mol:gl:G00047
+complex	ABO
+complex	ABO
+complex	ST3GAL4/ST3GAL3
+complex	ST3GAL4/ST3GAL3
+complex	ABO
+complex	ABO
+complex	FUT3
+complex	FUT3
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	B3GALT5/B3GALT2/B3GALT1
+complex	B3GALT5/B3GALT2/B3GALT1
+complex	FUT3
+complex	FUT3
+complex	B3GNT5
+complex	B3GNT5
+complex	ABO
+complex	ABO
+complex	B3GNT3/B3GNT2/B3GNT2/B3GNT4
+complex	B3GNT3/B3GNT2/B3GNT2/B3GNT4
+complex	ST3GAL6
+complex	ST3GAL6
+complex	GCNT2
+complex	GCNT2
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	B3GNT5
+complex	B3GNT5
+complex	FUT9/FUT3/FUT4/FUT5/FUT6/FUT7
+complex	FUT9/FUT3/FUT4/FUT5/FUT6/FUT7
+complex	B3GNT5
+complex	B3GNT5
+complex	ABO
+complex	ABO
+complex	ST8SIA1
+complex	ST8SIA1
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	ABO
+complex	ABO
+complex	FUT9/FUT3/FUT4/FUT5/FUT6
+complex	FUT9/FUT3/FUT4/FUT5/FUT6
+complex	B4GALT1/B4GALT4/B4GALT3
+complex	B4GALT1/B4GALT4/B4GALT3
+complex	ST3GAL6
+complex	ST3GAL6
+complex	B3GNT3/B3GNT2/B3GNT2
+complex	B3GNT3/B3GNT2/B3GNT2
+complex	FUT9/FUT3/FUT4/FUT5/FUT6
+complex	FUT9/FUT3/FUT4/FUT5/FUT6
+complex	ABO
+complex	ABO
+complex	ABO
+complex	ABO
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+complex	ABO
+complex	ABO
+complex	FUT1/FUT2
+complex	FUT1/FUT2
+B3GNT3	B3GNT3/mol:gl:G00067	component>
+mol:gl:G00067	B3GNT3/mol:gl:G00067	component>
+FUT9	FUT9/mol:gl:G00067	component>
+mol:gl:G00067	FUT9/mol:gl:G00067	component>
+FUT9	FUT9/mol:gl:G00085	component>
+mol:gl:G00085	FUT9/mol:gl:G00085	component>
+FUT9	FUT9/mol:gl:G00084	component>
+mol:gl:G00084	FUT9/mol:gl:G00084	component>
+FUT9	FUT9/mol:gl:G00081	component>
+mol:gl:G00081	FUT9/mol:gl:G00081	component>
+FUT4	FUT4/mol:gl:G00089	component>
+mol:gl:G00089	FUT4/mol:gl:G00089	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00089	component>
+mol:gl:G00089	FUT3/FUT5/FUT6/mol:gl:G00089	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00084	component>
+mol:gl:G00084	FUT3/FUT5/FUT6/mol:gl:G00084	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00085	component>
+mol:gl:G00085	FUT3/FUT5/FUT6/mol:gl:G00085	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00067	component>
+mol:gl:G00067	FUT3/FUT5/FUT6/mol:gl:G00067	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00081	component>
+mol:gl:G00081	FUT3/FUT5/FUT6/mol:gl:G00081	component>
+B4GALT4	B4GALT4/mol:gl:G00066	component>
+mol:gl:G00066	B4GALT4/mol:gl:G00066	component>
+B4GALT3	B4GALT3/mol:gl:G00066	component>
+mol:gl:G00066	B4GALT3/mol:gl:G00066	component>
+B4GALT4	B4GALT4/mol:gl:G00036	component>
+mol:gl:G00036	B4GALT4/mol:gl:G00036	component>
+B4GALT3	B4GALT3/mol:gl:G00036	component>
+mol:gl:G00036	B4GALT3/mol:gl:G00036	component>
+B4GALT2	B4GALT2/mol:gl:G00036	component>
+mol:gl:G00036	B4GALT2/mol:gl:G00036	component>
+B3GNT3/B3GNT4	B3GNT3/B3GNT4/mol:gl:G00050	component>
+mol:gl:G00050	B3GNT3/B3GNT4/mol:gl:G00050	component>
+FUT4	FUT4/mol:gl:G00069	component>
+mol:gl:G00069	FUT4/mol:gl:G00069	component>
+FUT4	FUT4/mol:gl:G00067	component>
+mol:gl:G00067	FUT4/mol:gl:G00067	component>
+FUT4	FUT4/mol:gl:G00071	component>
+mol:gl:G00071	FUT4/mol:gl:G00071	component>
+FUT4	FUT4/mol:gl:G00055	component>
+mol:gl:G00055	FUT4/mol:gl:G00055	component>
+FUT4/FUT7	FUT4/FUT7/mol:gl:G00062	component>
+mol:gl:G00062	FUT4/FUT7/mol:gl:G00062	component>
+FUT4	FUT4/mol:gl:G00050	component>
+mol:gl:G00050	FUT4/mol:gl:G00050	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00067	component>
+mol:gl:G00067	FUT3/FUT5/FUT6/mol:gl:G00067	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00069	component>
+mol:gl:G00069	FUT3/FUT5/FUT6/mol:gl:G00069	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00071	component>
+mol:gl:G00071	FUT3/FUT5/FUT6/mol:gl:G00071	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00055	component>
+mol:gl:G00055	FUT3/FUT5/FUT6/mol:gl:G00055	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00050	component>
+mol:gl:G00050	FUT3/FUT5/FUT6/mol:gl:G00050	component>
+FUT9	FUT9/mol:gl:G00089	component>
+mol:gl:G00089	FUT9/mol:gl:G00089	component>
+ABO	ABO/mol:gl:G00074	component>
+mol:gl:G00074	ABO/mol:gl:G00074	component>
+FUT1/FUT2	FUT1/FUT2	component>
+FUT9	FUT9/mol:gl:G00067	component>
+mol:gl:G00067	FUT9/mol:gl:G00067	component>
+FUT4	FUT4/mol:gl:G00084	component>
+mol:gl:G00084	FUT4/mol:gl:G00084	component>
+FUT9	FUT9/mol:gl:G00069	component>
+mol:gl:G00069	FUT9/mol:gl:G00069	component>
+FUT4	FUT4/mol:gl:G00067	component>
+mol:gl:G00067	FUT4/mol:gl:G00067	component>
+ST3GAL6	ST3GAL6/mol:gl:G00067	component>
+mol:gl:G00067	ST3GAL6/mol:gl:G00067	component>
+FUT4	FUT4/mol:gl:G00085	component>
+mol:gl:G00085	FUT4/mol:gl:G00085	component>
+FUT4	FUT4/mol:gl:G00081	component>
+mol:gl:G00081	FUT4/mol:gl:G00081	component>
+ABO	ABO/mol:gl:G00071	component>
+mol:gl:G00071	ABO/mol:gl:G00071	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00073	component>
+mol:gl:G00073	FUT1/FUT2/mol:gl:G00073	component>
+B3GNT2/B3GNT2	B3GNT2/B3GNT2/mol:gl:G00067	component>
+mol:gl:G00067	B3GNT2/B3GNT2/mol:gl:G00067	component>
+ABO	ABO/mol:gl:G00071	component>
+mol:gl:G00071	ABO/mol:gl:G00071	component>
+GCNT2	GCNT2/mol:gl:G00067	component>
+mol:gl:G00067	GCNT2/mol:gl:G00067	component>
+FUT9	FUT9/mol:gl:G00071	component>
+mol:gl:G00071	FUT9/mol:gl:G00071	component>
+ST8SIA1	ST8SIA1/mol:gl:G00062	component>
+mol:gl:G00062	ST8SIA1/mol:gl:G00062	component>
+FUT3/FUT5/FUT6	FUT3/FUT5/FUT6/mol:gl:G00062	component>
+mol:gl:G00062	FUT3/FUT5/FUT6/mol:gl:G00062	component>
+ST3GAL6	ST3GAL6/mol:gl:G00050	component>
+mol:gl:G00050	ST3GAL6/mol:gl:G00050	component>
+FUT9	FUT9/mol:gl:G00050	component>
+mol:gl:G00050	FUT9/mol:gl:G00050	component>
+B3GNT2/B3GNT2	B3GNT2/B3GNT2/mol:gl:G00050	component>
+mol:gl:G00050	B3GNT2/B3GNT2/mol:gl:G00050	component>
+B4GALT1	B4GALT1/mol:gl:G00066	component>
+mol:gl:G00066	B4GALT1/mol:gl:G00066	component>
+ABO	ABO/mol:gl:G00055	component>
+mol:gl:G00055	ABO/mol:gl:G00055	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00050	component>
+mol:gl:G00050	FUT1/FUT2/mol:gl:G00050	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00051	component>
+mol:gl:G00051	FUT1/FUT2/mol:gl:G00051	component>
+B3GNT5	B3GNT5/mol:gl:G00092	component>
+mol:gl:G00092	B3GNT5/mol:gl:G00092	component>
+FUT9	FUT9/mol:gl:G00055	component>
+mol:gl:G00055	FUT9/mol:gl:G00055	component>
+ABO	ABO/mol:gl:G00055	component>
+mol:gl:G00055	ABO/mol:gl:G00055	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00067	component>
+mol:gl:G00067	FUT1/FUT2/mol:gl:G00067	component>
+ABO	ABO/mol:gl:G00058	component>
+mol:gl:G00058	ABO/mol:gl:G00058	component>
+B4GALT1	B4GALT1/mol:gl:G00036	component>
+mol:gl:G00036	B4GALT1/mol:gl:G00036	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00057	component>
+mol:gl:G00057	FUT1/FUT2/mol:gl:G00057	component>
+B3GALT1	B3GALT1/mol:gl:G00036	component>
+mol:gl:G00036	B3GALT1/mol:gl:G00036	component>
+B3GALT2	B3GALT2/mol:gl:G00036	component>
+mol:gl:G00036	B3GALT2/mol:gl:G00036	component>
+B3GALT5	B3GALT5/mol:gl:G00036	component>
+mol:gl:G00036	B3GALT5/mol:gl:G00036	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00037	component>
+mol:gl:G00037	FUT1/FUT2/mol:gl:G00037	component>
+FUT1/FUT2	FUT1/FUT2/mol:gl:G00038	component>
+mol:gl:G00038	FUT1/FUT2/mol:gl:G00038	component>
+ABO	ABO/mol:gl:G00044	component>
+mol:gl:G00044	ABO/mol:gl:G00044	component>
+FUT3	FUT3/mol:gl:G00044	component>
+mol:gl:G00044	FUT3/mol:gl:G00044	component>
+FUT3	FUT3/mol:gl:G00039	component>
+mol:gl:G00039	FUT3/mol:gl:G00039	component>
+ABO	ABO/mol:gl:G00044	component>
+mol:gl:G00044	ABO/mol:gl:G00044	component>
+FUT3	FUT3/mol:gl:G00042	component>
+mol:gl:G00042	FUT3/mol:gl:G00042	component>
+FUT3	FUT3/mol:gl:G00037	component>
+mol:gl:G00037	FUT3/mol:gl:G00037	component>
+ST3GAL3	ST3GAL3/mol:gl:G00037	component>
+mol:gl:G00037	ST3GAL3/mol:gl:G00037	component>
+ST3GAL4	ST3GAL4/mol:gl:G00037	component>
+mol:gl:G00037	ST3GAL4/mol:gl:G00037	component>
+FUT3	FUT3/mol:gl:G00047	component>
+mol:gl:G00047	FUT3/mol:gl:G00047	component>
+ABO	ABO	component>
+ST3GAL4/ST3GAL3	ST3GAL4/ST3GAL3	component>
+ABO	ABO	component>
+FUT3	FUT3	component>
+FUT1/FUT2	FUT1/FUT2	component>
+B3GALT5/B3GALT2/B3GALT1	B3GALT5/B3GALT2/B3GALT1	component>
+FUT3	FUT3	component>
+B3GNT5	B3GNT5	component>
+ABO	ABO	component>
+B3GNT3/B3GNT2/B3GNT2/B3GNT4	B3GNT3/B3GNT2/B3GNT2/B3GNT4	component>
+ST3GAL6	ST3GAL6	component>
+GCNT2	GCNT2	component>
+FUT1/FUT2	FUT1/FUT2	component>
+B3GNT5	B3GNT5	component>
+FUT9/FUT3/FUT4/FUT5/FUT6/FUT7	FUT9/FUT3/FUT4/FUT5/FUT6/FUT7	component>
+B3GNT5	B3GNT5	component>
+ABO	ABO	component>
+ST8SIA1	ST8SIA1	component>
+FUT1/FUT2	FUT1/FUT2	component>
+ABO	ABO	component>
+FUT9/FUT3/FUT4/FUT5/FUT6	FUT9/FUT3/FUT4/FUT5/FUT6	component>
+B4GALT1/B4GALT4/B4GALT3	B4GALT1/B4GALT4/B4GALT3	component>
+ST3GAL6	ST3GAL6	component>
+B3GNT3/B3GNT2/B3GNT2	B3GNT3/B3GNT2/B3GNT2	component>
+FUT9/FUT3/FUT4/FUT5/FUT6	FUT9/FUT3/FUT4/FUT5/FUT6	component>
+ABO	ABO	component>
+ABO	ABO	component>
+FUT1/FUT2	FUT1/FUT2	component>
+FUT1/FUT2	FUT1/FUT2	component>
+ABO	ABO	component>
+FUT1/FUT2	FUT1/FUT2	component>
+B3GNT3/mol:gl:G00067	mol:gl:G00068	-a>
+FUT9/mol:gl:G00067	mol:gl:G00076	-a>
+FUT9/mol:gl:G00085	mol:gl:G00086	-a>
+FUT9/mol:gl:G00084	mol:gl:G00085	-a>
+FUT9/mol:gl:G00081	mol:gl:G00082	-a>
+FUT4/mol:gl:G00089	mol:gl:G00090	-a>
+FUT3/FUT5/FUT6/mol:gl:G00089	mol:gl:G00090	-a>
+FUT3/FUT5/FUT6/mol:gl:G00084	mol:gl:G00085	-a>
+FUT3/FUT5/FUT6/mol:gl:G00085	mol:gl:G00086	-a>
+FUT3/FUT5/FUT6/mol:gl:G00067	mol:gl:G00076	-a>
+FUT3/FUT5/FUT6/mol:gl:G00081	mol:gl:G00082	-a>
+B4GALT4/mol:gl:G00066	mol:gl:G00067	-a>
+B4GALT3/mol:gl:G00066	mol:gl:G00067	-a>
+B4GALT4/mol:gl:G00036	mol:gl:G00050	-a>
+B4GALT3/mol:gl:G00036	mol:gl:G00050	-a>
+B4GALT2/mol:gl:G00036	mol:gl:G00050	-a>
+B3GNT3/B3GNT4/mol:gl:G00050	mol:gl:G00066	-a>
+FUT4/mol:gl:G00069	mol:gl:G00084	-a>
+FUT4/mol:gl:G00067	mol:gl:G00089	-a>
+FUT4/mol:gl:G00071	mol:gl:G00081	-a>
+FUT4/mol:gl:G00055	mol:gl:G00056	-a>
+FUT4/FUT7/mol:gl:G00062	mol:gl:G00063	-a>
+FUT4/mol:gl:G00050	mol:gl:G00060	-a>
+FUT3/FUT5/FUT6/mol:gl:G00067	mol:gl:G00089	-a>
+FUT3/FUT5/FUT6/mol:gl:G00069	mol:gl:G00084	-a>
+FUT3/FUT5/FUT6/mol:gl:G00071	mol:gl:G00081	-a>
+FUT3/FUT5/FUT6/mol:gl:G00055	mol:gl:G00056	-a>
+FUT3/FUT5/FUT6/mol:gl:G00050	mol:gl:G00060	-a>
+FUT9/mol:gl:G00089	mol:gl:G00090	-a>
+ABO/mol:gl:G00074	mol:gl:G00075	-a>
+FUT9/mol:gl:G00067	mol:gl:G00089	-a>
+FUT4/mol:gl:G00084	mol:gl:G00085	-a>
+FUT9/mol:gl:G00069	mol:gl:G00084	-a>
+FUT4/mol:gl:G00067	mol:gl:G00076	-a>
+ST3GAL6/mol:gl:G00067	mol:gl:G00088	-a>
+FUT4/mol:gl:G00085	mol:gl:G00086	-a>
+FUT4/mol:gl:G00081	mol:gl:G00082	-a>
+ABO/mol:gl:G00071	mol:gl:G00072	-a>
+FUT1/FUT2/mol:gl:G00073	mol:gl:G00074	-a>
+B3GNT2/B3GNT2/mol:gl:G00067	mol:gl:G00068	-a>
+ABO/mol:gl:G00071	mol:gl:G00083	-a>
+GCNT2/mol:gl:G00067	mol:gl:G00077	-a>
+FUT9/mol:gl:G00071	mol:gl:G00081	-a>
+ST8SIA1/mol:gl:G00062	mol:gl:G00064	-a>
+FUT3/FUT5/FUT6/mol:gl:G00062	mol:gl:G00063	-a>
+ST3GAL6/mol:gl:G00050	mol:gl:G00062	-a>
+FUT9/mol:gl:G00050	mol:gl:G00060	-a>
+B3GNT2/B3GNT2/mol:gl:G00050	mol:gl:G00066	-a>
+B4GALT1/mol:gl:G00066	mol:gl:G00067	-a>
+ABO/mol:gl:G00055	mol:gl:G00052	-a>
+FUT1/FUT2/mol:gl:G00050	mol:gl:G00055	-a>
+FUT1/FUT2/mol:gl:G00051	mol:gl:G00052	-a>
+B3GNT5/mol:gl:G00092	mol:gl:G00036	-a>
+FUT9/mol:gl:G00055	mol:gl:G00056	-a>
+ABO/mol:gl:G00055	mol:gl:G00054	-a>
+FUT1/FUT2/mol:gl:G00067	mol:gl:G00071	-a>
+ABO/mol:gl:G00058	mol:gl:G00059	-a>
+B4GALT1/mol:gl:G00036	mol:gl:G00050	-a>
+FUT1/FUT2/mol:gl:G00057	mol:gl:G00058	-a>
+B3GALT1/mol:gl:G00036	mol:gl:G00037	-a>
+B3GALT2/mol:gl:G00036	mol:gl:G00037	-a>
+B3GALT5/mol:gl:G00036	mol:gl:G00037	-a>
+FUT1/FUT2/mol:gl:G00037	mol:gl:G00044	-a>
+FUT1/FUT2/mol:gl:G00038	mol:gl:G00039	-a>
+ABO/mol:gl:G00044	mol:gl:G00039	-a>
+FUT3/mol:gl:G00044	mol:gl:G00045	-a>
+FUT3/mol:gl:G00039	mol:gl:G00040	-a>
+ABO/mol:gl:G00044	mol:gl:G00042	-a>
+FUT3/mol:gl:G00042	mol:gl:G00043	-a>
+FUT3/mol:gl:G00037	mol:gl:G00046	-a>
+ST3GAL3/mol:gl:G00037	mol:gl:G00047	-a>
+ST3GAL4/mol:gl:G00037	mol:gl:G00047	-a>
+FUT3/mol:gl:G00047	mol:gl:G00048	-a>

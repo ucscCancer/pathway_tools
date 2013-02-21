@@ -1,0 +1,374 @@
+protein	ALG14
+protein	DPM3
+protein	DPM2
+protein	RFT1
+protein	ALG6
+protein	ALG12
+protein	ALG9
+protein	ALG3
+protein	MGAT5B
+protein	MGAT5
+protein	DOLPP1
+protein	FUT8
+protein	MGAT4C
+protein	B4GALT1
+protein	B4GALT3
+protein	B4GALT2
+protein	ST6GAL1
+protein	ST6GAL2
+protein	MGAT3
+protein	MOGAT2
+protein	MAN2A2
+protein	MAN2A1
+protein	MAN1A2
+protein	MAN1B1
+protein	MAN1A1
+protein	MAN1C1
+protein	MGAT4B
+protein	MGAT4A
+protein	GANAB
+protein	MOGS
+protein	ALG11
+protein	STT3B
+protein	STT3A
+protein	ALG5
+protein	ALG2
+protein	ALG1
+protein	ALG13
+protein	DPM1
+protein	DPAGT1
+protein	DOLK
+protein	ALG10B
+protein	ALG10
+protein	ALG8
+protein	MOGAT1
+protein	DAD1
+protein	DDOST
+protein	RPN1
+protein	RPN2
+protein	TUSC3
+chemical	mol:gl:G10596
+chemical	mol:gl:G00022
+chemical	mol:gl:G00021
+chemical	mol:gl:G00020
+chemical	mol:gl:G00019
+chemical	mol:gl:G00018
+chemical	mol:gl:G00017
+chemical	mol:gl:G00016
+chemical	mol:gl:G00015
+chemical	mol:gl:G00014
+chemical	mol:gl:G00013
+chemical	mol:gl:G00012
+chemical	mol:gl:G00011
+chemical	mol:gl:G00171
+chemical	mol:gl:G00009
+chemical	mol:gl:G00008
+chemical	mol:gl:G00007
+chemical	mol:gl:G00006
+chemical	mol:gl:G00005
+chemical	mol:gl:G00004
+chemical	mol:gl:G00003
+chemical	mol:gl:G00002
+chemical	mol:gl:G00001
+chemical	mol:cpd:C03021
+chemical	mol:cpd:C01246
+chemical	mol:cpd:C03862
+chemical	mol:cpd:C00621
+chemical	mol:cpd:C00381
+chemical	mol:cpd:C00110
+chemical	mol:gl:G10526
+chemical	mol:gl:G10595
+chemical	mol:gl:G10597
+chemical	mol:gl:G10598
+chemical	mol:gl:G10599
+chemical	mol:gl:G00010
+chemical	mol:cpd:C00096
+family	MGAT5B/MGAT5
+family	B4GALT1/B4GALT3/B4GALT2
+family	ST6GAL1/ST6GAL2
+family	MAN2A2/MAN2A1
+family	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+family	MGAT4B/MGAT4A
+family	STT3B/STT3A
+family	ALG10B/ALG10
+family	ALG14/ALG13
+family	DAD1/DDOST/RPN1/RPN2/TUSC3
+MGAT5B	MGAT5B/MGAT5	member>
+MGAT5	MGAT5B/MGAT5	member>
+B4GALT1	B4GALT1/B4GALT3/B4GALT2	member>
+B4GALT3	B4GALT1/B4GALT3/B4GALT2	member>
+B4GALT2	B4GALT1/B4GALT3/B4GALT2	member>
+ST6GAL1	ST6GAL1/ST6GAL2	member>
+ST6GAL2	ST6GAL1/ST6GAL2	member>
+MAN2A2	MAN2A2/MAN2A1	member>
+MAN2A1	MAN2A2/MAN2A1	member>
+MAN1A2	MAN1A2/MAN1B1/MAN1A1/MAN1C1	member>
+MAN1B1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	member>
+MAN1A1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	member>
+MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	member>
+MGAT4B	MGAT4B/MGAT4A	member>
+MGAT4A	MGAT4B/MGAT4A	member>
+STT3B	STT3B/STT3A	member>
+STT3A	STT3B/STT3A	member>
+ALG10B	ALG10B/ALG10	member>
+ALG10	ALG10B/ALG10	member>
+DAD1	DAD1/DDOST/RPN1/RPN2/TUSC3	member>
+DDOST	DAD1/DDOST/RPN1/RPN2/TUSC3	member>
+RPN1	DAD1/DDOST/RPN1/RPN2/TUSC3	member>
+RPN2	DAD1/DDOST/RPN1/RPN2/TUSC3	member>
+TUSC3	DAD1/DDOST/RPN1/RPN2/TUSC3	member>
+complex	ALG14/mol:gl:G00001
+complex	DPM3/mol:cpd:C00110/mol:cpd:C00096
+complex	DPM2/mol:cpd:C00110/mol:cpd:C00096
+complex	ALG10B/ALG10/mol:gl:G10599
+complex	ALG8/mol:gl:G10598
+complex	ALG6/mol:cpd:C01246/mol:gl:G00007
+complex	ALG12/mol:gl:G10596
+complex	ALG9/mol:gl:G10595
+complex	ALG3/mol:gl:G00006/mol:cpd:C03862
+complex	MGAT5B/MGAT5/mol:gl:G00020
+complex	DOLPP1/mol:cpd:C00621
+complex	FUT8/mol:gl:G00015
+complex	MGAT4C/mol:gl:G00021
+complex	B4GALT1/B4GALT3/B4GALT2/mol:gl:G00016
+complex	ST6GAL1/ST6GAL2/mol:gl:G00017
+complex	MGAT3/mol:gl:G00015
+complex	MOGAT2/mol:gl:G00014
+complex	MAN2A2/MAN2A1/mol:gl:G00013
+complex	MOGAT1/mol:gl:G00012
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1/mol:gl:G00011
+complex	MGAT4B/MGAT4A/mol:gl:G00015
+complex	GANAB
+complex	MOGS/mol:gl:G00009
+complex	ALG11/mol:gl:G10526
+complex	STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008
+complex	ALG5/mol:cpd:C00110
+complex	ALG9/mol:gl:G10597
+complex	ALG11/mol:gl:G00005
+complex	ALG2/mol:gl:G00004
+complex	ALG2/mol:gl:G00003
+complex	ALG1/mol:gl:G00002/mol:cpd:C00096
+complex	ALG13/mol:gl:G00001
+complex	DPM1/mol:cpd:C00110/mol:cpd:C00096
+complex	DPAGT1/mol:cpd:C00110
+complex	DOLK/mol:cpd:C00381
+complex	ALG10B/ALG10
+complex	ALG10B/ALG10
+complex	ALG12
+complex	ALG12
+complex	ALG8
+complex	ALG8
+complex	ALG6
+complex	ALG6
+complex	ALG11
+complex	ALG11
+complex	ALG11
+complex	ALG11
+complex	ALG9
+complex	ALG9
+complex	ALG9
+complex	ALG9
+complex	ALG3
+complex	ALG3
+complex	ALG2
+complex	ALG2
+complex	ALG2
+complex	ALG2
+complex	ALG1
+complex	ALG1
+complex	ALG14/ALG13
+complex	ALG14/ALG13
+complex	DPAGT1
+complex	DPAGT1
+complex	MOGS
+complex	MOGS
+complex	MAN2A2/MAN2A1
+complex	MAN2A2/MAN2A1
+complex	GANAB
+complex	GANAB
+complex	GANAB
+complex	GANAB
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN1A2/MAN1B1/MAN1A1/MAN1C1
+complex	MAN2A2/MAN2A1
+complex	MAN2A2/MAN2A1
+complex	MGAT5B/MGAT5
+complex	MGAT5B/MGAT5
+complex	MGAT4B/MGAT4A
+complex	MGAT4B/MGAT4A
+complex	ST6GAL1/ST6GAL2
+complex	ST6GAL1/ST6GAL2
+complex	MOGAT2
+complex	MOGAT2
+complex	FUT8
+complex	FUT8
+complex	MGAT4C
+complex	MGAT4C
+complex	B4GALT1/B4GALT3/B4GALT2
+complex	B4GALT1/B4GALT3/B4GALT2
+complex	MGAT3
+complex	MGAT3
+complex	ST6GAL1/ST6GAL2
+complex	ST6GAL1/ST6GAL2
+complex	B4GALT1/B4GALT3/B4GALT2
+complex	B4GALT1/B4GALT3/B4GALT2
+complex	MOGAT1
+complex	MOGAT1
+complex	DAD1/DDOST/RPN1/RPN2/TUSC3
+complex	DAD1/DDOST/RPN1/RPN2/TUSC3
+complex	GANAB/mol:gl:G00010
+ALG14	ALG14/mol:gl:G00001	component>
+mol:gl:G00001	ALG14/mol:gl:G00001	component>
+DPM3	DPM3/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00110	DPM3/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00096	DPM3/mol:cpd:C00110/mol:cpd:C00096	component>
+DPM2	DPM2/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00110	DPM2/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00096	DPM2/mol:cpd:C00110/mol:cpd:C00096	component>
+ALG10B/ALG10	ALG10B/ALG10/mol:gl:G10599	component>
+mol:gl:G10599	ALG10B/ALG10/mol:gl:G10599	component>
+ALG8	ALG8/mol:gl:G10598	component>
+mol:gl:G10598	ALG8/mol:gl:G10598	component>
+ALG6	ALG6/mol:cpd:C01246/mol:gl:G00007	component>
+mol:cpd:C01246	ALG6/mol:cpd:C01246/mol:gl:G00007	component>
+mol:gl:G00007	ALG6/mol:cpd:C01246/mol:gl:G00007	component>
+ALG12	ALG12/mol:gl:G10596	component>
+mol:gl:G10596	ALG12/mol:gl:G10596	component>
+ALG9	ALG9/mol:gl:G10595	component>
+mol:gl:G10595	ALG9/mol:gl:G10595	component>
+ALG3	ALG3/mol:gl:G00006/mol:cpd:C03862	component>
+mol:gl:G00006	ALG3/mol:gl:G00006/mol:cpd:C03862	component>
+mol:cpd:C03862	ALG3/mol:gl:G00006/mol:cpd:C03862	component>
+MGAT5B/MGAT5	MGAT5B/MGAT5/mol:gl:G00020	component>
+mol:gl:G00020	MGAT5B/MGAT5/mol:gl:G00020	component>
+DOLPP1	DOLPP1/mol:cpd:C00621	component>
+mol:cpd:C00621	DOLPP1/mol:cpd:C00621	component>
+FUT8	FUT8/mol:gl:G00015	component>
+mol:gl:G00015	FUT8/mol:gl:G00015	component>
+MGAT4C	MGAT4C/mol:gl:G00021	component>
+mol:gl:G00021	MGAT4C/mol:gl:G00021	component>
+B4GALT1/B4GALT3/B4GALT2	B4GALT1/B4GALT3/B4GALT2/mol:gl:G00016	component>
+mol:gl:G00016	B4GALT1/B4GALT3/B4GALT2/mol:gl:G00016	component>
+ST6GAL1/ST6GAL2	ST6GAL1/ST6GAL2/mol:gl:G00017	component>
+mol:gl:G00017	ST6GAL1/ST6GAL2/mol:gl:G00017	component>
+MGAT3	MGAT3/mol:gl:G00015	component>
+mol:gl:G00015	MGAT3/mol:gl:G00015	component>
+MOGAT2	MOGAT2/mol:gl:G00014	component>
+mol:gl:G00014	MOGAT2/mol:gl:G00014	component>
+MAN2A2/MAN2A1	MAN2A2/MAN2A1/mol:gl:G00013	component>
+mol:gl:G00013	MAN2A2/MAN2A1/mol:gl:G00013	component>
+MOGAT1	MOGAT1/mol:gl:G00012	component>
+mol:gl:G00012	MOGAT1/mol:gl:G00012	component>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1/mol:gl:G00011	component>
+mol:gl:G00011	MAN1A2/MAN1B1/MAN1A1/MAN1C1/mol:gl:G00011	component>
+MGAT4B/MGAT4A	MGAT4B/MGAT4A/mol:gl:G00015	component>
+mol:gl:G00015	MGAT4B/MGAT4A/mol:gl:G00015	component>
+GANAB	GANAB	component>
+MOGS	MOGS/mol:gl:G00009	component>
+mol:gl:G00009	MOGS/mol:gl:G00009	component>
+ALG11	ALG11/mol:gl:G10526	component>
+mol:gl:G10526	ALG11/mol:gl:G10526	component>
+STT3B/STT3A	STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008	component>
+mol:cpd:C03021	STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008	component>
+mol:gl:G00008	STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008	component>
+ALG5	ALG5/mol:cpd:C00110	component>
+mol:cpd:C00110	ALG5/mol:cpd:C00110	component>
+ALG9	ALG9/mol:gl:G10597	component>
+mol:gl:G10597	ALG9/mol:gl:G10597	component>
+ALG11	ALG11/mol:gl:G00005	component>
+mol:gl:G00005	ALG11/mol:gl:G00005	component>
+ALG2	ALG2/mol:gl:G00004	component>
+mol:gl:G00004	ALG2/mol:gl:G00004	component>
+ALG2	ALG2/mol:gl:G00003	component>
+mol:gl:G00003	ALG2/mol:gl:G00003	component>
+ALG1	ALG1/mol:gl:G00002/mol:cpd:C00096	component>
+mol:gl:G00002	ALG1/mol:gl:G00002/mol:cpd:C00096	component>
+mol:cpd:C00096	ALG1/mol:gl:G00002/mol:cpd:C00096	component>
+ALG13	ALG13/mol:gl:G00001	component>
+mol:gl:G00001	ALG13/mol:gl:G00001	component>
+DPM1	DPM1/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00110	DPM1/mol:cpd:C00110/mol:cpd:C00096	component>
+mol:cpd:C00096	DPM1/mol:cpd:C00110/mol:cpd:C00096	component>
+DPAGT1	DPAGT1/mol:cpd:C00110	component>
+mol:cpd:C00110	DPAGT1/mol:cpd:C00110	component>
+DOLK	DOLK/mol:cpd:C00381	component>
+mol:cpd:C00381	DOLK/mol:cpd:C00381	component>
+ALG10B/ALG10	ALG10B/ALG10	component>
+ALG12	ALG12	component>
+ALG8	ALG8	component>
+ALG6	ALG6	component>
+ALG11	ALG11	component>
+ALG11	ALG11	component>
+ALG9	ALG9	component>
+ALG9	ALG9	component>
+ALG3	ALG3	component>
+ALG2	ALG2	component>
+ALG2	ALG2	component>
+ALG1	ALG1	component>
+ALG14/ALG13	ALG14/ALG13	component>
+DPAGT1	DPAGT1	component>
+MOGS	MOGS	component>
+MAN2A2/MAN2A1	MAN2A2/MAN2A1	component>
+GANAB	GANAB	component>
+GANAB	GANAB	component>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	component>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	component>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	component>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1	MAN1A2/MAN1B1/MAN1A1/MAN1C1	component>
+MAN2A2/MAN2A1	MAN2A2/MAN2A1	component>
+MGAT5B/MGAT5	MGAT5B/MGAT5	component>
+MGAT4B/MGAT4A	MGAT4B/MGAT4A	component>
+ST6GAL1/ST6GAL2	ST6GAL1/ST6GAL2	component>
+MOGAT2	MOGAT2	component>
+FUT8	FUT8	component>
+MGAT4C	MGAT4C	component>
+B4GALT1/B4GALT3/B4GALT2	B4GALT1/B4GALT3/B4GALT2	component>
+MGAT3	MGAT3	component>
+ST6GAL1/ST6GAL2	ST6GAL1/ST6GAL2	component>
+B4GALT1/B4GALT3/B4GALT2	B4GALT1/B4GALT3/B4GALT2	component>
+MOGAT1	MOGAT1	component>
+DAD1/DDOST/RPN1/RPN2/TUSC3	DAD1/DDOST/RPN1/RPN2/TUSC3	component>
+GANAB	GANAB/mol:gl:G00010	component>
+mol:gl:G00010	GANAB/mol:gl:G00010	component>
+ALG14/mol:gl:G00001	mol:gl:G00002	-a>
+DPM3/mol:cpd:C00110/mol:cpd:C00096	mol:cpd:C03862	-a>
+DPM2/mol:cpd:C00110/mol:cpd:C00096	mol:cpd:C03862	-a>
+ALG10B/ALG10/mol:gl:G10599	mol:gl:G00008	-a>
+ALG8/mol:gl:G10598	mol:gl:G10599	-a>
+ALG6/mol:cpd:C01246/mol:gl:G00007	mol:gl:G10598	-a>
+ALG12/mol:gl:G10596	mol:gl:G10597	-a>
+ALG9/mol:gl:G10595	mol:gl:G10596	-a>
+ALG3/mol:gl:G00006/mol:cpd:C03862	mol:gl:G10595	-a>
+MGAT5B/MGAT5/mol:gl:G00020	mol:gl:G00021	-a>
+DOLPP1/mol:cpd:C00621	mol:cpd:C00110	-a>
+FUT8/mol:gl:G00015	mol:gl:G00016	-a>
+MGAT4C/mol:gl:G00021	mol:gl:G00022	-a>
+B4GALT1/B4GALT3/B4GALT2/mol:gl:G00016	mol:gl:G00017	-a>
+ST6GAL1/ST6GAL2/mol:gl:G00017	mol:gl:G00018	-a>
+MGAT3/mol:gl:G00015	mol:gl:G00019	-a>
+MOGAT2/mol:gl:G00014	mol:gl:G00015	-a>
+MAN2A2/MAN2A1/mol:gl:G00013	mol:gl:G00014	-a>
+MOGAT1/mol:gl:G00012	mol:gl:G00013	-a>
+MAN1A2/MAN1B1/MAN1A1/MAN1C1/mol:gl:G00011	mol:gl:G00012	-a>
+MGAT4B/MGAT4A/mol:gl:G00015	mol:gl:G00020	-a>
+MOGS/mol:gl:G00009	mol:gl:G00171	-a>
+ALG11/mol:gl:G10526	mol:gl:G00006	-a>
+STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008	mol:gl:G00009	-a>
+STT3B/STT3A/mol:cpd:C03021/mol:gl:G00008	mol:cpd:C00621	-a>
+ALG5/mol:cpd:C00110	mol:cpd:C01246	-a>
+ALG9/mol:gl:G10597	mol:gl:G00007	-a>
+ALG11/mol:gl:G00005	mol:gl:G10526	-a>
+ALG2/mol:gl:G00004	mol:gl:G00005	-a>
+ALG2/mol:gl:G00003	mol:gl:G00004	-a>
+ALG1/mol:gl:G00002/mol:cpd:C00096	mol:gl:G00003	-a>
+ALG13/mol:gl:G00001	mol:gl:G00002	-a>
+DPM1/mol:cpd:C00110/mol:cpd:C00096	mol:cpd:C03862	-a>
+DPAGT1/mol:cpd:C00110	mol:gl:G00001	-a>
+DOLK/mol:cpd:C00381	mol:cpd:C00110	-a>
+GANAB/mol:gl:G00010	mol:gl:G00011	-a>

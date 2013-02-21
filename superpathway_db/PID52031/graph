@@ -1,0 +1,75 @@
+protein	TAT
+protein	IL4I1
+protein	PAH
+protein	GOT1
+protein	GOT2
+chemical	mol:cpd:C00279
+chemical	mol:cpd:C00074
+chemical	mol:cpd:C04691
+chemical	mol:cpd:C00944
+chemical	mol:cpd:C00296
+chemical	mol:cpd:C02637
+chemical	mol:cpd:C00230
+chemical	mol:cpd:C00493
+chemical	mol:cpd:C03175
+chemical	mol:cpd:C01269
+chemical	mol:cpd:C00251
+chemical	mol:cpd:C00079
+chemical	mol:cpd:C00119
+chemical	mol:cpd:C00108
+chemical	mol:cpd:C04302
+chemical	mol:cpd:C01302
+chemical	mol:cpd:C03506
+chemical	mol:cpd:C00463
+chemical	mol:cpd:C00078
+chemical	mol:cpd:C00082
+chemical	mol:cpd:C01179
+chemical	mol:cpd:C00254
+chemical	mol:cpd:C00826
+chemical	mol:cpd:C00166
+chemical	mol:cpd:C16850
+chemical	mol:cpd:C00441
+chemical	mol:cpd:C16848
+family	GOT1/GOT2
+GOT1	GOT1/GOT2	member>
+GOT2	GOT1/GOT2	member>
+complex	TAT/mol:cpd:C00166
+complex	TAT/mol:cpd:C00079
+complex	IL4I1/mol:cpd:C00079
+complex	PAH/mol:cpd:C00079
+complex	IL4I1/mol:cpd:C00082
+complex	TAT/mol:cpd:C00082
+complex	TAT/mol:cpd:C01179
+complex	GOT1/GOT2/mol:cpd:C00166
+complex	GOT1/GOT2/mol:cpd:C00079
+complex	GOT1/GOT2/mol:cpd:C00082
+complex	GOT1/GOT2/mol:cpd:C01179
+TAT	TAT/mol:cpd:C00166	component>
+mol:cpd:C00166	TAT/mol:cpd:C00166	component>
+mol:cpd:C00079	TAT/mol:cpd:C00079	component>
+IL4I1	IL4I1/mol:cpd:C00079	component>
+mol:cpd:C00079	IL4I1/mol:cpd:C00079	component>
+PAH	PAH/mol:cpd:C00079	component>
+mol:cpd:C00079	PAH/mol:cpd:C00079	component>
+IL4I1	IL4I1/mol:cpd:C00082	component>
+mol:cpd:C00082	IL4I1/mol:cpd:C00082	component>
+TAT	TAT/mol:cpd:C00082	component>
+mol:cpd:C00082	TAT/mol:cpd:C00082	component>
+mol:cpd:C01179	TAT/mol:cpd:C01179	component>
+GOT1/GOT2	GOT1/GOT2/mol:cpd:C00166	component>
+mol:cpd:C00166	GOT1/GOT2/mol:cpd:C00166	component>
+mol:cpd:C00079	GOT1/GOT2/mol:cpd:C00079	component>
+GOT1/GOT2	GOT1/GOT2/mol:cpd:C00082	component>
+mol:cpd:C00082	GOT1/GOT2/mol:cpd:C00082	component>
+mol:cpd:C01179	GOT1/GOT2/mol:cpd:C01179	component>
+TAT/mol:cpd:C00166	mol:cpd:C00079	-a>
+TAT/mol:cpd:C00079	mol:cpd:C00166	-a>
+IL4I1/mol:cpd:C00079	mol:cpd:C00166	-a>
+PAH/mol:cpd:C00079	mol:cpd:C00082	-a>
+IL4I1/mol:cpd:C00082	mol:cpd:C01179	-a>
+TAT/mol:cpd:C00082	mol:cpd:C01179	-a>
+TAT/mol:cpd:C01179	mol:cpd:C00082	-a>
+GOT1/GOT2/mol:cpd:C00166	mol:cpd:C00079	-a>
+GOT1/GOT2/mol:cpd:C00079	mol:cpd:C00166	-a>
+GOT1/GOT2/mol:cpd:C00082	mol:cpd:C01179	-a>
+GOT1/GOT2/mol:cpd:C01179	mol:cpd:C00082	-a>

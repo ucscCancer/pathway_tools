@@ -1,0 +1,265 @@
+protein	SRR
+protein	CHDH
+protein	ALDH7A1
+protein	GLYCTK
+protein	BHMT
+protein	AGXT
+protein	GAMT
+protein	PHGDH
+protein	DMGDH
+protein	CBS
+protein	VSIG2
+protein	GATM
+protein	PSAT1
+protein	PIPOX
+protein	SARDH
+protein	PSPH
+protein	SHMT1
+protein	SHMT2
+protein	DAO
+protein	GCAT
+protein	SDS
+protein	GLDC
+protein	ALAS1
+protein	ALAS2
+protein	MAOA
+protein	MAOB
+protein	AOC2
+protein	AOC3
+protein	AMT
+protein	DLD
+protein	GNMT
+protein	AGXT2
+chemical	mol:cpd:C16432
+chemical	mol:cpd:C06231
+chemical	mol:cpd:C06442
+chemical	mol:cpd:C03283
+chemical	mol:cpd:C02855
+chemical	mol:cpd:C02972
+chemical	mol:cpd:C02051
+chemical	mol:cpd:C00258
+chemical	mol:cpd:C00114
+chemical	mol:cpd:C00576
+chemical	mol:cpd:C00719
+chemical	mol:cpd:C00197
+chemical	mol:cpd:C00300
+chemical	mol:cpd:C01026
+chemical	mol:cpd:C05519
+chemical	mol:cpd:C00581
+chemical	mol:cpd:C00049
+chemical	mol:cpd:C03232
+chemical	mol:cpd:C02291
+chemical	mol:cpd:C00097
+chemical	mol:cpd:C00213
+chemical	mol:cpd:C01005
+chemical	mol:cpd:C00037
+chemical	mol:cpd:C00188
+chemical	mol:cpd:C00109
+chemical	mol:cpd:C03082
+chemical	mol:cpd:C00065
+chemical	mol:cpd:C00048
+chemical	mol:cpd:C01102
+chemical	mol:cpd:C03508
+chemical	mol:cpd:C00263
+chemical	mol:cpd:C00441
+chemical	mol:cpd:C00740
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C00011
+chemical	mol:cpd:C00430
+chemical	mol:cpd:C00168
+chemical	mol:cpd:C00014
+chemical	mol:cpd:C00101
+chemical	mol:cpd:C01726
+chemical	mol:cpd:C01888
+chemical	mol:cpd:C00546
+chemical	mol:cpd:C05235
+chemical	mol:cpd:C00143
+chemical	mol:cpd:C01242
+chemical	mol:cpd:C03194
+chemical	mol:cpd:C02737
+chemical	mol:cpd:C00078
+chemical	mol:cpd:C00986
+family	SHMT1/SHMT2
+family	ALAS1/ALAS2
+family	MAOA/MAOB
+family	AOC2/AOC3
+family	AGXT/AGXT2
+SHMT1	SHMT1/SHMT2	member>
+SHMT2	SHMT1/SHMT2	member>
+ALAS1	ALAS1/ALAS2	member>
+ALAS2	ALAS1/ALAS2	member>
+MAOA	MAOA/MAOB	member>
+MAOB	MAOA/MAOB	member>
+AOC2	AOC2/AOC3	member>
+AOC3	AOC2/AOC3	member>
+AGXT2	AGXT/AGXT2	member>
+complex	SRR/mol:cpd:C00065
+complex	SRR/mol:cpd:C00740
+complex	CHDH/mol:cpd:C00114
+complex	ALDH7A1/mol:cpd:C00576
+complex	GLYCTK/mol:cpd:C00258
+complex	GLYCTK/mol:cpd:C00197
+complex	BHMT/mol:cpd:C00719
+complex	AGXT/mol:cpd:C00065
+complex	AGXT/mol:cpd:C00037
+complex	AGXT/mol:cpd:C00065
+complex	AGXT/mol:cpd:C00168
+complex	GAMT/mol:cpd:C00581
+complex	PHGDH/mol:cpd:C00197
+complex	PHGDH/mol:cpd:C03232
+complex	DMGDH/mol:cpd:C01026
+complex	CBS/mol:cpd:C00065
+complex	VSIG2/mol:cpd:C02291
+complex	VSIG2/mol:cpd:C00097
+complex	GATM/mol:cpd:C00037
+complex	PSAT1/mol:cpd:C01005
+complex	PSAT1/mol:cpd:C03232
+complex	PIPOX/mol:cpd:C00213
+complex	SARDH/mol:cpd:C00213
+complex	PSPH/mol:cpd:C01005
+complex	SHMT1/SHMT2/mol:cpd:C00037/mol:cpd:C00143
+complex	SHMT1/SHMT2/mol:cpd:C00065
+complex	DAO/mol:cpd:C00037
+complex	GCAT/mol:cpd:C00037
+complex	GCAT/mol:cpd:C03508
+complex	SDS/mol:cpd:C00065
+complex	SDS/mol:cpd:C00022
+complex	GLDC/mol:cpd:C02051/mol:cpd:C00037
+complex	ALAS1/ALAS2/mol:cpd:C00037
+complex	MAOA/MAOB/mol:cpd:C01888
+complex	AOC2/AOC3/mol:cpd:C01888
+complex	AMT/mol:cpd:C00101/mol:cpd:C01242
+complex	DLD/mol:cpd:C02972
+complex	GNMT/mol:cpd:C00037
+complex	GNMT/mol:cpd:C00213
+complex	AGXT/mol:cpd:C00065
+complex	AGXT/mol:cpd:C00168
+complex	CBS/mol:cpd:C00065
+complex	AGXT/AGXT2/mol:cpd:C00037
+complex	AGXT/AGXT2/mol:cpd:C00048
+SRR	SRR/mol:cpd:C00065	component>
+mol:cpd:C00065	SRR/mol:cpd:C00065	component>
+mol:cpd:C00740	SRR/mol:cpd:C00740	component>
+CHDH	CHDH/mol:cpd:C00114	component>
+mol:cpd:C00114	CHDH/mol:cpd:C00114	component>
+ALDH7A1	ALDH7A1/mol:cpd:C00576	component>
+mol:cpd:C00576	ALDH7A1/mol:cpd:C00576	component>
+GLYCTK	GLYCTK/mol:cpd:C00258	component>
+mol:cpd:C00258	GLYCTK/mol:cpd:C00258	component>
+mol:cpd:C00197	GLYCTK/mol:cpd:C00197	component>
+BHMT	BHMT/mol:cpd:C00719	component>
+mol:cpd:C00719	BHMT/mol:cpd:C00719	component>
+AGXT	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00065	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00037	AGXT/mol:cpd:C00037	component>
+AGXT	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00065	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00168	AGXT/mol:cpd:C00168	component>
+GAMT	GAMT/mol:cpd:C00581	component>
+mol:cpd:C00581	GAMT/mol:cpd:C00581	component>
+PHGDH	PHGDH/mol:cpd:C00197	component>
+mol:cpd:C00197	PHGDH/mol:cpd:C00197	component>
+mol:cpd:C03232	PHGDH/mol:cpd:C03232	component>
+DMGDH	DMGDH/mol:cpd:C01026	component>
+mol:cpd:C01026	DMGDH/mol:cpd:C01026	component>
+CBS	CBS/mol:cpd:C00065	component>
+mol:cpd:C00065	CBS/mol:cpd:C00065	component>
+VSIG2	VSIG2/mol:cpd:C02291	component>
+mol:cpd:C02291	VSIG2/mol:cpd:C02291	component>
+mol:cpd:C00097	VSIG2/mol:cpd:C00097	component>
+GATM	GATM/mol:cpd:C00037	component>
+mol:cpd:C00037	GATM/mol:cpd:C00037	component>
+PSAT1	PSAT1/mol:cpd:C01005	component>
+mol:cpd:C01005	PSAT1/mol:cpd:C01005	component>
+mol:cpd:C03232	PSAT1/mol:cpd:C03232	component>
+PIPOX	PIPOX/mol:cpd:C00213	component>
+mol:cpd:C00213	PIPOX/mol:cpd:C00213	component>
+SARDH	SARDH/mol:cpd:C00213	component>
+mol:cpd:C00213	SARDH/mol:cpd:C00213	component>
+PSPH	PSPH/mol:cpd:C01005	component>
+mol:cpd:C01005	PSPH/mol:cpd:C01005	component>
+SHMT1/SHMT2	SHMT1/SHMT2/mol:cpd:C00037/mol:cpd:C00143	component>
+mol:cpd:C00037	SHMT1/SHMT2/mol:cpd:C00037/mol:cpd:C00143	component>
+mol:cpd:C00143	SHMT1/SHMT2/mol:cpd:C00037/mol:cpd:C00143	component>
+mol:cpd:C00065	SHMT1/SHMT2/mol:cpd:C00065	component>
+DAO	DAO/mol:cpd:C00037	component>
+mol:cpd:C00037	DAO/mol:cpd:C00037	component>
+GCAT	GCAT/mol:cpd:C00037	component>
+mol:cpd:C00037	GCAT/mol:cpd:C00037	component>
+mol:cpd:C03508	GCAT/mol:cpd:C03508	component>
+SDS	SDS/mol:cpd:C00065	component>
+mol:cpd:C00065	SDS/mol:cpd:C00065	component>
+mol:cpd:C00022	SDS/mol:cpd:C00022	component>
+GLDC	GLDC/mol:cpd:C02051/mol:cpd:C00037	component>
+mol:cpd:C02051	GLDC/mol:cpd:C02051/mol:cpd:C00037	component>
+mol:cpd:C00037	GLDC/mol:cpd:C02051/mol:cpd:C00037	component>
+ALAS1/ALAS2	ALAS1/ALAS2/mol:cpd:C00037	component>
+mol:cpd:C00037	ALAS1/ALAS2/mol:cpd:C00037	component>
+MAOA/MAOB	MAOA/MAOB/mol:cpd:C01888	component>
+mol:cpd:C01888	MAOA/MAOB/mol:cpd:C01888	component>
+AOC2/AOC3	AOC2/AOC3/mol:cpd:C01888	component>
+mol:cpd:C01888	AOC2/AOC3/mol:cpd:C01888	component>
+AMT	AMT/mol:cpd:C00101/mol:cpd:C01242	component>
+mol:cpd:C00101	AMT/mol:cpd:C00101/mol:cpd:C01242	component>
+mol:cpd:C01242	AMT/mol:cpd:C00101/mol:cpd:C01242	component>
+DLD	DLD/mol:cpd:C02972	component>
+mol:cpd:C02972	DLD/mol:cpd:C02972	component>
+GNMT	GNMT/mol:cpd:C00037	component>
+mol:cpd:C00037	GNMT/mol:cpd:C00037	component>
+mol:cpd:C00213	GNMT/mol:cpd:C00213	component>
+AGXT	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00065	AGXT/mol:cpd:C00065	component>
+mol:cpd:C00168	AGXT/mol:cpd:C00168	component>
+CBS	CBS/mol:cpd:C00065	component>
+mol:cpd:C00065	CBS/mol:cpd:C00065	component>
+AGXT/AGXT2	AGXT/AGXT2/mol:cpd:C00037	component>
+mol:cpd:C00037	AGXT/AGXT2/mol:cpd:C00037	component>
+mol:cpd:C00048	AGXT/AGXT2/mol:cpd:C00048	component>
+SRR/mol:cpd:C00065	mol:cpd:C00740	-a>
+SRR/mol:cpd:C00740	mol:cpd:C00065	-a>
+CHDH/mol:cpd:C00114	mol:cpd:C00576	-a>
+ALDH7A1/mol:cpd:C00576	mol:cpd:C00719	-a>
+GLYCTK/mol:cpd:C00258	mol:cpd:C00197	-a>
+GLYCTK/mol:cpd:C00197	mol:cpd:C00258	-a>
+BHMT/mol:cpd:C00719	mol:cpd:C01026	-a>
+AGXT/mol:cpd:C00065	mol:cpd:C00037	-a>
+AGXT/mol:cpd:C00037	mol:cpd:C00065	-a>
+AGXT/mol:cpd:C00065	mol:cpd:C00168	-a>
+AGXT/mol:cpd:C00168	mol:cpd:C00065	-a>
+GAMT/mol:cpd:C00581	mol:cpd:C00300	-a>
+PHGDH/mol:cpd:C00197	mol:cpd:C03232	-a>
+PHGDH/mol:cpd:C03232	mol:cpd:C00197	-a>
+DMGDH/mol:cpd:C01026	mol:cpd:C00213	-a>
+CBS/mol:cpd:C00065	mol:cpd:C02291	-a>
+VSIG2/mol:cpd:C02291	mol:cpd:C00097	-a>
+VSIG2/mol:cpd:C00097	mol:cpd:C02291	-a>
+GATM/mol:cpd:C00037	mol:cpd:C00581	-a>
+PSAT1/mol:cpd:C01005	mol:cpd:C03232	-a>
+PSAT1/mol:cpd:C03232	mol:cpd:C01005	-a>
+PIPOX/mol:cpd:C00213	mol:cpd:C00037	-a>
+SARDH/mol:cpd:C00213	mol:cpd:C00037	-a>
+PSPH/mol:cpd:C01005	mol:cpd:C00065	-a>
+SHMT1/SHMT2/mol:cpd:C00037/mol:cpd:C00143	mol:cpd:C00065	-a>
+SHMT1/SHMT2/mol:cpd:C00065	mol:cpd:C00037	-a>
+SHMT1/SHMT2/mol:cpd:C00065	mol:cpd:C00143	-a>
+DAO/mol:cpd:C00037	mol:cpd:C00048	-a>
+GCAT/mol:cpd:C00037	mol:cpd:C03508	-a>
+GCAT/mol:cpd:C03508	mol:cpd:C00037	-a>
+SDS/mol:cpd:C00065	mol:cpd:C00022	-a>
+SDS/mol:cpd:C00022	mol:cpd:C00065	-a>
+GLDC/mol:cpd:C02051/mol:cpd:C00037	mol:cpd:C00011	-a>
+GLDC/mol:cpd:C02051/mol:cpd:C00037	mol:cpd:C01242	-a>
+ALAS1/ALAS2/mol:cpd:C00037	mol:cpd:C00430	-a>
+MAOA/MAOB/mol:cpd:C01888	mol:cpd:C00546	-a>
+AOC2/AOC3/mol:cpd:C01888	mol:cpd:C00546	-a>
+AMT/mol:cpd:C00101/mol:cpd:C01242	mol:cpd:C02972	-a>
+AMT/mol:cpd:C00101/mol:cpd:C01242	mol:cpd:C00143	-a>
+AMT/mol:cpd:C00101/mol:cpd:C01242	mol:cpd:C00014	-a>
+DLD/mol:cpd:C02972	mol:cpd:C02051	-a>
+GNMT/mol:cpd:C00037	mol:cpd:C00213	-a>
+GNMT/mol:cpd:C00213	mol:cpd:C00037	-a>
+AGXT/mol:cpd:C00065	mol:cpd:C00168	-a>
+AGXT/mol:cpd:C00168	mol:cpd:C00065	-a>
+CBS/mol:cpd:C00065	mol:cpd:C00097	-a>
+AGXT/AGXT2/mol:cpd:C00037	mol:cpd:C00048	-a>
+AGXT/AGXT2/mol:cpd:C00048	mol:cpd:C00037	-a>

@@ -1,0 +1,98 @@
+protein	AOX1
+protein	PNPO
+protein	PHOSPHO2
+protein	PDXP
+protein	PDXK
+protein	PSAT1
+chemical	mol:cpd:C00118
+chemical	mol:cpd:C00199
+chemical	mol:cpd:C07335
+chemical	mol:cpd:C00232
+chemical	mol:cpd:C01215
+chemical	mol:cpd:C01270
+chemical	mol:cpd:C04604
+chemical	mol:cpd:C06050
+chemical	mol:cpd:C00971
+chemical	mol:cpd:C00250
+chemical	mol:cpd:C00534
+chemical	mol:cpd:C00647
+chemical	mol:cpd:C00018
+chemical	mol:cpd:C00026
+chemical	mol:cpd:C00217
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C00133
+chemical	mol:cpd:C00627
+chemical	mol:cpd:C00266
+chemical	mol:cpd:C00314
+chemical	mol:cpd:C04773
+chemical	mol:cpd:C04690
+chemical	mol:cpd:C03393
+chemical	mol:cpd:C00279
+chemical	mol:cpd:C11638
+chemical	mol:cpd:C06056
+chemical	mol:cpd:C06051
+chemical	mol:cpd:C06052
+chemical	mol:cpd:C04106
+chemical	mol:cpd:C06054
+chemical	mol:cpd:C06055
+chemical	mol:cpd:C00847
+family	PHOSPHO2/PDXP
+PHOSPHO2	PHOSPHO2/PDXP	member>
+PDXP	PHOSPHO2/PDXP	member>
+complex	PSAT1/mol:cpd:C06055
+complex	PSAT1/mol:cpd:C06054
+complex	PNPO/mol:cpd:C00627
+complex	PNPO/mol:cpd:C00647
+complex	PHOSPHO2/PDXP/mol:cpd:C00627
+complex	PDXK/mol:cpd:C00314
+complex	PHOSPHO2/PDXP/mol:cpd:C00018
+complex	PDXK/mol:cpd:C00250
+complex	PHOSPHO2/PDXP/mol:cpd:C00647
+complex	PDXK/mol:cpd:C00534
+complex	AOX1/mol:cpd:C00250
+complex	PNPO/mol:cpd:C00534
+complex	PNPO/mol:cpd:C00250
+complex	PNPO/mol:cpd:C00314
+complex	PNPO/mol:cpd:C00250
+PSAT1	PSAT1/mol:cpd:C06055	component>
+mol:cpd:C06055	PSAT1/mol:cpd:C06055	component>
+mol:cpd:C06054	PSAT1/mol:cpd:C06054	component>
+PNPO	PNPO/mol:cpd:C00627	component>
+mol:cpd:C00627	PNPO/mol:cpd:C00627	component>
+PNPO	PNPO/mol:cpd:C00647	component>
+mol:cpd:C00647	PNPO/mol:cpd:C00647	component>
+PHOSPHO2/PDXP	PHOSPHO2/PDXP/mol:cpd:C00627	component>
+mol:cpd:C00627	PHOSPHO2/PDXP/mol:cpd:C00627	component>
+PDXK	PDXK/mol:cpd:C00314	component>
+mol:cpd:C00314	PDXK/mol:cpd:C00314	component>
+PHOSPHO2/PDXP	PHOSPHO2/PDXP/mol:cpd:C00018	component>
+mol:cpd:C00018	PHOSPHO2/PDXP/mol:cpd:C00018	component>
+PDXK	PDXK/mol:cpd:C00250	component>
+mol:cpd:C00250	PDXK/mol:cpd:C00250	component>
+PHOSPHO2/PDXP	PHOSPHO2/PDXP/mol:cpd:C00647	component>
+mol:cpd:C00647	PHOSPHO2/PDXP/mol:cpd:C00647	component>
+PDXK	PDXK/mol:cpd:C00534	component>
+mol:cpd:C00534	PDXK/mol:cpd:C00534	component>
+AOX1	AOX1/mol:cpd:C00250	component>
+mol:cpd:C00250	AOX1/mol:cpd:C00250	component>
+PNPO	PNPO/mol:cpd:C00534	component>
+mol:cpd:C00534	PNPO/mol:cpd:C00534	component>
+mol:cpd:C00250	PNPO/mol:cpd:C00250	component>
+PNPO	PNPO/mol:cpd:C00314	component>
+mol:cpd:C00314	PNPO/mol:cpd:C00314	component>
+mol:cpd:C00250	PNPO/mol:cpd:C00250	component>
+PSAT1/mol:cpd:C06055	mol:cpd:C06054	-a>
+PSAT1/mol:cpd:C06054	mol:cpd:C06055	-a>
+PNPO/mol:cpd:C00627	mol:cpd:C00018	-a>
+PNPO/mol:cpd:C00647	mol:cpd:C00018	-a>
+PHOSPHO2/PDXP/mol:cpd:C00627	mol:cpd:C00314	-a>
+PDXK/mol:cpd:C00314	mol:cpd:C00627	-a>
+PHOSPHO2/PDXP/mol:cpd:C00018	mol:cpd:C00250	-a>
+PDXK/mol:cpd:C00250	mol:cpd:C00018	-a>
+PHOSPHO2/PDXP/mol:cpd:C00647	mol:cpd:C00534	-a>
+PDXK/mol:cpd:C00534	mol:cpd:C00647	-a>
+AOX1/mol:cpd:C00250	mol:cpd:C00847	-a>
+PNPO/mol:cpd:C00534	mol:cpd:C00250	-a>
+PNPO/mol:cpd:C00250	mol:cpd:C00534	-a>
+PNPO/mol:cpd:C00314	mol:cpd:C00250	-a>
+PNPO/mol:cpd:C00250	mol:cpd:C00314	-a>

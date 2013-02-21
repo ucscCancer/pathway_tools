@@ -1,0 +1,176 @@
+the molecule is already in the list mol:cpd:C00036
+protein	HYI
+protein	ACO1
+protein	ACO2
+protein	AFMID
+protein	HAO2
+protein	HAO1
+protein	GRHPR
+protein	CS
+protein	MDH1
+protein	MDH2
+protein	GLYCTK
+protein	PGPEP1
+protein	ACAT1
+protein	SOAT2
+protein	MCEE
+protein	PCCA
+protein	PCCB
+protein	MUT
+chemical	mol:cpd:C00898
+chemical	mol:cpd:C00036
+chemical	mol:cpd:C00158
+chemical	mol:cpd:C00149
+chemical	mol:cpd:C04348
+chemical	mol:cpd:C03548
+chemical	mol:cpd:C00552
+chemical	mol:cpd:C03459
+chemical	mol:cpd:C00975
+chemical	mol:cpd:C01146
+chemical	mol:cpd:C00258
+chemical	mol:cpd:C00197
+chemical	mol:cpd:C01182
+chemical	mol:cpd:C00988
+chemical	mol:cpd:C00168
+chemical	mol:cpd:C00266
+chemical	mol:cpd:C01380
+chemical	mol:cpd:C00160
+chemical	mol:cpd:C00048
+chemical	mol:cpd:C00209
+chemical	mol:cpd:C00058
+chemical	mol:cpd:C00011
+chemical	mol:cpd:C02405
+chemical	mol:cpd:C06049
+chemical	mol:cpd:C00798
+chemical	mol:cpd:C00313
+chemical	mol:cpd:C00417
+chemical	mol:cpd:C00311
+chemical	mol:cpd:C00042
+chemical	mol:cpd:C01127
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C01990
+chemical	mol:cpd:C01989
+chemical	mol:cpd:C02123
+chemical	mol:cpd:C03217
+chemical	mol:cpd:C00026
+chemical	mol:cpd:C00888
+chemical	mol:cpd:C00136
+chemical	mol:cpd:C00332
+chemical	mol:cpd:C03561
+chemical	mol:cpd:C00877
+chemical	mol:cpd:C18026
+chemical	mol:cpd:C18324
+chemical	mol:cpd:C06028
+chemical	mol:cpd:C00683
+chemical	mol:cpd:C00100
+chemical	mol:cpd:C00091
+chemical	mol:cpd:C06027
+chemical	mol:cpd:C00024
+chemical	mol:cpd:C01213
+family	ACO1/ACO2
+family	HAO2/HAO1
+family	MDH1/MDH2
+family	ACAT1/SOAT2
+family	PCCA/PCCB
+ACO1	ACO1/ACO2	member>
+ACO2	ACO1/ACO2	member>
+HAO2	HAO2/HAO1	member>
+HAO1	HAO2/HAO1	member>
+MDH1	MDH1/MDH2	member>
+MDH2	MDH1/MDH2	member>
+ACAT1	ACAT1/SOAT2	member>
+SOAT2	ACAT1/SOAT2	member>
+PCCA	PCCA/PCCB	member>
+PCCB	PCCA/PCCB	member>
+complex	HYI/mol:cpd:C00168
+complex	ACO1/ACO2/mol:cpd:C00417
+complex	ACO1/ACO2/mol:cpd:C00311
+complex	AFMID/mol:cpd:C06049
+complex	ACO1/ACO2/mol:cpd:C00417
+complex	ACO1/ACO2/mol:cpd:C00158
+complex	HAO2/HAO1/mol:cpd:C00160
+complex	GRHPR/mol:cpd:C00160
+complex	GRHPR/mol:cpd:C00048
+complex	GRHPR/mol:cpd:C00160
+complex	GRHPR/mol:cpd:C00048
+complex	CS/mol:cpd:C00158
+complex	CS/mol:cpd:C00036
+complex	GRHPR/mol:cpd:C00258
+complex	GRHPR/mol:cpd:C00168
+complex	GRHPR/mol:cpd:C00258
+complex	GRHPR/mol:cpd:C00168
+complex	MDH1/MDH2/mol:cpd:C00149
+complex	MDH1/MDH2/mol:cpd:C00036
+complex	GLYCTK/mol:cpd:C00258
+complex	PGPEP1/mol:cpd:C00988
+complex	ACAT1/SOAT2/mol:cpd:C00024
+complex	MCEE/mol:cpd:C00683
+complex	PCCA/PCCB/mol:cpd:C00100
+complex	MUT/mol:cpd:C01213
+HYI	HYI/mol:cpd:C00168	component>
+mol:cpd:C00168	HYI/mol:cpd:C00168	component>
+ACO1/ACO2	ACO1/ACO2/mol:cpd:C00417	component>
+mol:cpd:C00417	ACO1/ACO2/mol:cpd:C00417	component>
+mol:cpd:C00311	ACO1/ACO2/mol:cpd:C00311	component>
+AFMID	AFMID/mol:cpd:C06049	component>
+mol:cpd:C06049	AFMID/mol:cpd:C06049	component>
+ACO1/ACO2	ACO1/ACO2/mol:cpd:C00417	component>
+mol:cpd:C00417	ACO1/ACO2/mol:cpd:C00417	component>
+mol:cpd:C00158	ACO1/ACO2/mol:cpd:C00158	component>
+HAO2/HAO1	HAO2/HAO1/mol:cpd:C00160	component>
+mol:cpd:C00160	HAO2/HAO1/mol:cpd:C00160	component>
+GRHPR	GRHPR/mol:cpd:C00160	component>
+mol:cpd:C00160	GRHPR/mol:cpd:C00160	component>
+mol:cpd:C00048	GRHPR/mol:cpd:C00048	component>
+GRHPR	GRHPR/mol:cpd:C00160	component>
+mol:cpd:C00160	GRHPR/mol:cpd:C00160	component>
+mol:cpd:C00048	GRHPR/mol:cpd:C00048	component>
+CS	CS/mol:cpd:C00158	component>
+mol:cpd:C00158	CS/mol:cpd:C00158	component>
+mol:cpd:C00036	CS/mol:cpd:C00036	component>
+GRHPR	GRHPR/mol:cpd:C00258	component>
+mol:cpd:C00258	GRHPR/mol:cpd:C00258	component>
+mol:cpd:C00168	GRHPR/mol:cpd:C00168	component>
+GRHPR	GRHPR/mol:cpd:C00258	component>
+mol:cpd:C00258	GRHPR/mol:cpd:C00258	component>
+mol:cpd:C00168	GRHPR/mol:cpd:C00168	component>
+MDH1/MDH2	MDH1/MDH2/mol:cpd:C00149	component>
+mol:cpd:C00149	MDH1/MDH2/mol:cpd:C00149	component>
+mol:cpd:C00036	MDH1/MDH2/mol:cpd:C00036	component>
+GLYCTK	GLYCTK/mol:cpd:C00258	component>
+mol:cpd:C00258	GLYCTK/mol:cpd:C00258	component>
+PGPEP1	PGPEP1/mol:cpd:C00988	component>
+mol:cpd:C00988	PGPEP1/mol:cpd:C00988	component>
+ACAT1/SOAT2	ACAT1/SOAT2/mol:cpd:C00024	component>
+mol:cpd:C00024	ACAT1/SOAT2/mol:cpd:C00024	component>
+MCEE	MCEE/mol:cpd:C00683	component>
+mol:cpd:C00683	MCEE/mol:cpd:C00683	component>
+PCCA/PCCB	PCCA/PCCB/mol:cpd:C00100	component>
+mol:cpd:C00100	PCCA/PCCB/mol:cpd:C00100	component>
+MUT	MUT/mol:cpd:C01213	component>
+mol:cpd:C01213	MUT/mol:cpd:C01213	component>
+HYI/mol:cpd:C00168	mol:cpd:C01146	-a>
+ACO1/ACO2/mol:cpd:C00417	mol:cpd:C00311	-a>
+ACO1/ACO2/mol:cpd:C00311	mol:cpd:C00417	-a>
+AFMID/mol:cpd:C06049	mol:cpd:C00058	-a>
+ACO1/ACO2/mol:cpd:C00417	mol:cpd:C00158	-a>
+ACO1/ACO2/mol:cpd:C00158	mol:cpd:C00417	-a>
+HAO2/HAO1/mol:cpd:C00160	mol:cpd:C00048	-a>
+GRHPR/mol:cpd:C00160	mol:cpd:C00048	-a>
+GRHPR/mol:cpd:C00048	mol:cpd:C00160	-a>
+GRHPR/mol:cpd:C00160	mol:cpd:C00048	-a>
+GRHPR/mol:cpd:C00048	mol:cpd:C00160	-a>
+CS/mol:cpd:C00158	mol:cpd:C00036	-a>
+CS/mol:cpd:C00036	mol:cpd:C00158	-a>
+GRHPR/mol:cpd:C00258	mol:cpd:C00168	-a>
+GRHPR/mol:cpd:C00168	mol:cpd:C00258	-a>
+GRHPR/mol:cpd:C00258	mol:cpd:C00168	-a>
+GRHPR/mol:cpd:C00168	mol:cpd:C00258	-a>
+MDH1/MDH2/mol:cpd:C00149	mol:cpd:C00036	-a>
+MDH1/MDH2/mol:cpd:C00036	mol:cpd:C00149	-a>
+GLYCTK/mol:cpd:C00258	mol:cpd:C00197	-a>
+PGPEP1/mol:cpd:C00988	mol:cpd:C00160	-a>
+ACAT1/SOAT2/mol:cpd:C00024	mol:cpd:C00332	-a>
+MCEE/mol:cpd:C00683	mol:cpd:C01213	-a>
+PCCA/PCCB/mol:cpd:C00100	mol:cpd:C00683	-a>
+MUT/mol:cpd:C01213	mol:cpd:C00091	-a>

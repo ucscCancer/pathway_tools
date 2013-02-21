@@ -1,0 +1,226 @@
+the molecule is already in the list mol:cpd:C16645
+the molecule is already in the list mol:cpd:C16532
+the molecule is already in the list mol:cpd:C16531
+the molecule is already in the list mol:cpd:C16530
+the molecule is already in the list mol:cpd:C16529
+the molecule is already in the list mol:cpd:C16529
+the molecule is already in the list mol:cpd:C16528
+the molecule is already in the list mol:cpd:C16528
+the molecule is already in the list mol:cpd:C02041
+the molecule is already in the list mol:cpd:C02041
+the molecule is already in the list mol:cpd:C16170
+the molecule is already in the list mol:cpd:C02249
+the molecule is already in the list mol:cpd:C03595
+the molecule is already in the list mol:cpd:C16180
+the molecule is already in the list mol:cpd:C03035
+the molecule is already in the list mol:cpd:C16169
+the molecule is already in the list mol:cpd:C16165
+the molecule is already in the list mol:cpd:C16179
+the molecule is already in the list mol:cpd:C02050 cpd:C16160
+the molecule is already in the list mol:cpd:C00510 cpd:C01203
+the molecule is already in the list mol:cpd:C00412 cpd:C04088
+the molecule is already in the list mol:cpd:C00154 cpd:C05764
+the molecule is already in the list mol:cpd:C16530
+the molecule is already in the list mol:cpd:C16531
+the molecule is already in the list mol:cpd:C16532
+the molecule is already in the list mol:cpd:C16166
+protein	ELOVL2
+protein	HSD17B12
+protein	PTPLB
+protein	PTPLA
+protein	PECR
+protein	TECR
+protein	ACAA1
+protein	HADHA
+protein	ACOX1
+protein	ACOX3
+protein	ACOT2
+protein	ACOT7
+protein	ACOT4
+protein	BAAT
+protein	ACOT1
+protein	ELOVL6
+protein	SLC22A5
+protein	SCD5
+protein	FADS2
+protein	ELOVL5
+protein	FADS1
+chemical	mol:cpd:C16533
+chemical	mol:cpd:C16645
+chemical	mol:cpd:C03242
+chemical	mol:cpd:C01595
+chemical	mol:cpd:C01530
+chemical	mol:cpd:C00712
+chemical	mol:cpd:C00249
+chemical	mol:cpd:C00219
+chemical	mol:cpd:C08320
+chemical	mol:cpd:C08323
+chemical	mol:cpd:C08316
+chemical	mol:cpd:C08281
+chemical	mol:cpd:C06425
+chemical	mol:cpd:C06426
+chemical	mol:cpd:C06429
+chemical	mol:cpd:C16526
+chemical	mol:cpd:C16527
+chemical	mol:cpd:C16525
+chemical	mol:cpd:C16513
+chemical	mol:cpd:C06428
+chemical	mol:cpd:C16522
+chemical	mol:cpd:C06427
+chemical	mol:cpd:C02050
+chemical	mol:cpd:C16532
+chemical	mol:cpd:C16531
+chemical	mol:cpd:C16530
+chemical	mol:cpd:C00510
+chemical	mol:cpd:C16529
+chemical	mol:cpd:C16528
+chemical	mol:cpd:C02041
+chemical	mol:cpd:C00412
+chemical	mol:cpd:C00154
+chemical	mol:cpd:C16170
+chemical	mol:cpd:C02249
+chemical	mol:cpd:C03595
+chemical	mol:cpd:C03035
+chemical	mol:cpd:C16180
+chemical	mol:cpd:C16169
+chemical	mol:cpd:C16165
+chemical	mol:cpd:C16179
+chemical	mol:cpd:C16162
+chemical	mol:cpd:C16172
+chemical	mol:cpd:C16171
+chemical	mol:cpd:C16173
+chemical	mol:cpd:C16168
+chemical	mol:cpd:C16167
+chemical	mol:cpd:C16164
+chemical	mol:cpd:C00510 cpd:C01203
+chemical	mol:cpd:C00412 cpd:C04088
+chemical	mol:cpd:C00154 cpd:C05764
+chemical	mol:cpd:C16163
+chemical	mol:cpd:C02050 cpd:C16160
+chemical	mol:cpd:C16162 cpd:C16161
+chemical	mol:cpd:C16166
+family	PTPLB/PTPLA
+family	PECR/TECR
+family	ACOX1/ACOX3
+family	ACOT2/ACOT7/ACOT4/BAAT/ACOT1
+family	ACOT2/ACOT7/ACOT4/ACOT1
+family	SLC22A5/SCD5
+family	ELOVL2/ELOVL5
+PTPLB	PTPLB/PTPLA	member>
+PTPLA	PTPLB/PTPLA	member>
+PECR	PECR/TECR	member>
+TECR	PECR/TECR	member>
+ACOX1	ACOX1/ACOX3	member>
+ACOX3	ACOX1/ACOX3	member>
+ACOT2	ACOT2/ACOT7/ACOT4/BAAT/ACOT1	member>
+ACOT7	ACOT2/ACOT7/ACOT4/BAAT/ACOT1	member>
+ACOT4	ACOT2/ACOT7/ACOT4/BAAT/ACOT1	member>
+BAAT	ACOT2/ACOT7/ACOT4/BAAT/ACOT1	member>
+ACOT1	ACOT2/ACOT7/ACOT4/BAAT/ACOT1	member>
+SLC22A5	SLC22A5/SCD5	member>
+SCD5	SLC22A5/SCD5	member>
+ELOVL5	ELOVL2/ELOVL5	member>
+complex	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00154
+complex	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00412
+complex	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C02041
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C00510
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02050
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02249
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03595
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03035
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16169
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16165
+complex	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16162
+complex	ELOVL6
+complex	ELOVL6
+complex	HSD17B12
+complex	HSD17B12
+complex	PTPLB/PTPLA
+complex	PTPLB/PTPLA
+complex	PECR/TECR
+complex	PECR/TECR
+complex	SLC22A5/SCD5
+complex	SLC22A5/SCD5
+complex	FADS2
+complex	FADS2
+complex	ACAA1
+complex	ACAA1
+complex	HADHA
+complex	HADHA
+complex	HADHA
+complex	HADHA
+complex	ACOX1/ACOX3
+complex	ACOX1/ACOX3
+complex	ELOVL6
+complex	ELOVL6
+complex	HSD17B12
+complex	HSD17B12
+complex	PTPLB/PTPLA
+complex	PTPLB/PTPLA
+complex	PECR/TECR
+complex	PECR/TECR
+complex	ACAA1
+complex	ACAA1
+complex	HADHA
+complex	HADHA
+complex	HADHA
+complex	HADHA
+complex	ACOX1/ACOX3
+complex	ACOX1/ACOX3
+complex	FADS2
+complex	FADS2
+complex	SLC22A5/SCD5
+complex	SLC22A5/SCD5
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00154	component>
+mol:cpd:C00154	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00154	component>
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00412	component>
+mol:cpd:C00412	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00412	component>
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C02041	component>
+mol:cpd:C02041	ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C02041	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C00510	component>
+mol:cpd:C00510	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C00510	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02050	component>
+mol:cpd:C02050	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02050	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02249	component>
+mol:cpd:C02249	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02249	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03595	component>
+mol:cpd:C03595	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03595	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03035	component>
+mol:cpd:C03035	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03035	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16169	component>
+mol:cpd:C16169	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16169	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16165	component>
+mol:cpd:C16165	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16165	component>
+ACOT2/ACOT7/ACOT4/ACOT1	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16162	component>
+mol:cpd:C16162	ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16162	component>
+ELOVL6	ELOVL6	component>
+HSD17B12	HSD17B12	component>
+PTPLB/PTPLA	PTPLB/PTPLA	component>
+PECR/TECR	PECR/TECR	component>
+SLC22A5/SCD5	SLC22A5/SCD5	component>
+FADS2	FADS2	component>
+ACAA1	ACAA1	component>
+HADHA	HADHA	component>
+HADHA	HADHA	component>
+ACOX1/ACOX3	ACOX1/ACOX3	component>
+ELOVL6	ELOVL6	component>
+HSD17B12	HSD17B12	component>
+PTPLB/PTPLA	PTPLB/PTPLA	component>
+PECR/TECR	PECR/TECR	component>
+ACAA1	ACAA1	component>
+HADHA	HADHA	component>
+HADHA	HADHA	component>
+ACOX1/ACOX3	ACOX1/ACOX3	component>
+FADS2	FADS2	component>
+SLC22A5/SCD5	SLC22A5/SCD5	component>
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00154	mol:cpd:C00249	-a>
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C00412	mol:cpd:C01530	-a>
+ACOT2/ACOT7/ACOT4/BAAT/ACOT1/mol:cpd:C02041	mol:cpd:C06425	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C00510	mol:cpd:C00712	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02050	mol:cpd:C01595	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C02249	mol:cpd:C00219	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03595	mol:cpd:C03242	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C03035	mol:cpd:C06426	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16169	mol:cpd:C06429	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16165	mol:cpd:C06428	-a>
+ACOT2/ACOT7/ACOT4/ACOT1/mol:cpd:C16162	mol:cpd:C06427	-a>

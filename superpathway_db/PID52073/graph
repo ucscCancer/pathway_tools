@@ -1,0 +1,29 @@
+protein	LIAS
+protein	LIPT2
+protein	LIPT1
+chemical	mol:cpd:C16239
+chemical	mol:cpd:C05752
+chemical	mol:cpd:C00725
+chemical	mol:cpd:C16238
+chemical	mol:cpd:C16236
+chemical	mol:cpd:C16237
+complex	LIAS/mol:cpd:C05752
+complex	LIPT2/mol:cpd:C16239
+complex	LIAS/mol:cpd:C16236
+complex	LIPT2/mol:cpd:C05752
+complex	LIPT1/mol:cpd:C16238
+LIAS	LIAS/mol:cpd:C05752	component>
+mol:cpd:C05752	LIAS/mol:cpd:C05752	component>
+LIPT2	LIPT2/mol:cpd:C16239	component>
+mol:cpd:C16239	LIPT2/mol:cpd:C16239	component>
+LIAS	LIAS/mol:cpd:C16236	component>
+mol:cpd:C16236	LIAS/mol:cpd:C16236	component>
+LIPT2	LIPT2/mol:cpd:C05752	component>
+mol:cpd:C05752	LIPT2/mol:cpd:C05752	component>
+LIPT1	LIPT1/mol:cpd:C16238	component>
+mol:cpd:C16238	LIPT1/mol:cpd:C16238	component>
+LIAS/mol:cpd:C05752	mol:cpd:C16239	-a>
+LIPT2/mol:cpd:C16239	mol:cpd:C16237	-a>
+LIAS/mol:cpd:C16236	mol:cpd:C16237	-a>
+LIPT2/mol:cpd:C05752	mol:cpd:C16236	-a>
+LIPT1/mol:cpd:C16238	mol:cpd:C16237	-a>

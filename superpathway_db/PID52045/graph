@@ -1,0 +1,47 @@
+protein	KCNA4
+protein	KIF2A
+protein	HOOK3
+protein	HKDC1
+protein	MAP4K2
+chemical	mol:cpd:C00031
+chemical	mol:cpd:C00092
+chemical	mol:cpd:C17209
+chemical	mol:cpd:C17580
+chemical	mol:cpd:C17581
+chemical	mol:cpd:C02627
+chemical	mol:cpd:C17582
+chemical	mol:cpd:C01743
+chemical	mol:cpd:C17583
+chemical	mol:cpd:C01441
+chemical	mol:cpd:C18004
+chemical	mol:cpd:C01759
+chemical	mol:cpd:C17587
+chemical	mol:cpd:C00043
+chemical	mol:cpd:C17588
+chemical	mol:cpd:C17589
+chemical	mol:cpd:C15652
+chemical	mol:cpd:C01737
+chemical	mol:cpd:C18005
+chemical	mol:cpd:C17586
+chemical	mol:cpd:C17585
+chemical	mol:cpd:C00229
+chemical	mol:cpd:C00025
+chemical	mol:cpd:C18006
+chemical	mol:cpd:C18007
+chemical	mol:cpd:C18008
+chemical	mol:cpd:C18009
+chemical	mol:cpd:C01847
+chemical	mol:cpd:C00061
+family	KCNA4/KIF2A/HOOK3/HKDC1
+KCNA4	KCNA4/KIF2A/HOOK3/HKDC1	member>
+KIF2A	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HOOK3	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HKDC1	KCNA4/KIF2A/HOOK3/HKDC1	member>
+complex	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00031
+complex	MAP4K2/mol:cpd:C00031
+KCNA4/KIF2A/HOOK3/HKDC1	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00031	component>
+mol:cpd:C00031	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00031	component>
+MAP4K2	MAP4K2/mol:cpd:C00031	component>
+mol:cpd:C00031	MAP4K2/mol:cpd:C00031	component>
+KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00031	mol:cpd:C00092	-a>
+MAP4K2/mol:cpd:C00031	mol:cpd:C00092	-a>

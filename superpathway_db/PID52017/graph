@@ -1,0 +1,67 @@
+protein	CYP1A2
+protein	XDH
+protein	CYP2A6
+protein	CYP2A7
+protein	CYP2A13
+protein	SLC38A1
+protein	SLC6A2
+chemical	mol:cpd:C00385
+chemical	mol:cpd:C13747
+chemical	mol:cpd:C16362
+chemical	mol:cpd:C16363
+chemical	mol:cpd:C16361
+chemical	mol:cpd:C00048
+chemical	mol:cpd:C16364
+chemical	mol:cpd:C16359
+chemical	mol:cpd:C16357
+chemical	mol:cpd:C16355
+chemical	mol:cpd:C07481
+chemical	mol:cpd:C16358
+chemical	mol:cpd:C16356
+chemical	mol:cpd:C16366
+chemical	mol:cpd:C07480
+chemical	mol:cpd:C07130
+chemical	mol:cpd:C16352
+chemical	mol:cpd:C01762
+chemical	mol:cpd:C16365
+chemical	mol:cpd:C16353
+chemical	mol:cpd:C16360
+family	CYP1A2/CYP2A6/CYP2A7/CYP2A13
+family	SLC38A1/SLC6A2
+CYP2A6	CYP1A2/CYP2A6/CYP2A7/CYP2A13	member>
+CYP2A7	CYP1A2/CYP2A6/CYP2A7/CYP2A13	member>
+CYP2A13	CYP1A2/CYP2A6/CYP2A7/CYP2A13	member>
+SLC38A1	SLC38A1/SLC6A2	member>
+SLC6A2	SLC38A1/SLC6A2	member>
+complex	CYP1A2/mol:cpd:C13747
+complex	XDH/mol:cpd:C16358
+complex	XDH/mol:cpd:C07480
+complex	CYP1A2/CYP2A6/CYP2A7/CYP2A13/mol:cpd:C13747
+complex	SLC38A1/SLC6A2/mol:cpd:C13747
+complex	XDH/mol:cpd:C16353
+complex	CYP1A2/mol:cpd:C07481
+complex	XDH/mol:cpd:C13747
+CYP1A2	CYP1A2/mol:cpd:C13747	component>
+mol:cpd:C13747	CYP1A2/mol:cpd:C13747	component>
+XDH	XDH/mol:cpd:C16358	component>
+mol:cpd:C16358	XDH/mol:cpd:C16358	component>
+XDH	XDH/mol:cpd:C07480	component>
+mol:cpd:C07480	XDH/mol:cpd:C07480	component>
+CYP1A2/CYP2A6/CYP2A7/CYP2A13	CYP1A2/CYP2A6/CYP2A7/CYP2A13/mol:cpd:C13747	component>
+mol:cpd:C13747	CYP1A2/CYP2A6/CYP2A7/CYP2A13/mol:cpd:C13747	component>
+SLC38A1/SLC6A2	SLC38A1/SLC6A2/mol:cpd:C13747	component>
+mol:cpd:C13747	SLC38A1/SLC6A2/mol:cpd:C13747	component>
+XDH	XDH/mol:cpd:C16353	component>
+mol:cpd:C16353	XDH/mol:cpd:C16353	component>
+CYP1A2	CYP1A2/mol:cpd:C07481	component>
+mol:cpd:C07481	CYP1A2/mol:cpd:C07481	component>
+XDH	XDH/mol:cpd:C13747	component>
+mol:cpd:C13747	XDH/mol:cpd:C13747	component>
+CYP1A2/mol:cpd:C13747	mol:cpd:C16358	-a>
+XDH/mol:cpd:C16358	mol:cpd:C16359	-a>
+XDH/mol:cpd:C07480	mol:cpd:C16360	-a>
+CYP1A2/CYP2A6/CYP2A7/CYP2A13/mol:cpd:C13747	mol:cpd:C16356	-a>
+SLC38A1/SLC6A2/mol:cpd:C13747	mol:cpd:C16365	-a>
+XDH/mol:cpd:C16353	mol:cpd:C16355	-a>
+CYP1A2/mol:cpd:C07481	mol:cpd:C13747	-a>
+XDH/mol:cpd:C13747	mol:cpd:C16356	-a>

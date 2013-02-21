@@ -1,0 +1,188 @@
+protein	SGSH
+protein	HPSE2
+protein	HPSE
+protein	GNS
+protein	IDS
+protein	GALNS
+protein	IDUA
+protein	ARSB
+protein	GLB1
+protein	HYAL4
+protein	HYAL1
+protein	SPAM1
+protein	HYAL3
+protein	HYAL2
+protein	HGSNAT
+protein	HEXA
+protein	HEXB
+protein	NAGLU
+protein	GUSB
+chemical	mol:gl:G08421
+chemical	mol:gl:G13033
+chemical	mol:gl:G06780
+chemical	mol:gl:G13032
+chemical	mol:gl:G13031
+chemical	mol:gl:G02632
+chemical	mol:gl:G09660
+chemical	mol:gl:G13040
+chemical	mol:gl:G13039
+chemical	mol:gl:G13038
+chemical	mol:gl:G13037
+chemical	mol:gl:G13036
+chemical	mol:gl:G13035
+chemical	mol:gl:G13034
+chemical	mol:gl:G00872
+chemical	mol:gl:G13043
+chemical	mol:gl:G12336
+chemical	mol:gl:G13042
+chemical	mol:gl:G13041
+chemical	mol:cpd:C00925
+chemical	mol:cpd:C00426
+chemical	mol:cpd:C00634
+chemical	mol:cpd:C00573
+family	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2
+family	HEXA/HEXB
+family	HPSE/HPSE2
+HYAL4	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	member>
+HYAL1	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	member>
+SPAM1	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	member>
+HYAL3	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	member>
+HYAL2	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	member>
+HEXA	HEXA/HEXB	member>
+HEXB	HEXA/HEXB	member>
+complex	HPSE2/mol:cpd:C00925
+complex	HPSE/mol:cpd:C00925
+complex	GNS/mol:gl:G06780
+complex	IDS/mol:gl:G13041
+complex	IDS/mol:gl:G13034
+complex	GALNS/mol:gl:G13031
+complex	IDUA/mol:gl:G13042
+complex	IDUA/mol:gl:G13035
+complex	ARSB/mol:gl:G12336
+complex	SGSH/mol:gl:G13036
+complex	GLB1/mol:gl:G13032
+complex	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043
+complex	HGSNAT/mol:gl:G13037
+complex	HEXA/HEXB/mol:gl:G06780
+complex	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G12336
+complex	NAGLU/mol:gl:G13038
+complex	HEXA/HEXB/mol:gl:G13033
+complex	GUSB/mol:gl:G13040
+complex	GNS/mol:gl:G09660
+complex	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043
+complex	ARSB/mol:gl:G12336
+complex	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043
+complex	IDS/mol:gl:G13041
+complex	IDUA/mol:gl:G13042
+complex	NAGLU/mol:gl:G13038
+complex	GUSB/mol:gl:G13040
+complex	IDS/mol:gl:G13034
+complex	IDUA/mol:gl:G13035
+complex	HPSE/HPSE2/mol:cpd:C00925
+complex	SGSH/mol:gl:G13036
+complex	HEXA/HEXB/mol:gl:G13033
+complex	GNS/mol:gl:G06780
+complex	GALNS/mol:gl:G13031
+complex	GLB1/mol:gl:G13032
+HPSE2	HPSE2/mol:cpd:C00925	component>
+mol:cpd:C00925	HPSE2/mol:cpd:C00925	component>
+HPSE	HPSE/mol:cpd:C00925	component>
+mol:cpd:C00925	HPSE/mol:cpd:C00925	component>
+GNS	GNS/mol:gl:G06780	component>
+mol:gl:G06780	GNS/mol:gl:G06780	component>
+IDS	IDS/mol:gl:G13041	component>
+mol:gl:G13041	IDS/mol:gl:G13041	component>
+IDS	IDS/mol:gl:G13034	component>
+mol:gl:G13034	IDS/mol:gl:G13034	component>
+GALNS	GALNS/mol:gl:G13031	component>
+mol:gl:G13031	GALNS/mol:gl:G13031	component>
+IDUA	IDUA/mol:gl:G13042	component>
+mol:gl:G13042	IDUA/mol:gl:G13042	component>
+IDUA	IDUA/mol:gl:G13035	component>
+mol:gl:G13035	IDUA/mol:gl:G13035	component>
+ARSB	ARSB/mol:gl:G12336	component>
+mol:gl:G12336	ARSB/mol:gl:G12336	component>
+SGSH	SGSH/mol:gl:G13036	component>
+mol:gl:G13036	SGSH/mol:gl:G13036	component>
+GLB1	GLB1/mol:gl:G13032	component>
+mol:gl:G13032	GLB1/mol:gl:G13032	component>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+mol:gl:G13043	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+HGSNAT	HGSNAT/mol:gl:G13037	component>
+mol:gl:G13037	HGSNAT/mol:gl:G13037	component>
+HEXA/HEXB	HEXA/HEXB/mol:gl:G06780	component>
+mol:gl:G06780	HEXA/HEXB/mol:gl:G06780	component>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G12336	component>
+mol:gl:G12336	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G12336	component>
+NAGLU	NAGLU/mol:gl:G13038	component>
+mol:gl:G13038	NAGLU/mol:gl:G13038	component>
+HEXA/HEXB	HEXA/HEXB/mol:gl:G13033	component>
+mol:gl:G13033	HEXA/HEXB/mol:gl:G13033	component>
+GUSB	GUSB/mol:gl:G13040	component>
+mol:gl:G13040	GUSB/mol:gl:G13040	component>
+GNS	GNS/mol:gl:G09660	component>
+mol:gl:G09660	GNS/mol:gl:G09660	component>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+mol:gl:G13043	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+ARSB	ARSB/mol:gl:G12336	component>
+mol:gl:G12336	ARSB/mol:gl:G12336	component>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+mol:gl:G13043	HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	component>
+IDS	IDS/mol:gl:G13041	component>
+mol:gl:G13041	IDS/mol:gl:G13041	component>
+IDUA	IDUA/mol:gl:G13042	component>
+mol:gl:G13042	IDUA/mol:gl:G13042	component>
+NAGLU	NAGLU/mol:gl:G13038	component>
+mol:gl:G13038	NAGLU/mol:gl:G13038	component>
+GUSB	GUSB/mol:gl:G13040	component>
+mol:gl:G13040	GUSB/mol:gl:G13040	component>
+IDS	IDS/mol:gl:G13034	component>
+mol:gl:G13034	IDS/mol:gl:G13034	component>
+IDUA	IDUA/mol:gl:G13035	component>
+mol:gl:G13035	IDUA/mol:gl:G13035	component>
+HPSE/HPSE2	HPSE/HPSE2/mol:cpd:C00925	component>
+mol:cpd:C00925	HPSE/HPSE2/mol:cpd:C00925	component>
+SGSH	SGSH/mol:gl:G13036	component>
+mol:gl:G13036	SGSH/mol:gl:G13036	component>
+HEXA/HEXB	HEXA/HEXB/mol:gl:G13033	component>
+mol:gl:G13033	HEXA/HEXB/mol:gl:G13033	component>
+GNS	GNS/mol:gl:G06780	component>
+mol:gl:G06780	GNS/mol:gl:G06780	component>
+GALNS	GALNS/mol:gl:G13031	component>
+mol:gl:G13031	GALNS/mol:gl:G13031	component>
+GLB1	GLB1/mol:gl:G13032	component>
+mol:gl:G13032	GLB1/mol:gl:G13032	component>
+HPSE2/mol:cpd:C00925	mol:gl:G13034	-a>
+HPSE/mol:cpd:C00925	mol:gl:G13034	-a>
+GNS/mol:gl:G06780	mol:gl:G13033	-a>
+IDS/mol:gl:G13041	mol:gl:G13042	-a>
+IDS/mol:gl:G13034	mol:gl:G13035	-a>
+GALNS/mol:gl:G13031	mol:gl:G13032	-a>
+IDUA/mol:gl:G13042	mol:gl:G12336	-a>
+IDUA/mol:gl:G13035	mol:gl:G13036	-a>
+ARSB/mol:gl:G12336	mol:gl:G13043	-a>
+SGSH/mol:gl:G13036	mol:gl:G13037	-a>
+GLB1/mol:gl:G13032	mol:gl:G06780	-a>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	mol:gl:G00872	-a>
+HGSNAT/mol:gl:G13037	mol:gl:G13038	-a>
+HEXA/HEXB/mol:gl:G06780	mol:gl:G08421	-a>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G12336	mol:gl:G00872	-a>
+NAGLU/mol:gl:G13038	mol:gl:G13039	-a>
+HEXA/HEXB/mol:gl:G13033	mol:gl:G08421	-a>
+GUSB/mol:gl:G13040	mol:gl:G09660	-a>
+GNS/mol:gl:G09660	mol:gl:G02632	-a>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	mol:gl:G00872	-a>
+ARSB/mol:gl:G12336	mol:gl:G13043	-a>
+HYAL4/HYAL1/SPAM1/HYAL3/HYAL2/mol:gl:G13043	mol:gl:G00872	-a>
+IDS/mol:gl:G13041	mol:gl:G13042	-a>
+IDUA/mol:gl:G13042	mol:gl:G12336	-a>
+NAGLU/mol:gl:G13038	mol:gl:G13039	-a>
+GUSB/mol:gl:G13040	mol:gl:G09660	-a>
+IDS/mol:gl:G13034	mol:gl:G13035	-a>
+IDUA/mol:gl:G13035	mol:gl:G13036	-a>
+HPSE/HPSE2/mol:cpd:C00925	mol:gl:G13034	-a>
+SGSH/mol:gl:G13036	mol:gl:G13037	-a>
+HEXA/HEXB/mol:gl:G13033	mol:gl:G08421	-a>
+GNS/mol:gl:G06780	mol:gl:G13033	-a>
+GALNS/mol:gl:G13031	mol:gl:G13032	-a>
+GLB1/mol:gl:G13032	mol:gl:G06780	-a>

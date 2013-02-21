@@ -1,0 +1,110 @@
+protein	EXT1
+protein	EXT3
+protein	EXTL1
+protein	EXTL3
+protein	EXTL2
+protein	B3GAT2
+protein	B3GAT3
+protein	B3GAT1
+protein	B3GALT6
+protein	B4GALT7
+protein	XYLT1
+protein	XYLT2
+protein	NDST1
+protein	NDST4
+protein	NDST2
+protein	NDST3
+protein	GLCE
+protein	HS6ST3
+protein	HS6ST1
+protein	HS2ST1
+protein	HS3ST2
+protein	HS3ST3B1
+protein	HS3ST3A1
+protein	HS3ST6
+protein	HS3ST1
+protein	HS6ST2
+chemical	mol:gl:G00164
+chemical	mol:gl:G00163
+chemical	mol:gl:G00162
+chemical	mol:gl:G00157
+chemical	mol:cpd:C00054
+chemical	mol:cpd:C00053
+chemical	mol:cpd:C00033
+family	EXT1/EXT3
+family	EXTL1/EXTL3
+family	EXTL2/EXTL3
+family	B3GAT2/B3GAT3/B3GAT1
+family	XYLT1/XYLT2
+family	EXT1/EXT3/EXTL1/EXTL2/EXTL3
+family	NDST1/NDST4/NDST2/NDST3
+family	HS6ST3/HS6ST1
+family	HS3ST3B1/HS3ST3A1
+family	HS3ST6/HS3ST1
+family	HS6ST3/HS6ST2
+EXT1	EXT1/EXT3	member>
+EXT3	EXT1/EXT3	member>
+EXTL1	EXTL1/EXTL3	member>
+EXTL3	EXTL1/EXTL3	member>
+EXTL2	EXTL2/EXTL3	member>
+B3GAT2	B3GAT2/B3GAT3/B3GAT1	member>
+B3GAT3	B3GAT2/B3GAT3/B3GAT1	member>
+B3GAT1	B3GAT2/B3GAT3/B3GAT1	member>
+XYLT1	XYLT1/XYLT2	member>
+XYLT2	XYLT1/XYLT2	member>
+NDST1	NDST1/NDST4/NDST2/NDST3	member>
+NDST4	NDST1/NDST4/NDST2/NDST3	member>
+NDST2	NDST1/NDST4/NDST2/NDST3	member>
+NDST3	NDST1/NDST4/NDST2/NDST3	member>
+HS6ST3	HS6ST3/HS6ST1	member>
+HS6ST1	HS6ST3/HS6ST1	member>
+HS3ST3B1	HS3ST3B1/HS3ST3A1	member>
+HS3ST3A1	HS3ST3B1/HS3ST3A1	member>
+HS3ST6	HS3ST6/HS3ST1	member>
+HS3ST1	HS3ST6/HS3ST1	member>
+HS6ST2	HS6ST3/HS6ST2	member>
+complex	EXTL1/EXTL3/mol:gl:G00163
+complex	EXTL2/EXTL3/mol:gl:G00157
+complex	EXT1/EXT3/mol:gl:G00162
+complex	EXTL1/EXTL3
+complex	EXTL1/EXTL3
+complex	EXT1/EXT3
+complex	EXT1/EXT3
+complex	EXTL2/EXTL3
+complex	EXTL2/EXTL3
+complex	B3GAT2/B3GAT3/B3GAT1
+complex	B3GAT2/B3GAT3/B3GAT1
+complex	B3GALT6
+complex	B3GALT6
+complex	B4GALT7
+complex	B4GALT7
+complex	XYLT1/XYLT2
+complex	XYLT1/XYLT2
+complex	B3GAT2/B3GAT3/B3GAT1
+complex	B3GAT2/B3GAT3/B3GAT1
+complex	B3GALT6
+complex	B3GALT6
+complex	B4GALT7
+complex	B4GALT7
+complex	XYLT1/XYLT2
+complex	XYLT1/XYLT2
+EXTL1/EXTL3	EXTL1/EXTL3/mol:gl:G00163	component>
+mol:gl:G00163	EXTL1/EXTL3/mol:gl:G00163	component>
+EXTL2/EXTL3	EXTL2/EXTL3/mol:gl:G00157	component>
+mol:gl:G00157	EXTL2/EXTL3/mol:gl:G00157	component>
+EXT1/EXT3	EXT1/EXT3/mol:gl:G00162	component>
+mol:gl:G00162	EXT1/EXT3/mol:gl:G00162	component>
+EXTL1/EXTL3	EXTL1/EXTL3	component>
+EXT1/EXT3	EXT1/EXT3	component>
+EXTL2/EXTL3	EXTL2/EXTL3	component>
+B3GAT2/B3GAT3/B3GAT1	B3GAT2/B3GAT3/B3GAT1	component>
+B3GALT6	B3GALT6	component>
+B4GALT7	B4GALT7	component>
+XYLT1/XYLT2	XYLT1/XYLT2	component>
+B3GAT2/B3GAT3/B3GAT1	B3GAT2/B3GAT3/B3GAT1	component>
+B3GALT6	B3GALT6	component>
+B4GALT7	B4GALT7	component>
+XYLT1/XYLT2	XYLT1/XYLT2	component>
+EXTL1/EXTL3/mol:gl:G00163	mol:gl:G00164	-a>
+EXTL2/EXTL3/mol:gl:G00157	mol:gl:G00162	-a>
+EXT1/EXT3/mol:gl:G00162	mol:gl:G00163	-a>

@@ -1,0 +1,228 @@
+the molecule is already in the list mol:cpd:C15777
+protein	SC5DL
+protein	SH3D19
+protein	DHCR7
+protein	DHCR24
+protein	CYP51A1
+protein	TM7SF2
+protein	FDFT1
+protein	SQLE
+protein	LSS
+protein	NSDHL
+protein	C5orf4
+protein	MSMO1
+protein	HSD17B7P2
+protein	CEL
+protein	SCGB1D1
+protein	SOAT1
+protein	SOAT2
+protein	CYP2R1
+protein	CYP27B1
+chemical	mol:cpd:C01673
+chemical	mol:cpd:C01561
+chemical	mol:cpd:C01902
+chemical	mol:cpd:C05442
+chemical	mol:cpd:C15776
+chemical	mol:cpd:C11508
+chemical	mol:cpd:C01802
+chemical	mol:cpd:C01789
+chemical	mol:cpd:C15781
+chemical	mol:cpd:C05107
+chemical	mol:cpd:C15780
+chemical	mol:cpd:C15783
+chemical	mol:cpd:C01753
+chemical	mol:cpd:C08830
+chemical	mol:cpd:C08821
+chemical	mol:cpd:C15782
+chemical	mol:cpd:C02141
+chemical	mol:cpd:C01943
+chemical	mol:cpd:C11523
+chemical	mol:cpd:C00448
+chemical	mol:cpd:C03428
+chemical	mol:cpd:C00751
+chemical	mol:cpd:C01054
+chemical	mol:cpd:C01724
+chemical	mol:cpd:C05109
+chemical	mol:cpd:C04525
+chemical	mol:cpd:C11455
+chemical	mol:cpd:C15915
+chemical	mol:cpd:C05108
+chemical	mol:cpd:C15777
+chemical	mol:cpd:C15808
+chemical	mol:cpd:C15778
+chemical	mol:cpd:C15816
+chemical	mol:cpd:C01189
+chemical	mol:cpd:C01164
+chemical	mol:cpd:C05443
+chemical	mol:cpd:C05103
+chemical	mol:cpd:C05437
+chemical	mol:cpd:C05440
+chemical	mol:cpd:C01694
+chemical	mol:cpd:C03845
+chemical	mol:cpd:C11522
+chemical	mol:cpd:C05441
+chemical	mol:cpd:C05439
+chemical	mol:cpd:C00599
+chemical	mol:cpd:C06309 cpd:C06310
+chemical	mol:cpd:C06085
+chemical	mol:cpd:C06083
+chemical	mol:cpd:C00187
+chemical	mol:cpd:C02530
+family	C5orf4/MSMO1
+family	CEL/SCGB1D1
+family	SOAT1/SOAT2
+C5orf4	C5orf4/MSMO1	member>
+MSMO1	C5orf4/MSMO1	member>
+CEL	CEL/SCGB1D1	member>
+SCGB1D1	CEL/SCGB1D1	member>
+SOAT1	SOAT1/SOAT2	member>
+SOAT2	SOAT1/SOAT2	member>
+complex	CYP2R1/mol:cpd:C05443
+complex	SC5DL/mol:cpd:C15782
+complex	SH3D19/mol:cpd:C05437
+complex	CYP27B1/mol:cpd:C01561
+complex	DHCR7/mol:cpd:C01164
+complex	SC5DL/mol:cpd:C01189
+complex	SH3D19/mol:cpd:C03845
+complex	DHCR24/mol:cpd:C15781
+complex	DHCR7/mol:cpd:C15780
+complex	SC5DL/mol:cpd:C15777
+complex	DHCR24/mol:cpd:C00187
+complex	DHCR24/mol:cpd:C01802
+complex	DHCR24/mol:cpd:C05107
+complex	DHCR24/mol:cpd:C01164
+complex	DHCR24/mol:cpd:C01189
+complex	DHCR24/mol:cpd:C05439
+complex	DHCR24/mol:cpd:C05437
+complex	DHCR24/mol:cpd:C03845
+complex	DHCR24/mol:cpd:C05108
+complex	DHCR24/mol:cpd:C15915
+complex	DHCR24/mol:cpd:C08821
+complex	CYP51A1/mol:cpd:C01943
+complex	TM7SF2/mol:cpd:C11508
+complex	DHCR7/mol:cpd:C15783
+complex	FDFT1/mol:cpd:C00448
+complex	FDFT1/mol:cpd:C03428
+complex	SQLE/mol:cpd:C00751
+complex	LSS/mol:cpd:C01054
+complex	TM7SF2/mol:cpd:C11455
+complex	SH3D19/mol:cpd:C15776
+complex	NSDHL/mol:cpd:C15808
+complex	DHCR24/mol:cpd:C01724
+complex	DHCR24/mol:cpd:C05109
+complex	C5orf4/MSMO1/mol:cpd:C05108
+complex	CYP51A1/mol:cpd:C01724
+complex	HSD17B7P2/mol:cpd:C15816
+complex	CEL/SCGB1D1/mol:cpd:C02530
+complex	SOAT1/SOAT2/mol:cpd:C00187
+complex	SOAT1/SOAT2/mol:cpd:C02530
+CYP2R1	CYP2R1/mol:cpd:C05443	component>
+mol:cpd:C05443	CYP2R1/mol:cpd:C05443	component>
+SC5DL	SC5DL/mol:cpd:C15782	component>
+mol:cpd:C15782	SC5DL/mol:cpd:C15782	component>
+SH3D19	SH3D19/mol:cpd:C05437	component>
+mol:cpd:C05437	SH3D19/mol:cpd:C05437	component>
+CYP27B1	CYP27B1/mol:cpd:C01561	component>
+mol:cpd:C01561	CYP27B1/mol:cpd:C01561	component>
+DHCR7	DHCR7/mol:cpd:C01164	component>
+mol:cpd:C01164	DHCR7/mol:cpd:C01164	component>
+SC5DL	SC5DL/mol:cpd:C01189	component>
+mol:cpd:C01189	SC5DL/mol:cpd:C01189	component>
+SH3D19	SH3D19/mol:cpd:C03845	component>
+mol:cpd:C03845	SH3D19/mol:cpd:C03845	component>
+DHCR24	DHCR24/mol:cpd:C15781	component>
+mol:cpd:C15781	DHCR24/mol:cpd:C15781	component>
+DHCR7	DHCR7/mol:cpd:C15780	component>
+mol:cpd:C15780	DHCR7/mol:cpd:C15780	component>
+SC5DL	SC5DL/mol:cpd:C15777	component>
+mol:cpd:C15777	SC5DL/mol:cpd:C15777	component>
+DHCR24	DHCR24/mol:cpd:C00187	component>
+mol:cpd:C00187	DHCR24/mol:cpd:C00187	component>
+mol:cpd:C01802	DHCR24/mol:cpd:C01802	component>
+DHCR24	DHCR24/mol:cpd:C05107	component>
+mol:cpd:C05107	DHCR24/mol:cpd:C05107	component>
+mol:cpd:C01164	DHCR24/mol:cpd:C01164	component>
+DHCR24	DHCR24/mol:cpd:C01189	component>
+mol:cpd:C01189	DHCR24/mol:cpd:C01189	component>
+mol:cpd:C05439	DHCR24/mol:cpd:C05439	component>
+DHCR24	DHCR24/mol:cpd:C05437	component>
+mol:cpd:C05437	DHCR24/mol:cpd:C05437	component>
+mol:cpd:C03845	DHCR24/mol:cpd:C03845	component>
+DHCR24	DHCR24/mol:cpd:C05108	component>
+mol:cpd:C05108	DHCR24/mol:cpd:C05108	component>
+mol:cpd:C15915	DHCR24/mol:cpd:C15915	component>
+DHCR24	DHCR24/mol:cpd:C08821	component>
+mol:cpd:C08821	DHCR24/mol:cpd:C08821	component>
+CYP51A1	CYP51A1/mol:cpd:C01943	component>
+mol:cpd:C01943	CYP51A1/mol:cpd:C01943	component>
+TM7SF2	TM7SF2/mol:cpd:C11508	component>
+mol:cpd:C11508	TM7SF2/mol:cpd:C11508	component>
+DHCR7	DHCR7/mol:cpd:C15783	component>
+mol:cpd:C15783	DHCR7/mol:cpd:C15783	component>
+FDFT1	FDFT1/mol:cpd:C00448	component>
+mol:cpd:C00448	FDFT1/mol:cpd:C00448	component>
+FDFT1	FDFT1/mol:cpd:C03428	component>
+mol:cpd:C03428	FDFT1/mol:cpd:C03428	component>
+SQLE	SQLE/mol:cpd:C00751	component>
+mol:cpd:C00751	SQLE/mol:cpd:C00751	component>
+LSS	LSS/mol:cpd:C01054	component>
+mol:cpd:C01054	LSS/mol:cpd:C01054	component>
+TM7SF2	TM7SF2/mol:cpd:C11455	component>
+mol:cpd:C11455	TM7SF2/mol:cpd:C11455	component>
+SH3D19	SH3D19/mol:cpd:C15776	component>
+mol:cpd:C15776	SH3D19/mol:cpd:C15776	component>
+NSDHL	NSDHL/mol:cpd:C15808	component>
+mol:cpd:C15808	NSDHL/mol:cpd:C15808	component>
+DHCR24	DHCR24/mol:cpd:C01724	component>
+mol:cpd:C01724	DHCR24/mol:cpd:C01724	component>
+mol:cpd:C05109	DHCR24/mol:cpd:C05109	component>
+C5orf4/MSMO1	C5orf4/MSMO1/mol:cpd:C05108	component>
+mol:cpd:C05108	C5orf4/MSMO1/mol:cpd:C05108	component>
+CYP51A1	CYP51A1/mol:cpd:C01724	component>
+mol:cpd:C01724	CYP51A1/mol:cpd:C01724	component>
+HSD17B7P2	HSD17B7P2/mol:cpd:C15816	component>
+mol:cpd:C15816	HSD17B7P2/mol:cpd:C15816	component>
+CEL/SCGB1D1	CEL/SCGB1D1/mol:cpd:C02530	component>
+mol:cpd:C02530	CEL/SCGB1D1/mol:cpd:C02530	component>
+SOAT1/SOAT2	SOAT1/SOAT2/mol:cpd:C00187	component>
+mol:cpd:C00187	SOAT1/SOAT2/mol:cpd:C00187	component>
+mol:cpd:C02530	SOAT1/SOAT2/mol:cpd:C02530	component>
+CYP2R1/mol:cpd:C05443	mol:cpd:C01561	-a>
+SC5DL/mol:cpd:C15782	mol:cpd:C15783	-a>
+SH3D19/mol:cpd:C05437	mol:cpd:C05439	-a>
+CYP27B1/mol:cpd:C01561	mol:cpd:C01673	-a>
+DHCR7/mol:cpd:C01164	mol:cpd:C00187	-a>
+SC5DL/mol:cpd:C01189	mol:cpd:C01164	-a>
+SH3D19/mol:cpd:C03845	mol:cpd:C01189	-a>
+DHCR24/mol:cpd:C15781	mol:cpd:C01789	-a>
+DHCR7/mol:cpd:C15780	mol:cpd:C15781	-a>
+SC5DL/mol:cpd:C15777	mol:cpd:C15780	-a>
+DHCR24/mol:cpd:C00187	mol:cpd:C01802	-a>
+DHCR24/mol:cpd:C01802	mol:cpd:C00187	-a>
+DHCR24/mol:cpd:C05107	mol:cpd:C01164	-a>
+DHCR24/mol:cpd:C01164	mol:cpd:C05107	-a>
+DHCR24/mol:cpd:C01189	mol:cpd:C05439	-a>
+DHCR24/mol:cpd:C05439	mol:cpd:C01189	-a>
+DHCR24/mol:cpd:C05437	mol:cpd:C03845	-a>
+DHCR24/mol:cpd:C03845	mol:cpd:C05437	-a>
+DHCR24/mol:cpd:C05108	mol:cpd:C15915	-a>
+DHCR24/mol:cpd:C15915	mol:cpd:C05108	-a>
+DHCR24/mol:cpd:C08821	mol:cpd:C01753	-a>
+CYP51A1/mol:cpd:C01943	mol:cpd:C11508	-a>
+TM7SF2/mol:cpd:C11508	mol:cpd:C15776	-a>
+DHCR7/mol:cpd:C15783	mol:cpd:C08821	-a>
+FDFT1/mol:cpd:C00448	mol:cpd:C03428	-a>
+FDFT1/mol:cpd:C03428	mol:cpd:C00751	-a>
+SQLE/mol:cpd:C00751	mol:cpd:C01054	-a>
+LSS/mol:cpd:C01054	mol:cpd:C01724	-a>
+TM7SF2/mol:cpd:C11455	mol:cpd:C05108	-a>
+SH3D19/mol:cpd:C15776	mol:cpd:C11522	-a>
+NSDHL/mol:cpd:C15808	mol:cpd:C15816	-a>
+DHCR24/mol:cpd:C01724	mol:cpd:C05109	-a>
+DHCR24/mol:cpd:C05109	mol:cpd:C01724	-a>
+C5orf4/MSMO1/mol:cpd:C05108	mol:cpd:C15808	-a>
+CYP51A1/mol:cpd:C01724	mol:cpd:C11455	-a>
+HSD17B7P2/mol:cpd:C15816	mol:cpd:C05103	-a>
+CEL/SCGB1D1/mol:cpd:C02530	mol:cpd:C00187	-a>
+SOAT1/SOAT2/mol:cpd:C00187	mol:cpd:C02530	-a>
+SOAT1/SOAT2/mol:cpd:C02530	mol:cpd:C00187	-a>

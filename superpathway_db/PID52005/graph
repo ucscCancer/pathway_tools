@@ -1,0 +1,241 @@
+the molecule is already in the list mol:cpd:C01235
+the molecule is already in the list mol:cpd:C00124
+protein	NAT8
+protein	PFKL
+protein	PFKM
+protein	PFKP
+protein	GAA
+protein	GANC
+protein	MGAM
+protein	AKR1B1
+protein	MAP4K2
+protein	KCNA4
+protein	KIF2A
+protein	HOOK3
+protein	HKDC1
+protein	LCT
+protein	GLB1
+protein	PGM1
+protein	PGM2
+protein	B4GALT1
+protein	LALBA
+protein	B4GALT2
+protein	GALE
+protein	UGP2
+protein	GALT
+protein	GALK1
+protein	GALK2
+protein	G6PC
+protein	G6PC2
+chemical	mol:cpd:C06311
+chemical	mol:cpd:C01216
+chemical	mol:cpd:C00137
+chemical	mol:cpd:C00095
+chemical	mol:cpd:C03383
+chemical	mol:cpd:C00124
+chemical	mol:cpd:C00052
+chemical	mol:cpd:C00103
+chemical	mol:cpd:C00029
+chemical	mol:cpd:C00880
+chemical	mol:cpd:C01286
+chemical	mol:cpd:C00446
+chemical	mol:cpd:C01235
+chemical	mol:cpd:C00089
+chemical	mol:cpd:C00492
+chemical	mol:cpd:C05399
+chemical	mol:cpd:C05400
+chemical	mol:cpd:C05401
+chemical	mol:cpd:C00116
+chemical	mol:cpd:C00159
+chemical	mol:cpd:C00794
+chemical	mol:cpd:C05396
+chemical	mol:cpd:C01113
+chemical	mol:cpd:C00031
+chemical	mol:cpd:C05404
+chemical	mol:cpd:C01613
+chemical	mol:cpd:C00118
+chemical	mol:cpd:C00111
+chemical	mol:cpd:C03785
+chemical	mol:cpd:C01097
+chemical	mol:cpd:C01697
+chemical	mol:cpd:C05796
+chemical	mol:cpd:C00795
+chemical	mol:cpd:C00243
+chemical	mol:cpd:C01132
+chemical	mol:cpd:C06376
+chemical	mol:cpd:C06377
+chemical	mol:cpd:C02262
+chemical	mol:cpd:C05402
+chemical	mol:cpd:C00668
+chemical	mol:cpd:C00267
+family	PFKL/PFKM/PFKP
+family	GAA/GANC/MGAM
+family	KCNA4/KIF2A/HOOK3/HKDC1
+family	PGM1/PGM2
+family	B4GALT1/LALBA/B4GALT2
+family	GALK1/GALK2
+family	G6PC/G6PC2
+PFKL	PFKL/PFKM/PFKP	member>
+PFKM	PFKL/PFKM/PFKP	member>
+PFKP	PFKL/PFKM/PFKP	member>
+GAA	GAA/GANC/MGAM	member>
+GANC	GAA/GANC/MGAM	member>
+MGAM	GAA/GANC/MGAM	member>
+KCNA4	KCNA4/KIF2A/HOOK3/HKDC1	member>
+KIF2A	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HOOK3	KCNA4/KIF2A/HOOK3/HKDC1	member>
+HKDC1	KCNA4/KIF2A/HOOK3/HKDC1	member>
+PGM1	PGM1/PGM2	member>
+PGM2	PGM1/PGM2	member>
+B4GALT1	B4GALT1/LALBA/B4GALT2	member>
+LALBA	B4GALT1/LALBA/B4GALT2	member>
+B4GALT2	B4GALT1/LALBA/B4GALT2	member>
+GALK1	GALK1/GALK2	member>
+GALK2	GALK1/GALK2	member>
+G6PC	G6PC/G6PC2	member>
+G6PC2	G6PC/G6PC2	member>
+complex	NAT8/mol:cpd:C01613
+complex	PFKL/PFKM/PFKP/mol:cpd:C01097
+complex	PFKL/PFKM/PFKP/mol:cpd:C03785
+complex	NAT8/mol:cpd:C05404
+complex	GAA/GANC/MGAM/mol:cpd:C00089
+complex	NAT8/mol:cpd:C00492
+complex	NAT8/mol:cpd:C05402
+complex	AKR1B1/mol:cpd:C00124
+complex	AKR1B1/mol:cpd:C01697
+complex	NAT8/mol:cpd:C05401
+complex	NAT8/mol:cpd:C00116/mol:cpd:C00124
+complex	NAT8/mol:cpd:C05400
+complex	NAT8/mol:cpd:C00159/mol:cpd:C00124
+complex	NAT8/mol:cpd:C05399
+complex	NAT8/mol:cpd:C00794/mol:cpd:C00124
+complex	NAT8/mol:cpd:C01235
+complex	NAT8/mol:cpd:C00137/mol:cpd:C00124
+complex	MAP4K2/mol:cpd:C00267
+complex	MAP4K2/mol:cpd:C00668
+complex	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267
+complex	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00668
+complex	LCT/mol:cpd:C00243
+complex	GLB1/mol:cpd:C00243
+complex	PGM1/PGM2/mol:cpd:C00103
+complex	PGM1/PGM2/mol:cpd:C00668
+complex	B4GALT1/LALBA/B4GALT2/mol:cpd:C00052
+complex	GALE/mol:cpd:C00029
+complex	GALE/mol:cpd:C00052
+complex	UGP2/mol:cpd:C00103
+complex	UGP2/mol:cpd:C00029
+complex	GALT/mol:cpd:C00029/mol:cpd:C00446
+complex	GALT/mol:cpd:C00103/mol:cpd:C00052
+complex	GALK1/GALK2/mol:cpd:C00124
+complex	G6PC/G6PC2/mol:cpd:C00668
+complex	G6PC/G6PC2/mol:cpd:C00267
+NAT8	NAT8/mol:cpd:C01613	component>
+mol:cpd:C01613	NAT8/mol:cpd:C01613	component>
+PFKL/PFKM/PFKP	PFKL/PFKM/PFKP/mol:cpd:C01097	component>
+mol:cpd:C01097	PFKL/PFKM/PFKP/mol:cpd:C01097	component>
+mol:cpd:C03785	PFKL/PFKM/PFKP/mol:cpd:C03785	component>
+NAT8	NAT8/mol:cpd:C05404	component>
+mol:cpd:C05404	NAT8/mol:cpd:C05404	component>
+GAA/GANC/MGAM	GAA/GANC/MGAM/mol:cpd:C00089	component>
+mol:cpd:C00089	GAA/GANC/MGAM/mol:cpd:C00089	component>
+NAT8	NAT8/mol:cpd:C00492	component>
+mol:cpd:C00492	NAT8/mol:cpd:C00492	component>
+NAT8	NAT8/mol:cpd:C05402	component>
+mol:cpd:C05402	NAT8/mol:cpd:C05402	component>
+AKR1B1	AKR1B1/mol:cpd:C00124	component>
+mol:cpd:C00124	AKR1B1/mol:cpd:C00124	component>
+mol:cpd:C01697	AKR1B1/mol:cpd:C01697	component>
+NAT8	NAT8/mol:cpd:C05401	component>
+mol:cpd:C05401	NAT8/mol:cpd:C05401	component>
+mol:cpd:C00116	NAT8/mol:cpd:C00116/mol:cpd:C00124	component>
+mol:cpd:C00124	NAT8/mol:cpd:C00116/mol:cpd:C00124	component>
+NAT8	NAT8/mol:cpd:C05400	component>
+mol:cpd:C05400	NAT8/mol:cpd:C05400	component>
+mol:cpd:C00159	NAT8/mol:cpd:C00159/mol:cpd:C00124	component>
+mol:cpd:C00124	NAT8/mol:cpd:C00159/mol:cpd:C00124	component>
+NAT8	NAT8/mol:cpd:C05399	component>
+mol:cpd:C05399	NAT8/mol:cpd:C05399	component>
+mol:cpd:C00794	NAT8/mol:cpd:C00794/mol:cpd:C00124	component>
+mol:cpd:C00124	NAT8/mol:cpd:C00794/mol:cpd:C00124	component>
+NAT8	NAT8/mol:cpd:C01235	component>
+mol:cpd:C01235	NAT8/mol:cpd:C01235	component>
+mol:cpd:C00137	NAT8/mol:cpd:C00137/mol:cpd:C00124	component>
+mol:cpd:C00124	NAT8/mol:cpd:C00137/mol:cpd:C00124	component>
+MAP4K2	MAP4K2/mol:cpd:C00267	component>
+mol:cpd:C00267	MAP4K2/mol:cpd:C00267	component>
+mol:cpd:C00668	MAP4K2/mol:cpd:C00668	component>
+KCNA4/KIF2A/HOOK3/HKDC1	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	component>
+mol:cpd:C00267	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	component>
+mol:cpd:C00668	KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00668	component>
+LCT	LCT/mol:cpd:C00243	component>
+mol:cpd:C00243	LCT/mol:cpd:C00243	component>
+GLB1	GLB1/mol:cpd:C00243	component>
+mol:cpd:C00243	GLB1/mol:cpd:C00243	component>
+PGM1/PGM2	PGM1/PGM2/mol:cpd:C00103	component>
+mol:cpd:C00103	PGM1/PGM2/mol:cpd:C00103	component>
+mol:cpd:C00668	PGM1/PGM2/mol:cpd:C00668	component>
+B4GALT1/LALBA/B4GALT2	B4GALT1/LALBA/B4GALT2/mol:cpd:C00052	component>
+mol:cpd:C00052	B4GALT1/LALBA/B4GALT2/mol:cpd:C00052	component>
+GALE	GALE/mol:cpd:C00029	component>
+mol:cpd:C00029	GALE/mol:cpd:C00029	component>
+mol:cpd:C00052	GALE/mol:cpd:C00052	component>
+UGP2	UGP2/mol:cpd:C00103	component>
+mol:cpd:C00103	UGP2/mol:cpd:C00103	component>
+mol:cpd:C00029	UGP2/mol:cpd:C00029	component>
+GALT	GALT/mol:cpd:C00029/mol:cpd:C00446	component>
+mol:cpd:C00029	GALT/mol:cpd:C00029/mol:cpd:C00446	component>
+mol:cpd:C00446	GALT/mol:cpd:C00029/mol:cpd:C00446	component>
+mol:cpd:C00103	GALT/mol:cpd:C00103/mol:cpd:C00052	component>
+mol:cpd:C00052	GALT/mol:cpd:C00103/mol:cpd:C00052	component>
+GALK1/GALK2	GALK1/GALK2/mol:cpd:C00124	component>
+mol:cpd:C00124	GALK1/GALK2/mol:cpd:C00124	component>
+G6PC/G6PC2	G6PC/G6PC2/mol:cpd:C00668	component>
+mol:cpd:C00668	G6PC/G6PC2/mol:cpd:C00668	component>
+mol:cpd:C00267	G6PC/G6PC2/mol:cpd:C00267	component>
+NAT8/mol:cpd:C01613	mol:cpd:C00492	-a>
+NAT8/mol:cpd:C01613	mol:cpd:C00124	-a>
+PFKL/PFKM/PFKP/mol:cpd:C01097	mol:cpd:C03785	-a>
+PFKL/PFKM/PFKP/mol:cpd:C03785	mol:cpd:C01097	-a>
+NAT8/mol:cpd:C05404	mol:cpd:C05402	-a>
+NAT8/mol:cpd:C05404	mol:cpd:C00124	-a>
+GAA/GANC/MGAM/mol:cpd:C00089	mol:cpd:C00031	-a>
+GAA/GANC/MGAM/mol:cpd:C00089	mol:cpd:C00095	-a>
+NAT8/mol:cpd:C00492	mol:cpd:C00089	-a>
+NAT8/mol:cpd:C05402	mol:cpd:C00031	-a>
+NAT8/mol:cpd:C05402	mol:cpd:C00124	-a>
+AKR1B1/mol:cpd:C00124	mol:cpd:C01697	-a>
+AKR1B1/mol:cpd:C01697	mol:cpd:C00124	-a>
+NAT8/mol:cpd:C05401	mol:cpd:C00116	-a>
+NAT8/mol:cpd:C05401	mol:cpd:C00124	-a>
+NAT8/mol:cpd:C00116/mol:cpd:C00124	mol:cpd:C05401	-a>
+NAT8/mol:cpd:C05400	mol:cpd:C00159	-a>
+NAT8/mol:cpd:C05400	mol:cpd:C00124	-a>
+NAT8/mol:cpd:C00159/mol:cpd:C00124	mol:cpd:C05400	-a>
+NAT8/mol:cpd:C05399	mol:cpd:C00794	-a>
+NAT8/mol:cpd:C05399	mol:cpd:C00124	-a>
+NAT8/mol:cpd:C00794/mol:cpd:C00124	mol:cpd:C05399	-a>
+NAT8/mol:cpd:C01235	mol:cpd:C00137	-a>
+NAT8/mol:cpd:C01235	mol:cpd:C00124	-a>
+NAT8/mol:cpd:C00137/mol:cpd:C00124	mol:cpd:C01235	-a>
+MAP4K2/mol:cpd:C00267	mol:cpd:C00668	-a>
+MAP4K2/mol:cpd:C00668	mol:cpd:C00267	-a>
+KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00267	mol:cpd:C00668	-a>
+KCNA4/KIF2A/HOOK3/HKDC1/mol:cpd:C00668	mol:cpd:C00267	-a>
+LCT/mol:cpd:C00243	mol:cpd:C00267	-a>
+LCT/mol:cpd:C00243	mol:cpd:C00124	-a>
+GLB1/mol:cpd:C00243	mol:cpd:C00267	-a>
+GLB1/mol:cpd:C00243	mol:cpd:C00124	-a>
+PGM1/PGM2/mol:cpd:C00103	mol:cpd:C00668	-a>
+PGM1/PGM2/mol:cpd:C00668	mol:cpd:C00103	-a>
+B4GALT1/LALBA/B4GALT2/mol:cpd:C00052	mol:cpd:C00243	-a>
+GALE/mol:cpd:C00029	mol:cpd:C00052	-a>
+GALE/mol:cpd:C00052	mol:cpd:C00029	-a>
+UGP2/mol:cpd:C00103	mol:cpd:C00029	-a>
+UGP2/mol:cpd:C00029	mol:cpd:C00103	-a>
+GALT/mol:cpd:C00029/mol:cpd:C00446	mol:cpd:C00103	-a>
+GALT/mol:cpd:C00029/mol:cpd:C00446	mol:cpd:C00052	-a>
+GALT/mol:cpd:C00103/mol:cpd:C00052	mol:cpd:C00029	-a>
+GALT/mol:cpd:C00103/mol:cpd:C00052	mol:cpd:C00446	-a>
+GALK1/GALK2/mol:cpd:C00124	mol:cpd:C00446	-a>
+G6PC/G6PC2/mol:cpd:C00668	mol:cpd:C00267	-a>
+G6PC/G6PC2/mol:cpd:C00267	mol:cpd:C00668	-a>

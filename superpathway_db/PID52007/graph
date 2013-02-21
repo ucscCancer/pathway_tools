@@ -1,0 +1,346 @@
+protein	FASN
+protein	OXSM
+protein	OLAH
+protein	MCAT
+protein	ACACA
+protein	ACACB
+chemical	mol:cpd:C04088
+chemical	mol:cpd:C16221
+chemical	mol:cpd:C16220
+chemical	mol:cpd:C16219
+chemical	mol:cpd:C00712
+chemical	mol:cpd:C01530
+chemical	mol:cpd:C08362
+chemical	mol:cpd:C01203
+chemical	mol:cpd:C16520
+chemical	mol:cpd:C06424
+chemical	mol:cpd:C02679
+chemical	mol:cpd:C01571
+chemical	mol:cpd:C06423
+chemical	mol:cpd:C00024
+chemical	mol:cpd:C04419
+chemical	mol:cpd:C06250
+chemical	mol:cpd:C00083
+chemical	mol:cpd:C01209
+chemical	mol:cpd:C03939
+chemical	mol:cpd:C05744
+chemical	mol:cpd:C04618
+chemical	mol:cpd:C04246
+chemical	mol:cpd:C05745
+chemical	mol:cpd:C00229
+chemical	mol:cpd:C05746
+chemical	mol:cpd:C05747
+chemical	mol:cpd:C05748
+chemical	mol:cpd:C05749
+chemical	mol:cpd:C05752
+chemical	mol:cpd:C05751
+chemical	mol:cpd:C04620
+chemical	mol:cpd:C05750
+chemical	mol:cpd:C05753
+chemical	mol:cpd:C04619
+chemical	mol:cpd:C05754
+chemical	mol:cpd:C05755
+chemical	mol:cpd:C05223
+chemical	mol:cpd:C05758
+chemical	mol:cpd:C05757
+chemical	mol:cpd:C05756
+chemical	mol:cpd:C05759
+chemical	mol:cpd:C04688
+chemical	mol:cpd:C05760
+chemical	mol:cpd:C05761
+chemical	mol:cpd:C00249
+chemical	mol:cpd:C05764
+chemical	mol:cpd:C05763
+chemical	mol:cpd:C04633
+chemical	mol:cpd:C05762
+family	ACACA/ACACB
+ACACA	ACACA/ACACB	member>
+ACACB	ACACA/ACACB	member>
+complex	FASN/mol:cpd:C05761
+complex	OXSM/mol:cpd:C05764/mol:cpd:C01209
+complex	OXSM/mol:cpd:C16219
+complex	OLAH/mol:cpd:C04088
+complex	OLAH/mol:cpd:C01203
+complex	OLAH/mol:cpd:C05223
+complex	OLAH/mol:cpd:C05761
+complex	OXSM/mol:cpd:C01209/mol:cpd:C05761
+complex	OXSM/mol:cpd:C01209/mol:cpd:C05223
+complex	OXSM/mol:cpd:C05755/mol:cpd:C01209
+complex	OXSM/mol:cpd:C05752/mol:cpd:C01209
+complex	OXSM/mol:cpd:C01209/mol:cpd:C05749
+complex	OXSM/mol:cpd:C01209/mol:cpd:C05745
+complex	OLAH/mol:cpd:C05764
+complex	FASN/mol:cpd:C05764
+complex	FASN/mol:cpd:C05763
+complex	FASN/mol:cpd:C05764
+complex	FASN/mol:cpd:C04633
+complex	FASN/mol:cpd:C05763
+complex	FASN/mol:cpd:C05762
+complex	FASN/mol:cpd:C04633
+complex	FASN/mol:cpd:C01209/mol:cpd:C05761
+complex	FASN/mol:cpd:C05760
+complex	FASN/mol:cpd:C05761
+complex	FASN/mol:cpd:C04688
+complex	FASN/mol:cpd:C05760
+complex	FASN/mol:cpd:C05759
+complex	FASN/mol:cpd:C04688
+complex	FASN/mol:cpd:C01209/mol:cpd:C05223
+complex	FASN/mol:cpd:C05758
+complex	FASN/mol:cpd:C05223
+complex	FASN/mol:cpd:C05757
+complex	FASN/mol:cpd:C05758
+complex	FASN/mol:cpd:C05756
+complex	FASN/mol:cpd:C05757
+complex	FASN/mol:cpd:C05755/mol:cpd:C01209
+complex	FASN/mol:cpd:C05754
+complex	FASN/mol:cpd:C05755
+complex	FASN/mol:cpd:C04619
+complex	FASN/mol:cpd:C05754
+complex	FASN/mol:cpd:C05753
+complex	FASN/mol:cpd:C04619
+complex	FASN/mol:cpd:C05752/mol:cpd:C01209
+complex	FASN/mol:cpd:C05751
+complex	FASN/mol:cpd:C05752
+complex	FASN/mol:cpd:C04620
+complex	FASN/mol:cpd:C05751
+complex	FASN/mol:cpd:C05750
+complex	FASN/mol:cpd:C04620
+complex	FASN/mol:cpd:C01209/mol:cpd:C05749
+complex	FASN/mol:cpd:C05748
+complex	FASN/mol:cpd:C05749
+complex	FASN/mol:cpd:C05747
+complex	FASN/mol:cpd:C05748
+complex	FASN/mol:cpd:C05746
+complex	FASN/mol:cpd:C05747
+complex	FASN/mol:cpd:C01209/mol:cpd:C05745
+complex	FASN/mol:cpd:C04246
+complex	FASN/mol:cpd:C05745
+complex	FASN/mol:cpd:C04618
+complex	FASN/mol:cpd:C04246
+complex	FASN/mol:cpd:C04618
+complex	FASN/mol:cpd:C05744
+complex	FASN/mol:cpd:C01209/mol:cpd:C03939
+complex	MCAT/mol:cpd:C00083
+complex	MCAT/mol:cpd:C01209
+complex	FASN/mol:cpd:C00083
+complex	FASN/mol:cpd:C01209
+complex	FASN/mol:cpd:C00229/mol:cpd:C00024
+complex	ACACA/ACACB/mol:cpd:C06250
+complex	ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024
+complex	ACACA/ACACB/mol:cpd:C06250/mol:cpd:C00083
+complex	OXSM/mol:cpd:C01209/mol:cpd:C03939
+FASN	FASN/mol:cpd:C05761	component>
+mol:cpd:C05761	FASN/mol:cpd:C05761	component>
+OXSM	OXSM/mol:cpd:C05764/mol:cpd:C01209	component>
+mol:cpd:C05764	OXSM/mol:cpd:C05764/mol:cpd:C01209	component>
+mol:cpd:C01209	OXSM/mol:cpd:C05764/mol:cpd:C01209	component>
+mol:cpd:C16219	OXSM/mol:cpd:C16219	component>
+OLAH	OLAH/mol:cpd:C04088	component>
+mol:cpd:C04088	OLAH/mol:cpd:C04088	component>
+OLAH	OLAH/mol:cpd:C01203	component>
+mol:cpd:C01203	OLAH/mol:cpd:C01203	component>
+OLAH	OLAH/mol:cpd:C05223	component>
+mol:cpd:C05223	OLAH/mol:cpd:C05223	component>
+OLAH	OLAH/mol:cpd:C05761	component>
+mol:cpd:C05761	OLAH/mol:cpd:C05761	component>
+OXSM	OXSM/mol:cpd:C01209/mol:cpd:C05761	component>
+mol:cpd:C01209	OXSM/mol:cpd:C01209/mol:cpd:C05761	component>
+mol:cpd:C05761	OXSM/mol:cpd:C01209/mol:cpd:C05761	component>
+OXSM	OXSM/mol:cpd:C01209/mol:cpd:C05223	component>
+mol:cpd:C01209	OXSM/mol:cpd:C01209/mol:cpd:C05223	component>
+mol:cpd:C05223	OXSM/mol:cpd:C01209/mol:cpd:C05223	component>
+OXSM	OXSM/mol:cpd:C05755/mol:cpd:C01209	component>
+mol:cpd:C05755	OXSM/mol:cpd:C05755/mol:cpd:C01209	component>
+mol:cpd:C01209	OXSM/mol:cpd:C05755/mol:cpd:C01209	component>
+OXSM	OXSM/mol:cpd:C05752/mol:cpd:C01209	component>
+mol:cpd:C05752	OXSM/mol:cpd:C05752/mol:cpd:C01209	component>
+mol:cpd:C01209	OXSM/mol:cpd:C05752/mol:cpd:C01209	component>
+OXSM	OXSM/mol:cpd:C01209/mol:cpd:C05749	component>
+mol:cpd:C01209	OXSM/mol:cpd:C01209/mol:cpd:C05749	component>
+mol:cpd:C05749	OXSM/mol:cpd:C01209/mol:cpd:C05749	component>
+OXSM	OXSM/mol:cpd:C01209/mol:cpd:C05745	component>
+mol:cpd:C01209	OXSM/mol:cpd:C01209/mol:cpd:C05745	component>
+mol:cpd:C05745	OXSM/mol:cpd:C01209/mol:cpd:C05745	component>
+OLAH	OLAH/mol:cpd:C05764	component>
+mol:cpd:C05764	OLAH/mol:cpd:C05764	component>
+FASN	FASN/mol:cpd:C05764	component>
+mol:cpd:C05764	FASN/mol:cpd:C05764	component>
+FASN	FASN/mol:cpd:C05763	component>
+mol:cpd:C05763	FASN/mol:cpd:C05763	component>
+mol:cpd:C05764	FASN/mol:cpd:C05764	component>
+FASN	FASN/mol:cpd:C04633	component>
+mol:cpd:C04633	FASN/mol:cpd:C04633	component>
+mol:cpd:C05763	FASN/mol:cpd:C05763	component>
+FASN	FASN/mol:cpd:C05762	component>
+mol:cpd:C05762	FASN/mol:cpd:C05762	component>
+mol:cpd:C04633	FASN/mol:cpd:C04633	component>
+FASN	FASN/mol:cpd:C01209/mol:cpd:C05761	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209/mol:cpd:C05761	component>
+mol:cpd:C05761	FASN/mol:cpd:C01209/mol:cpd:C05761	component>
+FASN	FASN/mol:cpd:C05760	component>
+mol:cpd:C05760	FASN/mol:cpd:C05760	component>
+mol:cpd:C05761	FASN/mol:cpd:C05761	component>
+FASN	FASN/mol:cpd:C04688	component>
+mol:cpd:C04688	FASN/mol:cpd:C04688	component>
+mol:cpd:C05760	FASN/mol:cpd:C05760	component>
+FASN	FASN/mol:cpd:C05759	component>
+mol:cpd:C05759	FASN/mol:cpd:C05759	component>
+mol:cpd:C04688	FASN/mol:cpd:C04688	component>
+FASN	FASN/mol:cpd:C01209/mol:cpd:C05223	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209/mol:cpd:C05223	component>
+mol:cpd:C05223	FASN/mol:cpd:C01209/mol:cpd:C05223	component>
+FASN	FASN/mol:cpd:C05758	component>
+mol:cpd:C05758	FASN/mol:cpd:C05758	component>
+mol:cpd:C05223	FASN/mol:cpd:C05223	component>
+FASN	FASN/mol:cpd:C05757	component>
+mol:cpd:C05757	FASN/mol:cpd:C05757	component>
+mol:cpd:C05758	FASN/mol:cpd:C05758	component>
+FASN	FASN/mol:cpd:C05756	component>
+mol:cpd:C05756	FASN/mol:cpd:C05756	component>
+mol:cpd:C05757	FASN/mol:cpd:C05757	component>
+FASN	FASN/mol:cpd:C05755/mol:cpd:C01209	component>
+mol:cpd:C05755	FASN/mol:cpd:C05755/mol:cpd:C01209	component>
+mol:cpd:C01209	FASN/mol:cpd:C05755/mol:cpd:C01209	component>
+FASN	FASN/mol:cpd:C05754	component>
+mol:cpd:C05754	FASN/mol:cpd:C05754	component>
+mol:cpd:C05755	FASN/mol:cpd:C05755	component>
+FASN	FASN/mol:cpd:C04619	component>
+mol:cpd:C04619	FASN/mol:cpd:C04619	component>
+mol:cpd:C05754	FASN/mol:cpd:C05754	component>
+FASN	FASN/mol:cpd:C05753	component>
+mol:cpd:C05753	FASN/mol:cpd:C05753	component>
+mol:cpd:C04619	FASN/mol:cpd:C04619	component>
+FASN	FASN/mol:cpd:C05752/mol:cpd:C01209	component>
+mol:cpd:C05752	FASN/mol:cpd:C05752/mol:cpd:C01209	component>
+mol:cpd:C01209	FASN/mol:cpd:C05752/mol:cpd:C01209	component>
+FASN	FASN/mol:cpd:C05751	component>
+mol:cpd:C05751	FASN/mol:cpd:C05751	component>
+mol:cpd:C05752	FASN/mol:cpd:C05752	component>
+FASN	FASN/mol:cpd:C04620	component>
+mol:cpd:C04620	FASN/mol:cpd:C04620	component>
+mol:cpd:C05751	FASN/mol:cpd:C05751	component>
+FASN	FASN/mol:cpd:C05750	component>
+mol:cpd:C05750	FASN/mol:cpd:C05750	component>
+mol:cpd:C04620	FASN/mol:cpd:C04620	component>
+FASN	FASN/mol:cpd:C01209/mol:cpd:C05749	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209/mol:cpd:C05749	component>
+mol:cpd:C05749	FASN/mol:cpd:C01209/mol:cpd:C05749	component>
+FASN	FASN/mol:cpd:C05748	component>
+mol:cpd:C05748	FASN/mol:cpd:C05748	component>
+mol:cpd:C05749	FASN/mol:cpd:C05749	component>
+FASN	FASN/mol:cpd:C05747	component>
+mol:cpd:C05747	FASN/mol:cpd:C05747	component>
+mol:cpd:C05748	FASN/mol:cpd:C05748	component>
+FASN	FASN/mol:cpd:C05746	component>
+mol:cpd:C05746	FASN/mol:cpd:C05746	component>
+mol:cpd:C05747	FASN/mol:cpd:C05747	component>
+FASN	FASN/mol:cpd:C01209/mol:cpd:C05745	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209/mol:cpd:C05745	component>
+mol:cpd:C05745	FASN/mol:cpd:C01209/mol:cpd:C05745	component>
+FASN	FASN/mol:cpd:C04246	component>
+mol:cpd:C04246	FASN/mol:cpd:C04246	component>
+mol:cpd:C05745	FASN/mol:cpd:C05745	component>
+FASN	FASN/mol:cpd:C04618	component>
+mol:cpd:C04618	FASN/mol:cpd:C04618	component>
+mol:cpd:C04246	FASN/mol:cpd:C04246	component>
+FASN	FASN/mol:cpd:C04618	component>
+mol:cpd:C04618	FASN/mol:cpd:C04618	component>
+mol:cpd:C05744	FASN/mol:cpd:C05744	component>
+FASN	FASN/mol:cpd:C01209/mol:cpd:C03939	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209/mol:cpd:C03939	component>
+mol:cpd:C03939	FASN/mol:cpd:C01209/mol:cpd:C03939	component>
+MCAT	MCAT/mol:cpd:C00083	component>
+mol:cpd:C00083	MCAT/mol:cpd:C00083	component>
+mol:cpd:C01209	MCAT/mol:cpd:C01209	component>
+FASN	FASN/mol:cpd:C00083	component>
+mol:cpd:C00083	FASN/mol:cpd:C00083	component>
+mol:cpd:C01209	FASN/mol:cpd:C01209	component>
+FASN	FASN/mol:cpd:C00229/mol:cpd:C00024	component>
+mol:cpd:C00229	FASN/mol:cpd:C00229/mol:cpd:C00024	component>
+mol:cpd:C00024	FASN/mol:cpd:C00229/mol:cpd:C00024	component>
+ACACA/ACACB	ACACA/ACACB/mol:cpd:C06250	component>
+mol:cpd:C06250	ACACA/ACACB/mol:cpd:C06250	component>
+ACACA/ACACB	ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024	component>
+mol:cpd:C04419	ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024	component>
+mol:cpd:C00024	ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024	component>
+mol:cpd:C06250	ACACA/ACACB/mol:cpd:C06250/mol:cpd:C00083	component>
+mol:cpd:C00083	ACACA/ACACB/mol:cpd:C06250/mol:cpd:C00083	component>
+OXSM	OXSM/mol:cpd:C01209/mol:cpd:C03939	component>
+mol:cpd:C01209	OXSM/mol:cpd:C01209/mol:cpd:C03939	component>
+mol:cpd:C03939	OXSM/mol:cpd:C01209/mol:cpd:C03939	component>
+FASN/mol:cpd:C05761	mol:cpd:C06424	-a>
+OXSM/mol:cpd:C05764/mol:cpd:C01209	mol:cpd:C16219	-a>
+OXSM/mol:cpd:C16219	mol:cpd:C05764	-a>
+OXSM/mol:cpd:C16219	mol:cpd:C01209	-a>
+OLAH/mol:cpd:C04088	mol:cpd:C01530	-a>
+OLAH/mol:cpd:C01203	mol:cpd:C00712	-a>
+OLAH/mol:cpd:C05223	mol:cpd:C02679	-a>
+OLAH/mol:cpd:C05761	mol:cpd:C06424	-a>
+OXSM/mol:cpd:C01209/mol:cpd:C05761	mol:cpd:C05762	-a>
+OXSM/mol:cpd:C01209/mol:cpd:C05223	mol:cpd:C05759	-a>
+OXSM/mol:cpd:C05755/mol:cpd:C01209	mol:cpd:C05756	-a>
+OXSM/mol:cpd:C05752/mol:cpd:C01209	mol:cpd:C05753	-a>
+OXSM/mol:cpd:C01209/mol:cpd:C05749	mol:cpd:C05750	-a>
+OXSM/mol:cpd:C01209/mol:cpd:C05745	mol:cpd:C05746	-a>
+OLAH/mol:cpd:C05764	mol:cpd:C00249	-a>
+FASN/mol:cpd:C05764	mol:cpd:C00249	-a>
+FASN/mol:cpd:C05763	mol:cpd:C05764	-a>
+FASN/mol:cpd:C05764	mol:cpd:C05763	-a>
+FASN/mol:cpd:C04633	mol:cpd:C05763	-a>
+FASN/mol:cpd:C05763	mol:cpd:C04633	-a>
+FASN/mol:cpd:C05762	mol:cpd:C04633	-a>
+FASN/mol:cpd:C04633	mol:cpd:C05762	-a>
+FASN/mol:cpd:C01209/mol:cpd:C05761	mol:cpd:C05762	-a>
+FASN/mol:cpd:C05760	mol:cpd:C05761	-a>
+FASN/mol:cpd:C05761	mol:cpd:C05760	-a>
+FASN/mol:cpd:C04688	mol:cpd:C05760	-a>
+FASN/mol:cpd:C05760	mol:cpd:C04688	-a>
+FASN/mol:cpd:C05759	mol:cpd:C04688	-a>
+FASN/mol:cpd:C04688	mol:cpd:C05759	-a>
+FASN/mol:cpd:C01209/mol:cpd:C05223	mol:cpd:C05759	-a>
+FASN/mol:cpd:C05758	mol:cpd:C05223	-a>
+FASN/mol:cpd:C05223	mol:cpd:C05758	-a>
+FASN/mol:cpd:C05757	mol:cpd:C05758	-a>
+FASN/mol:cpd:C05758	mol:cpd:C05757	-a>
+FASN/mol:cpd:C05756	mol:cpd:C05757	-a>
+FASN/mol:cpd:C05757	mol:cpd:C05756	-a>
+FASN/mol:cpd:C05755/mol:cpd:C01209	mol:cpd:C05756	-a>
+FASN/mol:cpd:C05754	mol:cpd:C05755	-a>
+FASN/mol:cpd:C05755	mol:cpd:C05754	-a>
+FASN/mol:cpd:C04619	mol:cpd:C05754	-a>
+FASN/mol:cpd:C05754	mol:cpd:C04619	-a>
+FASN/mol:cpd:C05753	mol:cpd:C04619	-a>
+FASN/mol:cpd:C04619	mol:cpd:C05753	-a>
+FASN/mol:cpd:C05752/mol:cpd:C01209	mol:cpd:C05753	-a>
+FASN/mol:cpd:C05751	mol:cpd:C05752	-a>
+FASN/mol:cpd:C05752	mol:cpd:C05751	-a>
+FASN/mol:cpd:C04620	mol:cpd:C05751	-a>
+FASN/mol:cpd:C05751	mol:cpd:C04620	-a>
+FASN/mol:cpd:C05750	mol:cpd:C04620	-a>
+FASN/mol:cpd:C04620	mol:cpd:C05750	-a>
+FASN/mol:cpd:C01209/mol:cpd:C05749	mol:cpd:C05750	-a>
+FASN/mol:cpd:C05748	mol:cpd:C05749	-a>
+FASN/mol:cpd:C05749	mol:cpd:C05748	-a>
+FASN/mol:cpd:C05747	mol:cpd:C05748	-a>
+FASN/mol:cpd:C05748	mol:cpd:C05747	-a>
+FASN/mol:cpd:C05746	mol:cpd:C05747	-a>
+FASN/mol:cpd:C05747	mol:cpd:C05746	-a>
+FASN/mol:cpd:C01209/mol:cpd:C05745	mol:cpd:C05746	-a>
+FASN/mol:cpd:C04246	mol:cpd:C05745	-a>
+FASN/mol:cpd:C05745	mol:cpd:C04246	-a>
+FASN/mol:cpd:C04618	mol:cpd:C04246	-a>
+FASN/mol:cpd:C04246	mol:cpd:C04618	-a>
+FASN/mol:cpd:C04618	mol:cpd:C05744	-a>
+FASN/mol:cpd:C05744	mol:cpd:C04618	-a>
+FASN/mol:cpd:C01209/mol:cpd:C03939	mol:cpd:C05744	-a>
+MCAT/mol:cpd:C00083	mol:cpd:C01209	-a>
+MCAT/mol:cpd:C01209	mol:cpd:C00083	-a>
+FASN/mol:cpd:C00083	mol:cpd:C01209	-a>
+FASN/mol:cpd:C01209	mol:cpd:C00083	-a>
+FASN/mol:cpd:C00229/mol:cpd:C00024	mol:cpd:C03939	-a>
+ACACA/ACACB/mol:cpd:C06250	mol:cpd:C04419	-a>
+ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024	mol:cpd:C06250	-a>
+ACACA/ACACB/mol:cpd:C04419/mol:cpd:C00024	mol:cpd:C00083	-a>
+ACACA/ACACB/mol:cpd:C06250/mol:cpd:C00083	mol:cpd:C04419	-a>
+ACACA/ACACB/mol:cpd:C06250/mol:cpd:C00083	mol:cpd:C00024	-a>
+OXSM/mol:cpd:C01209/mol:cpd:C03939	mol:cpd:C05744	-a>

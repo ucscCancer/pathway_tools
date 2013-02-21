@@ -1,0 +1,207 @@
+protein	PPT1
+protein	PPT2
+protein	MECR
+protein	ECHS1
+protein	HADHA
+protein	ACAA2
+protein	HADHB
+protein	HADH
+chemical	mol:cpd:C00024
+chemical	mol:cpd:C00136
+chemical	mol:cpd:C05270
+chemical	mol:cpd:C05271
+chemical	mol:cpd:C05268
+chemical	mol:cpd:C05269
+chemical	mol:cpd:C01944
+chemical	mol:cpd:C05276
+chemical	mol:cpd:C05266
+chemical	mol:cpd:C05267
+chemical	mol:cpd:C05265
+chemical	mol:cpd:C05264
+chemical	mol:cpd:C05275
+chemical	mol:cpd:C05274
+chemical	mol:cpd:C01832
+chemical	mol:cpd:C03221
+chemical	mol:cpd:C05262
+chemical	mol:cpd:C05263
+chemical	mol:cpd:C02593
+chemical	mol:cpd:C05273
+chemical	mol:cpd:C05260
+chemical	mol:cpd:C05261
+chemical	mol:cpd:C05259
+chemical	mol:cpd:C05258
+chemical	mol:cpd:C05272
+chemical	mol:cpd:C00154
+chemical	mol:cpd:C00249
+family	PPT1/PPT2
+family	ECHS1/HADHA
+family	ACAA2/HADHB
+PPT1	PPT1/PPT2	member>
+PPT2	PPT1/PPT2	member>
+ECHS1	ECHS1/HADHA	member>
+HADHA	ECHS1/HADHA	member>
+ACAA2	ACAA2/HADHB	member>
+HADHB	ACAA2/HADHB	member>
+complex	PPT1/PPT2/mol:cpd:C00154
+complex	MECR/mol:cpd:C05272
+complex	ECHS1/HADHA/mol:cpd:C05258
+complex	ECHS1/HADHA/mol:cpd:C05272
+complex	HADHA/mol:cpd:C05259
+complex	HADHA/mol:cpd:C05258
+complex	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C02593
+complex	MECR/mol:cpd:C05273
+complex	ECHS1/HADHA/mol:cpd:C05260
+complex	ECHS1/HADHA/mol:cpd:C05273
+complex	HADHA/mol:cpd:C05261
+complex	HADHA/mol:cpd:C05260
+complex	ACAA2/HADHB/mol:cpd:C01832/mol:cpd:C00024
+complex	MECR/mol:cpd:C03221
+complex	ECHS1/HADHA/mol:cpd:C05262
+complex	ECHS1/HADHA/mol:cpd:C03221
+complex	HADHA/mol:cpd:C05263
+complex	HADHA/mol:cpd:C05262
+complex	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05274
+complex	MECR/mol:cpd:C05275
+complex	ECHS1/HADHA/mol:cpd:C05264
+complex	ECHS1/HADHA/mol:cpd:C05275
+complex	HADHA/mol:cpd:C05265
+complex	HADHA/mol:cpd:C05264
+complex	HADH/mol:cpd:C05265
+complex	HADH/mol:cpd:C05264
+complex	ACAA2/HADHB/mol:cpd:C01944/mol:cpd:C00024
+complex	MECR/mol:cpd:C05276
+complex	ECHS1/HADHA/mol:cpd:C05266
+complex	ECHS1/HADHA/mol:cpd:C05276
+complex	HADHA/mol:cpd:C05267
+complex	HADHA/mol:cpd:C05266
+complex	HADH/mol:cpd:C05267
+complex	HADH/mol:cpd:C05266
+complex	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05270
+complex	MECR/mol:cpd:C05271
+complex	ECHS1/HADHA/mol:cpd:C05268
+complex	ECHS1/HADHA/mol:cpd:C05271
+complex	HADHA/mol:cpd:C05269
+complex	HADHA/mol:cpd:C05268
+complex	HADH/mol:cpd:C05269
+complex	HADH/mol:cpd:C05268
+complex	ACAA2/HADHB/mol:cpd:C00136/mol:cpd:C00024
+PPT1/PPT2	PPT1/PPT2/mol:cpd:C00154	component>
+mol:cpd:C00154	PPT1/PPT2/mol:cpd:C00154	component>
+MECR	MECR/mol:cpd:C05272	component>
+mol:cpd:C05272	MECR/mol:cpd:C05272	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05258	component>
+mol:cpd:C05258	ECHS1/HADHA/mol:cpd:C05258	component>
+mol:cpd:C05272	ECHS1/HADHA/mol:cpd:C05272	component>
+HADHA	HADHA/mol:cpd:C05259	component>
+mol:cpd:C05259	HADHA/mol:cpd:C05259	component>
+mol:cpd:C05258	HADHA/mol:cpd:C05258	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C02593	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C02593	component>
+mol:cpd:C02593	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C02593	component>
+MECR	MECR/mol:cpd:C05273	component>
+mol:cpd:C05273	MECR/mol:cpd:C05273	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05260	component>
+mol:cpd:C05260	ECHS1/HADHA/mol:cpd:C05260	component>
+mol:cpd:C05273	ECHS1/HADHA/mol:cpd:C05273	component>
+HADHA	HADHA/mol:cpd:C05261	component>
+mol:cpd:C05261	HADHA/mol:cpd:C05261	component>
+mol:cpd:C05260	HADHA/mol:cpd:C05260	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C01832/mol:cpd:C00024	component>
+mol:cpd:C01832	ACAA2/HADHB/mol:cpd:C01832/mol:cpd:C00024	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C01832/mol:cpd:C00024	component>
+MECR	MECR/mol:cpd:C03221	component>
+mol:cpd:C03221	MECR/mol:cpd:C03221	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05262	component>
+mol:cpd:C05262	ECHS1/HADHA/mol:cpd:C05262	component>
+mol:cpd:C03221	ECHS1/HADHA/mol:cpd:C03221	component>
+HADHA	HADHA/mol:cpd:C05263	component>
+mol:cpd:C05263	HADHA/mol:cpd:C05263	component>
+mol:cpd:C05262	HADHA/mol:cpd:C05262	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05274	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05274	component>
+mol:cpd:C05274	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05274	component>
+MECR	MECR/mol:cpd:C05275	component>
+mol:cpd:C05275	MECR/mol:cpd:C05275	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05264	component>
+mol:cpd:C05264	ECHS1/HADHA/mol:cpd:C05264	component>
+mol:cpd:C05275	ECHS1/HADHA/mol:cpd:C05275	component>
+HADHA	HADHA/mol:cpd:C05265	component>
+mol:cpd:C05265	HADHA/mol:cpd:C05265	component>
+mol:cpd:C05264	HADHA/mol:cpd:C05264	component>
+HADH	HADH/mol:cpd:C05265	component>
+mol:cpd:C05265	HADH/mol:cpd:C05265	component>
+mol:cpd:C05264	HADH/mol:cpd:C05264	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C01944/mol:cpd:C00024	component>
+mol:cpd:C01944	ACAA2/HADHB/mol:cpd:C01944/mol:cpd:C00024	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C01944/mol:cpd:C00024	component>
+MECR	MECR/mol:cpd:C05276	component>
+mol:cpd:C05276	MECR/mol:cpd:C05276	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05266	component>
+mol:cpd:C05266	ECHS1/HADHA/mol:cpd:C05266	component>
+mol:cpd:C05276	ECHS1/HADHA/mol:cpd:C05276	component>
+HADHA	HADHA/mol:cpd:C05267	component>
+mol:cpd:C05267	HADHA/mol:cpd:C05267	component>
+mol:cpd:C05266	HADHA/mol:cpd:C05266	component>
+HADH	HADH/mol:cpd:C05267	component>
+mol:cpd:C05267	HADH/mol:cpd:C05267	component>
+mol:cpd:C05266	HADH/mol:cpd:C05266	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05270	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05270	component>
+mol:cpd:C05270	ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05270	component>
+MECR	MECR/mol:cpd:C05271	component>
+mol:cpd:C05271	MECR/mol:cpd:C05271	component>
+ECHS1/HADHA	ECHS1/HADHA/mol:cpd:C05268	component>
+mol:cpd:C05268	ECHS1/HADHA/mol:cpd:C05268	component>
+mol:cpd:C05271	ECHS1/HADHA/mol:cpd:C05271	component>
+HADHA	HADHA/mol:cpd:C05269	component>
+mol:cpd:C05269	HADHA/mol:cpd:C05269	component>
+mol:cpd:C05268	HADHA/mol:cpd:C05268	component>
+HADH	HADH/mol:cpd:C05269	component>
+mol:cpd:C05269	HADH/mol:cpd:C05269	component>
+mol:cpd:C05268	HADH/mol:cpd:C05268	component>
+ACAA2/HADHB	ACAA2/HADHB/mol:cpd:C00136/mol:cpd:C00024	component>
+mol:cpd:C00136	ACAA2/HADHB/mol:cpd:C00136/mol:cpd:C00024	component>
+mol:cpd:C00024	ACAA2/HADHB/mol:cpd:C00136/mol:cpd:C00024	component>
+PPT1/PPT2/mol:cpd:C00154	mol:cpd:C00249	-a>
+MECR/mol:cpd:C05272	mol:cpd:C00154	-a>
+ECHS1/HADHA/mol:cpd:C05258	mol:cpd:C05272	-a>
+ECHS1/HADHA/mol:cpd:C05272	mol:cpd:C05258	-a>
+HADHA/mol:cpd:C05259	mol:cpd:C05258	-a>
+HADHA/mol:cpd:C05258	mol:cpd:C05259	-a>
+ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C02593	mol:cpd:C05259	-a>
+MECR/mol:cpd:C05273	mol:cpd:C02593	-a>
+ECHS1/HADHA/mol:cpd:C05260	mol:cpd:C05273	-a>
+ECHS1/HADHA/mol:cpd:C05273	mol:cpd:C05260	-a>
+HADHA/mol:cpd:C05261	mol:cpd:C05260	-a>
+HADHA/mol:cpd:C05260	mol:cpd:C05261	-a>
+ACAA2/HADHB/mol:cpd:C01832/mol:cpd:C00024	mol:cpd:C05261	-a>
+MECR/mol:cpd:C03221	mol:cpd:C01832	-a>
+ECHS1/HADHA/mol:cpd:C05262	mol:cpd:C03221	-a>
+ECHS1/HADHA/mol:cpd:C03221	mol:cpd:C05262	-a>
+HADHA/mol:cpd:C05263	mol:cpd:C05262	-a>
+HADHA/mol:cpd:C05262	mol:cpd:C05263	-a>
+ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05274	mol:cpd:C05263	-a>
+MECR/mol:cpd:C05275	mol:cpd:C05274	-a>
+ECHS1/HADHA/mol:cpd:C05264	mol:cpd:C05275	-a>
+ECHS1/HADHA/mol:cpd:C05275	mol:cpd:C05264	-a>
+HADHA/mol:cpd:C05265	mol:cpd:C05264	-a>
+HADHA/mol:cpd:C05264	mol:cpd:C05265	-a>
+HADH/mol:cpd:C05265	mol:cpd:C05264	-a>
+HADH/mol:cpd:C05264	mol:cpd:C05265	-a>
+ACAA2/HADHB/mol:cpd:C01944/mol:cpd:C00024	mol:cpd:C05265	-a>
+MECR/mol:cpd:C05276	mol:cpd:C01944	-a>
+ECHS1/HADHA/mol:cpd:C05266	mol:cpd:C05276	-a>
+ECHS1/HADHA/mol:cpd:C05276	mol:cpd:C05266	-a>
+HADHA/mol:cpd:C05267	mol:cpd:C05266	-a>
+HADHA/mol:cpd:C05266	mol:cpd:C05267	-a>
+HADH/mol:cpd:C05267	mol:cpd:C05266	-a>
+HADH/mol:cpd:C05266	mol:cpd:C05267	-a>
+ACAA2/HADHB/mol:cpd:C00024/mol:cpd:C05270	mol:cpd:C05267	-a>
+MECR/mol:cpd:C05271	mol:cpd:C05270	-a>
+ECHS1/HADHA/mol:cpd:C05268	mol:cpd:C05271	-a>
+ECHS1/HADHA/mol:cpd:C05271	mol:cpd:C05268	-a>
+HADHA/mol:cpd:C05269	mol:cpd:C05268	-a>
+HADHA/mol:cpd:C05268	mol:cpd:C05269	-a>
+HADH/mol:cpd:C05269	mol:cpd:C05268	-a>
+HADH/mol:cpd:C05268	mol:cpd:C05269	-a>
+ACAA2/HADHB/mol:cpd:C00136/mol:cpd:C00024	mol:cpd:C05269	-a>

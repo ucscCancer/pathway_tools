@@ -1,0 +1,70 @@
+protein	TYR
+protein	ENPP1
+protein	ENPP3
+protein	FLAD1
+protein	ACP6
+protein	ACP1
+protein	ACP2
+protein	ACP5
+protein	ACPP
+protein	ACPT
+protein	RFK
+protein	BLVRB
+chemical	mol:cpd:C15556
+chemical	mol:cpd:C00199
+chemical	mol:cpd:C00044
+chemical	mol:cpd:C01304
+chemical	mol:cpd:C01268
+chemical	mol:cpd:C04454
+chemical	mol:cpd:C04332
+chemical	mol:cpd:C05995
+chemical	mol:cpd:C00472
+chemical	mol:cpd:C00001
+chemical	mol:cpd:C00007
+chemical	mol:cpd:C00530
+chemical	mol:cpd:C04732
+chemical	mol:cpd:C00255
+chemical	mol:cpd:C00474
+chemical	mol:cpd:C01727
+chemical	mol:cpd:C00016
+chemical	mol:cpd:C00061
+chemical	mol:cpd:C18910
+chemical	mol:cpd:C01847
+chemical	mol:cpd:C01352
+chemical	mol:cpd:C03114
+chemical	mol:cpd:C15563
+family	ENPP1/ENPP3
+family	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT
+ENPP1	ENPP1/ENPP3	member>
+ENPP3	ENPP1/ENPP3	member>
+ACP6	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+ACP1	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+ACP2	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+ACP5	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+ACPP	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+ACPT	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	member>
+complex	ENPP1/ENPP3/mol:cpd:C00016
+complex	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT/mol:cpd:C00061
+complex	RFK/mol:cpd:C00255
+complex	TYR/mol:cpd:C00530/mol:cpd:C00007
+complex	FLAD1/mol:cpd:C00061
+complex	BLVRB
+complex	BLVRB
+ENPP1/ENPP3	ENPP1/ENPP3/mol:cpd:C00016	component>
+mol:cpd:C00016	ENPP1/ENPP3/mol:cpd:C00016	component>
+ACP6/ACP1/ACP2/ACP5/ACPP/ACPT	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT/mol:cpd:C00061	component>
+mol:cpd:C00061	ACP6/ACP1/ACP2/ACP5/ACPP/ACPT/mol:cpd:C00061	component>
+RFK	RFK/mol:cpd:C00255	component>
+mol:cpd:C00255	RFK/mol:cpd:C00255	component>
+TYR	TYR/mol:cpd:C00530/mol:cpd:C00007	component>
+mol:cpd:C00530	TYR/mol:cpd:C00530/mol:cpd:C00007	component>
+mol:cpd:C00007	TYR/mol:cpd:C00530/mol:cpd:C00007	component>
+FLAD1	FLAD1/mol:cpd:C00061	component>
+mol:cpd:C00061	FLAD1/mol:cpd:C00061	component>
+BLVRB	BLVRB	component>
+ENPP1/ENPP3/mol:cpd:C00016	mol:cpd:C00061	-a>
+ACP6/ACP1/ACP2/ACP5/ACPP/ACPT/mol:cpd:C00061	mol:cpd:C00255	-a>
+RFK/mol:cpd:C00255	mol:cpd:C00061	-a>
+TYR/mol:cpd:C00530/mol:cpd:C00007	mol:cpd:C00472	-a>
+TYR/mol:cpd:C00530/mol:cpd:C00007	mol:cpd:C00001	-a>
+FLAD1/mol:cpd:C00061	mol:cpd:C00016	-a>

@@ -1,0 +1,70 @@
+protein	CSAD
+protein	GAD1
+protein	GAD2
+protein	CDO1
+protein	ADO
+protein	GGT6
+protein	GGT1
+protein	GGT7
+protein	GGT5
+protein	BAAT
+chemical	mol:cpd:C00094
+chemical	mol:cpd:C06735
+chemical	mol:cpd:C00041
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C14179
+chemical	mol:cpd:C00227
+chemical	mol:cpd:C00024
+chemical	mol:cpd:C00606
+chemical	mol:cpd:C00519
+chemical	mol:cpd:C01678
+chemical	mol:cpd:C00097
+chemical	mol:cpd:C00506
+chemical	mol:cpd:C00245
+chemical	mol:cpd:C00593
+chemical	mol:cpd:C05123
+chemical	mol:cpd:C01959
+chemical	mol:cpd:C03149
+chemical	mol:cpd:C05844
+chemical	mol:cpd:C05122
+chemical	mol:cpd:C00033
+family	GAD1/GAD2
+family	GGT6/GGT1/GGT7/GGT5
+GAD1	GAD1/GAD2	member>
+GAD2	GAD1/GAD2	member>
+GGT6	GGT6/GGT1/GGT7/GGT5	member>
+GGT1	GGT6/GGT1/GGT7/GGT5	member>
+GGT7	GGT6/GGT1/GGT7/GGT5	member>
+GGT5	GGT6/GGT1/GGT7/GGT5	member>
+complex	CSAD/mol:cpd:C00506
+complex	GAD1/GAD2/mol:cpd:C00506
+complex	CDO1/mol:cpd:C00097
+complex	ADO/mol:cpd:C01678
+complex	CSAD/mol:cpd:C00606
+complex	GAD1/GAD2/mol:cpd:C00606
+complex	GGT6/GGT1/GGT7/GGT5/mol:cpd:C00245
+complex	BAAT/mol:cpd:C00245
+CSAD	CSAD/mol:cpd:C00506	component>
+mol:cpd:C00506	CSAD/mol:cpd:C00506	component>
+GAD1/GAD2	GAD1/GAD2/mol:cpd:C00506	component>
+mol:cpd:C00506	GAD1/GAD2/mol:cpd:C00506	component>
+CDO1	CDO1/mol:cpd:C00097	component>
+mol:cpd:C00097	CDO1/mol:cpd:C00097	component>
+ADO	ADO/mol:cpd:C01678	component>
+mol:cpd:C01678	ADO/mol:cpd:C01678	component>
+CSAD	CSAD/mol:cpd:C00606	component>
+mol:cpd:C00606	CSAD/mol:cpd:C00606	component>
+GAD1/GAD2	GAD1/GAD2/mol:cpd:C00606	component>
+mol:cpd:C00606	GAD1/GAD2/mol:cpd:C00606	component>
+GGT6/GGT1/GGT7/GGT5	GGT6/GGT1/GGT7/GGT5/mol:cpd:C00245	component>
+mol:cpd:C00245	GGT6/GGT1/GGT7/GGT5/mol:cpd:C00245	component>
+BAAT	BAAT/mol:cpd:C00245	component>
+mol:cpd:C00245	BAAT/mol:cpd:C00245	component>
+CSAD/mol:cpd:C00506	mol:cpd:C00245	-a>
+GAD1/GAD2/mol:cpd:C00506	mol:cpd:C00245	-a>
+CDO1/mol:cpd:C00097	mol:cpd:C00606	-a>
+ADO/mol:cpd:C01678	mol:cpd:C00519	-a>
+CSAD/mol:cpd:C00606	mol:cpd:C00519	-a>
+GAD1/GAD2/mol:cpd:C00606	mol:cpd:C00519	-a>
+GGT6/GGT1/GGT7/GGT5/mol:cpd:C00245	mol:cpd:C05844	-a>
+BAAT/mol:cpd:C00245	mol:cpd:C05122	-a>

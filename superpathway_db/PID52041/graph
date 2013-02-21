@@ -1,0 +1,34 @@
+protein	NEU3
+protein	NEU4
+protein	NEU1
+protein	NEU2
+protein	GLB1
+protein	MAN2B2
+protein	MAN2C1
+protein	MAN2B1
+protein	FUCA1
+protein	FUCA2
+protein	AGA
+protein	HEXA
+protein	HEXB
+protein	HEXDC
+protein	MANBA
+protein	ENGASE
+protein	GBA
+family	NEU3/NEU4/NEU1/NEU2
+family	MAN2B2/MAN2C1/MAN2B1
+family	FUCA1/FUCA2
+family	HEXA/HEXB
+family	HEXDC/HEXA/HEXB
+NEU3	NEU3/NEU4/NEU1/NEU2	member>
+NEU4	NEU3/NEU4/NEU1/NEU2	member>
+NEU1	NEU3/NEU4/NEU1/NEU2	member>
+NEU2	NEU3/NEU4/NEU1/NEU2	member>
+MAN2B2	MAN2B2/MAN2C1/MAN2B1	member>
+MAN2C1	MAN2B2/MAN2C1/MAN2B1	member>
+MAN2B1	MAN2B2/MAN2C1/MAN2B1	member>
+FUCA1	FUCA1/FUCA2	member>
+FUCA2	FUCA1/FUCA2	member>
+HEXA	HEXA/HEXB	member>
+HEXB	HEXA/HEXB	member>
+HEXDC	HEXDC/HEXA/HEXB	member>

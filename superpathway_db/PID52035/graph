@@ -1,0 +1,60 @@
+protein	GGT6
+protein	GGT1
+protein	GGT7
+protein	GGT5
+protein	GBA3
+protein	SHMT1
+protein	SHMT2
+chemical	mol:cpd:C05670
+chemical	mol:cpd:C01401
+chemical	mol:cpd:C00302
+chemical	mol:cpd:C05710 cpd:C03004
+chemical	mol:cpd:C05718 cpd:C15503
+chemical	mol:cpd:C05714
+chemical	mol:cpd:C00488
+chemical	mol:cpd:C05715
+chemical	mol:cpd:C05711
+chemical	mol:cpd:C02658 cpd:C04353 cpd:C16075
+chemical	mol:cpd:C00049
+chemical	mol:cpd:C00177 cpd:C01326
+chemical	mol:cpd:C02512
+chemical	mol:cpd:C00152
+chemical	mol:cpd:C05712 cpd:C02659 cpd:C03742 cpd:C00650 cpd:C18796 cpd:C18797
+chemical	mol:cpd:C00014
+chemical	mol:cpd:C00011
+chemical	mol:cpd:C05713 cpd:C01594 cpd:C05143 cpd:C01855 cpd:C00844
+chemical	mol:cpd:C06114
+chemical	mol:cpd:C00065
+chemical	mol:cpd:C00037
+chemical	mol:cpd:C00736
+chemical	mol:cpd:C00151 cpd:C00082
+chemical	mol:cpd:C00060
+chemical	mol:cpd:C03620
+chemical	mol:cpd:C00726 cpd:C16074
+chemical	mol:cpd:C08325
+family	GGT6/GGT1/GGT7/GGT5
+family	SHMT1/SHMT2
+GGT6	GGT6/GGT1/GGT7/GGT5	member>
+GGT1	GGT6/GGT1/GGT7/GGT5	member>
+GGT7	GGT6/GGT1/GGT7/GGT5	member>
+GGT5	GGT6/GGT1/GGT7/GGT5	member>
+SHMT1	SHMT1/SHMT2	member>
+SHMT2	SHMT1/SHMT2	member>
+complex	GGT6/GGT1/GGT7/GGT5/mol:cpd:C02512
+complex	GBA3
+complex	GBA3
+complex	GGT6/GGT1/GGT7/GGT5/mol:cpd:C05670
+complex	SHMT1/SHMT2/mol:cpd:C00037
+complex	SHMT1/SHMT2/mol:cpd:C00065
+GGT6/GGT1/GGT7/GGT5	GGT6/GGT1/GGT7/GGT5/mol:cpd:C02512	component>
+mol:cpd:C02512	GGT6/GGT1/GGT7/GGT5/mol:cpd:C02512	component>
+GBA3	GBA3	component>
+GGT6/GGT1/GGT7/GGT5	GGT6/GGT1/GGT7/GGT5/mol:cpd:C05670	component>
+mol:cpd:C05670	GGT6/GGT1/GGT7/GGT5/mol:cpd:C05670	component>
+SHMT1/SHMT2	SHMT1/SHMT2/mol:cpd:C00037	component>
+mol:cpd:C00037	SHMT1/SHMT2/mol:cpd:C00037	component>
+mol:cpd:C00065	SHMT1/SHMT2/mol:cpd:C00065	component>
+GGT6/GGT1/GGT7/GGT5/mol:cpd:C02512	mol:cpd:C05711	-a>
+GGT6/GGT1/GGT7/GGT5/mol:cpd:C05670	mol:cpd:C06114	-a>
+SHMT1/SHMT2/mol:cpd:C00037	mol:cpd:C00065	-a>
+SHMT1/SHMT2/mol:cpd:C00065	mol:cpd:C00037	-a>

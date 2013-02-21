@@ -1,0 +1,213 @@
+protein	BST1
+protein	CD38
+protein	NUDT12
+protein	QPRT
+protein	ENPP1
+protein	ENPP3
+protein	NT5C2
+protein	NT5C
+protein	NT5E
+protein	NT5C3
+protein	NT5M
+protein	NT5C1A
+protein	NT5C1B
+protein	NMRK1
+protein	PPY
+protein	NMNAT2
+protein	NMNAT3
+protein	NMNAT1
+protein	NADSYN1
+protein	NAPRT1
+protein	NAMPT
+protein	NNMT
+protein	NADK
+protein	NNT
+protein	AOX1
+chemical	mol:cpd:C06178
+chemical	mol:cpd:C15523
+chemical	mol:cpd:C00022
+chemical	mol:cpd:C00163
+chemical	mol:cpd:C03652
+chemical	mol:cpd:C00922
+chemical	mol:cpd:C02295
+chemical	mol:cpd:C02930
+chemical	mol:cpd:C16390
+chemical	mol:cpd:C16159
+chemical	mol:cpd:C04226
+chemical	mol:cpd:C16152
+chemical	mol:cpd:C03458
+chemical	mol:cpd:C15987
+chemical	mol:cpd:C03056
+chemical	mol:cpd:C16151
+chemical	mol:cpd:C15986
+chemical	mol:cpd:C01297
+chemical	mol:cpd:C01056
+chemical	mol:cpd:C16150
+chemical	mol:cpd:C00006
+chemical	mol:cpd:C00003
+chemical	mol:cpd:C00857
+chemical	mol:cpd:C00455
+chemical	mol:cpd:C01185
+chemical	mol:cpd:C03722
+chemical	mol:cpd:C00111
+chemical	mol:cpd:C00049
+chemical	mol:cpd:C00122
+chemical	mol:cpd:C01384
+chemical	mol:cpd:C01596
+chemical	mol:cpd:C01059
+chemical	mol:cpd:C01020
+chemical	mol:cpd:C00253
+chemical	mol:cpd:C05380
+chemical	mol:cpd:C02918
+chemical	mol:cpd:C03150
+chemical	mol:cpd:C05840
+chemical	mol:cpd:C05841
+chemical	mol:cpd:C01004
+chemical	mol:cpd:C05843
+chemical	mol:cpd:C05842
+chemical	mol:cpd:C03043
+chemical	mol:cpd:C00153
+family	BST1/CD38
+family	ENPP1/ENPP3
+family	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B
+family	NMNAT2/NMNAT3/NMNAT1
+BST1	BST1/CD38	member>
+CD38	BST1/CD38	member>
+ENPP1	ENPP1/ENPP3	member>
+ENPP3	ENPP1/ENPP3	member>
+NT5C2	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5C	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5E	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5C3	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5M	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5C1A	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NT5C1B	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	member>
+NMNAT2	NMNAT2/NMNAT3/NMNAT1	member>
+NMNAT3	NMNAT2/NMNAT3/NMNAT1	member>
+NMNAT1	NMNAT2/NMNAT3/NMNAT1	member>
+complex	BST1/CD38/mol:cpd:C00006
+complex	NUDT12/mol:cpd:C00857
+complex	QPRT/mol:cpd:C03722
+complex	ENPP1/ENPP3/mol:cpd:C00857
+complex	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C01185
+complex	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C05841
+complex	NMRK1/mol:cpd:C05841
+complex	PPY/mol:cpd:C05841
+complex	PPY/mol:cpd:C00253
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857
+complex	NADSYN1/mol:cpd:C00857
+complex	NAPRT1/mol:cpd:C01185
+complex	NAPRT1/mol:cpd:C00253
+complex	NUDT12/mol:cpd:C00003
+complex	ENPP1/ENPP3/mol:cpd:C00003
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455
+complex	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003
+complex	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C00455
+complex	PPY/mol:cpd:C03150
+complex	PPY/mol:cpd:C00153
+complex	NAMPT/mol:cpd:C00455
+complex	NAMPT/mol:cpd:C00153
+complex	BST1/CD38/mol:cpd:C00003
+complex	NNMT/mol:cpd:C00153
+complex	AOX1/mol:cpd:C02918
+complex	NADK/mol:cpd:C00003
+complex	NNT/mol:cpd:C00003
+complex	NNT/mol:cpd:C00006
+complex	AOX1/mol:cpd:C02918
+BST1/CD38	BST1/CD38/mol:cpd:C00006	component>
+mol:cpd:C00006	BST1/CD38/mol:cpd:C00006	component>
+NUDT12	NUDT12/mol:cpd:C00857	component>
+mol:cpd:C00857	NUDT12/mol:cpd:C00857	component>
+QPRT	QPRT/mol:cpd:C03722	component>
+mol:cpd:C03722	QPRT/mol:cpd:C03722	component>
+ENPP1/ENPP3	ENPP1/ENPP3/mol:cpd:C00857	component>
+mol:cpd:C00857	ENPP1/ENPP3/mol:cpd:C00857	component>
+NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C01185	component>
+mol:cpd:C01185	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C01185	component>
+mol:cpd:C05841	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C05841	component>
+NMRK1	NMRK1/mol:cpd:C05841	component>
+mol:cpd:C05841	NMRK1/mol:cpd:C05841	component>
+PPY	PPY/mol:cpd:C05841	component>
+mol:cpd:C05841	PPY/mol:cpd:C05841	component>
+mol:cpd:C00253	PPY/mol:cpd:C00253	component>
+NMNAT2/NMNAT3/NMNAT1	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	component>
+mol:cpd:C01185	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	component>
+mol:cpd:C00857	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857	component>
+NMNAT2/NMNAT3/NMNAT1	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	component>
+mol:cpd:C01185	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	component>
+mol:cpd:C00857	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857	component>
+NADSYN1	NADSYN1/mol:cpd:C00857	component>
+mol:cpd:C00857	NADSYN1/mol:cpd:C00857	component>
+NAPRT1	NAPRT1/mol:cpd:C01185	component>
+mol:cpd:C01185	NAPRT1/mol:cpd:C01185	component>
+mol:cpd:C00253	NAPRT1/mol:cpd:C00253	component>
+NUDT12	NUDT12/mol:cpd:C00003	component>
+mol:cpd:C00003	NUDT12/mol:cpd:C00003	component>
+ENPP1/ENPP3	ENPP1/ENPP3/mol:cpd:C00003	component>
+mol:cpd:C00003	ENPP1/ENPP3/mol:cpd:C00003	component>
+NMNAT2/NMNAT3/NMNAT1	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	component>
+mol:cpd:C00455	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	component>
+mol:cpd:C00003	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003	component>
+NMNAT2/NMNAT3/NMNAT1	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	component>
+mol:cpd:C00455	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	component>
+mol:cpd:C00003	NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003	component>
+NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C00455	component>
+mol:cpd:C00455	NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C00455	component>
+PPY	PPY/mol:cpd:C03150	component>
+mol:cpd:C03150	PPY/mol:cpd:C03150	component>
+mol:cpd:C00153	PPY/mol:cpd:C00153	component>
+NAMPT	NAMPT/mol:cpd:C00455	component>
+mol:cpd:C00455	NAMPT/mol:cpd:C00455	component>
+mol:cpd:C00153	NAMPT/mol:cpd:C00153	component>
+BST1/CD38	BST1/CD38/mol:cpd:C00003	component>
+mol:cpd:C00003	BST1/CD38/mol:cpd:C00003	component>
+NNMT	NNMT/mol:cpd:C00153	component>
+mol:cpd:C00153	NNMT/mol:cpd:C00153	component>
+AOX1	AOX1/mol:cpd:C02918	component>
+mol:cpd:C02918	AOX1/mol:cpd:C02918	component>
+NADK	NADK/mol:cpd:C00003	component>
+mol:cpd:C00003	NADK/mol:cpd:C00003	component>
+NNT	NNT/mol:cpd:C00003	component>
+mol:cpd:C00003	NNT/mol:cpd:C00003	component>
+mol:cpd:C00006	NNT/mol:cpd:C00006	component>
+AOX1	AOX1/mol:cpd:C02918	component>
+mol:cpd:C02918	AOX1/mol:cpd:C02918	component>
+BST1/CD38/mol:cpd:C00006	mol:cpd:C00153	-a>
+NUDT12/mol:cpd:C00857	mol:cpd:C01185	-a>
+QPRT/mol:cpd:C03722	mol:cpd:C01185	-a>
+ENPP1/ENPP3/mol:cpd:C00857	mol:cpd:C01185	-a>
+NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C01185	mol:cpd:C05841	-a>
+NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C05841	mol:cpd:C01185	-a>
+NMRK1/mol:cpd:C05841	mol:cpd:C01185	-a>
+PPY/mol:cpd:C05841	mol:cpd:C00253	-a>
+PPY/mol:cpd:C00253	mol:cpd:C05841	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	mol:cpd:C00857	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857	mol:cpd:C01185	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C01185	mol:cpd:C00857	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00857	mol:cpd:C01185	-a>
+NADSYN1/mol:cpd:C00857	mol:cpd:C00003	-a>
+NAPRT1/mol:cpd:C01185	mol:cpd:C00253	-a>
+NAPRT1/mol:cpd:C00253	mol:cpd:C01185	-a>
+NUDT12/mol:cpd:C00003	mol:cpd:C00455	-a>
+ENPP1/ENPP3/mol:cpd:C00003	mol:cpd:C00455	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	mol:cpd:C00003	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003	mol:cpd:C00455	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00455	mol:cpd:C00003	-a>
+NMNAT2/NMNAT3/NMNAT1/mol:cpd:C00003	mol:cpd:C00455	-a>
+NT5C2/NT5C/NT5E/NT5C3/NT5M/NT5C1A/NT5C1B/mol:cpd:C00455	mol:cpd:C03150	-a>
+PPY/mol:cpd:C03150	mol:cpd:C00153	-a>
+PPY/mol:cpd:C00153	mol:cpd:C03150	-a>
+NAMPT/mol:cpd:C00455	mol:cpd:C00153	-a>
+NAMPT/mol:cpd:C00153	mol:cpd:C00455	-a>
+BST1/CD38/mol:cpd:C00003	mol:cpd:C00153	-a>
+NNMT/mol:cpd:C00153	mol:cpd:C02918	-a>
+AOX1/mol:cpd:C02918	mol:cpd:C05843	-a>
+NADK/mol:cpd:C00003	mol:cpd:C00006	-a>
+NNT/mol:cpd:C00003	mol:cpd:C00006	-a>
+NNT/mol:cpd:C00006	mol:cpd:C00003	-a>
+AOX1/mol:cpd:C02918	mol:cpd:C05842	-a>
