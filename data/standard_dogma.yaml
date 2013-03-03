@@ -20,6 +20,8 @@ dogma:
         - [ active ]
     'abstract':
         - [ active ]
+    'rna':
+        - [ active ]
     'miRNA':
         - [ active ]
     
