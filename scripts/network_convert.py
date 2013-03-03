@@ -12,13 +12,30 @@ from glob import glob
 class FormatException(Exception):
     pass
 
+def read_sif(handle):
+    gr = networkx.MultiDiGraph()
+    for line in handle:
+        tmp = line.rstrip().split("\t")
+        gr.add_edge(tmp[0], tmp[2], interaction=tmp[1])
+    return gr
+
+def write_sif(gr, handle):
+    for e in gr.edges():
+        handle.write("%s\tpp\t%s\n" % (e[0], e[1]))
+
 def read_paradigm_graph(handle):
     gr = networkx.MultiDiGraph()
     for line in handle:
         tmp = line.rstrip().split("\t")
         if len(tmp) == 2:
+            if tmp[1] in gr.node:
+                raise FormatException("Duplicate element declaration for : %s" % (tmp[1]))                
             gr.add_node( tmp[1], type=tmp[0] )
         elif len(tmp) == 3:
+            if tmp[0] not in gr.node:
+                raise FormatException("Missing element declaration for : %s" % (tmp[0]))
+            if tmp[1] not in gr.node:
+                raise FormatException("Missing element declaration for : %s" % (tmp[1]))
             gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
         else:
             raise FormatException("Bad line: %s" % (line))
