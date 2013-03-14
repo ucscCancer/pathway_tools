@@ -3,7 +3,7 @@ import network_toolkit.dai_conf
 
 class FactorCalculator:
 
-    def calculate(self, **kw):
+    def calculate(self, *args, **kw):
         raise Exception("Unimplemented method 'calculate'")
 
 
@@ -201,22 +201,24 @@ class CPTGenerator:
             var_dims.append(d)
 
         cpt = CPT(var_dim_map)
-
-        while fac_states[-1] < var_dims[-1]:
+        done = False
+        while not done and fac_states[-1] < var_dims[-1]:
             c_map = {}
             for i, v in enumerate(variable_set):
                 c_map[v] = fac_states[i]
             val = self.calculator.calculate(c_map)
+            if val is None:
+                raise Exception("Null value from factor calculator")
             cpt.set_value(val, c_map)
             inc_index = 0
             fac_states[inc_index] += 1
             while fac_states[inc_index] >= self.get_variable_by_id(variable_set[inc_index]).dim:
                 fac_states[inc_index] = 0
                 inc_index += 1
-                if inc_index >= len(fac_states)-1:
+                if inc_index > len(fac_states)-1:
+                    done = True
                     break
                 fac_states[inc_index] += 1
-
         return cpt
 
 
@@ -327,7 +329,7 @@ class DaiFactorGraph:
         inf = dai.JTree(sn, prop)
         return inf
 
-    def get_inf_bp(self, logdomain=False):
+    def get_inf_bp(self, logdomain=False, verbose=False):
         sn = dai.FactorGraph(self.vecfac)
         prop = dai.PropertySet()
         prop["tol"] = "1e-9"
@@ -336,7 +338,10 @@ class DaiFactorGraph:
         else:
             prop["logdomain"] = "0"
         prop["updates"] = "SEQFIX"
-        prop["verbose"] = "1"
+        if verbose:
+            prop["verbose"] = "1"
+        else:
+            prop["verbose"] = "0"
         lb_inf = dai.BP(sn, prop)
         return lb_inf
 
