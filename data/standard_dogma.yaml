@@ -1,8 +1,8 @@
-#dogma defines the different types of templates for network object
-#dogma format:
+#dogma_template defines the different types of templates for network object
+#dogma_template format:
 #dogma type -> edge_list
 #edge_list - array of [ src_node_type, dst_node_type, edge_type]
-dogma:
+dogma_template:
     protein:
         - [ genome,  mRNA, -dTx> ]
         - [ genome,  promoter, -dPm> ]
@@ -10,21 +10,21 @@ dogma:
         - [ protein, active,  -dAct> ]
         - [ txreg,   mRNA,    -cTx> ]
         - [ promoter,mRNA,    -cTp> ]
-        - [ tlreg   protein -cTl> ]
-        - [ actreg  active  -cAct> ]
+        - [ tlreg,   protein, -cTl> ]
+        - [ actreg,  active,  -cAct> ]
     'chemical':
-        - [ active ]
+        - [ actreg,  active,  -cAct> ]
     'family':
         - [ active ]
     'complex':
-        - [ active ]
+        - [ actreg,  active,  -cAct> ]
     'abstract':
         - [ active ]
     'rna':
         - [ active ]
     'miRNA':
         - [ active ]
-    
+
 
 #interactions define how the sub-elements of two templates are connected
 #interactions format:
@@ -50,110 +50,88 @@ edge_names:
     "component>" : Complex component
     "member>" : Family member
 
+
+factor_tables : 
+    positive : 
+        - [0.9, 0.05, 0.05]
+        - [0.05, 0.9, 0.05]
+        - [0.05, 0.05, 0.9]
+    negative : 
+        - [0.05, 0.05, 0.9]
+        - [0.05, 0.9, 0.05]
+        - [0.9, 0.05, 0.05]
+
 #factor format:
 #Edge type
 #    dst_template_name
 #        dst_node_type
 #            probabilities
 
-factors-fixed:
+
+factors_fixed:
     -a>:
       '*':
         actreg:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -ap>:
       '*':
         active:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -ap|:
       '*':
         active:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+            negative
     -a|:
       '*':
         actreg:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+            negative
     -dAct>:
       '*':
         active:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -dTl>:
       '*':
         protein:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -dTx>:
       '*':
         mRNA:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -t>:
       '*':
         txreg:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -t|:
       '*':
         txreg:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+            negative
     component>:
       '*':
         active:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     member>:
       '*':
         active:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -dPm>:
       '*':
         promoter:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -cTx>:
       '*':
         mRNA:
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+            positive
     -cTp>:
       '*':
         mRNA:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+            negative
     -cTl>:
       '*':
         protein:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+            negative
     -cAct>:
       '*':
         active:
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
-
-
+            negative
 
 
