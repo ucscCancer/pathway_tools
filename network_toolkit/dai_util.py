@@ -134,17 +134,18 @@ class CPT:
         fac_values = []
 
         out = []
-
-        while fac_states[-1] < self.variables[variable_set[-1]]:
+        done = False
+        while not done and fac_states[-1] < self.variables[variable_set[-1]]:
             out.append( self._table.__getitem__(fac_states) )
             inc_index = 0
             fac_states[inc_index] += 1
             while fac_states[inc_index] >= self.variables[variable_set[inc_index]]:
                 fac_states[inc_index] = 0
                 inc_index += 1
-                fac_states[inc_index] += 1
-                if inc_index == len(fac_states)-1:
+                if inc_index > len(fac_states)-1:
+                    done = True
                     break
+                fac_states[inc_index] += 1
         return out
 
 
