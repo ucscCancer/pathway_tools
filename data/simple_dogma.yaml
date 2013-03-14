@@ -1,0 +1,102 @@
+#dogma_template defines the different types of templates for network object
+#dogma_template format:
+#dogma type -> edge_list
+#edge_list - array of [ src_node_type, dst_node_type, edge_type]
+dogma_template:
+    protein:
+        - [genome, mRNA, -dTx>]
+        - [mRNA, protein, -dTl>]
+        - [protein, active, -dAct>]
+    complex:
+        - [active]
+    chemical:
+        - [active]
+    abstract:
+        - [active]
+    family:
+        - [active]
+
+
+
+#interactions define how the sub-elements of two templates are connected
+#interactions format:
+#list -> [ src_node_type, dst_node_type, edge_type ]
+interactions:
+    - [active, mRNA, -t>]
+    - [active, mRNA, -t|]
+    - [active, active, -a>]
+    - [active, active, -a|]
+    - [active, active, component>]
+    - [active, active, -ap>]
+    - [active, active, -ap|]
+    - [active, active, member>]
+
+
+factor_tables : 
+    positive : 
+        - [0.9, 0.05, 0.05]
+        - [0.05, 0.9, 0.05]
+        - [0.05, 0.05, 0.9]
+    negative : 
+        - [0.05, 0.05, 0.9]
+        - [0.05, 0.9, 0.05]
+        - [0.9, 0.05, 0.05]
+
+
+
+#factor format:
+#Edge type
+#    dst_template_name
+#        dst_node_type
+#            probablity_table
+
+factors_fixed : 
+    -dTx> :
+        '*' :
+            mRNA:
+                positive
+    -dTl>:
+        '*' :
+            protein:
+                positive
+    -dAct>:
+        '*':
+            active:
+                positive
+    -t>:
+        '*':
+            mRNA:
+                positive
+    -t|:
+        '*':
+            mRNA:
+                negative
+    -a>:
+        '*':
+            active:
+                positive
+
+    -a|:
+        '*':
+            active:
+                negative
+
+    -ap>:
+        '*':
+            active:
+                positive
+
+    -ap|:
+        '*':
+            active:
+                negative
+
+    'component>' :
+        '*':
+            active:
+                positive
+
+    member>:
+        '*':
+            active:
+                positive
