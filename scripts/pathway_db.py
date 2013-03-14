@@ -249,7 +249,7 @@ def main_compile(args):
                     type_count[node_type] = type_count.get(node_type, 0) + 1
                 else:
                     if gr.node[node_name]['type'] != node_type:
-                        raise Exception("Mismatch Node Type: %s :%s --> %s" % (node_name, gr.node[node_name]['type'], node_type ))
+                        raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
                 if 'pathway' not in gr.node[node_name]:
                     gr.node[node_name]['pathway'] = []
                     gr.node[node_name]['pid'] = []                    
