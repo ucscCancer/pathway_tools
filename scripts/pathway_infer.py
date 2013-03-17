@@ -22,7 +22,7 @@ class Dogma:
     """
     DogmaSet 
 
-    Holds different dogmas that can be applied to different 
+    Holds different dogma templates that can be applied to different 
     types of pathway elements
     Right now, hard coded to dogma for protein and other
     """
@@ -104,13 +104,10 @@ class PairCalculator(dai_util.FactorCalculator):
     This class represents a set of variables and CPTPair classes.
     It can be used to generate a CPT from the variables (either all of them 
     or a subset).
-    In the future, when probablity rules more complicated then CPTPair 
-    are added, the rules of how to use them would go into this class
     """
     def __init__(self, variables, pair_table_list):
         """
-        variables : A hash of variables, where the key is the variable number, and the value 
-        is the number of possible states for that variable.
+        
         """
 
         self.variables = {}
@@ -132,6 +129,19 @@ class PairCalculator(dai_util.FactorCalculator):
                     if j in self.pair_tables[i]:
                         prob *= self.pair_tables[i][j].ab_table[v_set[i]][v_set[j]]
         return prob
+
+class PositiveFactorCalculator(dai_util.FactorCalculator):
+    MATRIX = [
+        [0.90, 0.05, 0.05],
+        [0.05, 0.90, 0.05],
+        [0.05, 0.05, 0.90]
+    ]
+    def __init__(self, src, dst):
+        self.src = src
+        self.dst = dst
+
+    def calculate(self, v_set):
+        return self.MATRIX[v_set[self.src]][v_set[self.dst]]
 
 
 class Pathway:
@@ -415,6 +425,16 @@ if __name__ == "__main__":
 
             expanded_pathway = pathway.expand(dogma)
 
+            clamp_map = {}
+            if args.sample is not None:
+                for e_type in e_map:
+                    col = e_map[e_type].get_col(args.sample)
+                    for probe in col:
+                        v = expanded_pathway.var_map.get_variable_by_label(probe, e_type)
+                        if v is not None:
+                            v_obs = expanded_pathway.var_map.get_or_add_variable(probe, e_type + ":obs", 3)
+                            clamp_map[v_obs.variable] = col[probe]
+                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable, v.variable) ) )
 
             dai_fg = expanded_pathway.generate_dai_factor_graph()
             lb_inf = dai_fg.get_inf_bp(verbose=True)
@@ -424,14 +444,8 @@ if __name__ == "__main__":
 
             lb_inf_post = lb_inf.clone()
 
-            
-            if args.sample is not None:
-                for e_type in e_map:
-                    col = e_map[e_type].get_col(args.sample)
-                    for probe in col:
-                        v = expanded_pathway.pvm.get_factor(probe, e_type)
-                        if v is not None:
-                            lb_inf_post.clamp(v.variable, col[probe])
+            for v in clamp_map:
+                lb_inf_post.clamp(v, clamp_map[v])
 
             lb_inf_post.init()
             lb_inf_post.run()
