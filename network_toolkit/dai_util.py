@@ -270,7 +270,7 @@ class FactorGraph:
 
         elem_map = {}
         dai_var_map = {}
-
+        factor_map = {}
         for elem in self.var_map:
             if elem.label not in elem_map:
                 elem_map[ elem.label ] = { elem.elem_type : elem.variable }
@@ -278,6 +278,7 @@ class FactorGraph:
                 elem_map[ elem.label ][elem.elem_type] = elem.variable
             dai_var_map[elem.variable] = dai.Var(elem.variable, elem.dim)
 
+        factor_i = 0
         for cpt_gen in self.cpt_list:
             elem = cpt_gen.generate()
             var_list = dai.VarSet()
@@ -288,14 +289,22 @@ class FactorGraph:
             factor = dai.Factor(var_list) 
             for i, v in enumerate(elem.factors()):
                 factor[i] = v
+            factor_label = cpt_gen.name
+            name_offset = 1
+            while factor_label in factor_map:
+                factor_label = cpt_gen.name + "_" + str(name_offset)
+                name_offset += 1
+            factor_map[factor_label] = factor_i
+            factor_i += 1
             vecfac.append(factor)
-        return DaiFactorGraph(self.var_map, vecfac, dai_var_map)
+        return DaiFactorGraph(self.var_map, vecfac, dai_var_map, factor_map)
 
 class DaiFactorGraph:
-    def __init__(self, variable_map, vecfac, var_map):
+    def __init__(self, variable_map, vecfac, var_map, factor_map):
         self.variable_map = variable_map
         self.vecfac = vecfac
         self.var_map = var_map
+        self.factor_map = factor_map
 
     def run_em(self, evidence):
         ev = dai.Evidence()
