@@ -112,7 +112,7 @@ class PairCalculator(dai_util.FactorCalculator):
 
         self.variables = {}
         for v in variables:
-            self.variables[ v.variable ] = v
+            self.variables[ v.variable_id ] = v
         self.pair_table_list = pair_table_list
         self.pair_tables = {}
         for pt in pair_table_list:
@@ -210,17 +210,17 @@ class Pathway:
             child_var = fg.var_map.get_variable_by_label( edge[1][0], edge[1][1] )
             if child_var is None:
                 raise Exception("Missing node %s %s" % (edge[1][0], edge[1][1]))
-            child_id = child_var.variable
+            child_id = child_var.variable_id
             if child_id not in child_map:
-                child_map[child_id] = [ (par_var.variable, edge[2]) ]
+                child_map[child_id] = [ (par_var.variable_id, edge[2]) ]
             else:
-                child_map[child_id].append( (par_var.variable, edge[2]) )
+                child_map[child_id].append( (par_var.variable_id, edge[2]) )
         
         for child_id in child_map:
             #now we need to yield out CPDs
             child_variable = fg.var_map.get_variable_by_id(child_id)
-            template_type = self.el_map[child_variable.label]
-            child_type = child_variable.elem_type
+            template_type = self.el_map[child_variable.variable_name]
+            child_type = child_variable.variable_type
 
             variable_list = [i[0] for i in child_map[child_id]]
             variable_list.append(child_id)
@@ -236,7 +236,7 @@ class Pathway:
                     pt = CPTPair( v_id, 3, child_id, 3, ft )
                     pair_probs.append(pt)
             cpt = PairCalculator(cpt_variables, pair_probs)
-            fg.append_cpt(dai_util.CPTGenerator(cpt_variables, cpt))
+            fg.append_cpt(dai_util.CPTGenerator(cpt_variables, cpt, child_variable.variable_name + ":" + child_variable.variable_type, "inputs"))
         return fg
 
 class EvidenceMatrix:
@@ -433,8 +433,8 @@ if __name__ == "__main__":
                         v = expanded_pathway.var_map.get_variable_by_label(probe, e_type)
                         if v is not None:
                             v_obs = expanded_pathway.var_map.get_or_add_variable(probe, e_type + ":obs", 3)
-                            clamp_map[v_obs.variable] = col[probe]
-                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable, v.variable) ) )
+                            clamp_map[v_obs.variable_id] = col[probe]
+                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable_id, v.variable_id), v_obs.variable_name, "obs_connect" ) )
 
             dai_fg = expanded_pathway.generate_dai_factor_graph()
             lb_inf = dai_fg.get_inf_bp(verbose=True)

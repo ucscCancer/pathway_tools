@@ -8,12 +8,20 @@ class FactorCalculator:
 
 
 class Variable:
-    def __init__(self, label, elem_type, variable, dim):
-        self.label = label
-        self.elem_type = elem_type
+    def __init__(self, variable_name, variable_type, variable_id, dim):
+        self.variable_name = variable_name
+        self.variable_type = variable_type
         self.dim = dim
-        self.variable = variable
+        self.variable_id = variable_id
+        self.dai_value = dai.Var(variable_id, dim)
 
+class Factor:
+    def __init__(self, factor_name, factor_type, factor_id, variables):
+        self.factor_name = factor_name
+        self.factor_type = factor_type
+        self.factor_id = factor_id
+        self.variables = variables
+        self.dai_value = None
 
 class VariableMap:
     def __init__(self):
@@ -29,12 +37,12 @@ class VariableMap:
             return self.variable_map[tup]
         var = Variable(label, elem_type, self.var_count, dim)
         self.var_count += 1
-        self.insert(var)
+        self.__insert(var)
         return var
 
-    def insert(self, pv):
-        self.variable_map[ (pv.label, pv.elem_type) ] = pv
-        self.varid_map[ pv.variable ] = pv
+    def __insert(self, pv):
+        self.variable_map[ (pv.variable_name, pv.variable_type) ] = pv
+        self.varid_map[ pv.variable_id ] = pv
 
     def get_variable_by_id(self, v):
         return self.varid_map[v]
@@ -45,7 +53,7 @@ class VariableMap:
         except KeyError:
             return None
 
-    def list_variable(self, label, elem_type):
+    def list_variables(self, label, elem_type):
         for v_label, v_elem_type in self.variable_map:
             if label is None or v_label == label:
                 if elem_type is None or v_elem_type == elem_type:            
@@ -53,8 +61,35 @@ class VariableMap:
 
 
     def __iter__(self):
-        for i in self.varid_map:
+        for i in sorted(self.varid_map):
             yield self.varid_map[i]
+
+
+class FactorMap:
+    def __init__(self):
+        self.factor_map = {}
+        self.factor_id_map = {}
+
+    def add_factor(self, factor_name, factor_type, variables):
+        l = (factor_name, factor_type)
+        if l in self.factor_map:
+            raise Exception("Need unique name for CPTGenerator")
+        fid = len(self.factor_map)
+        factor = Factor(factor_name, factor_type, fid, variables)
+        self.factor_map[l] = factor
+        self.factor_id_map[fid] = factor
+        return factor
+
+    def list_factors(self, factor_name, factor_type):
+        for v_label, v_type in self.factor_map:
+            if factor_name is None or v_label == factor_name:
+                if factor_type is None or v_type == factor_type:            
+                    yield self.factor_map[ (v_label, v_type) ]
+
+
+    def __iter__(self):
+        for i in sorted(self.factor_id_map):
+            yield self.factor_id_map[i]
 
 
 class MultiDimMatrix(object):
@@ -160,24 +195,25 @@ class CPTGenerator:
 
     Methods for normalizing the table against different variables should go here
     """
-    def __init__(self, variables, calculator, name="CPT"):
+    def __init__(self, variables, calculator, cpt_name, cpt_type):
         self.variables = variables
         self.calculator = calculator
-        self.name = name
+        self.cpt_name = cpt_name
+        self.cpt_type = cpt_type
 
     def __str__(self):
-        return self.name
+        return self.cpt_name + ":" + self.cpt_type
         #num_vars = len(self.variables)
         #fac_states = [ 0 ] * num_vars
         #return "%s" % ("\n".join(str(i) for i in self.table._li))
 
     def get_variable_ids(self):
         for var in self.variables:
-            yield var.variable
+            yield var.variable_id
 
     def get_variable_by_id(self, id):
         for var in self.variables:
-            if var.variable == id:
+            if var.variable_id == id:
                 return var
         return None
 
@@ -232,18 +268,15 @@ class FactorGraph:
     a factor graph. It contains factor variable mappings, network connections, and 
     CPT definitions
     """
-    def __init__(self, variable_map=None, cpt_list=None):
-        self.var_map = variable_map
-        self.cpt_list = cpt_list
-
-        if self.var_map is None:
-            self.var_map = VariableMap()
-        if self.cpt_list is None:
-            self.cpt_list = []
+    def __init__(self):
+        self.var_map = VariableMap()
+        self.factor_map = FactorMap()
+        self.cpt_gen_map = {}
 
     def append_cpt(self, cpt):
-        self.cpt_list.append(cpt)
-
+        cid = self.factor_map.add_factor(cpt.cpt_name, cpt.cpt_type, cpt.variables)
+        self.cpt_gen_map[cid] = cpt
+        
     def describe(self):
 
         yield "# Variables"
@@ -272,49 +305,128 @@ class FactorGraph:
         dai_var_map = {}
         factor_map = {}
         for elem in self.var_map:
-            if elem.label not in elem_map:
-                elem_map[ elem.label ] = { elem.elem_type : elem.variable }
+            if elem.variable_name not in elem_map:
+                elem_map[ elem.variable_name ] = { elem.variable_type : elem.variable_id }
             else:
-                elem_map[ elem.label ][elem.elem_type] = elem.variable
-            dai_var_map[elem.variable] = dai.Var(elem.variable, elem.dim)
+                elem_map[ elem.variable_name ][elem.variable_type] = elem.variable_id
+            #dai_var_map[elem.variable] = dai.Var(elem.variable, elem.dim)
 
-        factor_i = 0
-        for cpt_gen in self.cpt_list:
+        for factor in self.factor_map:
+            cpt_gen = self.cpt_gen_map[factor]
             elem = cpt_gen.generate()
             var_list = dai.VarSet()
             v_list = list(elem.variables)
             v_list.sort()
             for v in v_list:
-                var_list.append(dai_var_map[v])
-            factor = dai.Factor(var_list) 
+                var_list.append(self.var_map.get_variable_by_id(v).dai_value)
+            dai_factor = dai.Factor(var_list) 
             for i, v in enumerate(elem.factors()):
-                factor[i] = v
-            factor_label = cpt_gen.name
-            name_offset = 1
-            while factor_label in factor_map:
-                factor_label = cpt_gen.name + "_" + str(name_offset)
-                name_offset += 1
-            factor_map[factor_label] = factor_i
-            factor_i += 1
-            vecfac.append(factor)
-        return DaiFactorGraph(self.var_map, vecfac, dai_var_map, factor_map)
+                dai_factor[i] = v
+            vecfac.append(dai_factor)
+        return DaiFactorGraph(self.var_map, vecfac, self.factor_map)
+
+class SharedParameters:
+    def __init__(self, variable_set_labels):
+        self.variable_set_labels = variable_set_labels
+        self.shared_list = []
+        self.variable_dims = None
+
+    def add_factor(self, variable_list, factor):
+        if len(variable_list) != len(self.variable_set_labels):
+            raise Exception("Mismatch Variable set size added")
+        self.shared_list.append( (variable_list, factor) )
+        if self.variable_dims is None:
+            self.variable_dims = []
+            for v in variable_list:
+                self.variable_dims.append(v.dim)
+
+class DaiEM:
+    def __init__(self, factor_graph):
+        self.factor_graph = factor_graph
+        self.ev = dai.Evidence()
+        self.shared_param_list = []
+        self.evidence_map = {}
+
+    def add_evidence(self, sample, variable, value):
+        if sample not in self.evidence_map:
+            self.evidence_map[sample] = {}
+        self.evidence_map[sample][variable] = value
+
+    def new_shared(self, variable_set_labels):
+        param = SharedParameters(variable_set_labels)
+        self.shared_param_list.append(param)
+        return param
+
+    def run(self):
+        obsvec = dai.ObservationVec()
+        for sample in self.evidence_map:
+            obs = dai.Observation()
+            for var in self.evidence_map[sample]:
+                #obs[ self.factor_graph.var_map[var].dai_variable ] = self.evidence_map[sample][var]
+                obs[ var.dai_value ] = self.evidence_map[sample][var]
+            obsvec.append(obs)
+
+        sp_vec = dai.VecSharedParameters()
+        for sp in self.shared_param_list:          
+            fo = dai.FactorOrientations()
+            for variable_list, factor in sp.shared_list:
+                vec = dai.VecVar()
+                for v in variable_list:
+                    vec.append(v.dai_value)
+                fo[factor.factor_id] = vec
+
+            total_dim = 1
+            for d in sp.variable_dims:
+                total_dim *= d
+            props = dai.PropertySet()
+            props["total_dim"] = str(total_dim)
+            props["target_dim"] = str(sp.variable_dims[0])
+            pe = dai.ParameterEstimation.construct("CondProbEstimation", props)
+            dai_sp = dai.SharedParameters(fo, pe)
+            sp_vec.append(dai_sp)
+
+        max_step = dai.MaximizationStep(sp_vec)
+        vec_max_step = dai.VecMaximizationStep()
+        vec_max_step.append(max_step)
+        evidence = dai.Evidence(obsvec)
+        #inf_alg = self.factor_graph.get_inf_bp(verbose=True)
+        prop = dai.PropertySet()
+        prop["tol"] = "1e-9"
+        prop["logdomain"] = "0"
+        prop["updates"] = "SEQFIX"
+        prop["verbose"] = "1"
+
+        inf_alg = dai.newInfAlg("BP", self.factor_graph.get_factor_graph(), prop )
+        em_props= dai.PropertySet()
+        dai_em_alg = dai.EMAlg(evidence, inf_alg, vec_max_step, em_props)
+
+
+        #dai_em_alg.run()
+        while not dai_em_alg.hasSatisfiedTermConditions():
+            l = dai_em_alg.iterate()
+            print "Iteration ", dai_em_alg.Iterations(), " likelihood: ", l
+            for max_step in dai_em_alg:
+                print max_step, len(max_step)
+                for shared_param in max_step:
+                    print "\t", shared_param.currentExpectations()
+                    print "\t", shared_param.getPEst().estimate(shared_param.currentExpectations())
+
+
+
+        """
+        #estimate = dai.CondProbEstimation()
+        #see: http://cs.ru.nl/~jorism/libDAI/doc/classdai_1_1CondProbEstimation.html#a548db9c240464901a5d5cc37fe0e8caa
+        """
+
 
 class DaiFactorGraph:
-    def __init__(self, variable_map, vecfac, var_map, factor_map):
+    def __init__(self, variable_map, vecfac, factor_map):
         self.variable_map = variable_map
         self.vecfac = vecfac
-        self.var_map = var_map
         self.factor_map = factor_map
 
-    def run_em(self, evidence):
-        ev = dai.Evidence()
-
-        #estimate = dai.CondProbEstimation()
-        props = dai.PropertySet()
-        #see: http://cs.ru.nl/~jorism/libDAI/doc/classdai_1_1CondProbEstimation.html#a548db9c240464901a5d5cc37fe0e8caa
-        props["total_dim"] = total_dim 
-        props["target_dim"] = VARIABLE_DIMENSION
-        pe = dai.ParameterEstimation.construct("CondProbEstimation", props)
+    def setup_em(self):
+        return DaiEM(self)
 
     def get_factor_graph(self):
         return dai.FactorGraph(self.vecfac)
