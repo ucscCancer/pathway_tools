@@ -259,6 +259,22 @@ class CPTGenerator:
         return cpt
 
 
+def multi_dim_iter(dims):
+    states = [0] * len(dims)
+    done = False
+    while not done and states[-1] < dims[-1]:
+        yield states
+        inc_index = 0
+        states[inc_index] += 1
+        while states[inc_index] >= dims[inc_index]:
+            states[inc_index] = 0
+            inc_index += 1
+            if inc_index > len(states)-1:
+                done = True
+                break
+            states[inc_index] += 1
+
+
 
 class FactorGraph:
     """
@@ -281,11 +297,12 @@ class FactorGraph:
 
         yield "# Variables"
         for path_var in self.var_map:
-            yield "# %d\t%s\t%s" % (path_var.variable, path_var.label, path_var.elem_type)
+            yield "# %d\t%s\t%s" % (path_var.variable_id, path_var.variable_name, path_var.variable_type)
 
         yield "# Factor Graphs"
 
-        for cpt in self.cpt_list:
+        for cpt_id in self.cpt_gen_map:
+            cpt = self.cpt_gen_map[cpt_id]
             node_order = []
             node_dim   = []
 
@@ -293,7 +310,7 @@ class FactorGraph:
                 node_order.append(n)
                 node_dim.append(cpt.get_variable_by_id(n).dim)
 
-            yield "#graph to child " + str(cpt.name)
+            yield "#CPT %s %s " % (cpt.cpt_name, cpt.cpt_type)
             yield " ".join([str(i) for i in node_order])
             yield " ".join([str(i) for i in node_dim])
             yield cpt.generate()
@@ -330,6 +347,7 @@ class SharedParameters:
         self.variable_set_labels = variable_set_labels
         self.shared_list = []
         self.variable_dims = None
+        self.result = None
 
     def add_factor(self, variable_list, factor):
         if len(variable_list) != len(self.variable_set_labels):
@@ -339,6 +357,19 @@ class SharedParameters:
             self.variable_dims = []
             for v in variable_list:
                 self.variable_dims.append(v.dim)
+
+
+    def __str__(self):
+        out = " ".join(self.variable_set_labels) + "\n"
+        for state in multi_dim_iter(self.variable_dims):
+            out += " ".join( str(i) for i in state)
+            pos = 0
+            dim = 1
+            for i, v in enumerate(state):
+                pos += v * dim
+                dim *= self.variable_dims[i]
+            out += "\t" + str(self.result[pos]) + "\n"
+        return out
 
 class DaiEM:
     def __init__(self, factor_graph):
@@ -357,7 +388,11 @@ class DaiEM:
         self.shared_param_list.append(param)
         return param
 
-    def run(self):
+    def __iter__(self):
+        for i in self.shared_param_list:
+            yield i
+
+    def run(self, verbose=False):
         obsvec = dai.ObservationVec()
         for sample in self.evidence_map:
             obs = dai.Observation()
@@ -394,30 +429,32 @@ class DaiEM:
         prop["tol"] = "1e-9"
         prop["logdomain"] = "0"
         prop["updates"] = "SEQFIX"
-        prop["verbose"] = "1"
+        if verbose:
+            prop["verbose"] = "1"
+        else:
+            prop["verbose"] = "0"
 
         inf_alg = dai.newInfAlg("BP", self.factor_graph.get_factor_graph(), prop )
         em_props= dai.PropertySet()
         dai_em_alg = dai.EMAlg(evidence, inf_alg, vec_max_step, em_props)
 
-
-        #dai_em_alg.run()
         while not dai_em_alg.hasSatisfiedTermConditions():
             l = dai_em_alg.iterate()
-            print "Iteration ", dai_em_alg.Iterations(), " likelihood: ", l
-            for max_step in dai_em_alg:
-                print max_step, len(max_step)
-                for shared_param in max_step:
-                    print "\t", shared_param.currentExpectations()
-                    print "\t", shared_param.getPEst().estimate(shared_param.currentExpectations())
-
-
-
-        """
-        #estimate = dai.CondProbEstimation()
-        #see: http://cs.ru.nl/~jorism/libDAI/doc/classdai_1_1CondProbEstimation.html#a548db9c240464901a5d5cc37fe0e8caa
-        """
-
+            if verbose:
+                print "Iteration ", dai_em_alg.Iterations(), " likelihood: ", l
+                for max_step in dai_em_alg:
+                    print max_step, len(max_step)
+                    for shared_param in max_step:
+                        print "\t", shared_param.currentExpectations()
+                        print "\t", shared_param.getPEst().estimate(shared_param.currentExpectations())
+        
+        for i in range(len(dai_em_alg[0])):
+            shared_param = dai_em_alg[0][i]
+            param_vec = shared_param.getPEst().estimate(shared_param.currentExpectations())
+            var_list = self.shared_param_list[i].variable_set_labels
+            var_dims = self.shared_param_list[i].variable_dims
+            self.shared_param_list[i].result = param_vec
+      
 
 class DaiFactorGraph:
     def __init__(self, variable_map, vecfac, factor_map):

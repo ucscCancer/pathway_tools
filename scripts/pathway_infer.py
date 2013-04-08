@@ -8,6 +8,8 @@ import math
 import csv
 from StringIO import StringIO
 
+from types import FunctionType
+
 from network_toolkit import convert, dai_util
 
 from argparse import ArgumentParser
@@ -64,13 +66,38 @@ class Dogma:
     def get_interaction_map(self):
         return self.i_map
 
-    def get_factor_table(self, edge_type, dst_template, dst_nodetype):
-        ft = None
-        if dst_template in self.data['factors_fixed'][edge_type]:
-            ft = self.data['factors_fixed'][edge_type][dst_nodetype]
-        else:
-            ft = self.data['factors_fixed'][edge_type]['*'][dst_nodetype]
-        return self.data['factor_tables'][ft]
+    def get_edge_factor_table(self, edge_type):
+        if edge_type in self.data['factors_fixed']:
+            if 'factor_table' in self.data['factors_fixed'][edge_type]:
+                ft = self.data['factors_fixed'][edge_type]['factor_table']
+                return self.data['factor_tables'][ft]
+        return None
+
+    def get_edge_combine_method(self, edge_type):
+        if edge_type in self.data['factors_fixed']:
+            if 'combine' in self.data['factors_fixed'][edge_type]:
+                return self.data['factors_fixed'][edge_type]['combine']['method']
+        return None
+
+    def get_edge_combine_selection(self, edge_type):
+        if edge_type in self.data['factors_fixed']:
+            if 'combine' in self.data['factors_fixed'][edge_type]:
+                return self.data['factors_fixed'][edge_type]['combine']['types']
+        return None
+
+    def get_edge_factor_function(self, edge_type):
+        if edge_type in self.data['factors_fixed']:
+            if 'factor_function' in self.data['factors_fixed'][edge_type]:
+                func_name = self.data['factors_fixed'][edge_type]['factor_function']
+                func_text = self.data['factor_functions'][func_name]
+                l_data = {}
+                exec(func_text, {}, l_data) ##BUG <- We're execing config code without sandboxing __builtins__, This is a major security issue right here!!!!
+                out_function = None
+                for l in l_data:
+                    if type(l_data[l]) == FunctionType:
+                        out_function = l_data[l]
+                return out_function
+        return None
 
 
 class ExpandedPathway:
@@ -142,6 +169,27 @@ class PositiveFactorCalculator(dai_util.FactorCalculator):
 
     def calculate(self, v_set):
         return self.MATRIX[v_set[self.src]][v_set[self.dst]]
+
+class TableCaclulator(dai_util.FactorCalculator):
+    def __init__(self, src, dst, matrix):
+        self.src = src
+        self.dst = dst
+        self.matrix = matrix
+
+    def calculate(self, v_set):
+        return self.matrix[v_set[self.src]][v_set[self.dst]]
+
+class FunctionCalculator(dai_util.FactorCalculator):
+    def __init__(self, labels, function):
+        self.labels = labels
+        self.function = function
+
+    def calculate(self, v_set):
+        trans = {}
+        for v in self.labels:
+            trans[self.labels[v]] = v_set[v]
+        return self.function(trans)
+
 
 
 class Pathway:
@@ -216,27 +264,81 @@ class Pathway:
             else:
                 child_map[child_id].append( (par_var.variable_id, edge[2]) )
         
+        #we now should have a mapping of all child (destination) nodes in the network,
+        #with 'child_map' providing a list of the parent (source) nodes.
+        #now we need figure out how to combine togeather the incoming edges
+
         for child_id in child_map:
             #now we need to yield out CPDs
             child_variable = fg.var_map.get_variable_by_id(child_id)
             template_type = self.el_map[child_variable.variable_name]
             child_type = child_variable.variable_type
 
-            variable_list = [i[0] for i in child_map[child_id]]
-            variable_list.append(child_id)
+            input_variable_list = [i[0] for i in child_map[child_id]]
             edge_map = {i[0] : i[1] for i in child_map[child_id]}
-            #yield child_id, child_map[child_id]
             cpt_variables = []
             pair_probs = []
+
+            while len(input_variable_list):
+                cur_var_id = input_variable_list.pop()
+                cur_var = fg.var_map.get_variable_by_id(cur_var_id)
+                edge = edge_map[cur_var_id]
+                method = dogma.get_edge_combine_method(edge_type=edge)
+                if method == 'function':
+                    combine_selection = dogma.get_edge_combine_selection(edge_type=edge)
+                    combine_set = []
+                    for other in input_variable_list:
+                        if edge_map[other] in combine_selection:
+                            combine_set.append(other)
+                    for other in combine_set:
+                        input_variable_list.remove(other)
+                    combine_set.append(cur_var_id)
+
+                    func = dogma.get_edge_factor_function(edge_type=edge)
+                    if func is None:
+                        raise Exception("Unable to find function for edge %s" % (func))
+                    
+                    #create variable labels
+                    input_labels = {}
+                    input_variables = []
+                    for c in combine_set:
+                        in_var = fg.var_map.get_variable_by_id(c)
+                        input_labels[c] = in_var.variable_name
+                        input_variables.append(in_var)
+                    input_labels[child_id] = 'child'
+                    input_variables.append(child_variable)
+
+                    cpt = FunctionCalculator( input_labels, func )
+                    cpt_name =  "%s:%s:%s" % (edge, child_variable.variable_name, child_variable.variable_type) #may be non-unique if mulitple edge types are combined
+                    fg.append_cpt(dai_util.CPTGenerator(input_variables, cpt, cpt_name, "input"))
+                    
+                    #print "Doing combine of ", input_labels
+                elif method is None:
+                    #is there is no combine method, then its Factor table naivley shares the child variable
+                    ft = dogma.get_edge_factor_table(edge_type=edge)
+                    if ft is None:
+                        raise Exception("Cant find factor table for edge: %s" % (edge))
+                    else:
+                        cpt = TableCaclulator(cur_var_id, child_id, ft)
+                        cpt_name = "%s:%s->%s:%s" % (cur_var.variable_name, cur_var.variable_type, child_variable.variable_name, child_variable.variable_type)
+                        fg.append_cpt(dai_util.CPTGenerator([cur_var, child_variable], cpt, cpt_name, "input"))
+
+
+            """
+            ###code for old factor mulitplication combine. May be useful again someday
             for v_id in variable_list:
                 cpt_variables.append( fg.var_map.get_variable_by_id(v_id) )
                 if v_id != child_id:
                     edge = edge_map[v_id]
                     ft = dogma.get_factor_table(edge_type=edge, dst_template=template_type, dst_nodetype=child_type)
+                    if ft is None:
+                        print "Cant find", edge
                     pt = CPTPair( v_id, 3, child_id, 3, ft )
                     pair_probs.append(pt)
             cpt = PairCalculator(cpt_variables, pair_probs)
             fg.append_cpt(dai_util.CPTGenerator(cpt_variables, cpt, child_variable.variable_name + ":" + child_variable.variable_type, "inputs"))
+            """
+
         return fg
 
 class EvidenceMatrix:
@@ -391,7 +493,9 @@ if __name__ == "__main__":
         dest="pathway", help="PathwayFile", default=None)
     parser.add_argument("-e", "--evidence", nargs=2, action="append", default=[])
     parser.add_argument("--report", action="store_true", help="Print out factor graph and quit", default=False)
+    parser.add_argument("--dai-file", help="Build factor graph in DAI, then print out to file and quit", default=None)
     parser.add_argument("-s", "--sample", help="Sample Name", default=None)
+    parser.add_argument("--em-mode", action="store_true", default=False)
 
     
     args = parser.parse_args()
@@ -412,19 +516,25 @@ if __name__ == "__main__":
         handle.close()
         e_map[e_type] = mat.descritize([0.33, 0.66], [0,1,2])
 
+
+    expanded_pathway = pathway.expand(dogma)
+
+
     if args.report:
-        expanded_pathway = pathway.expand(dogma)
         for line in expanded_pathway.describe():
             print line
+    elif args.dai_file:
+        if not dai:
+            sys.stderr.write("Cannot proceed without libdai")
+            sys.exit(1)
+        else:
+            dai_fg = expanded_pathway.generate_dai_factor_graph()
+            dai_fg.get_factor_graph().WriteToFile(args.dai_file)
     else:
         if not dai:
             sys.stderr.write("Cannot proceed without libdai")
             sys.exit(1)
         else:
-            vecfac = dai.VecFactor()
-
-            expanded_pathway = pathway.expand(dogma)
-
             clamp_map = {}
             if args.sample is not None:
                 for e_type in e_map:
@@ -433,30 +543,48 @@ if __name__ == "__main__":
                         v = expanded_pathway.var_map.get_variable_by_label(probe, e_type)
                         if v is not None:
                             v_obs = expanded_pathway.var_map.get_or_add_variable(probe, e_type + ":obs", 3)
-                            clamp_map[v_obs.variable_id] = col[probe]
-                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable_id, v.variable_id), v_obs.variable_name, "obs_connect" ) )
+                            clamp_map[v_obs] = col[probe]
+                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable_id, v.variable_id), v_obs.variable_name, e_type + ":obs_connect" ) )
 
-            dai_fg = expanded_pathway.generate_dai_factor_graph()
-            lb_inf = dai_fg.get_inf_bp(verbose=True)
+            if args.em_mode:
+                dai_fg = expanded_pathway.generate_dai_factor_graph()
+                emalg = dai_fg.setup_em()
+                for obs in clamp_map:
+                    emalg.add_evidence("sample", obs, clamp_map[obs])
+                """
+                set of shared parameters for each of the obervation nodes
+                """
+                for e_type in e_map:
+                    shared = emalg.new_shared(['state_value', 'observed_value'])
+                    for factor in dai_fg.factor_map.list_factors(None, e_type + ":obs_connect"):
+                        shared.add_factor( [factor.variables[0], factor.variables[1]], factor)
+                emalg.run(verbose=True)
 
-            lb_inf.init()
-            lb_inf.run()
+                for result in emalg:
+                    print result
 
-            lb_inf_post = lb_inf.clone()
+            else:
+                dai_fg = expanded_pathway.generate_dai_factor_graph()
+                lb_inf = dai_fg.get_inf_bp(verbose=True)
 
-            for v in clamp_map:
-                lb_inf_post.clamp(v, clamp_map[v])
+                lb_inf.init()
+                lb_inf.run()
 
-            lb_inf_post.init()
-            lb_inf_post.run()
-                        
-            for variable, dai_variable in dai_fg.variables():
-                factor_pre = lb_inf.belief( dai_variable )
-                factor_post = lb_inf_post.belief( dai_variable )
-                for i in range(factor_pre.nrStates()):
-                    print variable.label, variable.elem_type, i, factor_pre[i], factor_post[i]
-            print lb_inf_post._iters
-            
+                lb_inf_post = lb_inf.clone()
+
+                for v in clamp_map:
+                    lb_inf_post.clamp(v.variable_id, clamp_map[v])
+
+                lb_inf_post.init()
+                lb_inf_post.run()
+                            
+                for variable, dai_variable in dai_fg.variables():
+                    factor_pre = lb_inf.belief( dai_variable )
+                    factor_post = lb_inf_post.belief( dai_variable )
+                    for i in range(factor_pre.nrStates()):
+                        print variable.label, variable.elem_type, i, factor_pre[i], factor_post[i]
+                print lb_inf_post._iters
+                
 
 
 

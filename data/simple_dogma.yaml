@@ -34,14 +34,39 @@ interactions:
 
 factor_tables : 
     positive : 
-        - [0.9, 0.05, 0.05]
-        - [0.05, 0.9, 0.05]
-        - [0.05, 0.05, 0.9]
+        - [0.90, 0.05, 0.05]
+        - [0.05, 0.90, 0.05]
+        - [0.05, 0.05, 0.90]
     negative : 
-        - [0.05, 0.05, 0.9]
-        - [0.05, 0.9, 0.05]
-        - [0.9, 0.05, 0.05]
+        - [0.05, 0.05, 0.90]
+        - [0.05, 0.90, 0.05]
+        - [0.90, 0.05, 0.05]
 
+factor_functions : 
+    max : |
+        def max_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if max(other_vals) == child_val:
+                return 0.9
+            return 0.5
+    min : |
+        def min_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if min(other_vals) == child_val:
+                return 0.9
+            return 0.5
 
 
 #factor format:
@@ -52,51 +77,32 @@ factor_tables :
 
 factors_fixed : 
     -dTx> :
-        '*' :
-            mRNA:
-                positive
+        factor_table : positive
     -dTl>:
-        '*' :
-            protein:
-                positive
+        factor_table : positive
     -dAct>:
-        '*':
-            active:
-                positive
+        factor_table : positive
     -t>:
-        '*':
-            mRNA:
-                positive
+        factor_table : positive
     -t|:
-        '*':
-            mRNA:
-                negative
+        factor_table : negative
     -a>:
-        '*':
-            active:
-                positive
-
+        factor_table : positive
     -a|:
-        '*':
-            active:
-                negative
-
+        factor_table : negative
     -ap>:
-        '*':
-            active:
-                positive
-
+        factor_table : positive
     -ap|:
-        '*':
-            active:
-                negative
+        factor_table : negative
 
     'component>' :
-        '*':
-            active:
-                positive
+        factor_function : min
+        combine : 
+            method : function
+            types : [ component> ]
 
-    member>:
-        '*':
-            active:
-                positive
+    'member>' :
+        factor_function : max
+        combine : 
+            method : function
+            types : [ member> ]
