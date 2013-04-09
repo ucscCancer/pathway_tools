@@ -19,9 +19,10 @@ def read_sif(handle):
         gr.add_edge(tmp[0], tmp[2], interaction=tmp[1])
     return gr
 
-def write_sif(gr, handle):
-    for e in gr.edges():
-        handle.write("%s\tpp\t%s\n" % (e[0], e[1]))
+def write_sif(gr, handle, edge_type_field='interaction'):
+    for (e1,e2,data) in gr.edges_iter(data=True):
+        interaction = data.get(edge_type_field, "pp")
+        handle.write("%s\t%s\t%s\n" % (e1, interaction, e2))
 
 def read_paradigm_graph(handle):
     gr = networkx.MultiDiGraph()

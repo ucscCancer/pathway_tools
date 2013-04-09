@@ -18,23 +18,8 @@ parser.add_option("-n","--network",dest="network",action="store", default=None, 
 parser.add_option("-s","--subdivs",dest="subdivs",action="store", default=100, help="Number of Subdivisions (per heat increment of 1) to test in the Range")
 (opts, args) = parser.parse_args()
 
+from network_toolkit import convert
 import networkx as nx
-
-def parseNet(network_file):
-	'''
-		Parse .SIF File
-	'''
-	G = nx.MultiGraph()
-	for line in open(network_file, 'r'):
-
-		parts = line.rstrip().split("\t")
-		source = parts[0]
-		interaction = parts[1]
-		target = parts[2]
-
-		G.add_edges_from([(source, target, dict(i=interaction))])
-
-	return G
 
 def parseHeats(file):
 	heats = {}
@@ -50,19 +35,11 @@ def cutGraph(graph, heats, cutoff):
 	for edge in graph.edges_iter(data=True):
 		source = edge[0]
 		target = edge[1]
-		interaction = edge[2]['i']
+		interaction = edge[2]['interaction']
 		if (heats[source] >= cutoff) and (heats[target] >= cutoff):
-			GC.add_edges_from([(source, target, dict(i=interaction))])
+			GC.add_edges_from([(source, target, dict(interaction=interaction))])
 
 	return GC
-
-def printGraph(graph):
-
-	for edge in graph.edges_iter(data=True):
-		source = edge[0]
-		target = edge[1]
-		interaction = edge[2]['i']
-		print "\t".join([source, interaction, target])
 
 def maxCC(ccs):
 
@@ -73,7 +50,7 @@ def maxCC(ccs):
 
 	return max
 
-ugraph = parseNet(opts.network)
+graph = convert.read_sif(open(opts.network))
 heats = parseHeats(opts.heats)
 if opts.cut_graph:
 	cut_val = None
@@ -82,15 +59,15 @@ if opts.cut_graph:
 	except:
 		raise Exception("Error: value supplied to cut_graph must be a positive number")
 
-	cutG = cutGraph(ugraph, heats, cutoff)
-	printGraph(cutG)
+	cutG = cutGraph(graph, heats, cutoff)
+	convert.write_sif(cutG, sys.stdout)
 	sys.exit(1)
 
 max_heat = max(heats.values())
 print "Cutoff\tNum Edges\tNum Connected Components\tLargest Connected ComponentmaxCC(ccs)\tEdge Biggest CC Ratio"
 for cutoff in range(0, int(max_heat*opts.subdivs)+1):
 	cutoff = cutoff/float(opts.subdivs)
-	cutG = cutGraph(ugraph, heats, cutoff)
+	cutG = cutGraph(graph, heats, cutoff)
 	l_ccs = nx.number_connected_components(cutG)
 	ccs = nx.connected_components(cutG)
 	max_ccs = maxCC(ccs)
