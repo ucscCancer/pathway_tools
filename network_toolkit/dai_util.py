@@ -428,7 +428,9 @@ class DaiEM:
         prop = dai.PropertySet()
         prop["tol"] = "1e-9"
         prop["logdomain"] = "0"
-        prop["updates"] = "SEQFIX"
+        #prop["updates"] = "SEQFIX"
+        prop['updates'] = 'PARALL'
+        prop['nthread'] = "5"
         if verbose:
             prop["verbose"] = "1"
         else:
@@ -468,7 +470,8 @@ class DaiFactorGraph:
     def get_factor_graph(self):
         return dai.FactorGraph(self.vecfac)
 
-    def get_inf(self, name, verbose=False):
+    def get_inf(self, name, **kwds):
+        """
         cls, config = network_toolkit.dai_conf.config_map[name]
         prop = dai.PropertySet()
         for c in config:
@@ -478,6 +481,13 @@ class DaiFactorGraph:
         sn = dai.FactorGraph(self.vecfac)
         inf = cls(sn, prop)
         return inf
+        """
+        sn = dai.FactorGraph(self.vecfac)
+        prop = dai.PropertySet()
+        for k in kwds:
+            prop[k] = str(kwds[k])
+        inf_alg = dai.newInfAlg(name, sn, prop )
+        return inf_alg
 
     def get_inf_jtree(self):
         sn = self.get_factor_graph()
@@ -506,6 +516,6 @@ class DaiFactorGraph:
 
     def variables(self):
         for var in self.variable_map:
-            yield var, self.var_map[var.variable]
+            yield var
 
 

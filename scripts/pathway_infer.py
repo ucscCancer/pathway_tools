@@ -565,7 +565,9 @@ if __name__ == "__main__":
 
             else:
                 dai_fg = expanded_pathway.generate_dai_factor_graph()
-                lb_inf = dai_fg.get_inf_bp(verbose=True)
+                #lb_inf = dai_fg.get_inf("BP", tol="1e-9", logdomain=1, updates="SEQFIX", verbose=1)
+                lb_inf = dai_fg.get_inf("BP", tol="1e-9", logdomain=1, nthread=5, updates="PARALL", verbose=1)
+                #lb_inf = dai_fg.get_inf_bp(verbose=True)
 
                 lb_inf.init()
                 lb_inf.run()
@@ -578,12 +580,12 @@ if __name__ == "__main__":
                 lb_inf_post.init()
                 lb_inf_post.run()
                             
-                for variable, dai_variable in dai_fg.variables():
-                    factor_pre = lb_inf.belief( dai_variable )
-                    factor_post = lb_inf_post.belief( dai_variable )
+                for variable in dai_fg.variables():
+                    factor_pre = lb_inf.belief( variable.dai_value )
+                    factor_post = lb_inf_post.belief( variable.dai_value )
                     for i in range(factor_pre.nrStates()):
-                        print variable.label, variable.elem_type, i, factor_pre[i], factor_post[i]
-                print lb_inf_post._iters
+                        print variable.variable_name, variable.variable_type, i, factor_pre[i], factor_post[i]
+                #print lb_inf_post._iters
                 
 
 
