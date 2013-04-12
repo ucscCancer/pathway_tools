@@ -392,7 +392,7 @@ class DaiEM:
         for i in self.shared_param_list:
             yield i
 
-    def run(self, verbose=False):
+    def run(self, method_name, **kwds):
         obsvec = dai.ObservationVec()
         for sample in self.evidence_map:
             obs = dai.Observation()
@@ -426,23 +426,16 @@ class DaiEM:
         evidence = dai.Evidence(obsvec)
         #inf_alg = self.factor_graph.get_inf_bp(verbose=True)
         prop = dai.PropertySet()
-        prop["tol"] = "1e-9"
-        prop["logdomain"] = "0"
-        #prop["updates"] = "SEQFIX"
-        prop['updates'] = 'PARALL'
-        prop['nthread'] = "5"
-        if verbose:
-            prop["verbose"] = "1"
-        else:
-            prop["verbose"] = "0"
+        for k in kwds:
+            prop[k] = str(kwds[k])
 
-        inf_alg = dai.newInfAlg("BP", self.factor_graph.get_factor_graph(), prop )
+        inf_alg = dai.newInfAlg(method_name, self.factor_graph.get_factor_graph(), prop )
         em_props= dai.PropertySet()
         dai_em_alg = dai.EMAlg(evidence, inf_alg, vec_max_step, em_props)
 
         while not dai_em_alg.hasSatisfiedTermConditions():
             l = dai_em_alg.iterate()
-            if verbose:
+            if kwds.get("verbose", False):
                 print "Iteration ", dai_em_alg.Iterations(), " likelihood: ", l
                 for max_step in dai_em_alg:
                     print max_step, len(max_step)
