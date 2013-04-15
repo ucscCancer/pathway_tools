@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import network_convert
 import sys
 import networkx
 import argparse
+from pathway_tools import convert as network_convert
 
 
 if __name__ == "__main__":

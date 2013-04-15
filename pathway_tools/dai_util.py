@@ -1,5 +1,5 @@
 import dai
-import network_toolkit.dai_conf
+import pathway_tools.dai_conf
 
 class FactorCalculator:
 

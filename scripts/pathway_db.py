@@ -9,7 +9,7 @@ import csv
 import shutil
 import subprocess
 import networkx
-from network_toolkit import convert as network_convert
+from pathway_tools import convert as network_convert
 from glob import glob
 from StringIO import StringIO
 from urllib2 import urlopen

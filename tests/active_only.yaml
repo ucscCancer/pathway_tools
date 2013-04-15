@@ -1,0 +1,100 @@
+#dogma_template defines the different types of templates for network object
+#dogma_template format:
+#dogma type -> edge_list
+#edge_list - array of [ src_node_type, dst_node_type, edge_type]
+dogma_template:
+    protein:
+        - [active]
+    complex:
+        - [active]
+    chemical:
+        - [active]
+    abstract:
+        - [active]
+    family:
+        - [active]
+
+
+
+#interactions define how the sub-elements of two templates are connected
+#interactions format:
+#list -> [ src_node_type, dst_node_type, edge_type ]
+interactions:
+    - [active, active, -t>]
+    - [active, active, -t|]
+    - [active, active, -a>]
+    - [active, active, -a|]
+    - [active, active, component>]
+    - [active, active, -ap>]
+    - [active, active, -ap|]
+    - [active, active, member>]
+
+
+factor_tables : 
+    positive : 
+        - [0.90, 0.05, 0.05]
+        - [0.05, 0.90, 0.05]
+        - [0.05, 0.05, 0.90]
+    negative : 
+        - [0.05, 0.05, 0.90]
+        - [0.05, 0.90, 0.05]
+        - [0.90, 0.05, 0.05]
+
+factor_functions : 
+    max : |
+        def max_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if max(other_vals) == child_val:
+                return 0.9
+            return 0.5
+    min : |
+        def min_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if min(other_vals) == child_val:
+                return 0.9
+            return 0.5
+
+
+#factor format:
+#Edge type
+#    dst_template_name
+#        dst_node_type
+#            probablity_table
+
+factors_fixed : 
+    -t>:
+        factor_table : positive
+    -t|:
+        factor_table : negative
+    -a>:
+        factor_table : positive
+    -a|:
+        factor_table : negative
+    -ap>:
+        factor_table : positive
+    -ap|:
+        factor_table : negative
+
+    'component>' :
+        factor_function : min
+        combine : 
+            method : function
+            types : [ component> ]
+
+    'member>' :
+        factor_function : max
+        combine : 
+            method : function
+            types : [ member> ]

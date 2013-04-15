@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
-import network_convert
+from pathway_tools import convert as network_convert
 import sys
 import argparse
-
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
