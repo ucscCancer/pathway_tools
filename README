@@ -11,10 +11,24 @@ pip install networkx
 To get the code:
 git clone git://github.com/ucscCancer/pathway_tools.git
 
+
+========================
+Installation
+========================
+
+python setup.py build
+python setup.py install
+
+(Local install)
+python setup.py install --user
+
+
+========================
+Developement
+========================
+
 Setup your PYTHONPATH
-
 export PYTHONPATH=`pwd`/pathway_tools
-
 Once you have the pathway toolkit:
 
 ========================
@@ -66,9 +80,9 @@ Compare to the old super pathway
 
 
 Convert Superpathway file, with GMT file into XGMML
-./paradigm_network_convert.py -in-paradigm pid_110725_pathway.tab -in-gmt output.gmt  -out-xgmml super.xgmml
+./network_convert.py --in-paradigm pid_110725_pathway.tab --in-gmt output.gmt  --out-xgmml super.xgmml
 
 ----------
 
 Convert XGMML file to paradigm network and gmt file
-./paradigm_network_convert.py -in-xgmml super.xgmml -out-gmt test.gmt -out-paradigm test.tab
+./network_convert.py --in-xgmml super.xgmml --out-gmt test.gmt --out-paradigm test.tab
