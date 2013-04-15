@@ -86,3 +86,59 @@ Convert Superpathway file, with GMT file into XGMML
 
 Convert XGMML file to paradigm network and gmt file
 ./network_convert.py --in-xgmml super.xgmml --out-gmt test.gmt --out-paradigm test.tab
+
+
+
+Inference instructions (assumes Mac with 'ports' installed)
+
+
+Download from 
+https://github.com/kellrott/libdai (git clone git://github.com/kellrott/libdai.git)
+
+
+sudo port install scons
+sudo port install swig
+sudo port install swig-python
+sudo port install gmp
+
+
+1. from libdai:
+Build:
+scons
+(If impatient add '-j 4' to use 4 threads)
+
+Install:
+scons install --prefix=/opt/local
+(you may have to sudo to install)
+
+2. from libdai/swig:
+LIBDAI_PATH=/opt/local python setup.py install
+
+(or 'python setup.py install --user' if you want to do a local install)
+
+Before use (so shared library can be found)
+3. export DYLD_LIBRARY_PATH=/opt/local/lib
+
+To test:
+python
+
+>>> import dai
+
+Pathway toolkit
+
+git clone git://github.com/ucscCancer/pathway_tools.git
+
+export DYLD_LIBRARY_PATH=/opt/local/lib
+
+python setup.py build
+python setup.py test
+
+Command line:
+
+./scripts/pathway_infer.py -d tests/active_only.yaml -p tests/toy_pathway.tab -e active tests/toy_data.tab -s sample_1
+
+Run EM:
+
+./scripts/pathway_infer.py -d tests/active_only.yaml -p tests/toy_pathway.tab -e active tests/toy_data.tab -s sample_1 --em-mode
+
+
