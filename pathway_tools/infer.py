@@ -556,7 +556,7 @@ def pathway_inference(args):
                     shared = emalg.new_shared(['state_value', 'observed_value'])
                     for factor in dai_fg.factor_map.list_factors(None, e_type + ":obs_connect"):
                         shared.add_factor( [factor.variables[0], factor.variables[1]], factor)
-                emalg.run(verbose=True)
+                emalg.run("BP", tol="1e-9", logdomain=1, updates="SEQFIX", verbose=1)
 
                 for result in emalg:
                     print result
@@ -564,7 +564,7 @@ def pathway_inference(args):
             else:
                 dai_fg = expanded_pathway.generate_dai_factor_graph()
                 #lb_inf = dai_fg.get_inf("BP", tol="1e-9", logdomain=1, updates="SEQFIX", verbose=1)
-                lb_inf = dai_fg.get_inf("BP", tol="1e-9", logdomain=1, nthread=5, updates="PARALL", verbose=1)
+                lb_inf = dai_fg.get_inf("BP", tol="1e-9", logdomain=1, nthread=5, updates="SEQFIX", verbose=1)
                 #lb_inf = dai_fg.get_inf_bp(verbose=True)
 
                 lb_inf.init()
