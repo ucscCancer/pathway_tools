@@ -395,7 +395,7 @@ class DaiEM:
         for i in self.shared_param_list:
             yield i
 
-    def run(self, method_name, **kwds):
+    def run(self, method_name, pseudo_count=0.1, **kwds):
         obsvec = dai.ObservationVec()
         for sample in self.evidence_map:
             obs = dai.Observation()
@@ -416,10 +416,14 @@ class DaiEM:
             total_dim = 1
             for d in sp.variable_dims:
                 total_dim *= d
-            props = dai.PropertySet()
-            props["total_dim"] = str(total_dim)
-            props["target_dim"] = str(sp.variable_dims[0])
-            pe = dai.ParameterEstimation.construct("CondProbEstimation", props)
+            #props = dai.PropertySet()
+            #props["total_dim"] = str(total_dim)
+            #props["target_dim"] = str(sp.variable_dims[0])
+            #pe = dai.ParameterEstimation.construct("CondProbEstimation", props)
+            pseudo_counts = dai.Prob(total_dim, pseudo_count)
+            #for i in range(total_dim):
+            #    pseudo_count.append( 0.01 )
+            pe = dai.CondProbEstimation(sp.variable_dims[0], pseudo_counts)
             dai_sp = dai.SharedParameters(fo, pe)
             sp_vec.append(dai_sp)
 
