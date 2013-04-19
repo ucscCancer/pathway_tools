@@ -47,6 +47,9 @@ class VariableMap:
     def get_variable_by_id(self, v):
         return self.varid_map[v]
 
+    def has_variable_by_label(self, label, elem_type):
+        return (label, elem_type) in self.variable_map
+
     def get_variable_by_label(self, label, elem_type):
         try:
             return self.variable_map[ (label, elem_type) ]

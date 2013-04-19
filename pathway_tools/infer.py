@@ -535,20 +535,28 @@ def pathway_inference(args):
         else:
             clamp_map = {}
             if args.sample is not None:
-                for e_type in e_map:
-                    col = e_map[e_type].get_col(args.sample)
-                    for probe in col:
-                        v = expanded_pathway.var_map.get_variable_by_label(probe, e_type)
-                        if v is not None:
-                            v_obs = expanded_pathway.var_map.get_or_add_variable(probe, e_type + ":obs", 3)
-                            clamp_map[v_obs] = col[probe]
-                            expanded_pathway.append_cpt( dai_util.CPTGenerator([v, v_obs], PositiveFactorCalculator(v_obs.variable_id, v.variable_id), v_obs.variable_name, e_type + ":obs_connect" ) )
-
+                for sample in args.sample:
+                    clamp_map[sample] = {}
+                    for e_type in e_map:
+                        col = e_map[e_type].get_col(sample)
+                        for probe in col:
+                            v = expanded_pathway.var_map.get_variable_by_label(probe, e_type)
+                            if v is not None:
+                                v_obs = expanded_pathway.var_map.get_variable_by_label(probe, e_type + ":obs")
+                                if v_obs is None:
+                                    v_obs = expanded_pathway.var_map.get_or_add_variable(probe, e_type + ":obs", 3)
+                                    expanded_pathway.append_cpt( 
+                                        dai_util.CPTGenerator([v, v_obs], 
+                                            PositiveFactorCalculator(v_obs.variable_id, v.variable_id), 
+                                        v_obs.variable_name, e_type + ":obs_connect" ) 
+                                    )
+                                clamp_map[sample][v_obs] = col[probe]
             if args.em_mode:
                 dai_fg = expanded_pathway.generate_dai_factor_graph()
                 emalg = dai_fg.setup_em()
-                for obs in clamp_map:
-                    emalg.add_evidence("sample", obs, clamp_map[obs])
+                for sample in clamp_map:
+                    for obs in clamp_map[sample]:
+                        emalg.add_evidence(sample, obs, clamp_map[sample][obs])
                 """
                 set of shared parameters for each of the obervation nodes
                 """
@@ -570,17 +578,17 @@ def pathway_inference(args):
                 lb_inf.init()
                 lb_inf.run()
 
-                lb_inf_post = lb_inf.clone()
+                for sample in clamp_map:
+                    lb_inf_post = lb_inf.clone()
+                    for v in clamp_map[sample]:
+                        lb_inf_post.clamp(v.variable_id, clamp_map[sample][v])
 
-                for v in clamp_map:
-                    lb_inf_post.clamp(v.variable_id, clamp_map[v])
-
-                lb_inf_post.init()
-                lb_inf_post.run()
-                            
-                for variable in dai_fg.variables():
-                    factor_pre = lb_inf.belief( variable.dai_value )
-                    factor_post = lb_inf_post.belief( variable.dai_value )
-                    for i in range(factor_pre.nrStates()):
-                        print variable.variable_name, variable.variable_type, i, factor_pre[i], factor_post[i]
-                #print lb_inf_post._iters
+                    lb_inf_post.init()
+                    lb_inf_post.run()
+                                
+                    for variable in dai_fg.variables():
+                        factor_pre = lb_inf.belief( variable.dai_value )
+                        factor_post = lb_inf_post.belief( variable.dai_value )
+                        for i in range(factor_pre.nrStates()):
+                            print sample, variable.variable_name, variable.variable_type, i, factor_pre[i], factor_post[i]
+                    #print lb_inf_post._iters
