@@ -54,7 +54,7 @@ factor_functions :
                     other_vals.append(inputs[v])
             if max(other_vals) == child_val:
                 return 0.9
-            return 0.05
+            return 0.1 / float(len(other_vals))
     min : |
         def min_val(inputs):
             other_vals = []
@@ -66,7 +66,7 @@ factor_functions :
                     other_vals.append(inputs[v])
             if min(other_vals) == child_val:
                 return 0.9
-            return 0.05
+            return 0.1 / float(len(other_vals))
 
 
 #factor format:
