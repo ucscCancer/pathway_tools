@@ -74,6 +74,12 @@ factor_functions :
 #            probablity_table
 
 factors_fixed : 
+    -dTx> :
+        factor_table : positive
+    -dTl>:
+        factor_table : positive
+    -dAct>:
+        factor_table : positive
     -t>:
         factor_table : positive
     -t|:
