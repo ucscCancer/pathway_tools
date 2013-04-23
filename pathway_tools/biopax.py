@@ -7,6 +7,7 @@ import os
 from glob import glob
 import networkx
 from pathway_tools import convert
+from StringIO import StringIO
 
 TYPE_PRED = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 BIOPAX_BASE = "http://www.biopax.org/release/biopax-level3.owl#"
@@ -72,7 +73,16 @@ class BioPax:
 	
 	def load(self, path):
 		g = rdflib.Graph()
-		result = g.parse(sys.argv[1])
+		result = g.parse(path)
+		self._graph_parse(g)
+	
+	def parse(self, text):
+		handle = StringIO(text)
+		g = rdflib.Graph()
+		result = g.parse(handle)
+		self._graph_parse(g)
+	
+	def _graph_parse(self, g):
 		for subj, pred, obj in g:
 			subj_text = ("%s" % (subj)).encode('ascii', errors='ignore').rstrip()
 			pred_text = ("%s" % (pred)).encode('ascii', errors='ignore').rstrip()
@@ -114,16 +124,16 @@ class BioPax:
 					
 					for l in left:
 						if l.name not in gr.node:
-							gr.add_node(l.name, type=l.type)
+							gr.add_node(l.name.replace("\n", " "), type=l.type)
 
 					for r in right:
 						if r.name not in gr.node:
-							gr.add_node(r.name, type=r.type)
+							gr.add_node(r.name.replace("\n", " "), type=r.type)
 						
 					for l in left:
 						for r in right:
 							interaction = "-a>"
-							gr.add_edge( l.name, r.name, None, {'interaction' : interaction} )
+							gr.add_edge( l.name.replace("\n", " "), r.name.replace("\n", " "), None, {'interaction' : interaction} )
 					
 				elif  component_list[component] == BIOPAX_BASE + "Catalysis":
 					pass
