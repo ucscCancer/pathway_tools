@@ -146,16 +146,22 @@ class CPT:
     def __init__(self, variables):
         self.variables = variables
         self.varmap = {}
-        dims = []
+        self.dims = []
         for i, v in enumerate(variables):
             self.varmap[v] = i
-            dims.append(variables[v])
-        self._table = MultiDimMatrix(*dims)
+            self.dims.append(variables[v])
+        self._table = MultiDimMatrix(*self.dims)
 
     def __str__(self):
-        num_vars = len(self.variables)
-        fac_states = [ 0 ] * num_vars
-        return "%s" % ("\n".join(str(i) for i in self._table._li))
+        #num_vars = len(self.variables)
+        #fac_states = [ 0 ] * num_vars
+        #return "%s" % ("\n".join(str(i) for i in self._table._li))
+        out = []
+        i = 0
+        for v in multi_dim_iter(self.dims):
+            out.append("%d %f # %s" % (i, self._table.__getitem__(v), v ))
+            i += 1
+        return "\n".join(out)
 
     def set_value(self, value, factors):
         idx = []
@@ -339,7 +345,7 @@ class FactorGraph:
             v_list.sort()
             for v in v_list:
                 var_list.append(self.var_map.get_variable_by_id(v).dai_value)
-            dai_factor = dai.Factor(var_list) 
+            dai_factor = dai.Factor(var_list)
             for i, v in enumerate(elem.factors()):
                 dai_factor[i] = v
             vecfac.append(dai_factor)

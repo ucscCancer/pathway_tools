@@ -2,6 +2,7 @@ protein	protein_1
 protein	protein_2
 protein	protein_3
 complex	complex_1
+complex	complex_2
 family	family_1
 protein_1	family_1	member>
 protein_2	family_1	member>
@@ -9,3 +10,5 @@ protein_3	family_1	member>
 protein_1	complex_1	component>
 protein_2	complex_1	component>
 protein_3	complex_1	component>
+protein_1	complex_2	component>
+protein_2	complex_2	component>
