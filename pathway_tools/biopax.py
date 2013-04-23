@@ -6,7 +6,7 @@ import rdflib.term
 import os
 from glob import glob
 import networkx
-import network_convert
+from pathway_tools import convert
 
 TYPE_PRED = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 BIOPAX_BASE = "http://www.biopax.org/release/biopax-level3.owl#"
@@ -52,11 +52,16 @@ class PhysicalEntity(ElementBase):
 	type = "physicalentity"
 
 
+class Rna(ElementBase):
+	type = "rna"
+
+
 element_mapping = {
 	BIOPAX_BASE + "Protein" : Protein,
 	BIOPAX_BASE + "SmallMolecule" : SmallMolecule,
 	BIOPAX_BASE + "Complex" : Complex,
-	BIOPAX_BASE + "PhysicalEntity" : PhysicalEntity
+	BIOPAX_BASE + "PhysicalEntity" : PhysicalEntity,
+	BIOPAX_BASE + "Rna" : Rna
 }
 
 
@@ -69,9 +74,9 @@ class BioPax:
 		g = rdflib.Graph()
 		result = g.parse(sys.argv[1])
 		for subj, pred, obj in g:
-			subj_text = ("%s" % (subj)).encode('ascii', errors='ignore')
-			pred_text = ("%s" % (pred)).encode('ascii', errors='ignore')
-			obj_text =  ("%s" % (obj)).encode('ascii', errors='ignore')
+			subj_text = ("%s" % (subj)).encode('ascii', errors='ignore').rstrip()
+			pred_text = ("%s" % (pred)).encode('ascii', errors='ignore').rstrip()
+			obj_text =  ("%s" % (obj)).encode('ascii', errors='ignore').rstrip()
 			if subj_text not in self.graph:
 				self.graph[subj_text] = {}
 			if pred_text not in self.graph[subj_text]:
@@ -168,10 +173,3 @@ class BioPax:
 						)
 		return out			
 	
-
-if __name__ == "__main__":
-	b = BioPax()
-	b.load(sys.argv[1])
-	
-	for gr in b.toNet():
-		network_convert.write_paradigm_graph(gr, sys.stdout)
