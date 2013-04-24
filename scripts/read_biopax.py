@@ -9,4 +9,6 @@ if __name__ == "__main__":
 	b.load(sys.argv[1])
 	
 	for gr in b.toNet():
-		convert.write_paradigm_graph(gr, sys.stdout)
+		#convert.write_paradigm_graph(gr, sys.stdout)
+		convert.write_xgmml(gr, sys.stdout)
+		

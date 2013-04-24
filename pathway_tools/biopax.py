@@ -101,7 +101,7 @@ class BioPax:
 
 		for pathway in pathway_list:
 			gr = networkx.MultiDiGraph()
-			log("Pathway: " + pathway)
+			#log("Pathway: " + pathway)
 			name = None
 			for a in self.query(src=pathway, predicate= BIOPAX_BASE + "displayName"):
 				name = a.dst
@@ -142,6 +142,23 @@ class BioPax:
 				#for c_info in self.query(src=component):
 				#	print c_info
 				#print component, component_list[component]
+
+			for protein in self.query(predicate=TYPE_PRED, dst=BIOPAX_BASE + "Protein"):
+				for name in self.query(src=protein.src, predicate=BIOPAX_BASE + "displayName"):
+					node_name = name.dst.replace("\n", " ")
+					if node_name not in gr.node:
+						gr.add_node(node_name, type="protein")
+					for ref in self.query(src=protein.src, predicate=BIOPAX_BASE + "entityReference"):
+						for xref in self.query(src=ref.dst, predicate=BIOPAX_BASE + "xref"):
+							db = None
+							db_id = None
+							for rel in self.query(src=xref.dst):
+								if rel.predicate == BIOPAX_BASE + "db":
+									db = rel.dst
+								if rel.predicate == BIOPAX_BASE + "id":
+									db_id = rel.dst
+							db_xref = "%s:%s" % (db, db_id)
+							gr.node[node_name]['db_xref'] = db_xref
 			yield gr
 	
 	def get_node_type(self, node):
