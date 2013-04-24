@@ -6,10 +6,13 @@
 
 import sys
 import os
+import csv
 import base64
 from SOAPpy import SOAPProxy      
 url = 'http://www.wikipathways.org/wpi/webservice/webservice.php'
 namespace = 'http://www.wikipathways.org/webservice'
+
+import argparse
 
 from pathway_tools import biopax
 from pathway_tools import convert
@@ -26,21 +29,60 @@ def printOutput(ws_output):
         index+=1
 
 
+db_map = {
+    "Ensembl" : "Ensembl ID",
+    "Uniprot" : "UniProt ID",
+    'Entrez Gene' : "Entrez Gene ID"
+}
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o', "--outdir")
+    parser.add_argument('-t', "--translate")
+    parser.add_argument("pathways", action="append")
+    args = parser.parse_args()
+
+
     server = SOAPProxy(url, namespace)
-    outdir = sys.argv[1]
     
-    for row in server.listPathways():
-        if row['species'] == "Homo sapiens":
-            print row
-            pathdata_str = server.getPathwayAs(fileType="owl", pwId=row['id'])
-            pathdata_xml = base64.b64decode(pathdata_str)
-            b = biopax.BioPax()
-            b.parse(pathdata_xml)
-            for gr in b.toNet():
-                handle = open( os.path.join(outdir, row['id']), "w" )
-                convert.write_paradigm_graph(gr, handle)            
-                handle.close()
+    if len(args.pathways) == 0:    
+        pathways = []
+        for row in server.listPathways():
+            if row['species'] == "Homo sapiens":
+                pathways.append(row['id'])
+    else:
+        pathways = args.pathways
+
+    translate_table = None
+    if args.translate:
+        handle = open(args.translate)
+        reader = csv.DictReader(handle, delimiter="\t")
+        translate_table = []
+        for row in reader:
+            translate_table.append(row)
+        handle.close()
+
+    for path in pathways:
+        pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
+        pathdata_xml = base64.b64decode(pathdata_str)
+        b = biopax.BioPax()
+        b.parse(pathdata_xml)
+        for gr in b.toNet():
+            if translate_table:
+                for n in gr.node:
+                    if 'db_xref' in gr.node[n]:
+                        db, db_id = gr.node[n]['db_xref'].split(":")
+                        found = False
+                        for row in translate_table:
+                            if db_map[db] in row:
+                                if row[db_map[db]] == db_id:
+                                    print db_id, row['Approved Symbol']
+                                    found = True
+                        print found
+            handle = open( os.path.join(args.outdir, path), "w" )
+            #convert.write_paradigm_graph(gr, handle)            
+            convert.write_xgmml(gr, handle)            
+            handle.close()
             
     #print server.getPathway(pwId="WP98")
 
