@@ -318,6 +318,7 @@ class Pathway:
                         input_variables.append(in_var)
                     input_labels[child_id] = 'child'
                     input_variables.append(child_variable)
+                    print input_labels
 
                     cpt = FunctionCalculator( input_labels, func )
                     cpt_name =  "%s:%s:%s" % (edge, child_variable.variable_name, child_variable.variable_type) #may be non-unique if mulitple edge types are combined

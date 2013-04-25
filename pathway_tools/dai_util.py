@@ -143,14 +143,13 @@ class CPT:
 
     Methods for normalizing the table against different variables should go here
     """
-    def __init__(self, variables):
+    def __init__(self, variables, dims):
         self.variables = variables
+        self.dims = dims
         self.varmap = {}
-        self.dims = []
         for i, v in enumerate(variables):
             self.varmap[v] = i
-            self.dims.append(variables[v])
-        self._table = MultiDimMatrix(*self.dims)
+        self._table = MultiDimMatrix(*dims)
 
     def __str__(self):
         #num_vars = len(self.variables)
@@ -171,25 +170,15 @@ class CPT:
 
     def factors(self, variable_set=None):
         if variable_set is None:
-            variable_set = self.variables.keys()
+            variable_set = self.variables
         num_vars = len(variable_set)
-        fac_states = [ 0 ] * num_vars
-        fac_index = 0
-        fac_values = []
+        dims = []
+        for v in variable_set:
+            dims.append(self.dims[self.varmap[v]])
 
         out = []
-        done = False
-        while not done and fac_states[-1] < self.variables[variable_set[-1]]:
+        for fac_states in multi_dim_iter(dims):
             out.append( self._table.__getitem__(fac_states) )
-            inc_index = 0
-            fac_states[inc_index] += 1
-            while fac_states[inc_index] >= self.variables[variable_set[inc_index]]:
-                fac_states[inc_index] = 0
-                inc_index += 1
-                if inc_index > len(fac_states)-1:
-                    done = True
-                    break
-                fac_states[inc_index] += 1
         return out
 
 
@@ -239,14 +228,14 @@ class CPTGenerator:
         fac_index = 0
         fac_values = []
 
-        var_dim_map = {}
+        var_list = []
         var_dims = []
         for i in variable_set:
             d = self.get_variable_by_id(i).dim
-            var_dim_map[i] = d
+            var_list.append(i)
             var_dims.append(d)
 
-        cpt = CPT(var_dim_map)
+        cpt = CPT(var_list, var_dims)
         done = False
         while not done and fac_states[-1] < var_dims[-1]:
             c_map = {}
@@ -322,7 +311,7 @@ class FactorGraph:
             yield "#CPT %s %s " % (cpt.cpt_name, cpt.cpt_type)
             yield " ".join([str(i) for i in node_order])
             yield " ".join([str(i) for i in node_dim])
-            yield cpt.generate()
+            yield cpt.generate(node_order)
 
     def generate_dai_factor_graph(self):
         vecfac = dai.VecFactor()
