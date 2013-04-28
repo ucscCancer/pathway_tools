@@ -16,6 +16,7 @@ import argparse
 
 from pathway_tools import biopax
 from pathway_tools import convert
+import networkx as nx
 
 # Print out function for query results (see code below function first)
 def printOutput(ws_output):
@@ -29,19 +30,50 @@ def printOutput(ws_output):
         index+=1
 
 
+#mapping of databases referenced by WikiPathways, and what they can be translated to
 db_map = {
     "Ensembl" : "Ensembl ID",
+    "Ensembl Human" : "Ensembl ID",
     "Uniprot" : "UniProt ID",
-    'Entrez Gene' : "Entrez Gene ID"
+    "UniProt" : "UniProt ID",
+    'Entrez Gene' : "Entrez Gene ID",
+    "Enzyme Nomenclature" : None,
+    "SwissProt" : None,
+    'Affy' : None,
+    "ec-code" : None,
+    "PubChem" : None,
+    "Wikipedia" : None,
+    "Other" : None,
+    "EMBL" : None,
+    "miRBase Sequence" : None,
+    "HGNC" : None,
+    "GenBank" : None,
+    "UniGene" : None,
+    "PubChem-compound" : None,
+    "Reactome" : None,
+    "COMPOUND" : None,
+    "ChEBI" : None,
+    "GenBank" : "Accession Numbers",
+    "GLYCAN" : None,
+    "CAS" : None,
+    "Kegg ortholog" : None,
+    "KEGG Orthology" : None,
+    "KEGG Genes" : None,
+    "OMIM" : "OMIM ID",
+    "RefSeq" : "RefSeq IDs",
+    "enzyme" : "Enzyme IDs",
+    "CTD Gene" : None,
+    "GeneDB" : None,
+    "Pfam" : None
 }
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', "--outdir")
     parser.add_argument('-t', "--translate")
-    parser.add_argument("pathways", action="append")
+    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("pathways", nargs="*")
     args = parser.parse_args()
-
 
     server = SOAPProxy(url, namespace)
     
@@ -63,22 +95,33 @@ if __name__ == "__main__":
         handle.close()
 
     for path in pathways:
+        print "Getting", path
         pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
         pathdata_xml = base64.b64decode(pathdata_str)
         b = biopax.BioPax()
         b.parse(pathdata_xml)
         for gr in b.toNet():
             if translate_table:
+                re_map = {}
                 for n in gr.node:
                     if 'db_xref' in gr.node[n]:
-                        db, db_id = gr.node[n]['db_xref'].split(":")
-                        found = False
-                        for row in translate_table:
-                            if db_map[db] in row:
-                                if row[db_map[db]] == db_id:
-                                    print db_id, row['Approved Symbol']
-                                    found = True
-                        print found
+                        try:
+                            db, db_id = gr.node[n]['db_xref'].split(":")
+                            found = False
+                            for row in translate_table:
+                                if db not in db_map:
+                                    print "WARNING: Database not found: %s" % (db)
+                                else:
+                                    if db_map[db] in row:
+                                        if row[db_map[db]] == db_id:
+                                            if args.verbose:
+                                                print db_id, row['Approved Symbol']
+                                            found = True
+                                            re_map[n] = row['Approved Symbol']
+                            #print found
+                        except ValueError:
+                            pass
+                gr = nx.relabel_nodes(gr, re_map)
             handle = open( os.path.join(args.outdir, path), "w" )
             #convert.write_paradigm_graph(gr, handle)            
             convert.write_xgmml(gr, handle)            
