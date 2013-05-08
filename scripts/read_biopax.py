@@ -14,10 +14,11 @@ if __name__ == "__main__":
     b = BioPax()
     b.load(args.input)
     
-    for gr in b.toNet():
-        #convert.write_paradigm_graph(gr, sys.stdout)
-        if args.output:
-            handle = open(args.output, "w")
-            convert.write_xgmml(gr, handle)
-        else:
-            convert.write_xgmml(gr, sys.stdout)
+    for gr_set in b.toNet():
+        for gr in gr_set:
+            if args.output:
+                handle = open(args.output, "w")
+                convert.write_xgmml(gr, handle)
+            else:
+                convert.write_xgmml(gr, sys.stdout)
+        
