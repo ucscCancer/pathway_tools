@@ -71,7 +71,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', "--outdir")
     parser.add_argument('-t', "--translate")
-    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("-v", "--verbose", action="store_true", default=False)
+    parser.add_argument("-f", "--file-mode", action="store_true", default=False)
     parser.add_argument("pathways", nargs="*")
     args = parser.parse_args()
 
@@ -94,40 +95,50 @@ if __name__ == "__main__":
             translate_table.append(row)
         handle.close()
 
-    for path in pathways:
-        print "Getting", path
-        pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
-        pathdata_xml = base64.b64decode(pathdata_str)
-        b = biopax.BioPax()
-        b.parse(pathdata_xml)
-        for gr in b.toNet():
-            if translate_table:
-                re_map = {}
-                for n in gr.node:
-                    if 'db_xref' in gr.node[n]:
-                        try:
-                            db, db_id = gr.node[n]['db_xref'].split(":")
-                            found = False
-                            for row in translate_table:
-                                if db not in db_map:
-                                    print "WARNING: Database not found: %s" % (db)
-                                else:
-                                    if db_map[db] in row:
-                                        if row[db_map[db]] == db_id:
-                                            if args.verbose:
-                                                print db_id, row['Approved Symbol']
-                                            found = True
-                                            re_map[n] = row['Approved Symbol']
-                            #print found
-                        except ValueError:
-                            pass
-                gr = nx.relabel_nodes(gr, re_map)
-            handle = open( os.path.join(args.outdir, path), "w" )
-            #convert.write_paradigm_graph(gr, handle)            
-            convert.write_xgmml(gr, handle)            
+    if args.file_mode:
+        for path in pathways:
+            handle = open(path)
+            gr = convert.read_gpml(handle)
             handle.close()
+            convert.write_xgmml(gr, sys.stdout)            
+
+    else:
+        for path in pathways:
+            print "Getting", path
+            pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
+            pathdata_xml = base64.b64decode(pathdata_str)
+            handle = open( os.path.join(args.outdir, path + ".owl"), "w" )
+            handle.write(pathdata_xml)
+            handle.close()
+            b = biopax.BioPax()
+            b.parse(pathdata_xml)
+            for gr in b.toNet():
+                if translate_table:
+                    re_map = {}
+                    for n in gr.node:
+                        if 'db_xref' in gr.node[n]:
+                            try:
+                                db, db_id = gr.node[n]['db_xref'].split(":")
+                                found = False
+                                for row in translate_table:
+                                    if db not in db_map:
+                                        print "WARNING: Database not found: %s" % (db)
+                                    else:
+                                        if db_map[db] in row:
+                                            if row[db_map[db]] == db_id:
+                                                if args.verbose:
+                                                    print db_id, row['Approved Symbol']
+                                                found = True
+                                                re_map[n] = row['Approved Symbol']
+                                #print found
+                            except ValueError:
+                                pass
+                    gr = nx.relabel_nodes(gr, re_map)
+                handle = open( os.path.join(args.outdir, path + ".xgmml"), "w" )
+                #convert.write_paradigm_graph(gr, handle)            
+                convert.write_xgmml(gr, handle)            
+                handle.close()
             
-    #print server.getPathway(pwId="WP98")
 
     """
     # listOrganisms (no args; returns list of strings)
