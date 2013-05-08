@@ -272,7 +272,7 @@ class GPML_Pathway:
 
 class GPML_DataNode:
     def __init__(self, parser, parent, attrs):
-        self.label = attrs.getValue('TextLabel')
+        self.label = attrs.getValue('TextLabel').replace("\n", " ")
         self.nodeid = attrs.getValue('GraphId')
         self.nodetype = attrs.getValue('Type')
         self.parser = parser
@@ -280,6 +280,8 @@ class GPML_DataNode:
         parser.id_map[self.nodeid] = self.label
         if self.nodeid not in self.parent.graph.node:
             self.parent.graph.add_node(self.nodeid, attr_dict={'type' : self.nodetype})
+        else:
+            self.parent.graph.node[self.nodeid]['type'] = self.nodetype
 
     def add_att(self, name, value):
         self.parent.graph.node[self.nodeid][name] =  value
@@ -354,6 +356,58 @@ class GPML_Point:
         pass
 
 
+
+
+class GPML_Group:
+    def __init__(self, parser, parent, attrs):
+        self.nodeid = attrs.getValue('GraphId')
+        self.label = attrs.getValue('GroupId')
+        self.parser = parser
+        self.parent = parent
+        parser.id_map[self.nodeid] = self.label
+        if self.nodeid not in self.parent.graph.node:
+            self.parent.graph.add_node(self.nodeid, attr_dict={'type' : 'group'})
+        else:
+            self.parent.graph.node[self.nodeid]['type'] = 'group'
+
+    def add_att(self, name, value):
+        pass
+
+    def pop(self):
+        pass
+
+class GPML_Label:
+    def __init__(self, parser, parent, attrs):
+        self.nodeid = attrs.getValue('GraphId')
+        self.label = attrs.getValue('TextLabel').replace("\n", " ")
+        self.parser = parser
+        self.parent = parent
+        parser.id_map[self.nodeid] = self.label
+
+    def add_att(self, name, value):
+        pass
+
+    def pop(self):
+        pass
+
+
+
+class GPML_Xref:
+    def __init__(self, parser, parent, attrs):
+        self.database = attrs.getValue('Database')
+        self.database_id = attrs.getValue('ID')
+        self.parser = parser
+        self.parent = parent
+        db_xref = "%s:%s" % (self.database, self.database_id)
+        self.parent.add_att('db_xref', db_xref)
+
+    def add_att(self, name, value):
+        pass
+
+    def pop(self):
+        pass
+
+
 class GPMLHandler(xml.sax.ContentHandler):
     def __init__(self):
         xml.sax.ContentHandler.__init__(self)
@@ -373,8 +427,14 @@ class GPMLHandler(xml.sax.ContentHandler):
             self.elem_stack.append(GPML_Graphics(self, self.elem_stack[-1], attrs))
         elif name == "Point":
             self.elem_stack.append(GPML_Point(self, self.elem_stack[-1], attrs))
+        elif name == "Group":
+            self.elem_stack.append(GPML_Group(self, self.elem_stack[-1], attrs))
+        elif name == "Label":
+            self.elem_stack.append(GPML_Label(self, self.elem_stack[-1], attrs))
+        elif name == "Xref":
+            self.elem_stack.append(GPML_Xref(self, self.elem_stack[-1], attrs))
         else:
-            print name
+            #print name
             self.elem_stack.append(None)
             
  

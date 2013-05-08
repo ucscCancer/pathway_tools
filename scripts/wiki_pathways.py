@@ -64,8 +64,30 @@ db_map = {
     "enzyme" : "Enzyme IDs",
     "CTD Gene" : None,
     "GeneDB" : None,
-    "Pfam" : None
+    "Pfam" : None,
+    "WikiPathways" : None
 }
+
+def find_translation(label):
+    out = None
+    try:
+        db, db_id = gr.node[n]['db_xref'].split(":")
+        found = False
+        for row in translate_table:
+            if db not in db_map:
+                print "WARNING: Database not found: %s" % (db)
+            else:
+                if db_map[db] in row:
+                    if row[db_map[db]] == db_id:
+                        if args.verbose:
+                            print db_id, row['Approved Symbol']
+                        found = True
+                        out = row['Approved Symbol']
+        #print found
+    except ValueError:
+        pass
+    return out
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -100,6 +122,14 @@ if __name__ == "__main__":
             handle = open(path)
             gr = convert.read_gpml(handle)
             handle.close()
+            if translate_table:
+                re_map = {}
+                for n in gr.node:
+                    if 'db_xref' in gr.node[n]:
+                        relabel = find_translation(gr.node[n]['db_xref'])
+                        if relabel:
+                            re_map[n] = relabel
+                gr = nx.relabel_nodes(gr, re_map)
             convert.write_xgmml(gr, sys.stdout)            
 
     else:
@@ -117,22 +147,9 @@ if __name__ == "__main__":
                     re_map = {}
                     for n in gr.node:
                         if 'db_xref' in gr.node[n]:
-                            try:
-                                db, db_id = gr.node[n]['db_xref'].split(":")
-                                found = False
-                                for row in translate_table:
-                                    if db not in db_map:
-                                        print "WARNING: Database not found: %s" % (db)
-                                    else:
-                                        if db_map[db] in row:
-                                            if row[db_map[db]] == db_id:
-                                                if args.verbose:
-                                                    print db_id, row['Approved Symbol']
-                                                found = True
-                                                re_map[n] = row['Approved Symbol']
-                                #print found
-                            except ValueError:
-                                pass
+                            relabel = find_translation(gr.node[n]['db_xref'])
+                            if relabel:
+                                re_map[n] = relabel
                     gr = nx.relabel_nodes(gr, re_map)
                 handle = open( os.path.join(args.outdir, path + ".xgmml"), "w" )
                 #convert.write_paradigm_graph(gr, handle)            
