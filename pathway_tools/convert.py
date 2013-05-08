@@ -4,6 +4,7 @@ import networkx
 from xml.dom.minidom import Document
 import xml.sax
 import sys
+import csv
 import os
 from glob import glob
 
@@ -240,4 +241,22 @@ def read_xgmml(handle):
     handler = XGMMLHandler()
     xml.sax.parse(handle, handler)
     return handler.result()
+
+
+
+def write_binary_matrix(gr, handle, postive="1", negative="0", delimiter="\t", nodelist=None):
+    if nodelist is None:
+        nodelist = gr.node
+
+    writer = csv.writer(handle, delimiter=delimiter, lineterminator="\n")
+    for s in nodelist:
+        out = []
+        for t in nodelist:
+            if s in gr.edge and t in gr.edge[s]:
+                out.append(postive)
+            else:
+                out.append(negative)
+        writer.writerow(out)
+
+
 
