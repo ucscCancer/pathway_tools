@@ -272,9 +272,12 @@ class GPML_Pathway:
 
 class GPML_DataNode:
     def __init__(self, parser, parent, attrs):
-        self.label = attrs.getValue('TextLabel').replace("\n", " ")
+        self.label = attrs.getValue('TextLabel').replace("\n", " ").encode('ascii', errors='ignore')
         self.nodeid = attrs.getValue('GraphId')
-        self.nodetype = attrs.getValue('Type')
+        if attrs.has_key('Type'):
+            self.nodetype = attrs.getValue('Type')
+        else:
+            self.nodetype = "NA"
         self.parser = parser
         self.parent = parent
         parser.id_map[self.nodeid] = self.label
@@ -360,7 +363,11 @@ class GPML_Point:
 
 class GPML_Group:
     def __init__(self, parser, parent, attrs):
-        self.nodeid = attrs.getValue('GraphId')
+        if attrs.has_key('GraphId'):
+            graphid = attrs.getValue('GraphId')
+        else:
+            graphid = attrs.getValue('GroupId')            
+        self.nodeid = graphid
         self.label = attrs.getValue('GroupId')
         self.parser = parser
         self.parent = parent
@@ -379,7 +386,7 @@ class GPML_Group:
 class GPML_Label:
     def __init__(self, parser, parent, attrs):
         self.nodeid = attrs.getValue('GraphId')
-        self.label = attrs.getValue('TextLabel').replace("\n", " ")
+        self.label = attrs.getValue('TextLabel').replace("\n", " ").encode('ascii', errors='ignore')
         self.parser = parser
         self.parent = parent
         parser.id_map[self.nodeid] = self.label
@@ -399,7 +406,8 @@ class GPML_Xref:
         self.parser = parser
         self.parent = parent
         db_xref = "%s:%s" % (self.database, self.database_id)
-        self.parent.add_att('db_xref', db_xref)
+        if self.parent is not None:
+            self.parent.add_att('db_xref', db_xref)
 
     def add_att(self, name, value):
         pass
@@ -422,6 +430,8 @@ class GPMLHandler(xml.sax.ContentHandler):
         elif name == "DataNode":
             self.elem_stack.append(GPML_DataNode(self, self.elem_stack[-1], attrs))
         elif name == "Line":
+            self.elem_stack.append(GPML_Line(self, self.elem_stack[-1], attrs))
+        elif name == "Interaction":
             self.elem_stack.append(GPML_Line(self, self.elem_stack[-1], attrs))
         elif name == "Graphics":
             self.elem_stack.append(GPML_Graphics(self, self.elem_stack[-1], attrs))

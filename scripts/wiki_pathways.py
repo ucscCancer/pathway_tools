@@ -8,6 +8,7 @@ import sys
 import os
 import csv
 import base64
+from StringIO import StringIO
 from SOAPpy import SOAPProxy      
 url = 'http://www.wikipathways.org/wpi/webservice/webservice.php'
 namespace = 'http://www.wikipathways.org/webservice'
@@ -93,6 +94,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', "--outdir")
     parser.add_argument('-t', "--translate")
+    parser.add_argument('-b', "--biopax", action="store_true", default=False)
     parser.add_argument("-v", "--verbose", action="store_true", default=False)
     parser.add_argument("-f", "--file-mode", action="store_true", default=False)
     parser.add_argument("pathways", nargs="*")
@@ -135,14 +137,29 @@ if __name__ == "__main__":
     else:
         for path in pathways:
             print "Getting", path
-            pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
-            pathdata_xml = base64.b64decode(pathdata_str)
-            handle = open( os.path.join(args.outdir, path + ".owl"), "w" )
-            handle.write(pathdata_xml)
-            handle.close()
-            b = biopax.BioPax()
-            b.parse(pathdata_xml)
-            for gr in b.toNet():
+            grs = []
+            if args.biopax:
+                pathdata_str = server.getPathwayAs(fileType="owl", pwId=path)
+                pathdata_xml = base64.b64decode(pathdata_str)
+                handle = open( os.path.join(args.outdir, path + ".owl"), "w" )
+                handle.write(pathdata_xml)
+                handle.close()
+                b = biopax.BioPax()
+                b.parse(pathdata_xml)
+                grs = b.toNet()
+            else:
+                pathdata_str = server.getPathwayAs(fileType="gpml", pwId=path)
+                pathdata_xml = base64.b64decode(pathdata_str)
+                handle = open( os.path.join(args.outdir, path + ".gpml"), "w" )
+                handle.write(pathdata_xml)
+                handle.close()
+                try:
+                    gr = convert.read_gpml(StringIO(pathdata_xml))
+                    grs = [gr]
+                except Exception, e:
+                    print "Pathway", path, "failed", str(e)
+                    grs = []
+            for gr in grs:
                 if translate_table:
                     re_map = {}
                     for n in gr.node:
