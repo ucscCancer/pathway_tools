@@ -243,7 +243,6 @@ def read_xgmml(handle):
     return handler.result()
 
 
-
 def write_binary_matrix(gr, handle, postive="1", negative="0", delimiter="\t", nodelist=None):
     if nodelist is None:
         nodelist = gr.node
@@ -259,4 +258,136 @@ def write_binary_matrix(gr, handle, postive="1", negative="0", delimiter="\t", n
         writer.writerow(out)
 
 
+class GPML_Pathway:
+    def __init__(self, parser, attrs):
+        self.graph = networkx.MultiDiGraph()
+        self.parser = parser
 
+    def add_att(self, name, value):
+        self.graph.graph[name] =  value
+
+    def pop(self):
+        return networkx.relabel_nodes(self.graph, self.parser.id_map)
+
+
+class GPML_DataNode:
+    def __init__(self, parser, parent, attrs):
+        self.label = attrs.getValue('TextLabel')
+        self.nodeid = attrs.getValue('GraphId')
+        self.nodetype = attrs.getValue('Type')
+        self.parser = parser
+        self.parent = parent
+        parser.id_map[self.nodeid] = self.label
+        if self.nodeid not in self.parent.graph.node:
+            self.parent.graph.add_node(self.nodeid, attr_dict={'type' : self.nodetype})
+
+    def add_att(self, name, value):
+        self.parent.graph.node[self.nodeid][name] =  value
+
+    def pop(self):
+        pass
+
+
+class GPML_Line:
+    def __init__(self, parser, parent, attrs):
+        self.parent = parent
+        self.parser = parser
+        self.src = None
+        self.target = None
+        self.att_list = []
+
+    def add_att(self, name, value):
+        self.att_list.append( (name, value) )
+
+    def add_edge(self, src, target):
+        self.src = src
+        self.target = target
+
+    def pop(self):
+        if self.src and self.target:
+            self.key = 0
+
+            if self.src not in self.parent.graph.node:
+                self.parent.graph.add_node(self.src)
+            if self.target not in self.parent.graph.node:
+                self.parent.graph.add_node(self.target)
+
+            if self.target in self.parent.graph.edge[self.src]:
+                self.key=len(self.parent.graph.edge[self.src][self.target])
+
+            attr = {}
+            for k,v in self.att_list:
+                attr[k] = v    
+
+            self.parent.graph.add_edge(self.src,self.target, self.key, attr_dict=attr)
+
+
+class GPML_Graphics:
+    def __init__(self, parser, parent, attrs):
+        self.parent = parent
+        self.parser = parser
+        self.points = []
+
+    def add_att(self, name, value):
+        self.parent.add_att(name, value)
+
+    def add_point(self, name):
+        self.points.append(name)
+
+    def pop(self):
+        if len(self.points) == 2:
+            self.parent.add_edge(self.points[0], self.points[1])
+
+
+class GPML_Point:
+    def __init__(self, parser, parent, attrs):
+        self.parent = parent
+        self.parser = parser
+
+        if attrs.has_key('ArrowHead'):
+            self.parent.add_att('interaction', attrs.getValue('ArrowHead'))
+
+        if attrs.has_key("GraphRef"):
+            self.parent.add_point(attrs.getValue('GraphRef'))
+
+    def pop(self):
+        pass
+
+
+class GPMLHandler(xml.sax.ContentHandler):
+    def __init__(self):
+        xml.sax.ContentHandler.__init__(self)
+        self.elem_stack = []
+        self.id_map = {}
+        self.last_value = None
+
+    def startElement(self, name, attrs):
+        #print("startElement '" + name + "'")
+        if name == "Pathway":
+            self.elem_stack.append(GPML_Pathway(self, attrs))
+        elif name == "DataNode":
+            self.elem_stack.append(GPML_DataNode(self, self.elem_stack[-1], attrs))
+        elif name == "Line":
+            self.elem_stack.append(GPML_Line(self, self.elem_stack[-1], attrs))
+        elif name == "Graphics":
+            self.elem_stack.append(GPML_Graphics(self, self.elem_stack[-1], attrs))
+        elif name == "Point":
+            self.elem_stack.append(GPML_Point(self, self.elem_stack[-1], attrs))
+        else:
+            print name
+            self.elem_stack.append(None)
+            
+ 
+    def endElement(self, name):
+        last_node = self.elem_stack.pop()
+        if last_node is not None:
+            self.last_value = last_node.pop()
+
+    def result(self):
+        return self.last_value
+
+
+def read_gpml(handle):
+    handler = GPMLHandler()
+    xml.sax.parse(handle, handler)
+    return handler.result()
