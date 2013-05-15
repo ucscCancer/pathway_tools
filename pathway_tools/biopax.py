@@ -3,6 +3,7 @@
 import sys
 import rdflib
 import rdflib.term
+import sparql
 import os
 from glob import glob
 import networkx
@@ -216,23 +217,73 @@ class BioPax_MolecularInteraction(BioPax_ElementBase):
                         print "Skipped", p1, p2
 
 class BioPax_Transport(BioPax_ElementBase):
-    type = "transport"
-
     def process(self):
         yield None
+
+class BioPax_Control(BioPax_ElementBase):
+    def process(self):
+        yield None
+
+class BioPax_TemplateReactionRegulation(BioPax_ElementBase):
+    def process(self):
+        yield None
+
+class BioPax_TemplateReaction(BioPax_ElementBase):
+    def process(self):
+        yield None
+
+class BioPax_TransportWithBiochemicalReaction(BioPax_ElementBase):
+    def process(self):
+        yield None
+
+class BioPax_Interaction(BioPax_ElementBase):
+    def process(self):
+        yield None
+
+class BioPax_ComplexAssembly(BioPax_ElementBase):
+    type = "complex"
+
+    def process(self):
+        left = []
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
+            elem = element_mapping[c_info.dst_type](self.pax, c_info.dst)
+            for e in elem.process():
+                left.append( e )
+            
+        right = []
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
+            elem = element_mapping[c_info.dst_type](self.pax, c_info.dst)
+            for e in elem.process():
+                right.append( e )
+        
+        for l in left:
+            for r in right:
+                interaction = "member>"
+                if isinstance(l, Output_Node) and isinstance(r, Output_Node):
+                    yield Output_Edge( l, r, {'interaction' : interaction} )
+                else:
+                    print "Skipped", l, r
+
+
 
 
 element_mapping = {
     BIOPAX_BASE + "Protein" : BioPax_Protein,
     BIOPAX_BASE + "SmallMolecule" : BioPax_SmallMolecule,
     BIOPAX_BASE + "Complex" : BioPax_Complex,
+    BIOPAX_BASE + "ComplexAssembly" : BioPax_ComplexAssembly,
     BIOPAX_BASE + "PhysicalEntity" : BioPax_PhysicalEntity,
     BIOPAX_BASE + "Rna" : BioPax_Rna,
     BIOPAX_BASE + "Catalysis" : BioPax_Catalysis,
     BIOPAX_BASE + "BiochemicalReaction" : BioPax_BiochemicalReaction,
     BIOPAX_BASE + "MolecularInteraction" : BioPax_MolecularInteraction,
     BIOPAX_BASE + "Transport" : BioPax_Transport,
-    BIOPAX_BASE + "Pathway" : BioPax_Pathway
+    BIOPAX_BASE + "Pathway" : BioPax_Pathway,
+    BIOPAX_BASE + "Control" : BioPax_Control,
+    BIOPAX_BASE + "TemplateReactionRegulation" : BioPax_TemplateReactionRegulation,
+    BIOPAX_BASE + "TemplateReaction" : BioPax_TemplateReaction,
+    BIOPAX_BASE + "TransportWithBiochemicalReaction" : BioPax_TransportWithBiochemicalReaction,
+    BIOPAX_BASE + "Interaction" : BioPax_Interaction,
 }
 
 
@@ -249,10 +300,24 @@ class Output_Node:
         self.data = data
 
 class BioPax:
+
+    def toNet(self, pathways=None):
+        if pathways is None:
+            pathways = {}
+            for a in self.query(src_type=BIOPAX_BASE + "Pathway"):
+                pathways[a.src] = True
+
+        for pathway in pathways:
+            p_elem = BioPax_Pathway(self, pathway)
+            gr = p_elem.process()
+            yield gr
     
+
+
+class BioPaxFile(BioPax):
     def __init__(self):
         self.graph = {}
-    
+
     def load(self, path):
         g = rdflib.Graph()
         result = g.parse(path)
@@ -274,18 +339,7 @@ class BioPax:
             if pred_text not in self.graph[subj_text]:
                 self.graph[subj_text][pred_text] = []
             self.graph[subj_text][pred_text].append( obj_text )
-            
 
-    def toNet(self):
-        pathway_list = {}
-        for a in self.query(src_type=BIOPAX_BASE + "Pathway"):
-            pathway_list[a.src] = True
-
-        for pathway in pathway_list:
-            p_elem = BioPax_Pathway(self, pathway)
-            gr = p_elem.process()
-            yield gr
-    
     def get_node_type(self, node):
         return self.graph.get(node, {}).get(TYPE_PRED, [None])[0]
     
@@ -323,8 +377,85 @@ class BioPax:
                             pred_cmp, 
                             self.get_node_type(dst_cmp), dst_cmp) 
                         )
-        return out          
-    
+        return out
+
+
+class BioPaxSparql(BioPax):
+
+    def __init__(self, url):
+        self.url = url
+        self.sparql = sparql.Service(url)
+
+    def get_node_type(self, node):
+        query = "select ?t { <%s> a ?t }" % (node)
+        results = self.sparql.query(query)
+        out = list(results.fetchone())
+        if len(out):
+            return unicode(out[0][0])
+        return None
+
+    def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True):
+        if src:
+            src_label = "<%s>" % (src)
+        else:
+            src_label = "?s"
+
+        if dst:
+            dst_label = "<%s>" % (dst)
+        else:
+            dst_label = "?d"
+
+        if predicate:
+            predicate_label = "<%s>" % (predicate)
+        else:
+            predicate_label = "?p"
+
+        if src_type:
+            src_type_select = "%s a <%s> ." % (src_label, src_type)
+        else:
+            src_type_select = ""
+        if dst_type:
+            dst_type_select = "%s a <%s> ." % (dst_label, dst_type)
+        else:
+            dst_type_select = ""
+
+
+
+        link_select = "%s %s %s ." % (src_label, predicate_label, dst_label)
+
+        query = """SELECT *
+        WHERE {
+            %s
+            %s
+            %s
+        }""" % (src_type_select, dst_type_select, link_select)
+        
+        try:
+            results = self.sparql.query(query)
+            for row in results.fetchall():
+                rsrc = None
+                rsrc_type = None
+                rdst = None
+                rdst_type = None
+                rpred = None
+                for i, v in enumerate(results.variables):
+                    if v == 's':
+                        rsrc = unicode(row[i])
+                        if isinstance(row[i], sparql.IRI):
+                            rsrc_type = self.get_node_type(rsrc)
+                    if v == 'd':
+                        rdst = unicode(row[i])
+                        if isinstance(row[i], sparql.IRI):
+                            rdst_type = self.get_node_type(rdst)
+                    if v == 'p':
+                        rpred = unicode(row[i])
+                link = Link(rsrc_type, rsrc, rpred, rdst_type, rdst)
+                yield link
+        except Exception, e:
+            raise Exception("Query Fail: %s : %s " % (query, str(e)) )
+
+
+
 def write_biopax(gr, handle):
 
     gene = rdflib.Namespace("http://ucsc.edu/gene#")
