@@ -23,19 +23,21 @@ def write_sif(gr, handle, edge_type_field='interaction'):
         interaction = data.get(edge_type_field, "pp")
         handle.write("%s\t%s\t%s\n" % (e1, interaction, e2))
 
-def read_paradigm_graph(handle):
+def read_paradigm_graph(handle, strict=True):
     gr = networkx.MultiDiGraph()
     for line in handle:
         tmp = line.rstrip().split("\t")
         if len(tmp) == 2:
-            if tmp[1] in gr.node:
-                raise FormatException("Duplicate element declaration for : %s" % (tmp[1]))                
+            if strict:
+                if tmp[1] in gr.node:
+                    raise FormatException("Duplicate element declaration for : %s" % (tmp[1]))                
             gr.add_node( tmp[1], type=tmp[0] )
         elif len(tmp) == 3:
-            if tmp[0] not in gr.node:
-                raise FormatException("Missing element declaration for : %s" % (tmp[0]))
-            if tmp[1] not in gr.node:
-                raise FormatException("Missing element declaration for : %s" % (tmp[1]))
+            if strict:
+                if tmp[0] not in gr.node:
+                    raise FormatException("Missing element declaration for : %s" % (tmp[0]))
+                if tmp[1] not in gr.node:
+                    raise FormatException("Missing element declaration for : %s" % (tmp[1]))
             gr.add_edge(tmp[0], tmp[1], interaction=tmp[2])
         else:
             raise FormatException("Bad line: %s" % (line))
