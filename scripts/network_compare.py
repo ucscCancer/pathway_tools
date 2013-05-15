@@ -5,6 +5,8 @@ import networkx
 import argparse
 from pathway_tools import convert as network_convert
 
+def log(msg):
+    sys.stdout.write(msg + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -20,7 +22,7 @@ if __name__ == "__main__":
 
     if args.src_paradigm:
         handle1 = open(args.src_paradigm)
-        gr1 = network_convert.read_paradigm_graph(handle1)
+        gr1 = network_convert.read_paradigm_graph(handle1, strict=False)
         handle1.close()
     if args.src_xgmml:
         handle1 = open(args.src_xgmml)
@@ -29,7 +31,7 @@ if __name__ == "__main__":
 
     if args.dst_paradigm:      
         handle2 = open(args.dst_paradigm)
-        gr2 = network_convert.read_paradigm_graph(handle2)
+        gr2 = network_convert.read_paradigm_graph(handle2, strict=False)
         handle2.close()
     if args.src_xgmml:
         handle1 = open(args.dst_xgmml)
@@ -42,12 +44,12 @@ if __name__ == "__main__":
 
     gr = networkx.MultiDiGraph()
 
-    sys.stderr.write("Node Counts %d %d\n" % (len(gr1.nodes()), len(gr2.nodes())))
-    sys.stderr.write("Edge Counts %d %d\n" % (len(gr1.edges()), len(gr2.edges())))
+    log("Node Counts %d %d" % (len(gr1.nodes()), len(gr2.nodes())))
+    log("Edge Counts %d %d" % (len(gr1.edges()), len(gr2.edges())))
 
     for n in gr1.node:
         if n not in gr2.node:
-            sys.stderr.write( "Graph2 Missing Node:" + n + "\n" )
+            log( "Graph2 Missing Node:" + n )
             gr.add_node(n)
             gr.node[n] = gr1.node[n]
     for n in gr1.node:
@@ -61,14 +63,14 @@ if __name__ == "__main__":
 
                 if not found:
                     gr.add_edge(n,t, attr_dict=gr1.edge[n][t][i] )
-                    sys.stderr.write( "Graph2 Missing Edge:" + str((n,t)) + " " + str(gr1.edge[n][t][i]) + "\n")
+                    log( "Graph2 Missing Edge:" + str((n,t)) + " " + str(gr1.edge[n][t][i]))
     for n in gr2.node:
         if n not in gr1.node:
-            sys.stderr.write( "Graph1 Missing Node:" + n + "\n" )
+            log( "Graph1 Missing Node:" + n )
         else:
             for t in gr2.edge[n]:
                 if t not in gr1.edge[n]:
-                    sys.stderr.write( "Graph1 Missing Edge:" + str((n,t)) + "\n")
+                    log( "Graph1 Missing Edge:" + str((n,t)))
     
-    network_convert.write_paradigm_graph(gr, sys.stdout)
+    #network_convert.write_paradigm_graph(gr, sys.stdout)
     #network_convert.write_xgmml(gr, sys.stdout)
