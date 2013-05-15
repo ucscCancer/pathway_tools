@@ -61,6 +61,32 @@ factor_tables :
         - [0.05, 0.9, 0.05]
         - [0.9, 0.05, 0.05]
 
+factor_functions : 
+    max : |
+        def max_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if max(other_vals) == child_val:
+                return 0.9
+            return 0.1 / float(len(other_vals))
+    min : |
+        def min_val(inputs):
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if v == 'child':
+                    child_val = inputs[v]
+                else:
+                    other_vals.append(inputs[v])
+            if min(other_vals) == child_val:
+                return 0.9
+            return 0.1 / float(len(other_vals))
+
 #factor format:
 #Edge type
 #    dst_template_name
@@ -70,68 +96,43 @@ factor_tables :
 
 factors_fixed:
     -a>:
-      '*':
-        actreg:
-            positive
+        factor_table : positive
     -ap>:
-      '*':
-        active:
-            positive
+        factor_table : positive
     -ap|:
-      '*':
-        active:
-            negative
+        factor_table : negative
     -a|:
-      '*':
-        actreg:
-            negative
+        factor_table : negative
     -dAct>:
-      '*':
-        active:
-            positive
+        factor_table : positive
     -dTl>:
-      '*':
-        protein:
-            positive
+        factor_table : positive
     -dTx>:
-      '*':
-        mRNA:
-            positive
+        factor_table : positive
     -t>:
-      '*':
-        txreg:
-            positive
+        factor_table : positive
     -t|:
-      '*':
-        txreg:
-            negative
-    component>:
-      '*':
-        active:
-            positive
-    member>:
-      '*':
-        active:
-            positive
+        factor_table : negative
+    'component>' :
+        factor_function : min
+        combine : 
+            method : function
+            types : [ component> ]
+
+    'member>' :
+        factor_function : max
+        combine : 
+            method : function
+            types : [ member> ]
     -dPm>:
-      '*':
-        promoter:
-            positive
+        factor_table : positive
     -cTx>:
-      '*':
-        mRNA:
-            positive
+        factor_table : positive
     -cTp>:
-      '*':
-        mRNA:
-            negative
+        factor_table : negative
     -cTl>:
-      '*':
-        protein:
-            negative
+        factor_table : negative
     -cAct>:
-      '*':
-        active:
-            negative
+        factor_table : negative
 
 
