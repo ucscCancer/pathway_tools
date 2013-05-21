@@ -50,7 +50,12 @@ def maxCC(ccs):
 
 	return max
 
-graph = convert.read_sif(open(opts.network))
+graph = None
+if opts.network.endswith(".sif"):
+	graph = convert.read_sif(open(opts.network))
+else:
+	graph = convert.read_paradigm_graph(open(opts.network))
+
 heats = parseHeats(opts.heats)
 if opts.cut_graph:
 	cut_val = None
