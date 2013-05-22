@@ -25,7 +25,7 @@ def parseHeats(file):
 	heats = {}
 	for line in open(file, 'r'):
 		parts = line.rstrip().split("\t")
-		heats[parts[0]] = float(parts[1])
+		heats[parts[0]] = abs(float(parts[1]))
 
 	return heats
 
@@ -73,7 +73,7 @@ if opts.cut_graph:
 	sys.exit(1)
 
 max_heat = max(heats.values())
-print "Cutoff\tNum Edges\tNum Connected Components\tLargest Connected ComponentmaxCC(ccs)\tEdge Biggest CC Ratio"
+print "Cutoff\tNum Edges\tNum Connected Components\tLargest Connected Component\tEdge Biggest CC Ratio"
 for cutoff in range(0, int(max_heat*opts.subdivs)+1):
 	cutoff = cutoff/float(opts.subdivs)
 	cutG = cutGraph(graph, heats, cutoff)
@@ -81,5 +81,9 @@ for cutoff in range(0, int(max_heat*opts.subdivs)+1):
 	ccs = nx.connected_components(cutG)
 	max_ccs = maxCC(ccs)
 	l_edges = len(cutG.edges())
-	edge_bigccs_ratio = l_edges/float(l_ccs)
-	print "\t".join([str(i) for i in [cutoff, l_ccs, max_ccs, l_edges, edge_bigccs_ratio]])
+	if float(l_ccs) == 0:
+		edge_bigccs_ratio = "NA"
+	else:	
+		edge_bigccs_ratio = l_edges/float(l_ccs)
+
+	print "\t".join([str(i) for i in [cutoff, l_edges, l_ccs, max_ccs, edge_bigccs_ratio]])
