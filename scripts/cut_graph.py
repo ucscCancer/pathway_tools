@@ -18,7 +18,7 @@ parser.add_option("-n","--network",dest="network",action="store", default=None, 
 parser.add_option("-s","--subdivs",dest="subdivs",action="store", default=100, help="Number of Subdivisions (per heat increment of 1) to test in the Range")
 (opts, args) = parser.parse_args()
 
-from network_toolkit import convert
+from pathway_tools import convert
 import networkx as nx
 
 def parseHeats(file):
@@ -36,6 +36,10 @@ def cutGraph(graph, heats, cutoff):
 		source = edge[0]
 		target = edge[1]
 		interaction = edge[2]['interaction']
+		# edge in graph, but not in input heats
+		if source not in heats or target not in heats:
+			continue
+
 		if (heats[source] >= cutoff) and (heats[target] >= cutoff):
 			GC.add_edges_from([(source, target, dict(interaction=interaction))])
 
