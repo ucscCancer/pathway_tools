@@ -1,0 +1,18 @@
+<tool id="Diffuse" name="Diffuse" version="1.0.0">
+  <description>Generates a Heat Diffusion Kernel (or uses the Supplied Kernel) to diffuse input heats over a network</description>
+  <command interpreter="python">
+	diffuse.py
+		-i $input_heats 
+		-k $kernel 
+		-n $network 
+		-o $diffused_heats 
+  </command>
+  <inputs>
+    <param name="input_heats" label="Input Heats Matrix (Samples=Columns, Features=Rows)" type="data"/>
+	<param name="network" label="Search Network (sif)" type="data"/>
+	<param name="kernel" label="Kernel" type="data"/>
+  </inputs>
+  <outputs>
+    <data format="text" name="diffused_heats" label="Diffused Heats Matrix (Samples=Rows, Features=Columns)" />
+  </outputs>
+</tool>
