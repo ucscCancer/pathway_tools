@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#NetPath
+curl -o import/netpath.zip http://www.netpath.org/download/zipped/BioPAX.zip
+
+#NCI Curated
+curl -o import/NCI-Nature_Curated.bp3.owl.gz ftp://ftp1.nci.nih.gov/pub/PID/BioPAX_Level_3/NCI-Nature_Curated.bp3.owl.gz
+
+#Reactome
+curl -o import/reactome.zip http://www.reactome.org/download/current/biopax.zip
+
+#BioCarta
+curl -o import/BioCarta.bp3.owl.gz ftp://ftp1.nci.nih.gov/pub/PID/BioPAX_Level_3/BioCarta.bp3.owl.gz
+
+
