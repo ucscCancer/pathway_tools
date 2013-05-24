@@ -13,7 +13,7 @@ from collections import defaultdict
 from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-c","--cut_graph", dest="cut_graph",action="store", default=None, help="(Optional) Print the graph at supplied cutoff")
-parser.add_option("-a","--node_attributes", dest="node_attributes",action="store", default=None, help="(Optional) Print the node attributes")
+parser.add_option("-a","--node_attributes", dest="node_attributes",action="store_true", default=False, help="(Optional Flag) Print the node attributes")
 parser.add_option("-i","--heats", dest="heats",action="store", default=None, help="Input (diffused) Heats")
 parser.add_option("-n","--network",dest="network",action="store", default=None, help="Base Network in UCSC Pathway Format")
 parser.add_option("-s","--subdivs",dest="subdivs",action="store", default=100, help="Number of Subdivisions (per heat increment of 1) to test in the Range")
@@ -49,7 +49,7 @@ def cutGraph(graph, heats, cutoff):
 def getNodes(graph):
 
 	nodes = set()
-	for edge in graph:
+	for edge in graph.edges_iter(data=True):
 		source = edge[0]
 		target = edge[1]
 		nodes.add(source)
