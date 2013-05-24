@@ -73,7 +73,7 @@ else:
 	graph = convert.read_paradigm_graph(open(opts.network))
 
 heats = parseHeats(opts.heats)
-if opts.cut_graph:
+if opts.cut_graph and not opts.node_attributes:
 	cut_val = None
 	try:
 		cutoff = float(opts.cut_graph)
