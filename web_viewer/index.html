@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="graphview.js"></script>
+  <style type="text/css">
+svg {
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+svg:not(.active):not(.ctrl) {
+  cursor: crosshair;
+}
+
+path.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 4px;
+  cursor: default;
+}
+
+svg:not(.active):not(.ctrl) path.link {
+  cursor: pointer;
+}
+
+path.link.selected {
+  stroke-dasharray: 10,2;
+}
+
+path.link.dragline {
+  pointer-events: none;
+}
+
+path.link.hidden {
+  stroke-width: 0;
+}
+
+circle.node {
+  stroke-width: 1.0px;
+  cursor: pointer;
+}
+
+circle.node.reflexive {
+  stroke: #000 !important;
+  stroke-width: 2.5px;
+}
+
+text {
+  font: 12px sans-serif;
+  pointer-events: none;
+}
+
+text.id {
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 60px;                  
+  height: 28px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
+#input { 
+	width: 350px; 
+	height: 600px; 
+	padding: 0.5em;
+	overflow: auto;
+}
+  </style>
+</head>
+<body>
+ 
+<div id="title"></div>
+<div id="tooltip"></div>
+<div id="drawingElement"></div>
+<div id="input" class="ui-widget-content"></div>
+<script>
+
+
+function getURLAnchor() {
+    return decodeURI(
+    	(RegExp('#(.+?)($)').exec(location.hash)||[,null])[1]
+    );
+}
+
+function setURLAnchor(msg) {
+	location.hash = msg
+}
+
+
+$(document).ready(function() {
+	var pid = getURLAnchor();
+	
+	if (pid == '' || pid === null || pid == 'null') {
+		pid = "PID41410"
+	}	
+	$("#title").append(pid)
+	setURLAnchor(pid)
+
+
+	var gv = $("#drawingElement").graphViewer({height:900, width:900});
+
+	$('#input').draggable( ); 
+	$.ajax({
+		url : "superpathway_db/" + pid + "/graph",
+		success : function(data) { 
+			$("#input").empty().append( $("<pre>").append(data) );
+			var lines = data.split("\n")
+			for (var i in lines) {
+				var tmp = lines[i].split("\t");
+				if (tmp.length == 2) {
+					gv.add_node(tmp[1], tmp[1], {type:tmp[0]})
+				}
+				if (tmp.length == 3) {
+					gv.add_edge(tmp[0], tmp[1], {type:tmp[2]});
+				}
+			}
+			gv.render();
+		}
+	})
+
+});
+
+</script>
+ 
+</body>
+</html>

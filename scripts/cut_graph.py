@@ -12,7 +12,8 @@ import sys
 from collections import defaultdict
 from optparse import OptionParser
 parser = OptionParser()
-parser.add_option("-c","--cut_graph", dest="cut_graph",action="store", default=None, help="Just print the graph at supplied cutoff")
+parser.add_option("-c","--cut_graph", dest="cut_graph",action="store", default=None, help="(Optional) Print the graph at supplied cutoff")
+parser.add_option("-a","--node_attributes", dest="node_attributes",action="store_true", default=False, help="(Optional Flag) Print the node attributes")
 parser.add_option("-i","--heats", dest="heats",action="store", default=None, help="Input (diffused) Heats")
 parser.add_option("-n","--network",dest="network",action="store", default=None, help="Base Network in UCSC Pathway Format")
 parser.add_option("-s","--subdivs",dest="subdivs",action="store", default=100, help="Number of Subdivisions (per heat increment of 1) to test in the Range")
@@ -45,6 +46,17 @@ def cutGraph(graph, heats, cutoff):
 
 	return GC
 
+def getNodes(graph):
+
+	nodes = set()
+	for edge in graph.edges_iter(data=True):
+		source = edge[0]
+		target = edge[1]
+		nodes.add(source)
+		nodes.add(target)
+	
+	return nodes
+	
 def maxCC(ccs):
 
 	max = 0
@@ -61,7 +73,7 @@ else:
 	graph = convert.read_paradigm_graph(open(opts.network))
 
 heats = parseHeats(opts.heats)
-if opts.cut_graph:
+if opts.cut_graph and not opts.node_attributes:
 	cut_val = None
 	try:
 		cutoff = float(opts.cut_graph)
@@ -70,7 +82,25 @@ if opts.cut_graph:
 
 	cutG = cutGraph(graph, heats, cutoff)
 	convert.write_sif(cutG, sys.stdout)
-	sys.exit(1)
+	sys.exit(0)
+
+if opts.node_attributes:
+	if not opts.cut_graph:
+		print "Error: please supply a cut value"
+		sys.exit(1)
+	cutoff = None
+	try:
+		cutoff = float(opts.cut_graph)
+	except:
+		raise Exception("Error: value supplied to cut_graph must be a positive number")
+
+	cutG = cutGraph(graph, heats, cutoff)
+	nodes = getNodes(cutG)
+	print "HeatsValue"
+	for n in nodes:
+		print n+" = "+str(heats[n])
+	sys.exit(0)
+			
 
 max_heat = max(heats.values())
 print "Cutoff\tNum Edges\tNum Connected Components\tLargest Connected Component\tEdge Biggest CC Ratio"

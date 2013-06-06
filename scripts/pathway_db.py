@@ -219,64 +219,75 @@ def main_compile(args):
     parser = argparse.ArgumentParser(prog="pathway_db compile")
     parser.add_argument('-a', '--append', help="Default Edge Type", action="append")
     parser.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
+    parser.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser.add_argument("pathways", nargs="*")
     
     args = parser.parse_args(args)
 
     gr = networkx.MultiDiGraph()
     base_dir = args.base_dir
 
-    paths = glob(os.path.join(base_dir, "[A-Z]*"))
-    if args.append:
-        paths +=args.append
+    if len(args.pathways):
+        paths = []
+        for p in args.pathways:
+            paths.append(os.path.join(base_dir, p))
+    else:
+        paths = glob(os.path.join(base_dir, "[A-Z]*"))
+        if args.append:
+            paths +=args.append
 
     type_count = {}
     interaction_count = {}
     duplicate_edges = 0
     for path in paths:
         info_path = os.path.join(path, "INFO")
-        handle = open(info_path)
-        info = yaml.load(handle.read())
-        handle.close()
-        handle = open(os.path.join(path, "graph"))
-        for line in handle:
-            tmp = line.rstrip().split("\t")
-            node_type = tmp[0]
-            node_name = tmp[1]
-            if len(tmp) == 2:
-                if node_name not in gr.node:
-                    gr.add_node( tmp[1], type=node_type )
-                    type_count[node_type] = type_count.get(node_type, 0) + 1
-                else:
-                    if gr.node[node_name]['type'] != node_type:
-                        raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
-                if 'pathway' not in gr.node[node_name]:
-                    gr.node[node_name]['pathway'] = []
-                    gr.node[node_name]['pid'] = []                    
-                gr.node[node_name]['pathway'].append(info['DESC'])
-                gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
-            elif len(tmp) == 3:
-                if tmp[0] not in gr.node:
-                    raise Exception("Missing Node Declaration: %s" % (tmp[0]))
-                if tmp[1] not in gr.node:
-                    raise Exception("Missing Node Declaration: %s" % (tmp[1]))
-                has_edge = False
-                if tmp[1] in gr.edge[tmp[0]]:
-                    for i in gr.edge[tmp[0]][tmp[1]]:
-                        if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
-                            has_edge = True
-                if not has_edge:
-                    gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
-                else:
-                    duplicate_edges += 1
-        handle.close()
+        if os.path.exists(info_path):
+            handle = open(info_path)
+            info = yaml.load(handle.read())
+            handle.close()
+            handle = open(os.path.join(path, "graph"))
+            for line in handle:
+                tmp = line.rstrip().split("\t")
+                node_type = tmp[0]
+                node_name = tmp[1]
+                if len(tmp) == 2:
+                    if node_name not in gr.node:
+                        gr.add_node( tmp[1], type=node_type )
+                        type_count[node_type] = type_count.get(node_type, 0) + 1
+                    else:
+                        if gr.node[node_name]['type'] != node_type:
+                            raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
+                    if 'pathway' not in gr.node[node_name]:
+                        gr.node[node_name]['pathway'] = []
+                        gr.node[node_name]['pid'] = []
+                    gr.node[node_name]['pathway'].append(info['DESC'])
+                    gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
+                elif len(tmp) == 3:
+                    if tmp[0] not in gr.node:
+                        raise Exception("Missing Node Declaration: %s" % (tmp[0]))
+                    if tmp[1] not in gr.node:
+                        raise Exception("Missing Node Declaration: %s" % (tmp[1]))
+                    has_edge = False
+                    if tmp[1] in gr.edge[tmp[0]]:
+                        for i in gr.edge[tmp[0]][tmp[1]]:
+                            if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
+                                has_edge = True
+                    if not has_edge:
+                        gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
+                    else:
+                        duplicate_edges += 1
+            handle.close()
     log("Node Count: %d" % (len(gr.nodes())))
     log("Edge Count: %d" % (len(gr.edges())))
     log("Duplicate Edges: %s" % (duplicate_edges))
+    log("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
     for n_type in type_count:
         log("Node Type %s: %d" % (n_type, type_count[n_type]))
     if args.paradigm:
         network_convert.write_paradigm_graph(gr, sys.stdout)
+    elif args.sif:
+        network_convert.write_sif(gr, sys.stdout)        
     else:        
         network_convert.write_xgmml(gr, sys.stdout)
 
