@@ -19,6 +19,7 @@ def main():
     parser = OptionParser()
     parser.add_option("-i","--input_heats",dest="input_heats",action="store",default=None,help="\
     File with columns as samples, rows as pathway features")
+    parser.add_option("-r", "--real-only", action="store_true", default=False, help="Report only observed values")
     parser.add_option("-k","--kernel",dest="kernel",action="store",default=None,help="\
     Pre-computed heat diffusion kernel in tab-delimited form. Should have both a header and row labels")
     parser.add_option("-o","--output",dest="output",action="store",default="diffused.tab")
@@ -59,13 +60,12 @@ def main():
             diffuser = Kernel(opts.kernel)
         print "Finished Loading..."
 
-    # remove any feature not in the network
-    feature_list = input_heats.getFeatureList()
-    restricted = []
-    for f in set(feature_list).intersection(network_nodes):
-        restricted.append(f)
-    feature_list = restricted
-
+    if opts.real_only:
+        print "Report Real only..."
+        feature_list = input_heats.getFeatureList()
+    else:
+        feature_list = diffuser.getKernelLabels()
+    
     # negative values require dual-diffusion and a merge/sum step
     m_diffuser = MultiDiffuser(diffuser)
 
@@ -75,7 +75,8 @@ def main():
         in_heat_vec = input_heats.getSampleValues(sample)   
         diffused_heat_vec = m_diffuser.diffuse(in_heat_vec, reverse=False)
         # print diffused heats in order, to line up with feature columns
-        out.write(sample+"\t"+"\t".join([str(diffused_heat_vec[feature]) for feature in feature_list])+"\n")
+        out.write(sample+"\t"+"\t".join([str(diffused_heat_vec.get(feature, "NA")) for feature in feature_list])+"\n")
+    out.close()
         
 if __name__ == "__main__":
     main()

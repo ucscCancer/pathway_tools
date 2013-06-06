@@ -31,6 +31,13 @@ class Kernel:
             self.ncols[kernel] = self.kernels[kernel].shape[1]-1
             self.nrows[kernel] = self.kernels[kernel].shape[0]-1
 
+    def getKernelLabels(self):
+        out = {}
+        for k in self.labels:
+            for l in self.labels[k]:
+                out[l] = True
+        return out.keys()
+    
     def kernelMultiplyOne(self, kernel, vector):
         """
             Input:
@@ -119,7 +126,7 @@ class MultiDiffuser:
         neg_diffused = self.diffuser_engine.diffuse(neg_vector, reverse)
         # merge back
         merged_diffused = {}
-        for feature in vector:
+        for feature in pos_diffused:
             v = pos_diffused[feature]-neg_diffused[feature]
             merged_diffused[feature] = v
 
