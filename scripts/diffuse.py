@@ -9,7 +9,7 @@ from optparse import OptionParser
 # local imports
 from pathway_tools.kernel import Kernel, MultiDiffuser
 from pathway_tools.data_matrix import DataMatrix
-#from tiedie_util import *
+from pathway_tools.tiedie_util import parseNet, getNetworkNodes
 
 # Program Constants
 SCORE_MU = 0.1
@@ -39,6 +39,9 @@ def main():
     #   page-rank diffused vectors
     #
 
+    if opts.network is None:
+        print "Please define network"
+        return
     print "Parsing Network File..."
     network = parseNet(opts.network)
     network_nodes = getNetworkNodes(network) 
@@ -54,6 +57,7 @@ def main():
             diffuser = SciPYKernel(opts.network)
         else:   
             diffuser = Kernel(opts.kernel)
+        print "Finished Loading..."
 
     # remove any feature not in the network
     feature_list = input_heats.getFeatureList()
