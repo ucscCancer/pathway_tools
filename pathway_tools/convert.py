@@ -44,13 +44,18 @@ def read_paradigm_graph(handle, strict=True):
     return gr
 
 def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
+    node_label = {}
     for e in sorted(gr.node):
-        handle.write("%s\t%s\n" % (gr.node[e].get(node_type_field, node_type_default), e))
+        if 'label' in gr.node[e]:
+            node_label[e] = gr.node[e]['label']
+        else:
+            node_label[e] = e
+        handle.write("%s\t%s\n" % (gr.node[e].get(node_type_field, node_type_default), node_label[e]))
 
     for src in gr.edge:
         for dst in gr.edge[src]:
             for edge in gr.edge[src][dst]:
-                handle.write("%s\t%s\t%s\n" % (src, dst, gr.edge[src][dst][edge].get(edge_type_field, edge_type_default)))
+                handle.write("%s\t%s\t%s\n" % (node_label[src], node_label[dst], gr.edge[src][dst][edge].get(edge_type_field, edge_type_default)))
 
 
 def load_paradigm_dir(base_dir):
@@ -96,7 +101,10 @@ def write_xgmml(gr, handle):
     for i, n in enumerate(gr.node):
         name_map[n] = i
         node = doc.createElement('node')
-        node.setAttribute('label', str(n))
+        if 'label' in gr.node[n]:
+            node.setAttribute('label', gr.node[n]['label'])
+        else:
+            node.setAttribute('label', str(n))
         node.setAttribute('id', str(i))
         for key, value in gr.node[n].items():
             att_node = doc.createElement('att')

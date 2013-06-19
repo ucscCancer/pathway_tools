@@ -12,4 +12,16 @@ curl -o import/reactome.zip http://www.reactome.org/download/current/biopax.zip
 #BioCarta
 curl -o import/BioCarta.bp3.owl.gz ftp://ftp1.nci.nih.gov/pub/PID/BioPAX_Level_3/BioCarta.bp3.owl.gz
 
+cd import
+mkdir -p owl
 
+gunzip -c BioCarta.bp3.owl.gz > owl/BioCarta.bp3.owl
+gunzip -c NCI-Nature_Curated.bp3.owl.gz > owl/NCI-Nature_Curated.bp3.owl
+unzip netpath.zip 
+mv BioPAX/* owl/
+rmdir BioPAX
+cd owl
+unzip ../reactome.zip
+cd ../../
+
+# grep -n -P "[\x80-\xFF]" BioCarta.bp3.owl 
