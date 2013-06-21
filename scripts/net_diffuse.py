@@ -32,7 +32,7 @@ class diffuse_heat:
                 y = v
             else:
                 x.append(v)
-        return ( key, y + (y * float(len(x)) - sum(x)) * self.delta )
+        return ( key, y - (y * float(len(x)) - sum(x)) * self.delta )
 
 def diffuse_net(gr, data, ncycles, delta):
 
