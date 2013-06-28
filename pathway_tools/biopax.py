@@ -52,40 +52,31 @@ class BioPax_ElementBase(object):
         if DEBUG:
             sys.stderr.write("DEBUG: %s :%s\n" % (str(self.stack + [self]), message))
 
-    def __str__(self):
+    def __repr__(self):
         return "%s <%s>" % (self.name, self.type)
 
 class BioPax_Pathway(BioPax_ElementBase):
     type = "Pathway"
 
     def process(self):
+        self.debug("Pathway: %s" % (self.node))
+
         component_list = {}
         for component in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "pathwayComponent"):
             component_list[component.dst] = self.process_child(component.dst, component.dst_type)
+
+        name = None
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+            name = c_info.dst
 
         gr = networkx.MultiDiGraph()
         re_map = {}
         for c in component_list:
             if component_list[c] is not None:
                 component_list[c].to_graph(gr)
-            """
-            for r in component_list[c]:
-                if isinstance(r, Output_Edge):
-                    re_map[r.src.id] = r.src.label
-                    re_map[r.dst.id] = r.dst.label
-                    if r.src.id not in gr.node:
-                        gr.add_node( r.src.id, attr_dict=r.src.data )
-                    if r.dst.id not in gr.node:
-                        gr.add_node( r.dst.id, attr_dict=r.dst.data )
-                    gr.add_edge( r.src.id, r.dst.id, attr_dict=r.data )
-                elif isinstance(r, Output_Node):
-                    if r.id not in gr.node:
-                        gr.add_node( r.id, attr_dict=r.data )
-                else:
-                    #raise Exception("Unexpected parsing: %s %s" % (c, type(component_list[c])) )
-                    pass
-            """       
         #gr = networkx.relabel_nodes(gr, re_map)
+        gr.graph['name'] = name
+        gr.graph['url'] = self.node
         yield gr
 
 class BioPax_SmallMolecule(BioPax_ElementBase):
@@ -151,29 +142,48 @@ class BioPax_Protein(BioPax_ElementBase):
     type = "Protein"
 
     def process(self):
+
+        entity_ref = None
+        entity_type = None
+        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "entityReference"):
+            entity_ref = ref.dst
+            entity_type = ref.dst_type
+        if entity_ref is not None:
+            return self.process_child(entity_ref, entity_type)
+
+
+class BioPax_ProteinReference(BioPax_ElementBase):
+    type = "ProteinReference"
+
+    def process(self):
+
+        xref_list = []
+        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref"):
+            db = None
+            db_id = None
+            for rel in self.pax.query(src=xref.dst):
+                if rel.predicate == BIOPAX_BASE + "db":
+                    db = rel.dst
+                if rel.predicate == BIOPAX_BASE + "id":
+                    db_id = rel.dst
+            db_xref = "%s:%s" % (db, db_id)
+            xref_list.append(db_xref)
+
+        aliases = []
         node_label = None
         for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
             node_label = name.dst.replace("\n", " ")
+            aliases.append(node_label)
 
-        xref_list = []
-        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "entityReference"):
-            for xref in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "xref"):
-                db = None
-                db_id = None
-                for rel in self.pax.query(src=xref.dst):
-                    if rel.predicate == BIOPAX_BASE + "db":
-                        db = rel.dst
-                    if rel.predicate == BIOPAX_BASE + "id":
-                        db_id = rel.dst
-                db_xref = "%s:%s" % (db, db_id)
-                xref_list.append(db_xref)
-
-            for prot_name in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "name"):
-                node_label = prot_name.dst
+        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+            node_label = prot_name.dst
+            aliases.append(node_label)
 
 
         out = Subnet()
-        data = {'db_xref' : xref_list, 'type' : self.type}
+        data = {'db_xref' : xref_list, 'type' : 'protein'}
+        if len(aliases) > 1:
+            data['aliases'] = aliases
         if node_label is not None:
             data['label'] = node_label
         out.add_node(self.node, data, is_input=True, is_output=True )
@@ -205,7 +215,7 @@ class BioPax_Catalysis(BioPax_ElementBase):
         
         for l in controller:
             for r in controlled:
-                out.add_edge( l, r, {'interaction' : interaction} )
+                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
         return out
 
 class BioPax_BiochemicalReaction(BioPax_ElementBase):
@@ -225,10 +235,15 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
             out.add_node(c_info.dst, elem, is_output=True)           
             right.append( c_info.dst )
 
+        interaction = "-a>"
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType"):
+            interaction = c_info.dst
+            for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term"):
+                interaction = d_info.dst
+
         for l in left:
             for r in right:
-                interaction = "-a>"
-                out.add_edge( l, r, {'interaction' : interaction} )
+                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
         return out
 
 
@@ -236,20 +251,16 @@ class BioPax_MolecularInteraction(BioPax_ElementBase):
     type = "MolecularInteraction"
 
     def process(self):
+        out = Subnet()
         part = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "participant"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            for e in elem:
-                part.append( e )
-
-        out = []
+            out.add_node(c_info.dst, elem)
+            part.append( c_info.dst )
         for p1 in part:
             for p2 in part:
                 if p1 != p2:
-                    if isinstance(p1, Output_Node) and isinstance(p2, Output_Node):
-                        out.append( Output_Edge( p1, p2, {'interaction' : "--"} ) )
-                    else:
-                        self.debug( "Skipped %s %s" % (p1, p2) )
+                    out.add_edge(p1, p2, {'interaction' : "--"} ) 
         return out
 
 class BioPax_Transport(BioPax_ElementBase):
@@ -261,18 +272,26 @@ class BioPax_Control(BioPax_ElementBase):
     type = "Control"
     def process(self):
         controller = []
+        out = Subnet()
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "controller"):
             self.debug("call %s %s" % (c_info.dst, c_info.dst_type))
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            sys.exit(0)
-            for e in elem:
-                controller.append( e )
+            out.add_node(c_info.dst, elem, is_input=True)
+            controller.append( c_info.dst )
             
         controlled = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "controlled"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            for e in elem:
-                controlled.append( e )
+            out.add_node(c_info.dst, elem, is_output=True)
+            controlled.append( c_info.dst )
+
+        interaction = "-a>"
+        for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType'):
+            interaction = control.dst 
+        
+        for l in controller:
+            for r in controlled:
+                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
 
         for component in self.pax.query(src=self.node):
             #print "NA", component
@@ -309,6 +328,9 @@ class BioPax_Complex(BioPax_ElementBase):
         for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
             node_label = name.dst.replace("\n", " ")
 
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+            node_label = name.dst.replace("\n", " ")
+
         out = Subnet()
         data = {"type" : "complex"}
         if node_label is not None:
@@ -319,8 +341,9 @@ class BioPax_Complex(BioPax_ElementBase):
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "component"):
             c = self.process_child(c_info.dst, c_info.dst_type)
             if c is not None:
+                self.debug("ComponentLink %s %s" % (c_info.dst, c))
                 out.add_node(c_info.dst, c)
-                out.add_edge(c_info.dst, self.node, {"type" : "component>"} )
+                out.add_edge(c_info.dst, self.node, {"interaction" : "component>", 'class' : self.type, 'src_url' : self.node} )
         return out
 
 
@@ -328,39 +351,49 @@ class BioPax_ComplexAssembly(BioPax_ElementBase):
     type = "ComplexAssembly"
 
     def process(self):
+        
         """
         out = Subnet()
         left = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            left.append( elem )
-        """         
+            out.add_node(c_info.dst, elem)
+            left.append( c_info.dst )
+        
         right = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            right.append( elem )
+            out.add_node(c_info.dst, elem, is_input=True, is_output=True)
+            right.append( c_info.dst )
 
         if len(right) != 1:
             self.debug("Weird product set")
-        return right[0]
         
-        """
         for l in left:
             for r in right:
-                interaction = "member>"
-                out.add
-
-                if isinstance(l, Output_Node) and isinstance(r, Output_Node):
-                    out.append( Output_Edge( l, r, {'interaction' : interaction} ) )
-                else:
-                    self.debug( "Skipped %s %s" % (l, r) )
-        """
+                out.add_edge(l, r, {"interaction" : "component>", 'class' : self.type, 'src_url' : self.node} )        
         return out
+        """
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
+            elem = self.process_child(c_info.dst, c_info.dst_type)
+            return elem
 
 
+
+class BioPax_Blank(BioPax_ElementBase):
+    type = "Blank"
+
+    def process(self):
+        out = Subnet()
+        name = None
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+            name = c_info.dst
+        out.add_node( self.node, {'name' : name, 'url' : self.node}, is_input=True, is_output=True )
+        return out
 
 element_mapping = {
     BIOPAX_BASE + "Protein" : BioPax_Protein,
+    BIOPAX_BASE + "ProteinReference" : BioPax_ProteinReference,
     BIOPAX_BASE + "SmallMolecule" : BioPax_SmallMolecule,
     BIOPAX_BASE + "Complex" : BioPax_Complex,
     BIOPAX_BASE + "ComplexAssembly" : BioPax_ComplexAssembly,
@@ -376,6 +409,7 @@ element_mapping = {
     BIOPAX_BASE + "TemplateReaction" : BioPax_TemplateReaction,
     BIOPAX_BASE + "TransportWithBiochemicalReaction" : BioPax_TransportWithBiochemicalReaction,
     BIOPAX_BASE + "Interaction" : BioPax_Interaction,
+    None : BioPax_Blank
 }
 
 class Subnet:
@@ -395,15 +429,21 @@ class Subnet:
     def add_edge(self, src, dst, data):
         self.edges.append( (src, dst, data) )
 
-    def to_graph(self, graph):
+    def to_graph(self, graph, visited={}):
         out = ""
         for a in self.nodes:
             if isinstance(self.nodes[a], Subnet):
-                self.nodes[a].to_graph(graph)
+                if a not in visited:
+                    self.nodes[a].to_graph(graph, visited)
+                #visited[a] = True
             else:
-                graph.add_node(a, attr_dict=self.nodes[a])
+                if isinstance(self.nodes[a], dict):
+                    data = dict(self.nodes[a])
+                else:
+                    data = {}
+                data['src_url'] = a
+                graph.add_node(a, attr_dict=data)
         for a in self.edges:
-
             if isinstance(self.nodes[a[0]], Subnet):
                 src = self.nodes[a[0]].get_input()
             else:
@@ -412,24 +452,44 @@ class Subnet:
                 dst = self.nodes[a[1]].get_output()
             else:
                 dst = a[1]
-            graph.add_edge( src, dst, attr_dict=a[2] )
+            if dst not in graph.edge[src]:
+                graph.add_edge( src, dst, attr_dict=a[2] )
     
     def get_input(self):
+        if isinstance(self.nodes[self.input_node], Subnet):
+            return self.nodes[self.input_node].get_input()
         return self.input_node
 
     def get_output(self):
+        if isinstance(self.nodes[self.output_node], Subnet):
+            return self.nodes[self.output_node].get_output()
         return self.output_node
+
+    def __str__(self):
+        return "{%s}" % (",".join( [ str(self.nodes[a]) for a in self.nodes ] ))
 
 
 class BioPax:
 
+    def __init__(self):
+        pass
+
     def pathways(self):
+        out = {}
         for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "name"):
-           yield a.dst
+            out[a.dst] = True
+        for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "displayName"):
+            out[a.dst] = True
+
+        return out.keys()
 
     def toNet(self, pathways=None):
         start_set = {}
         for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "name"):
+            if pathways is None or a.dst in pathways:
+                start_set[a.src] = True
+
+        for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "displayName"):
             if pathways is None or a.dst in pathways:
                 start_set[a.src] = True
 

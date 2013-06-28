@@ -29,7 +29,10 @@ if __name__ == "__main__":
 
     gr = None
     if args.in_xgmml is not None:
-        handle = open(args.in_xgmml)
+        if args.in_xgmml == "-":
+            handle = sys.stdin
+        else:
+            handle = open(args.in_xgmml)
         gr = convert.read_xgmml(handle)
         handle.close()
 
