@@ -266,8 +266,26 @@ class BioPax_MolecularInteraction(BioPax_ElementBase):
 class BioPax_Transport(BioPax_ElementBase):
     type = "Transport"
     def process(self):
-        return None
+        left = []
+        out = Subnet()
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
+            elem = self.process_child(c_info.dst, c_info.dst_type)
+            out.add_node(c_info.dst, elem, is_input=True)
+            left.append( c_info.dst )
+                
+        right = []
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
+            elem = self.process_child(c_info.dst, c_info.dst_type)
+            out.add_node(c_info.dst, elem, is_output=True)           
+            right.append( c_info.dst )
 
+        interaction = "transport"
+
+        for l in left:
+            for r in right:
+                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+        return out
+        
 class BioPax_Control(BioPax_ElementBase):
     type = "Control"
     def process(self):
@@ -312,7 +330,25 @@ class BioPax_TemplateReaction(BioPax_ElementBase):
 class BioPax_TransportWithBiochemicalReaction(BioPax_ElementBase):
     type = "TransportWithBiochemicalReaction"
     def process(self):
-        return None
+        left = []
+        out = Subnet()
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
+            elem = self.process_child(c_info.dst, c_info.dst_type)
+            out.add_node(c_info.dst, elem, is_input=True)
+            left.append( c_info.dst )
+                
+        right = []
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
+            elem = self.process_child(c_info.dst, c_info.dst_type)
+            out.add_node(c_info.dst, elem, is_output=True)           
+            right.append( c_info.dst )
+
+        interaction = "transport"
+
+        for l in left:
+            for r in right:
+                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+        return out
 
 class BioPax_Interaction(BioPax_ElementBase):
     type = "Interaction"
