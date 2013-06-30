@@ -136,7 +136,51 @@ class BioPax_Rna(BioPax_ElementBase):
     type = "Rna"
 
     def process(self):
-        return None
+        entity_ref = None
+        entity_type = None
+        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "entityReference"):
+            entity_ref = ref.dst
+            entity_type = ref.dst_type
+        if entity_ref is not None:
+            return self.process_child(entity_ref, entity_type)
+
+class BioPax_RnaReference(BioPax_ElementBase):
+    type = "Rna"
+
+    def process(self):
+        
+        xref_list = []
+        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref"):
+            db = None
+            db_id = None
+            for rel in self.pax.query(src=xref.dst):
+                if rel.predicate == BIOPAX_BASE + "db":
+                    db = rel.dst
+                if rel.predicate == BIOPAX_BASE + "id":
+                    db_id = rel.dst
+            db_xref = "%s:%s" % (db, db_id)
+            xref_list.append(db_xref)
+
+        aliases = []
+        node_label = None
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
+            node_label = name.dst.replace("\n", " ")
+            aliases.append(node_label)
+
+        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+            node_label = prot_name.dst
+            aliases.append(node_label)
+
+
+        out = Subnet()
+        data = {'db_xref' : xref_list, 'type' : 'rna'}
+        if len(aliases) > 1:
+            data['aliases'] = aliases
+        if node_label is not None:
+            data['label'] = node_label
+        out.add_node(self.node, data, is_input=True, is_output=True )
+        return out
+
 
 class BioPax_Protein(BioPax_ElementBase):
     type = "Protein"
@@ -285,7 +329,7 @@ class BioPax_Transport(BioPax_ElementBase):
             for r in right:
                 out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
         return out
-        
+
 class BioPax_Control(BioPax_ElementBase):
     type = "Control"
     def process(self):
@@ -435,6 +479,7 @@ element_mapping = {
     BIOPAX_BASE + "ComplexAssembly" : BioPax_ComplexAssembly,
     BIOPAX_BASE + "PhysicalEntity" : BioPax_PhysicalEntity,
     BIOPAX_BASE + "Rna" : BioPax_Rna,
+    BIOPAX_BASE + "RnaReference" : BioPax_RnaReference,
     BIOPAX_BASE + "Catalysis" : BioPax_Catalysis,
     BIOPAX_BASE + "BiochemicalReaction" : BioPax_BiochemicalReaction,
     BIOPAX_BASE + "MolecularInteraction" : BioPax_MolecularInteraction,
