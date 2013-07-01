@@ -2,6 +2,9 @@
 import array
 import csv
 
+class DataException(Exception):
+    pass
+
 class NamedMatrix:
     """
     array.array based float matrix class
@@ -17,7 +20,7 @@ class NamedMatrix:
     def read(self, handle):
         header = None
         for line in handle:
-            row = line.rstrip().split("\t")
+            row = line.rstrip("\n\r").split("\t")
             if header is None:
                 header = row
                 self.data = array.array("f")
