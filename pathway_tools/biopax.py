@@ -37,7 +37,7 @@ class BioPax_ElementBase(object):
         self.node = node
         self.name = None
         self.stack = stack
-        for a in self.pax.query(src=node, predicate=BIOPAX_BASE + "displayName"):
+        for a in self.pax.query(src=node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             self.name = a.dst
         if self.name is None:
             self.name = self.node
@@ -50,50 +50,51 @@ class BioPax_ElementBase(object):
 
     def debug(self, message):
         if DEBUG:
-            sys.stderr.write("DEBUG: %s :%s\n" % (str(self.stack + [self]), message))
+            sys.stderr.write("DEBUG: %s :%s\n" % (self.stack + [self], message))
 
     def __repr__(self):
-        return "%s <%s>" % (self.name, self.type)
+        return "%s <%s>" % (self.name.encode('ascii', errors='ignore'), self.type)
 
 class BioPax_Pathway(BioPax_ElementBase):
     type = "Pathway"
 
     def process(self):
-        self.debug("Pathway: %s" % (self.node))
+        self.debug("Pathway: %s" % (self.node.encode("ascii", errors='ignore')))
 
         component_list = {}
         for component in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "pathwayComponent"):
             component_list[component.dst] = self.process_child(component.dst, component.dst_type)
 
         name = None
-        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             name = c_info.dst
 
-        gr = networkx.MultiDiGraph()
-        re_map = {}
+        if name is None:
+            for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
+                name = c_info.dst
+
+        out = Subnet({'name' : name, 'url' : self.node})
+
         for c in component_list:
             if component_list[c] is not None:
-                component_list[c].to_graph(gr)
-        #gr = networkx.relabel_nodes(gr, re_map)
-        gr.graph['name'] = name
-        gr.graph['url'] = self.node
-        yield gr
+                out.add_node( c, component_list[c] )
+        return out
 
 class BioPax_SmallMolecule(BioPax_ElementBase):
     type = "SmallMolecule"
 
     def process(self):
         node_label = None
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
 
         xref_list = []
-        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "entityReference"):
-            for xref in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "xref"):
+        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "entityReference", get_type=False):
+            for xref in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "xref", get_type=False):
                 db = None
                 db_id = None
                 for rel in self.pax.query(src=xref.dst):
@@ -104,7 +105,7 @@ class BioPax_SmallMolecule(BioPax_ElementBase):
                 db_xref = "%s:%s" % (db, db_id)
                 xref_list.append(db_xref)
 
-            for name in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "name"):
+            for name in self.pax.query(src=ref.dst, predicate=BIOPAX_BASE + "name", get_type=False):
                 node_label = name.dst.replace("\n", " ")
 
 
@@ -122,7 +123,7 @@ class BioPax_PhysicalEntity(BioPax_ElementBase):
 
     def process(self):
         node_label = None
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
         out = Subnet()
@@ -150,7 +151,7 @@ class BioPax_RnaReference(BioPax_ElementBase):
     def process(self):
         
         xref_list = []
-        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref"):
+        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref", get_type=False):
             db = None
             db_id = None
             for rel in self.pax.query(src=xref.dst):
@@ -163,11 +164,11 @@ class BioPax_RnaReference(BioPax_ElementBase):
 
         aliases = []
         node_label = None
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             node_label = name.dst.replace("\n", " ")
             aliases.append(node_label)
 
-        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = prot_name.dst
             aliases.append(node_label)
 
@@ -202,7 +203,7 @@ class BioPax_ProteinReference(BioPax_ElementBase):
     def process(self):
 
         xref_list = []
-        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref"):
+        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref", get_type=False):
             db = None
             db_id = None
             for rel in self.pax.query(src=xref.dst):
@@ -215,11 +216,11 @@ class BioPax_ProteinReference(BioPax_ElementBase):
 
         aliases = []
         node_label = None
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             node_label = name.dst.replace("\n", " ")
             aliases.append(node_label)
 
-        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for prot_name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = prot_name.dst
             aliases.append(node_label)
 
@@ -254,7 +255,7 @@ class BioPax_Catalysis(BioPax_ElementBase):
 
 
         interaction = "-a>"
-        for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType'):
+        for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType', get_type=False):
             interaction = control.dst 
         
         for l in controller:
@@ -280,9 +281,9 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
             right.append( c_info.dst )
 
         interaction = "-a>"
-        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType"):
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType", get_type=False):
             interaction = c_info.dst
-            for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term"):
+            for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term", get_type=False):
                 interaction = d_info.dst
 
         for l in left:
@@ -348,18 +349,14 @@ class BioPax_Control(BioPax_ElementBase):
             controlled.append( c_info.dst )
 
         interaction = "-a>"
-        for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType'):
+        for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType', get_type=False):
             interaction = control.dst 
         
         for l in controller:
             for r in controlled:
                 out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
 
-        for component in self.pax.query(src=self.node):
-            #print "NA", component
-            #yield "NA", component
-            pass
-        return None
+        return out
 
 class BioPax_TemplateReactionRegulation(BioPax_ElementBase):
     type = "TemplateReactionRegulation"
@@ -405,10 +402,10 @@ class BioPax_Complex(BioPax_ElementBase):
     def process(self):
         node_label = None
         #bug, using displayName may cause errors for complexes
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
-        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
         out = Subnet()
@@ -466,7 +463,7 @@ class BioPax_Blank(BioPax_ElementBase):
     def process(self):
         out = Subnet()
         name = None
-        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name"):
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             name = c_info.dst
         out.add_node( self.node, {'name' : name, 'url' : self.node}, is_input=True, is_output=True )
         return out
@@ -494,11 +491,12 @@ element_mapping = {
 }
 
 class Subnet:
-    def __init__(self):
+    def __init__(self, meta=None):
         self.nodes = {}
         self.edges = []
         self.output_node = None
         self.input_node = None
+        self.meta = meta
 
     def add_node(self, name, data, is_input=False, is_output=False):
         self.nodes[name] = data
@@ -533,15 +531,19 @@ class Subnet:
                 dst = self.nodes[a[1]].get_output()
             else:
                 dst = a[1]
-            if dst not in graph.edge[src]:
+            if src in graph.edge and dst not in graph.edge[src]:
                 graph.add_edge( src, dst, attr_dict=a[2] )
     
     def get_input(self):
+        if self.input_node is None:
+            return None
         if isinstance(self.nodes[self.input_node], Subnet):
             return self.nodes[self.input_node].get_input()
         return self.input_node
 
     def get_output(self):
+        if self.output_node is None:
+            return None
         if isinstance(self.nodes[self.output_node], Subnet):
             return self.nodes[self.output_node].get_output()
         return self.output_node
@@ -616,7 +618,7 @@ class BioPaxFile(BioPax):
         #print str1, str2
         return str1.lower() == str2.lower()
 
-    def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True):
+    def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True, get_type=True):
         out = []
         include = [True,True,True,True,True]
         for src_cmp in self.graph:
@@ -661,7 +663,7 @@ class BioPaxSparql(BioPax):
             return unicode(out[0][0])
         return None
 
-    def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True):
+    def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True, get_type=True):
         if src:
             src_label = "<%s>" % (src)
         else:
@@ -707,11 +709,11 @@ class BioPaxSparql(BioPax):
                 for i, v in enumerate(results.variables):
                     if v == 's':
                         rsrc = unicode(row[i])
-                        if isinstance(row[i], sparql.IRI):
+                        if isinstance(row[i], sparql.IRI) and get_type:
                             rsrc_type = self.get_node_type(rsrc)
                     if v == 'd':
                         rdst = unicode(row[i])
-                        if isinstance(row[i], sparql.IRI):
+                        if isinstance(row[i], sparql.IRI) and get_type:
                             rdst_type = self.get_node_type(rdst)
                     if v == 'p':
                         rpred = unicode(row[i])
