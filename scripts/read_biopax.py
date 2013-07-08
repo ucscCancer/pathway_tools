@@ -2,9 +2,14 @@
 
 import sys
 import os
+import re
 import argparse
+import networkx
 from pathway_tools.biopax import BioPaxFile, BioPaxSparql
 from pathway_tools import convert
+
+re_clean = re.compile(r'[/\\ \n;]')
+re_namesplit = re.compile(r'[/ \#\&]')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -28,23 +33,30 @@ if __name__ == "__main__":
 
     if args.list:
         for a in b.pathways():
-            print a
+            print a.encode('ascii', errors='ignore')
     else:
         paths = args.pathways        
-        for gr_set in b.toNet(paths):
-            for gr in gr_set:
-                if args.out_dir:
-                    handle = open(os.path.join(args.out_dir, gr.graph['name'] + ".xgmml"), "w")
-                else:
-                    if args.output:
-                        handle = open(args.output, "w")
-                    else:
-                        handle = sys.stdout
+        for subnet in b.toNet(paths):
+            
+            gr = networkx.MultiDiGraph()
+            gr.graph['name'] = subnet.meta['name']
+            gr.graph['url'] = subnet.meta['url']
+            subnet.to_graph(gr)
 
-                
-                if args.paradigm:
-                    convert.write_paradigm_graph(gr, handle)
+            if args.out_dir:
+                name = re_namesplit.split(gr.graph['url'])[-1]
+                handle = open(os.path.join(args.out_dir, name + ".xgmml"), "w")
+            else:
+                if args.output:
+                    handle = open(args.output, "w")
                 else:
-                    convert.write_xgmml(gr, handle)
-                
+                    handle = sys.stdout
+
+            
+            if args.paradigm:
+                convert.write_paradigm_graph(gr, handle)
+            else:
+                convert.write_xgmml(gr, handle)
+            
+            if handle != sys.stdout:
                 handle.close()
