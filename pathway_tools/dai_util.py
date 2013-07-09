@@ -102,11 +102,11 @@ class MultiDimMatrix(object):
     def __init__(self, *dims):
         self._shortcuts = [i for i in self._create_shortcuts(dims)]
         self._li = [None] * (self._shortcuts.pop())
-        self._shortcuts.reverse()
+        #self._shortcuts.reverse()
 
     def _create_shortcuts(self, dims):
         dimList = list(dims)
-        dimList.reverse()
+        #dimList.reverse()
         number = 1
         yield 1
         for i in dimList:
@@ -130,6 +130,17 @@ class MultiDimMatrix(object):
 
     def __str__(self):
         return "%s" % (self._li)
+
+
+class VectorRemap:
+    def __init__(self, order):
+        self.order = order
+
+    def remap(self, val):
+        out = [None] * len(self.order)
+        for s, d in enumerate(self.order):
+            out[s] = val[d]
+        return out
 
 
 class CPT:
@@ -162,6 +173,10 @@ class CPT:
             i += 1
         return "\n".join(out)
 
+    def iter():
+        for i in multi_dim_iter(self.dims):
+            yield i
+
     def set_value(self, value, factors):
         idx = []
         for i in self.variables:
@@ -171,15 +186,19 @@ class CPT:
     def factors(self, variable_set=None):
         if variable_set is None:
             variable_set = self.variables
+
         num_vars = len(variable_set)
+
         dims = []
+        remap = []
         for v in variable_set:
             dims.append(self.dims[self.varmap[v]])
-
-        out = []
-        for fac_states in multi_dim_iter(dims):
-            out.append( self._table.__getitem__(fac_states) )
-        return out
+            remap.append(self.variables.index(v))
+        out = MultiDimMatrix(*dims)
+        remap = VectorRemap(remap)
+        for fac_states in multi_dim_iter(self.dims):
+            out[ remap.remap(fac_states) ] = self._table[fac_states]
+        return out._li
 
 
 class CPTGenerator:
@@ -293,12 +312,12 @@ class FactorGraph:
         
     def describe(self):
 
-        yield "# Variables"
+        #yield "# Variables"
         for path_var in self.var_map:
             yield "# %d\t%s\t%s" % (path_var.variable_id, path_var.variable_name, path_var.variable_type)
 
-        yield "# Factor Graphs"
-
+        yield "## Factor Graphs"
+        yield "%s" % (len(self.cpt_gen_map))
         for cpt_id in self.cpt_gen_map:
             cpt = self.cpt_gen_map[cpt_id]
             node_order = []
@@ -308,10 +327,13 @@ class FactorGraph:
                 node_order.append(n)
                 node_dim.append(cpt.get_variable_by_id(n).dim)
 
-            yield "#CPT %s %s " % (cpt.cpt_name, cpt.cpt_type)
+            yield "## CPT %s %s " % (cpt.cpt_name, cpt.cpt_type)
+            yield "%d" % (len(node_order))
             yield " ".join([str(i) for i in node_order])
             yield " ".join([str(i) for i in node_dim])
-            yield cpt.generate(node_order)
+            cpt = cpt.generate(node_order)
+            yield "%s" % (len(cpt._table._li))
+            yield cpt
 
     def generate_dai_factor_graph(self):
         vecfac = dai.VecFactor()
