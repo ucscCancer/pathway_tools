@@ -37,11 +37,7 @@ class Dogma:
     def get_dogma(self, name):
         return self.data['dogma'].get(name, None)
 
-class RepoChecker:
-    def __init__(self, repo):
-        self.repo = repo
-        self.hugo_map = None
-        self.dogma = None
+class GraphChecker:
 
     def load_hugomap(self, path):
         handle = open(path)
@@ -59,6 +55,32 @@ class RepoChecker:
                     o[col] = row[header[col]]
                 self.hugo_map[ row[header["Approved Symbol"]] ] = o
         handle.close()
+
+
+    def suggest_nodes(self, gr):
+        if self.hugo_map is not None:
+            for node in gr.node:
+                if 'type' in gr.node[node] and gr.node[node]['type'] == 'protein':
+                    if node not in self.hugo_map:
+                        log("Checking for %s" % (node))
+                        found = False
+                        for alt in self.hugo_map:
+                            for src_namespace in self.hugo_map[alt]:
+                                if str(self.hugo_map[alt][src_namespace]) == str(node):
+                                    yield [node, src_namespace, alt]
+                                    found = True
+                        if not found:
+                            for alt in self.hugo_map:
+                                if len(alt) > 2:    
+                                    if node.startswith(alt):
+                                        yield [node, 'name prefix', alt]
+
+
+class RepoChecker(GraphChecker):
+    def __init__(self, repo):
+        self.repo = repo
+        self.hugo_map = None
+        self.dogma = None
 
     def load_dogma(self, path):
         handle = open(path)
@@ -100,27 +122,6 @@ class RepoChecker:
 
         return errors
 
-    def suggest_nodes(self, project):
-        handle = open(os.path.join(self.repo, project, "graph"))
-        gr = network_convert.read_paradigm_graph(handle)
-        handle.close()
-        out = []
-        if self.hugo_map is not None:
-            for node in gr.node:
-                if gr.node[node]['type'] == 'protein':
-                    if node not in self.hugo_map:
-                        found = False
-                        for alt in self.hugo_map:
-                            for src_namespace in self.hugo_map[alt]:
-                                if self.hugo_map[alt][src_namespace] == node:
-                                    out.append( [node, src_namespace, alt] )
-                                    found = True
-                        if not found:
-                            for alt in self.hugo_map:
-                                if len(alt) > 2:    
-                                    if node.startswith(alt):
-                                        out.append( [node, 'name prefix', alt] )
-        return out
 
 
 
@@ -216,14 +217,6 @@ def main_sync(args):
 
 
 def main_compile(args):
-    parser = argparse.ArgumentParser(prog="pathway_db compile")
-    parser.add_argument('-a', '--append', help="Default Edge Type", action="append")
-    parser.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
-    parser.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
-    parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
-    parser.add_argument("pathways", nargs="*")
-    
-    args = parser.parse_args(args)
 
     gr = networkx.MultiDiGraph()
     base_dir = args.base_dir
@@ -290,6 +283,109 @@ def main_compile(args):
         network_convert.write_sif(gr, sys.stdout)        
     else:        
         network_convert.write_xgmml(gr, sys.stdout)
+
+
+def scan_dir(base_dir):
+    out = []
+    paths = glob(os.path.join(base_dir, "*"))
+    for path in paths:
+        if os.path.isdir(path):
+            out += scan_dir(path)
+        else:
+            if path.endswith(".xgmml"):
+                out.append(path)
+    return out
+
+def main_build(args):
+    gr = networkx.MultiDiGraph()
+
+    paths = []
+    for base_dir in args.pathways:
+        paths += scan_dir(base_dir)
+
+    type_count = {}
+    interaction_count = {}
+    duplicate_edges = 0
+    for path in paths:
+        #log("Scanning: %s" % (path))
+        handle = open(path)
+        cur_gr = network_convert.read_xgmml(handle)
+        handle.close()
+
+        for node in cur_gr.node:
+            if 'type' not in cur_gr.node[node]:
+                log("Untyped node: %s" % (node))
+            if node not in gr.node:
+                gr.add_node(node, attr_dict=cur_gr.node[node])
+            else:
+
+                if 'type' in gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
+                    log("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
+
+        for src, dst, data in cur_gr.edges(data=True):
+
+            interaction = data['interaction']
+            has_edge = False
+            if dst in gr.edge[src]:
+                for i in gr.edge[src][dst]:
+                    if gr.edge[src][dst][i]['interaction'] == interaction:
+                        has_edge = True
+
+            if not has_edge:
+                gr.add_edge(src, dst, attr_dict=data )
+            else:
+                duplicate_edges += 1
+
+            """
+
+            handle = open(os.path.join(path, "graph"))
+            for line in handle:
+                tmp = line.rstrip().split("\t")
+                node_type = tmp[0]
+                node_name = tmp[1]
+                if len(tmp) == 2:
+                    if node_name not in gr.node:
+                        gr.add_node( tmp[1], type=node_type )
+                        type_count[node_type] = type_count.get(node_type, 0) + 1
+                    else:
+                        if gr.node[node_name]['type'] != node_type:
+                            raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
+                    if 'pathway' not in gr.node[node_name]:
+                        gr.node[node_name]['pathway'] = []
+                        gr.node[node_name]['pid'] = []
+                    gr.node[node_name]['pathway'].append(info['DESC'])
+                    gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
+                elif len(tmp) == 3:
+                    if tmp[0] not in gr.node:
+                        raise Exception("Missing Node Declaration: %s" % (tmp[0]))
+                    if tmp[1] not in gr.node:
+                        raise Exception("Missing Node Declaration: %s" % (tmp[1]))
+                    has_edge = False
+                    if tmp[1] in gr.edge[tmp[0]]:
+                        for i in gr.edge[tmp[0]][tmp[1]]:
+                            if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
+                                has_edge = True
+                    if not has_edge:
+                        gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
+                    else:
+                        duplicate_edges += 1
+            handle.close()
+            """
+
+    log("Node Count: %d" % (len(gr.nodes())))
+    log("Edge Count: %d" % (len(gr.edges())))
+    log("Duplicate Edges: %s" % (duplicate_edges))
+    log("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
+    for n_type in type_count:
+        log("Node Type %s: %d" % (n_type, type_count[n_type]))
+    if args.paradigm:
+        network_convert.write_paradigm_graph(gr, sys.stdout)
+    elif args.sif:
+        network_convert.write_sif(gr, sys.stdout)        
+    else:        
+        network_convert.write_xgmml(gr, sys.stdout)
+
+
 
 def get_modified(base_dir):
     output = subprocess.check_output("cd %s; git status" % (base_dir), 
@@ -401,19 +497,8 @@ def main_check(args):
             sys.stderr.write("Pathway Check Error: %s : %s\n" % (project, str(e)))
 
 def main_suggest(args):
-    parser = argparse.ArgumentParser(prog="pathway_db check")
-    parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
-    parser.add_argument("project", help="Project List", nargs="*")
 
-    args = parser.parse_args(args)
-
-    projects = []
-    if len(args.project) == 0:
-        projects = get_project_list(args.base_dir)
-    else:
-        projects = args.project
-
-    checker = RepoChecker(args.base_dir)
+    checker = GraphChecker()
     hugo_path = os.path.join(DATA_REPO, "hugo.tab")
     if os.path.exists(hugo_path):
         checker.load_hugomap(hugo_path)
@@ -421,13 +506,16 @@ def main_suggest(args):
         log("Can't make suggestions until hugo synced")
         sys.exit(1)
 
-    for project in projects:
-        try:
-            suggestions = checker.suggest_nodes(project)
-            for sug in suggestions:
-                print "For %s :  instead of %s (from:%s) try %s" % (project, sug[0], sug[1], sug[2])
-        except Exception, e:
-            sys.stderr.write("Pathway Check Error: %s : %s\n" % (project, str(e)))
+    handle = open(args.graph)
+    gr = network_convert.read_xgmml(handle)
+    handle.close()
+
+    #try:
+    suggestions = checker.suggest_nodes(gr)
+    for sug in suggestions:
+        print "Instead of %s (from:%s) try %s" % (sug[0], sug[1], sug[2])
+    #except Exception, e:
+    #    sys.stderr.write("Pathway Check Error: %s\n" % (str(e)))
 
 
 
@@ -507,14 +595,35 @@ mode_map = {
 }
 
 if __name__ == "__main__":
-    mode = None
-    if len(sys.argv) > 1:
-        mode = sys.argv[1]
 
-    if mode in mode_map:
-        mode_map[mode]['method'](sys.argv[2:])
-    else:
-        print "Modes:"
-        for m in mode_map:
-            print "\t%s" % (m)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    subparsers = parser.add_subparsers(title="subcommand")
+
+    parser_compile = subparsers.add_parser('compile')
+    parser_compile.add_argument('-a', '--append', help="Default Edge Type", action="append")
+    parser_compile.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
+    parser_compile.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
+    parser_compile.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser_compile.add_argument("pathways", nargs="*")
+    parser_compile.set_defaults(func=main_compile)
+
+    parser_build = subparsers.add_parser('build')
+    parser_build.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
+    parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
+    parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser_build.add_argument("pathways", nargs="*")
+    parser_build.set_defaults(func=main_build)
+
+    parser_hugosync = subparsers.add_parser('hugosync')
+    parser_hugosync.set_defaults(func=main_hugosync)
+
+
+    parser_suggest = subparsers.add_parser('suggest')
+    parser_suggest.add_argument("graph")
+    parser_suggest.set_defaults(func=main_suggest)
+
+    args = parser.parse_args()
+
+    args.func(args)
 

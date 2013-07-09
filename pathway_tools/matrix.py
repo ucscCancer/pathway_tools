@@ -17,10 +17,10 @@ class NamedMatrix:
         self.rowmap = None
         self.colmap = None
 
-    def read(self, handle):
+    def read(self, handle, delim="\t"):
         header = None
         for line in handle:
-            row = line.rstrip("\n\r").split("\t")
+            row = line.rstrip("\n\r").split(delim)
             if header is None:
                 header = row
                 self.data = array.array("f")

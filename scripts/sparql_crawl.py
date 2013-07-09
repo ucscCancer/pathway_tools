@@ -40,8 +40,8 @@ if __name__ == "__main__":
         next = []
         for n in added:
             for edge, dst in server.node_query(n):
-                dst_str = str(dst)
                 if isinstance(dst, sparql.IRI):
+                    dst_str = dst.value.encode('ascii', errors='ignore')
                     output.add( (rdflib.URIRef(n), rdflib.URIRef(str(edge)), rdflib.URIRef(dst_str)) )
                     if dst_str not in hit_map:
                         nd = hit_map[n] + 1
@@ -49,6 +49,7 @@ if __name__ == "__main__":
                         if nd < args.max_depth:
                             next.append(dst_str)
                 else:
+                    dst_str = dst.value.encode('ascii', errors='ignore')
                     output.add( (rdflib.URIRef(n), rdflib.URIRef(str(edge)), rdflib.Literal(dst_str)) )
             added = next
 
