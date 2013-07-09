@@ -15,6 +15,9 @@ curl -o import/BioCarta.bp3.owl.gz ftp://ftp1.nci.nih.gov/pub/PID/BioPAX_Level_3
 #pathway commons
 curl -o import/Pathway_Commons.homo_sapiens.BIOPAX.owl.gz http://www.pathwaycommons.org/pc2/downloads/Pathway%20Commons%202%20homo%20sapiens.BIOPAX.owl.gz
 
+#use raptor from rapper to convert RDF to N3 triple format
+#rapper -o ntriples Pathway_Commons.homo_sapiens.BIOPAX.owl > Pathway_Commons.homo_sapiens.BIOPAX.n3
+
 cd import
 mkdir -p owl
 
