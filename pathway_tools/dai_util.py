@@ -177,6 +177,12 @@ class CPT:
         for i in multi_dim_iter(self.dims):
             yield i
 
+    def __len__(self):
+        out = 1
+        for i in self.dims:
+            out *= i
+        return out
+
     def set_value(self, value, factors):
         idx = []
         for i in self.variables:
@@ -205,7 +211,7 @@ class CPTGenerator:
     """
     CPT 
 
-    Conditional Probablity Tabel
+    Conditional Probablity Table
 
     This class stores a set of variables (and their dimensions) as well
     as the multidimensional matrix that represents the their probablities.
@@ -318,6 +324,7 @@ class FactorGraph:
 
         yield "## Factor Graphs"
         yield "%s" % (len(self.cpt_gen_map))
+
         for cpt_id in self.cpt_gen_map:
             cpt = self.cpt_gen_map[cpt_id]
             node_order = []
@@ -328,12 +335,12 @@ class FactorGraph:
                 node_dim.append(cpt.get_variable_by_id(n).dim)
 
             yield "## CPT %s %s " % (cpt.cpt_name, cpt.cpt_type)
-            yield "%d" % (len(node_order))
+            yield "%s" % (len(node_order))
             yield " ".join([str(i) for i in node_order])
             yield " ".join([str(i) for i in node_dim])
-            cpt = cpt.generate(node_order)
-            yield "%s" % (len(cpt._table._li))
-            yield cpt
+            table = cpt.generate(node_order)
+            yield "%s" % (len(table))
+            yield "%s" % (table)
 
     def generate_dai_factor_graph(self):
         vecfac = dai.VecFactor()
