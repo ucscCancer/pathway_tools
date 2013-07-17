@@ -13,7 +13,16 @@ class Variable:
         self.variable_type = variable_type
         self.dim = dim
         self.variable_id = variable_id
-        self.dai_value = dai.Var(variable_id, dim)
+        self.dai_value = None
+
+    def __str__(self):
+        return "<pathway_tools.dai_util.Variable name=%s type=%s id=%d 0x%s>" % (
+            self.variable_name, self.variable_type, self.variable_id,
+            id(self)
+        )
+
+    def __repr__(self):
+        return self.__str__()
 
 class Factor:
     def __init__(self, factor_name, factor_type, factor_id, variables):
@@ -21,7 +30,16 @@ class Factor:
         self.factor_type = factor_type
         self.factor_id = factor_id
         self.variables = variables
-        self.dai_value = None
+
+    def __str__(self):
+        return "<pathway_tools.dai_util.Factor name=%s type=%s id=%s vars=%s 0x%s>" % (
+            self.factor_name,
+            self.factor_type,
+            self.factor_id,
+            ",".join( str(a) for a in self.variables ),
+            id(self)
+        )
+
 
 class VariableMap:
     def __init__(self):
@@ -189,7 +207,7 @@ class CPT:
             idx.append( factors[i] )
         self._table.__setitem__(idx, value)
 
-    def factors(self, variable_set=None):
+    def cpt_linear_table(self, variable_set=None):
         if variable_set is None:
             variable_set = self.variables
 
@@ -301,11 +319,11 @@ def multi_dim_iter(dims):
 
 class FactorGraph:
     """
-    ExpandedPathway
+    FactorGraph
 
-    The ExpandedPathway (rename?) represents a pathway that has been expanded out to 
-    a factor graph. It contains factor variable mappings, network connections, and 
-    CPT definitions
+    The FactorGraph represents all of the various data elements needed
+    to setup a Factor graph calculation. It contains factor variable mappings, 
+    and CPT definitions
     """
     def __init__(self):
         self.var_map = VariableMap()
@@ -343,31 +361,12 @@ class FactorGraph:
             yield "%s" % (table)
 
     def generate_dai_factor_graph(self):
-        vecfac = dai.VecFactor()
-
-        elem_map = {}
-        dai_var_map = {}
-        factor_map = {}
-        for elem in self.var_map:
-            if elem.variable_name not in elem_map:
-                elem_map[ elem.variable_name ] = { elem.variable_type : elem.variable_id }
-            else:
-                elem_map[ elem.variable_name ][elem.variable_type] = elem.variable_id
-            #dai_var_map[elem.variable] = dai.Var(elem.variable, elem.dim)
-
+        cpt_map = {}
         for factor in self.factor_map:
             cpt_gen = self.cpt_gen_map[factor]
             elem = cpt_gen.generate()
-            var_list = dai.VarSet()
-            v_list = list(elem.variables)
-            v_list.sort()
-            for v in v_list:
-                var_list.append(self.var_map.get_variable_by_id(v).dai_value)
-            dai_factor = dai.Factor(var_list)
-            for i, v in enumerate(elem.factors()):
-                dai_factor[i] = v
-            vecfac.append(dai_factor)
-        return DaiFactorGraph(self.var_map, vecfac, self.factor_map)
+            cpt_map[factor] = elem
+        return DaiFactorGraph(self.var_map, self.factor_map, cpt_map)
 
 class SharedParameters:
     def __init__(self, variable_set_labels):
@@ -395,12 +394,14 @@ class SharedParameters:
             for i, v in enumerate(state):
                 pos += v * dim
                 dim *= self.variable_dims[i]
-            out += "\t" + str(self.result[pos]) + "\n"
+            if self.result is not None:
+                out += "\t" + str(self.result[pos])
+            out += "\n"
         return out
 
 class DaiEM:
-    def __init__(self, factor_graph):
-        self.factor_graph = factor_graph
+    def __init__(self, dai_factor_graph):
+        self.dai_factor_graph = dai_factor_graph
         self.ev = dai.Evidence()
         self.shared_param_list = []
         self.evidence_map = {}
@@ -420,21 +421,23 @@ class DaiEM:
             yield i
 
     def run(self, method_name, pseudo_count=0.1, **kwds):
+        self.dai_factor_graph.setup_factor_graph()
         obsvec = dai.ObservationVec()
         for sample in self.evidence_map:
             obs = dai.Observation()
             for var in self.evidence_map[sample]:
                 #obs[ self.factor_graph.var_map[var].dai_variable ] = self.evidence_map[sample][var]
-                obs[ var.dai_value ] = self.evidence_map[sample][var]
+                #obs[ var.get_dai_value() ] = self.evidence_map[sample][var]
+                obs[ self.dai_factor_graph.dai_variables[var] ] = self.evidence_map[sample][var]
             obsvec.append(obs)
 
         sp_vec = dai.VecSharedParameters()
-        for sp in self.shared_param_list:          
+        for sp in self.shared_param_list:
             fo = dai.FactorOrientations()
             for variable_list, factor in sp.shared_list:
                 vec = dai.VecVar()
                 for v in variable_list:
-                    vec.append(v.dai_value)
+                    vec.append(self.dai_factor_graph.dai_variables[v])
                 fo[factor.factor_id] = vec
 
             total_dim = 1
@@ -460,11 +463,12 @@ class DaiEM:
         for k in kwds:
             prop[k] = str(kwds[k])
 
-        inf_alg = dai.newInfAlg(method_name, self.factor_graph.get_factor_graph(), prop )
+        inf_alg = dai.newInfAlg(method_name, self.dai_factor_graph.get_factor_graph(), prop )
         em_props= dai.PropertySet()
         dai_em_alg = dai.EMAlg(evidence, inf_alg, vec_max_step, em_props)
 
         while not dai_em_alg.hasSatisfiedTermConditions():
+            print "Cycle 1"
             l = dai_em_alg.iterate()
             if kwds.get("verbose", False):
                 print "Iteration ", dai_em_alg.Iterations(), " likelihood: ", l
@@ -483,15 +487,45 @@ class DaiEM:
       
 
 class DaiFactorGraph:
-    def __init__(self, variable_map, vecfac, factor_map):
+    def __init__(self, variable_map, factor_map, cpt_map):
         self.variable_map = variable_map
-        self.vecfac = vecfac
         self.factor_map = factor_map
+        self.cpt_map = cpt_map
+        self.dai_variables = {}
+        self.vecfac = None
+
+    def setup_factor_graph(self):
+        self.vecfac = dai.VecFactor()
+        elem_map = {}
+        for elem in self.variable_map:
+            if elem.variable_name not in elem_map:
+                elem_map[ elem.variable_name ] = { elem.variable_type : elem.variable_id }
+            else:
+                elem_map[ elem.variable_name ][elem.variable_type] = elem.variable_id
+            #dai_var_map[elem.variable] = dai.Var(elem.variable, elem.dim)
+
+
+        for cpt in sorted(self.cpt_map.keys(), key=lambda x: x.factor_id ):
+            cpt_value = self.cpt_map[cpt]
+            var_list = dai.VarSet()
+            v_list = list(cpt_value.variables)
+            v_list.sort()
+            for v_id in v_list:
+                v = self.variable_map.get_variable_by_id(v_id)
+                if v not in self.dai_variables:
+                    self.dai_variables[v] = dai.Var(v.variable_id, v.dim)
+                var_list.append(self.dai_variables[v])
+            dai_factor = dai.Factor(var_list)
+            for i, v in enumerate(cpt_value.cpt_linear_table()):
+                dai_factor[i] = v
+            self.vecfac.append(dai_factor)
 
     def setup_em(self):
         return DaiEM(self)
 
     def get_factor_graph(self):
+        if self.vecfac is None:
+            self.setup_factor_graph()
         return dai.FactorGraph(self.vecfac)
 
     def get_inf(self, name, **kwds):
@@ -506,7 +540,8 @@ class DaiFactorGraph:
         inf = cls(sn, prop)
         return inf
         """
-        sn = dai.FactorGraph(self.vecfac)
+
+        sn = self.get_factor_graph()
         prop = dai.PropertySet()
         for k in kwds:
             prop[k] = str(kwds[k])
