@@ -129,14 +129,14 @@ class NamedMatrix:
             if math.isnan(self.data[i]):
                 self.data[i] = value
 
-    def descritize(self, bounds, labels):
+    def descritize(self, bounds, labels, default=None):
         out = NamedMatrix()
         out.init_blank(cols=self.colmap, rows=self.rowmap, type='i', null_value=0)
         out.rowmap = self.rowmap
         out.colmap = self.colmap
 
         for i, v in enumerate(self.data):
-            o = float('nan')
+            o = default
             if v <= bounds[0]:
                 o = labels[0]
             if v > bounds[-1]:
