@@ -80,6 +80,8 @@ class VariableMap:
                 if elem_type is None or v_elem_type == elem_type:            
                     yield self.variable_map[ (v_label, v_elem_type) ]
 
+    def __len__(self):
+        return len(self.variable_map)
 
     def __iter__(self):
         for i in sorted(self.varid_map):
@@ -106,7 +108,6 @@ class FactorMap:
             if factor_name is None or v_label == factor_name:
                 if factor_type is None or v_type == factor_type:            
                     yield self.factor_map[ (v_label, v_type) ]
-
 
     def __iter__(self):
         for i in sorted(self.factor_id_map):
