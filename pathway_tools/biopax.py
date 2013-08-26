@@ -63,7 +63,8 @@ class BioPax_Pathway(BioPax_ElementBase):
 
         component_list = {}
         for component in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "pathwayComponent"):
-            component_list[component.dst] = self.process_child(component.dst, component.dst_type)
+            if component.dst_type != BIOPAX_BASE + "Pathway":
+                component_list[component.dst] = self.process_child(component.dst, component.dst_type)
 
         name = None
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
@@ -125,9 +126,12 @@ class BioPax_PhysicalEntity(BioPax_ElementBase):
         node_label = None
         for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
             node_label = name.dst.replace("\n", " ")
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
+            node_label = name.dst.replace("\n", " ")
 
-        out = Subnet({'name' : node_label, 'url' : self.node, 'type' : self.type})
-        data = {'type' : self.type}
+        entity_type = self.type # "Abstract"
+        out = Subnet({'name' : node_label, 'url' : self.node, 'type' : entity_type})
+        data = {'type' : entity_type}
         if node_label is not None:
             data['label'] = node_label
         out.add_node(self.node, data, is_input=True, is_output=True )
@@ -736,32 +740,35 @@ class BioPaxFile(BioPax):
 
     def query(self, src_type=None, src=None, predicate=None, dst_type=None, dst=None, check_case=True, get_type=True):
         out = []
-        include = [True,True,True,True,True]
         for src_cmp in self.graph:
+            include = [True,True,True,True,True]
             include[0] = False
             if src_type is None or self.str_compare(self.get_node_type(src_cmp), src_type, check_case):
                 include[0] = True
-            include[1] = False
-            if src is None or self.str_compare(src_cmp, src, check_case):
-                include[1] = True
-                
-            for pred_cmp in self.graph[src_cmp]:
-                include[2] = False
-                if predicate is None or self.str_compare(pred_cmp, predicate, check_case):
-                    include[2] = True
-                for dst_cmp in self.graph[src_cmp][pred_cmp]:
-                    include[3] = False
-                    if dst_type is None or self.str_compare(self.get_node_type(dst_cmp), dst_type, check_case):
-                        include[3] = True
-                    include[4] = False
-                    if dst is None or self.str_compare(dst, dst_cmp, check_case):
-                        include[4] = True
-                    if False not in include:
-                        out.append( Link(
-                            self.get_node_type(src_cmp), src_cmp, 
-                            pred_cmp, 
-                            self.get_node_type(dst_cmp), dst_cmp) 
-                        )
+            if include[0]:
+                include[1] = False
+                if src is None or self.str_compare(src_cmp, src, check_case):
+                    include[1] = True                
+                if include[1]:
+                    for pred_cmp in self.graph[src_cmp]:
+                        include[2] = False
+                        if predicate is None or self.str_compare(pred_cmp, predicate, check_case):
+                            include[2] = True
+                        if include[2]:
+                            for dst_cmp in self.graph[src_cmp][pred_cmp]:
+                                include[3] = False
+                                if dst_type is None or self.str_compare(self.get_node_type(dst_cmp), dst_type, check_case):
+                                    include[3] = True
+                                if include[3]:
+                                    include[4] = False
+                                    if dst is None or self.str_compare(dst, dst_cmp, check_case):
+                                        include[4] = True
+                                    if include[4]:
+                                        out.append( Link(
+                                            self.get_node_type(src_cmp), src_cmp, 
+                                            pred_cmp, 
+                                            self.get_node_type(dst_cmp), dst_cmp) 
+                                        )
         return out
 
 

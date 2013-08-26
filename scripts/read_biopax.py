@@ -43,12 +43,14 @@ if __name__ == "__main__":
             gr.graph['url'] = subnet.meta['url']
             subnet.to_graph(gr)
 
+            name = re_namesplit.split(gr.graph['url'])[-1]
             if args.out_dir:
-                name = re_namesplit.split(gr.graph['url'])[-1]
                 handle = open(os.path.join(args.out_dir, name + ".xgmml"), "w")
             else:
                 if args.output:
-                    handle = open(args.output, "w")
+                    if "%s" not in args.output:
+                        raise Exception("Output path string not formatted correctly (use %s))")
+                    handle = open(args.output % (name), "w")
                 else:
                     handle = sys.stdout
 
