@@ -4,6 +4,7 @@ import argparse
 import sys
 import os
 import re
+from copy import copy
 import yaml
 import csv
 import shutil
@@ -159,7 +160,7 @@ def add_repo(basedir, pathway_name, conf):
     dstdir = os.path.join(basedir, pathway_name)
     if not os.path.exists(dstdir):
         raise Exception("Pathway PID%s doesn't exists" % (pathway_name))
-    print "Adding", pathway_name
+    #print "Adding", pathway_name
     subprocess.check_call("cd %s; git add %s; git commit -m 'Adding Pathway %s'" % (basedir, pathway_name, pathway_name), shell=True)
 
 
@@ -286,6 +287,8 @@ def main_compile(args):
 
 
 def scan_dir(base_dir):
+    if os.path.isfile(base_dir):
+        return [base_dir]
     out = []
     paths = glob(os.path.join(base_dir, "*"))
     for path in paths:
@@ -307,7 +310,7 @@ def main_build(args):
     interaction_count = {}
     duplicate_edges = 0
     for path in paths:
-        #log("Scanning: %s" % (path))
+        log("Scanning: %s" % (path))
         handle = open(path)
         cur_gr = network_convert.read_xgmml(handle)
         handle.close()
@@ -316,9 +319,15 @@ def main_build(args):
             if 'type' not in cur_gr.node[node]:
                 log("Untyped node: %s" % (node))
             if node not in gr.node:
-                gr.add_node(node, attr_dict=cur_gr.node[node])
+                data = copy(cur_gr.node[node])
+                if args.rename:
+                    if 'db_xref' in data:
+                        for key in data['db_xref']:
+                            if key.startswith("HGNC Symbol:"):
+                                log("Changing %s to %s" % (data['label'], key))
+                                data['label'] = key.split(":")[1]
+                gr.add_node(node, attr_dict=data)
             else:
-
                 if 'type' in gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
                     log("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
 
@@ -376,15 +385,20 @@ def main_build(args):
     log("Edge Count: %d" % (len(gr.edges())))
     log("Duplicate Edges: %s" % (duplicate_edges))
     log("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
+    if args.output:
+        handle = open(args.output, "w")
+    else:
+        handle = sys.stdout
+
     for n_type in type_count:
         log("Node Type %s: %d" % (n_type, type_count[n_type]))
     if args.paradigm:
-        network_convert.write_paradigm_graph(gr, sys.stdout)
+        network_convert.write_paradigm_graph(gr, handle)
     elif args.sif:
-        network_convert.write_sif(gr, sys.stdout)        
+        network_convert.write_sif(gr, handle)        
     else:        
-        network_convert.write_xgmml(gr, sys.stdout)
-
+        network_convert.write_xgmml(gr, handle)
+    handle.close()
 
 
 def get_modified(base_dir):
@@ -612,6 +626,9 @@ if __name__ == "__main__":
     parser_build.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
+    parser_build.add_argument("-r", "--rename", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
+    parser_build.add_argument("-o", "--output", default=None)
+    
     parser_build.add_argument("pathways", nargs="*")
     parser_build.set_defaults(func=main_build)
 
