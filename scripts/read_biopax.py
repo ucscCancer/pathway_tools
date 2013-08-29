@@ -32,10 +32,24 @@ if __name__ == "__main__":
         b.load(args.input)
 
     if args.list:
-        for a in b.pathways():
-            print a.encode('ascii', errors='ignore')
+        for a,b in b.pathways().iteritems():
+            print a, b.encode('ascii', errors='ignore')
     else:
-        paths = args.pathways        
+        
+        paths = []
+        for key,value in b.pathways().iteritems():
+            add = False
+            if value in args.pathways:
+                add = True
+            elif key in args.pathways:
+                add = True
+            else:
+                a_name = re_namesplit.split(key)[-1]
+                if a_name in args.pathways:
+                    add = True
+            if add:
+                paths.append(key)
+
         for subnet in b.toNet(paths):
             
             gr = networkx.MultiDiGraph()

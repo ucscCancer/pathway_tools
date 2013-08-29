@@ -52,6 +52,16 @@ class BioPax_ElementBase(object):
         if DEBUG:
             sys.stderr.write("DEBUG: %s :%s\n" % (self.stack + [self], message))
 
+
+    def get_node_name(self):
+        node_label = None
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
+            node_label = name.dst.replace("\n", " ")
+
+        for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "name", get_type=False):
+            node_label = name.dst.replace("\n", " ")
+        return node_label
+
     def __repr__(self):
         return "%s (%s) <%s>" % (self.name.encode('ascii', errors='ignore'), self.node, self.type)
 
@@ -250,6 +260,29 @@ class BioPax_Protein(BioPax_ElementBase):
             entity_type = ref.dst_type
         if entity_ref is not None:
             return self.process_child(entity_ref, entity_type)
+
+        #Alternate to entityReference is memberPhysicalEntity which may have multiple proteins
+        #that can be used for this purpose 
+        #check http://www.biopax.org/release/biopax-level3-documentation.pdf page 51
+
+        ref_list = []
+        for ref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "memberPhysicalEntity"):
+            ref_list.append(ref)
+
+        if len(ref_list):
+            node_label = self.get_node_name()
+            out = Subnet({'name' : node_label, 'url' : self.node, 'type' : self.type})
+            data = {"type" : "family", "label" : node_label}
+
+            out.add_node(self.node, data, is_output=True, is_input=True)
+
+            for c_info in ref_list:
+                c = self.process_child(c_info.dst, c_info.dst_type)
+                if c is not None:
+                    self.debug("memberLink %s %s" % (c_info.dst, c))
+                    out.add_node(c_info.dst, c)
+                    out.add_edge(c_info.dst, self.node, {"interaction" : "member>", 'class' : self.type, 'src_url' : self.node} )
+            return out        
 
 
 class BioPax_ProteinReference(BioPax_ElementBase):
@@ -679,21 +712,21 @@ class BioPax:
 
     def pathways(self):
         out = {}
-        for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "name"):
-            out[a.dst] = True
         for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "displayName"):
-            out[a.dst] = True
+            out[a.src] = a.dst
+        for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "name"):
+            out[a.src] = a.dst
 
-        return out.keys()
+        return out
 
     def toNet(self, pathways=None):
         start_set = {}
         for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "name"):
-            if pathways is None or a.dst in pathways:
+            if pathways is None or a.src in pathways:
                 start_set[a.src] = True
 
         for a in self.query(src_type=BIOPAX_BASE + "Pathway", predicate=BIOPAX_BASE + "displayName"):
-            if pathways is None or a.dst in pathways:
+            if pathways is None or a.src in pathways:
                 start_set[a.src] = True
 
         for pathway in start_set:
