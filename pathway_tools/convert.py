@@ -96,6 +96,35 @@ def write_xgmml(gr, handle):
     graph_node.setAttribute("xmlns:cy", "http://www.cytoscape.org" )
     graph_node.setAttribute("directed", "1")
     doc.appendChild(graph_node)
+    
+    if len(gr.graph):
+        for key, value in gr.graph.items():
+            att_node = doc.createElement('att')
+            att_node.setAttribute('name', str(key))
+            if type(value) == float:
+                att_node.setAttribute('value', str(value))
+                att_node.setAttribute('type', "real")
+            elif type(value) == int:
+                att_node.setAttribute('value', str(value))
+                att_node.setAttribute('type', "integer")
+            elif type(value)== list:
+                att_node.setAttribute('type', "list")
+                for elm in value:
+                    list_node = doc.createElement("att")
+                    list_node.setAttribute("name", str(key))
+                    list_node.setAttribute('value', str(elm))
+                    if type(elm) == float:
+                        list_node.setAttribute("type", "real")
+                    elif type(elm) == int:
+                        list_node.setAttribute("type", "integer")
+                    else:
+                        list_node.setAttribute("type", "string")
+                    att_node.appendChild(list_node)
+            else:
+                att_node.setAttribute('value', str(value))
+                att_node.setAttribute('type', "string")
+            graph_node.appendChild(att_node)
+
 
     name_map = {}
     for i, n in enumerate(gr.node):
