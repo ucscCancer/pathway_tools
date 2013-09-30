@@ -227,7 +227,7 @@ def main_compile(args):
         for p in args.pathways:
             paths.append(os.path.join(base_dir, p))
     else:
-        paths = glob(os.path.join(base_dir, "[A-Z]*"))
+        paths = glob(os.path.join(base_dir, "[A-Za-z]*"))
         if args.append:
             paths +=args.append
 
@@ -256,7 +256,7 @@ def main_compile(args):
                         gr.node[node_name]['pathway'] = []
                         gr.node[node_name]['pid'] = []
                     gr.node[node_name]['pathway'].append(info['DESC'])
-                    gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
+                    #gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
                 elif len(tmp) == 3:
                     if tmp[0] not in gr.node:
                         raise Exception("Missing Node Declaration: %s" % (tmp[0]))
