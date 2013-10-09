@@ -306,6 +306,15 @@ def main_build(args):
     for base_dir in args.pathways:
         paths += scan_dir(base_dir)
 
+    merge_map = {}
+    if args.merge_file is not None:
+        handle = open(args.merge_file)
+        for line in handle:
+            tmp = line.rstrip("\r\n").split("\t")
+            for i in tmp:
+                merge_map[i] = tmp[0]
+        handle.close()
+
     type_count = {}
     interaction_count = {}
     duplicate_edges = 0
@@ -316,29 +325,51 @@ def main_build(args):
         handle.close()
 
         for node in cur_gr.node:
+            skip = False
             if 'type' not in cur_gr.node[node]:
                 log("Untyped node: %s" % (node))
-            if node not in gr.node:
-                data = copy(cur_gr.node[node])
-                if args.rename:
-                    if 'db_xref' in data:
-                        for key in data['db_xref']:
-                            if key.startswith("HGNC Symbol:"):
-                                log("Changing %s to %s" % (data['label'], key))
-                                data['label'] = key.split(":")[1]
-                gr.add_node(node, attr_dict=data)
-            else:
-                if 'type' in gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
-                    log("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
+                if args.all:
+                    skip = True
+            if 'label' not in cur_gr.node[node]:
+                log("Unlabeled node: %s" % (node))
+                if args.all:
+                    skip = True
+            
+            if not skip:
+                if node not in gr.node:
+                    data = copy(cur_gr.node[node])
+                    if args.rename_hugo or args.all:
+                        if 'db_xref' in data:
+                            for key in data['db_xref']:
+                                if key.startswith("HGNC Symbol:"):
+                                    log("Changing %s to %s" % (data['label'], key))
+                                    data['label'] = key.split(":")[1]
+                    if args.rename_type or args.all:
+                        if data.get('type', '') == 'complex':
+                            data['label'] += " (complex)"
+                        if data.get('type', '') == 'family':
+                            data['label'] += " (family)"
+
+                    if args.rename_space or args.all:
+                        data['label'] = data['label'].replace(" ", "_")
+
+                    if data['label'] in merge_map:
+                        data['label'] = merge_map[data['label']]
+
+                    gr.add_node(node, attr_dict=data)
+                else:
+                    if 'type' in gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
+                        log("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
 
         for src, dst, data in cur_gr.edges(data=True):
 
             interaction = data['interaction']
             has_edge = False
-            if dst in gr.edge[src]:
-                for i in gr.edge[src][dst]:
-                    if gr.edge[src][dst][i]['interaction'] == interaction:
-                        has_edge = True
+            if src in gr.node and dst in gr.node:
+                if dst in gr.edge[src]:
+                    for i in gr.edge[src][dst]:
+                        if gr.edge[src][dst][i]['interaction'] == interaction:
+                            has_edge = True
 
             if not has_edge:
                 gr.add_edge(src, dst, attr_dict=data )
@@ -623,10 +654,14 @@ if __name__ == "__main__":
     parser_compile.set_defaults(func=main_compile)
 
     parser_build = subparsers.add_parser('build')
+    parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
     parser_build.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
-    parser_build.add_argument("-r", "--rename", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
+    parser_build.add_argument("--merge-file", default=None)
+    parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
+    parser_build.add_argument("--rename-type", action="store_true", default=False)
+    parser_build.add_argument("--rename-space", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
     
     parser_build.add_argument("pathways", nargs="*")
