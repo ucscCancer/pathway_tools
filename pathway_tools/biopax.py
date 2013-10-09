@@ -5,6 +5,7 @@ import rdflib
 import rdflib.term
 import sparql
 import os
+import itertools
 from glob import glob
 import networkx
 from pathway_tools import convert
@@ -359,33 +360,54 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
     type = "BiochemicalReaction"
 
     def process(self):
-        left = []
 
         node_label = None
         for name in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
             node_label = name.dst.replace("\n", " ")
 
         out = Subnet({'name' : node_label, 'url' : self.node, 'type' : self.type})
+        left = []
+        left_elem = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_input=True)
             left.append( c_info.dst )
+            left_elem.append(elem)
                 
         right = []
+        right_elem = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_output=True)           
             right.append( c_info.dst )
+            right_elem.append(elem)
 
-        interaction = "-a>"
-        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType", get_type=False):
-            interaction = c_info.dst
-            for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term", get_type=False):
-                interaction = d_info.dst
 
-        for l in left:
-            for r in right:
-                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+
+        #self.debug( "REACT" + str(list(a.meta for a in left_elem)) + str(list(a.meta for a in right_elem)) )
+        left_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in left_elem))))
+        right_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in right_elem))))
+        
+        #self.debug( "REACT_LEFT" + str( left_set ) )
+        #self.debug( "REACT_RIGHT" + str( right_set ) )
+        #self.debug( "REACT:" + str(len(left_set)) + " " + str(len(right_set)) )
+        #self.debug( "REACT:" + str(left_set == right_set))
+
+        #self.debug( "REACT: %s %s %s %s %s" % (len(right_elem), right_elem[0].meta['type'] == 'Complex', left_set == right_set, left_set, right_set) )
+        if len(right_elem) and right_elem[0].meta['type'] == 'Complex' and left_set == right_set:
+            #it appears that all of the elements on the left side, moved to the right side to form a complex, 
+            #don't report this as an interaction
+            return right_elem[0]
+        else:
+            interaction = "-a>"
+            for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType", get_type=False):
+                interaction = c_info.dst
+                for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term", get_type=False):
+                    interaction = d_info.dst
+
+            for l in left:
+                for r in right:
+                    out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
         return out
 
 
@@ -686,7 +708,17 @@ class Subnet:
                 dst = a[1]
             if src in graph.edge and dst not in graph.edge[src]:
                 graph.add_edge( src, dst, attr_dict=a[2] )
-    
+
+    def node_set(self, type_filter):
+        out = []
+        for a in self.nodes:
+            if isinstance(self.nodes[a], Subnet):
+                out.extend( self.nodes[a].node_set(type_filter) )
+            else:
+                if self.nodes[a]['type'] == type_filter:
+                    out.append( a )
+        return set(out)
+
     def get_input(self):
         if self.input_node is None:
             return None
