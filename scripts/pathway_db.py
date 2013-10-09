@@ -327,11 +327,11 @@ def main_build(args):
         for node in cur_gr.node:
             skip = False
             if 'type' not in cur_gr.node[node]:
-                log("Untyped node: %s" % (node))
+                log("Untyped node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
                     skip = True
-            if 'label' not in cur_gr.node[node]:
-                log("Unlabeled node: %s" % (node))
+            if 'label' not in cur_gr.node[node] or cur_gr.node[node]['label'] == 'None':
+                log("Unlabeled node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
                     skip = True
             
@@ -353,6 +353,10 @@ def main_build(args):
                     if args.rename_space or args.all:
                         data['label'] = data['label'].replace(" ", "_")
 
+                    if args.rename_prime or args.all:
+                        data['label'] = data['label'].replace("5'", "5prime")
+                        data['label'] = data['label'].replace("3'", "3prime")
+
                     if data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
@@ -364,17 +368,20 @@ def main_build(args):
         for src, dst, data in cur_gr.edges(data=True):
 
             interaction = data['interaction']
-            has_edge = False
             if src in gr.node and dst in gr.node:
+                has_edge = False
                 if dst in gr.edge[src]:
                     for i in gr.edge[src][dst]:
                         if gr.edge[src][dst][i]['interaction'] == interaction:
                             has_edge = True
 
-            if not has_edge:
-                gr.add_edge(src, dst, attr_dict=data )
-            else:
-                duplicate_edges += 1
+                if not has_edge:
+                    if not (args.remove_self or args.all) or src != dst:
+                        gr.add_edge(src, dst, attr_dict=data )
+                    else:
+                        log("Removing self loop: %s" % (src))
+                else:
+                    duplicate_edges += 1
 
             """
 
@@ -662,6 +669,8 @@ if __name__ == "__main__":
     parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser_build.add_argument("--rename-type", action="store_true", default=False)
     parser_build.add_argument("--rename-space", action="store_true", default=False)
+    parser_build.add_argument("--rename-prime", action="store_true", default=False)
+    parser_build.add_argument("--remove-self", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
     
     parser_build.add_argument("pathways", nargs="*")
