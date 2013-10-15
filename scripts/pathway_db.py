@@ -357,6 +357,10 @@ def main_build(args):
                         data['label'] = data['label'].replace("5'", "5prime")
                         data['label'] = data['label'].replace("3'", "3prime")
 
+
+                    if args.rename_char or args.all:
+                        data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
+
                     if data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
@@ -669,6 +673,7 @@ if __name__ == "__main__":
     parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser_build.add_argument("--rename-type", action="store_true", default=False)
     parser_build.add_argument("--rename-space", action="store_true", default=False)
+    parser_build.add_argument("--rename-char", action="store_true", default=False)
     parser_build.add_argument("--rename-prime", action="store_true", default=False)
     parser_build.add_argument("--remove-self", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
