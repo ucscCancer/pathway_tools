@@ -361,7 +361,7 @@ def main_build(args):
                     if args.rename_char or args.all:
                         data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
 
-                    if data['label'] in merge_map:
+                    if 'label' in data and data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
                     gr.add_node(node, attr_dict=data)
