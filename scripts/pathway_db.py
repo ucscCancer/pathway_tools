@@ -357,7 +357,7 @@ def main_build(args):
                         data['label'] = data['label'].replace("5'", "5prime")
                         data['label'] = data['label'].replace("3'", "3prime")
 
-                    if data['label'] in merge_map:
+                    if 'label' in data and data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
                     gr.add_node(node, attr_dict=data)
