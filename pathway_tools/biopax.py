@@ -3,7 +3,7 @@
 import sys
 import rdflib
 import rdflib.term
-import sparql
+#import sparql
 import os
 import itertools
 from glob import glob
@@ -323,6 +323,11 @@ class BioPax_ProteinReference(BioPax_ElementBase):
         out.add_node(self.node, data, is_input=True, is_output=True )
         return out
 
+iteraction_map = {
+    '-a>' : '-a>',
+    'ACTIVATION' : '-a>',
+    'INHIBITION' : '-a|'
+}
 
 class BioPax_Catalysis(BioPax_ElementBase):
     type = "Catalysis"
@@ -353,7 +358,7 @@ class BioPax_Catalysis(BioPax_ElementBase):
         
         for l in controller:
             for r in controlled:
-                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+                out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
         return out
 
 class BioPax_BiochemicalReaction(BioPax_ElementBase):
@@ -370,17 +375,19 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
         left_elem = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "left"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_input=True)
-            left.append( c_info.dst )
-            left_elem.append(elem)
+            if elem is not None:
+                out.add_node(c_info.dst, elem, is_input=True)
+                left.append( c_info.dst )
+                left_elem.append(elem)
                 
         right = []
         right_elem = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_output=True)           
-            right.append( c_info.dst )
-            right_elem.append(elem)
+            if elem is not None:
+                out.add_node(c_info.dst, elem, is_output=True)           
+                right.append( c_info.dst )
+                right_elem.append(elem)
 
 
 
@@ -394,7 +401,7 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
         #self.debug( "REACT:" + str(left_set == right_set))
 
         #self.debug( "REACT: %s %s %s %s %s" % (len(right_elem), right_elem[0].meta['type'] == 'Complex', left_set == right_set, left_set, right_set) )
-        if len(right_elem) and right_elem[0].meta['type'] == 'Complex' and left_set == right_set:
+        if len(right_elem) and right_elem[0].meta['type'] == 'Complex' and len(left_set) and left_set == right_set:
             #it appears that all of the elements on the left side, moved to the right side to form a complex, 
             #don't report this as an interaction
             return right_elem[0]
@@ -407,7 +414,7 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
 
             for l in left:
                 for r in right:
-                    out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+                    out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
         return out
 
 
@@ -518,7 +525,7 @@ class BioPax_Control(BioPax_ElementBase):
         
         for l in controller:
             for r in controlled:
-                out.add_edge( l, r, {'interaction' : interaction, 'class' : self.type, 'src_url' : self.node} )
+                out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
 
         return out
 
