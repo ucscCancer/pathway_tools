@@ -467,11 +467,12 @@ def main_build(args):
                         duplicate_edges += 1
             handle.close()
             """
-
-    log("Node Count: %d" % (len(gr.nodes())))
-    log("Edge Count: %d" % (len(gr.edges())))
-    log("Duplicate Edges: %s" % (duplicate_edges))
-    log("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
+    log("+---------------------------+")
+    log("|Node Count: %15d|" % (len(gr.nodes())))
+    log("|Edge Count: %15d|" % (len(gr.edges())))
+    log("|Duplicate Edges: %10d|" % (duplicate_edges))
+    log("|Connected Components: %5d|" % (networkx.number_connected_components(networkx.Graph(gr))))
+    log("+---------------------------+")
     if args.output:
         handle = open(args.output, "w")
     else:
