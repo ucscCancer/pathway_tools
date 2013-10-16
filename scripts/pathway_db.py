@@ -18,6 +18,10 @@ from urllib2 import urlopen
 def log(message):
     sys.stderr.write(message + "\n")
 
+def error(message):
+    sys.stderr.write( "ERROR:" + message + "\n")
+
+
 
 reKeyValue = re.compile(r'^(\S+)\s*=\s*(.*)$')
 
@@ -216,7 +220,7 @@ def main_sync(args):
                 (args.base_dir), 
             shell=True)
 
-
+"""
 def main_compile(args):
 
     gr = networkx.MultiDiGraph()
@@ -284,7 +288,7 @@ def main_compile(args):
         network_convert.write_sif(gr, sys.stdout)        
     else:        
         network_convert.write_xgmml(gr, sys.stdout)
-
+"""
 
 def scan_dir(base_dir):
     if os.path.isfile(base_dir):
@@ -299,12 +303,49 @@ def scan_dir(base_dir):
                 out.append(path)
     return out
 
+def pathway_opener(pathway_list):
+
+    for path_type, path in pathway_list:
+
+        if path_type == 'xgmml-dir':
+            for path_path in scan_dir(path):
+                yield XGMMLOpener(path_path)
+
+        if path_type == 'paradigm-file':
+            yield ParadigmOpener(path)
+
+
+
+class XGMMLOpener:
+
+    def __init__(self, path):
+        self.path = path
+        self.name = path
+
+    def read(self):
+        handle = open(self.path)
+        cur_gr = network_convert.read_xgmml(handle)
+        handle.close()
+        return cur_gr
+
+
+class ParadigmOpener:
+
+    def __init__(self, path):
+        self.path = path
+        self.name = path
+
+    def read(self):
+        handle = open(self.path)
+        cur_gr = network_convert.read_paradigm_graph(handle, strict=False)
+        handle.close()
+        return cur_gr
+
+
 def main_build(args):
     gr = networkx.MultiDiGraph()
 
-    paths = []
-    for base_dir in args.pathways:
-        paths += scan_dir(base_dir)
+    paths = pathway_opener( list( (args.pathways[i],args.pathways[i+1]) for i in range(0, len(args.pathways),2) ) )
 
     merge_map = {}
     if args.merge_file is not None:
@@ -318,11 +359,9 @@ def main_build(args):
     type_count = {}
     interaction_count = {}
     duplicate_edges = 0
-    for path in paths:
-        log("Scanning: %s" % (path))
-        handle = open(path)
-        cur_gr = network_convert.read_xgmml(handle)
-        handle.close()
+    for cur_path in paths:
+        log("Scanning: %s" % (cur_path.name))
+        cur_gr = cur_path.read()
 
         for node in cur_gr.node:
             skip = False
@@ -366,8 +405,14 @@ def main_build(args):
 
                     gr.add_node(node, attr_dict=data)
                 else:
-                    if 'type' in gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
-                        log("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
+                    if 'type' in gr.node[node] and 'type' in cur_gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
+                        error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
+
+                        if args.rename_nonprotein or args.all:
+                            #because 'protein' is a default node type, if we see something not protein, then change the node to match
+                            if gr.node[node]['type'] == 'protein':
+                                gr.node[node]['type'] = cur_gr.node[node]['type']
+
 
         for src, dst, data in cur_gr.edges(data=True):
 
@@ -562,16 +607,17 @@ def main_suggest(args):
         log("Can't make suggestions until hugo synced")
         sys.exit(1)
 
-    handle = open(args.graph)
-    gr = network_convert.read_xgmml(handle)
-    handle.close()
 
-    #try:
-    suggestions = checker.suggest_nodes(gr)
-    for sug in suggestions:
-        print "Instead of %s (from:%s) try %s" % (sug[0], sug[1], sug[2])
-    #except Exception, e:
-    #    sys.stderr.write("Pathway Check Error: %s\n" % (str(e)))
+    paths = pathway_opener( list( (args.pathways[i],args.pathways[i+1]) for i in range(0, len(args.pathways),2) ) )
+    for cur_path in paths:
+        gr = cur_path.read()
+
+        #try:
+        suggestions = checker.suggest_nodes(gr)
+        for sug in suggestions:
+            print "Instead of %s (from:%s) try %s" % (sug[0], sug[1], sug[2])
+        #except Exception, e:
+        #    sys.stderr.write("Pathway Check Error: %s\n" % (str(e)))
 
 
 
@@ -614,41 +660,7 @@ def main_commit(args):
                 (args.base_dir, message, args.project), 
             shell=True)
 
-mode_map = {
-    'add' : {
-        'method' : main_add
-    },
-    'sync' : {
-        'method' : main_sync
-    },
-    'compile' : {
-        'method' : main_compile
-    },
-    'status' : {
-        'method' : main_status
-    },
-    'add' : {
-        'method' : main_add
-    },
-    'hugo_sync' : {
-        'method' : main_hugosync
-    },
-    'check' : {
-        'method' : main_check
-    },
-    'suggest' : {
-        'method' : main_suggest
-    },
-    'commit' : {
-        'method' : main_commit
-    },
-    'new' : {
-        'method' : main_new
-    },
-    
 
-
-}
 
 if __name__ == "__main__":
 
@@ -656,6 +668,7 @@ if __name__ == "__main__":
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     subparsers = parser.add_subparsers(title="subcommand")
 
+    """
     parser_compile = subparsers.add_parser('compile')
     parser_compile.add_argument('-a', '--append', help="Default Edge Type", action="append")
     parser_compile.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
@@ -663,6 +676,7 @@ if __name__ == "__main__":
     parser_compile.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_compile.add_argument("pathways", nargs="*")
     parser_compile.set_defaults(func=main_compile)
+    """
 
     parser_build = subparsers.add_parser('build')
     parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
@@ -676,9 +690,11 @@ if __name__ == "__main__":
     parser_build.add_argument("--rename-char", action="store_true", default=False)
     parser_build.add_argument("--rename-prime", action="store_true", default=False)
     parser_build.add_argument("--remove-self", action="store_true", default=False)
+    parser_build.add_argument("--rename-nonprotein", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
     
     parser_build.add_argument("pathways", nargs="*")
+
     parser_build.set_defaults(func=main_build)
 
     parser_hugosync = subparsers.add_parser('hugosync')
@@ -686,7 +702,7 @@ if __name__ == "__main__":
 
 
     parser_suggest = subparsers.add_parser('suggest')
-    parser_suggest.add_argument("graph")
+    parser_suggest.add_argument("pathways", nargs="*")
     parser_suggest.set_defaults(func=main_suggest)
 
     args = parser.parse_args()

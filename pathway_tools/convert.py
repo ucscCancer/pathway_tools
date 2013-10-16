@@ -31,7 +31,7 @@ def read_paradigm_graph(handle, strict=True):
             if strict:
                 if tmp[1] in gr.node:
                     raise FormatException("Duplicate element declaration for : %s" % (tmp[1]))                
-            gr.add_node( tmp[1], type=tmp[0] )
+            gr.add_node( tmp[1], { 'type' : tmp[0], 'label' : tmp[1] } )
         elif len(tmp) == 3:
             if strict:
                 if tmp[0] not in gr.node:

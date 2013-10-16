@@ -37,33 +37,20 @@ Once you have the pathway toolkit:
 
 ----------
 
-Get a copy of the database
-./scripts/pathway_db.py sync
-
-----------
-
-Compile to a superpathway (paradigm format)
- ./scripts/pathway_db.py compile --paradigm > superpathway.pid 
-
-----------
-
-Check status of local Pathway Database
-./scripts/pathway_db.py status
-
-----------
-
-Syncronize local copy of HUGO
+Synchronize local copy of HUGO
 ./scripts/pathway_db.py hugo_sync
 
 ----------
 
-Run checks on pathway record
-./scripts/pathway_db.py check PID45669
+Compile to a superpathway (paradigm format)
+./scripts/pathway_db.py build --paradigm > superpathway.pid 
 
 ----------
 
-Commit changes done on pathway
-./scripts/pathway_db.py commit PID45669
+Merge two paradigm files
+./scripts/pathway_db.py build paradigm-file Five3_v3/pid_120912_pathway.tab paradigm-file RB1_v2.tab 
+
+----------
 
 
 ========================
