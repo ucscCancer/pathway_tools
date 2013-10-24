@@ -356,6 +356,13 @@ def main_build(args):
                 merge_map[i] = tmp[0]
         handle.close()
 
+    exclude = {}
+    if args.exclude is not None:
+        handle = open(args.exclude)
+        for line in handle:
+            exclude[line.rstrip()] = True
+        handle.close()
+
     type_count = {}
     interaction_count = {}
     duplicate_edges = 0
@@ -365,6 +372,7 @@ def main_build(args):
 
         for node in cur_gr.node:
             skip = False
+
             if 'type' not in cur_gr.node[node]:
                 log("Untyped node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
@@ -403,7 +411,8 @@ def main_build(args):
                     if 'label' in data and data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
-                    gr.add_node(node, attr_dict=data)
+                    if data['label'] not in exclude:
+                        gr.add_node(node, attr_dict=data)
                 else:
                     if 'type' in gr.node[node] and 'type' in cur_gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
                         error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
@@ -685,6 +694,7 @@ if __name__ == "__main__":
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("--merge-file", default=None)
+    parser_build.add_argument("--exclude", default=None)
     parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser_build.add_argument("--rename-type", action="store_true", default=False)
     parser_build.add_argument("--rename-space", action="store_true", default=False)
