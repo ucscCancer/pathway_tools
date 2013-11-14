@@ -39,7 +39,7 @@ if __name__ == "__main__":
         paths = []
         for key,value in b.pathways().iteritems():
             add = False
-            if value in args.pathways:
+            if args.pathways is None or value in args.pathways:
                 add = True
             elif key in args.pathways:
                 add = True
