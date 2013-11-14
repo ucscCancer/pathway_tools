@@ -138,7 +138,7 @@ object BioPaxExtract {
     val out_dir = args(1);
     val pathway_scan = new BioPax_Pathways();
     parseFile(file_path, pathway_scan);
-    println(pathway_scan.pathway_list.length)
+    println("Pathway Count: " + pathway_scan.pathway_list.length)
 
     val ng = new NetworkGrouper(pathway_scan.pathway_list.toArray)
 
@@ -146,7 +146,8 @@ object BioPaxExtract {
       parseFile(file_path, ng);
       println("Selection Cycle: " + ng.member_map.size + " elements");
     } while (ng.added);
-
+	
+	println("Writing output files")
     val writer = new BioPax_Splitter(ng.name_map.toMap, ng.member_map.toMap, new File(out_dir));
     parseFile(file_path, writer);
   }
