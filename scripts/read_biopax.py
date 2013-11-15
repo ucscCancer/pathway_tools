@@ -25,54 +25,59 @@ if __name__ == "__main__":
     parser.add_argument("input")
     args = parser.parse_args()
 
+    file_list = []
+
     if args.sparql:
-        b = BioPaxSparql(args.input)
+        file_list = [ BioPaxSparql(args.input) ]
     else:
         b = BioPaxFile()
         b.load(args.input)
+        file_list = [b]
 
     if args.list:
-        for a,b in b.pathways().iteritems():
-            print a, b.encode('ascii', errors='ignore')
+        for f in file_list:
+            for a,b in f.pathways().iteritems():
+                print a, b.encode('ascii', errors='ignore')
     else:
         
         paths = []
-        for key,value in b.pathways().iteritems():
-            add = False
-            if args.pathways is None or value in args.pathways:
-                add = True
-            elif key in args.pathways:
-                add = True
-            else:
-                a_name = re_namesplit.split(key)[-1]
-                if a_name in args.pathways:
+        for path_file in file_list:
+            for key,value in b.pathways().iteritems():
+                add = False
+                if args.pathways is None or value in args.pathways:
                     add = True
-            if add:
-                paths.append(key)
-
-        for subnet in b.toNet(paths):
-            
-            gr = networkx.MultiDiGraph()
-            gr.graph['name'] = subnet.meta['name']
-            gr.graph['url'] = subnet.meta['url']
-            subnet.to_graph(gr)
-
-            name = re_namesplit.split(gr.graph['url'])[-1]
-            if args.out_dir:
-                handle = open(os.path.join(args.out_dir, name + ".xgmml"), "w")
-            else:
-                if args.output:
-                    if "%s" not in args.output:
-                        raise Exception("Output path string not formatted correctly (use %s))")
-                    handle = open(args.output % (name), "w")
+                elif key in args.pathways:
+                    add = True
                 else:
-                    handle = sys.stdout
+                    a_name = re_namesplit.split(key)[-1]
+                    if a_name in args.pathways:
+                        add = True
+                if add:
+                    paths.append(key)
 
-            
-            if args.paradigm:
-                convert.write_paradigm_graph(gr, handle)
-            else:
-                convert.write_xgmml(gr, handle)
-            
-            if handle != sys.stdout:
-                handle.close()
+            for subnet in b.toNet(paths):
+                
+                gr = networkx.MultiDiGraph()
+                gr.graph['name'] = subnet.meta['name']
+                gr.graph['url'] = subnet.meta['url']
+                subnet.to_graph(gr)
+
+                name = re_namesplit.split(gr.graph['url'])[-1]
+                if args.out_dir:
+                    handle = open(os.path.join(args.out_dir, name + ".xgmml"), "w")
+                else:
+                    if args.output:
+                        if "%s" not in args.output:
+                            raise Exception("Output path string not formatted correctly (use %s))")
+                        handle = open(args.output % (name), "w")
+                    else:
+                        handle = sys.stdout
+
+                
+                if args.paradigm:
+                    convert.write_paradigm_graph(gr, handle)
+                else:
+                    convert.write_xgmml(gr, handle)
+                
+                if handle != sys.stdout:
+                    handle.close()
