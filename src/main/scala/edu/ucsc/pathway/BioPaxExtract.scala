@@ -38,7 +38,7 @@ class NetworkGrouper(seeds : Array[Resource]) extends RDFHandler {
 
   seeds.zipWithIndex.foreach( x => {
     member_map(x._1) = member_map.getOrElse(x._1, new HashSet[Int]()) ++ List(x._2);
-    name_map(x._1.toString().split("/").last) = x._2
+    name_map(x._1.toString().split("[/#]").last) = x._2
   } )
 
 
