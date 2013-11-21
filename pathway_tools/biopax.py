@@ -123,7 +123,7 @@ class BioPax_SmallMolecule(BioPax_ElementBase):
 
 
         out = Subnet({'name' : node_label, 'url' : self.node, 'type' : self.type})
-        data = {'db_xref' : xref_list, 'type' : self.type}
+        data = {'db_xref' : xref_list, 'type' : 'chemical'}
         if node_label is not None:
             data['label'] = node_label
         out.add_node( self.node, data, is_input=True, is_output=True)
@@ -248,6 +248,14 @@ class BioPax_DnaReference(BioPax_ElementBase):
         out.add_node(self.node, data, is_input=True, is_output=True )
         return out
 
+class BioPax_RnaRegion(BioPax_ElementBase):
+    def process(self):
+        return None    
+
+class BioPax_DnaRegion(BioPax_ElementBase):
+    def process(self):
+        return None    
+
 
 class BioPax_Protein(BioPax_ElementBase):
     type = "Protein"
@@ -326,7 +334,11 @@ class BioPax_ProteinReference(BioPax_ElementBase):
 iteraction_map = {
     '-a>' : '-a>',
     'ACTIVATION' : '-a>',
-    'INHIBITION' : '-a|'
+    'INHIBITION' : '-a|',
+    'STATE_TRANSITION' : '-a>',
+    'DISSOCIATION' : '-a>',
+    'TRUNCATION' : '-a|',
+    'HETERODIMER_ASSOCIATION' : 'component>' #BUG: this needs to be check, may end up pointing to other member, not the complex
 }
 
 class BioPax_Catalysis(BioPax_ElementBase):
@@ -529,6 +541,14 @@ class BioPax_Control(BioPax_ElementBase):
 
         return out
 
+
+class BioPax_Conversion(BioPax_ElementBase):
+    type = "TemplateReactionRegulation"
+    def process(self):
+        #raise Exception("Missing Code: %s" % (self.type))
+        return None
+
+
 class BioPax_TemplateReactionRegulation(BioPax_ElementBase):
     type = "TemplateReactionRegulation"
     def process(self):
@@ -570,6 +590,12 @@ class BioPax_TransportWithBiochemicalReaction(BioPax_ElementBase):
         return out
 
 class BioPax_Interaction(BioPax_ElementBase):
+    type = "Interaction"
+    def process(self):
+        #raise Exception("Missing Code: %s" % (self.type))
+        return None
+
+class BioPax_Modulation(BioPax_ElementBase):
     type = "Interaction"
     def process(self):
         #raise Exception("Missing Code: %s" % (self.type))
@@ -658,6 +684,8 @@ element_mapping = {
     BIOPAX_BASE + "RnaReference" : BioPax_RnaReference,
     BIOPAX_BASE + "Dna" : BioPax_Dna,
     BIOPAX_BASE + "DnaReference" : BioPax_DnaReference,
+    BIOPAX_BASE + "RnaRegion" : BioPax_RnaRegion,
+    BIOPAX_BASE + "DnaRegion" : BioPax_DnaRegion,
     BIOPAX_BASE + "Catalysis" : BioPax_Catalysis,
     BIOPAX_BASE + "BiochemicalReaction" : BioPax_BiochemicalReaction,
     BIOPAX_BASE + "MolecularInteraction" : BioPax_MolecularInteraction,
@@ -669,6 +697,8 @@ element_mapping = {
     BIOPAX_BASE + "TemplateReaction" : BioPax_TemplateReaction,
     BIOPAX_BASE + "TransportWithBiochemicalReaction" : BioPax_TransportWithBiochemicalReaction,
     BIOPAX_BASE + "Interaction" : BioPax_Interaction,
+    BIOPAX_BASE + "Conversion" : BioPax_Conversion,
+    BIOPAX_BASE + "Modulation" : BioPax_Modulation,
     None : BioPax_Blank
 }
 
