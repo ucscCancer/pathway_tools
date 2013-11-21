@@ -15,94 +15,150 @@ dogma_template:
         - [active]
     family:
         - [active]
+    rna:
+        - [genome, mRNA, -dTx>]
+        - [mRNA, active, -dAct>]
+    miRNA:
+        - [genome, mRNA, -dTx>]
+        - [mRNA, active, -dAct>]
 
 
 
 #interactions define how the sub-elements of two templates are connected
 #interactions format:
-#list -> [ src_node_type, dst_node_type, edge_type ]
+#edge_type -> [ src_node_type, dst_node_type ]
 interactions:
-    - [active, mRNA, -t>]
-    - [active, mRNA, -t|]
-    - [active, active, -a>]
-    - [active, active, -a|]
-    - [active, active, component>]
-    - [active, active, -ap>]
-    - [active, active, -ap|]
-    - [active, active, member>]
+    -t> : [active, mRNA]
+    -t| : [active, mRNA]
+    -a> : [active, active]
+    -a| : [active, active]
+    component> : [active, active]
+    -ap> : [active, active]
+    -ap| : [active, active]
+    member> : [active, active]
 
 
 factor_tables : 
     positive : 
-        - [0.90, 0.05, 0.05]
-        - [0.05, 0.90, 0.05]
-        - [0.05, 0.05, 0.90]
+        - [0.9990, 0.0005, 0.0005]
+        - [0.0005, 0.9990, 0.0005]
+        - [0.0005, 0.0005, 0.9990]
     negative : 
-        - [0.05, 0.05, 0.90]
-        - [0.05, 0.90, 0.05]
-        - [0.90, 0.05, 0.05]
+        - [0.0005, 0.0005, 0.9990]
+        - [0.0005, 0.9990, 0.0005]
+        - [0.9990, 0.0005, 0.0005]
 
 factor_functions : 
     max : |
         def max_val(inputs):
+            epsilon = 0.001
             other_vals = []
             child_val = None
             for v in inputs:
-                if v == 'child':
-                    child_val = inputs[v]
+                if inputs[v]['child']:
+                    child_val = inputs[v]['value']
                 else:
-                    other_vals.append(inputs[v])
+                    other_vals.append(inputs[v]['value'])
             if max(other_vals) == child_val:
-                return 0.9
-            return 0.1 / float(len(other_vals))
+                return 1.0 - epsilon
+            return epsilon / 2.0 #float(len(other_vals))
     min : |
         def min_val(inputs):
+            epsilon = 0.001
             other_vals = []
             child_val = None
             for v in inputs:
-                if v == 'child':
-                    child_val = inputs[v]
+                if inputs[v]['child']:
+                    child_val = inputs[v]['value']
                 else:
-                    other_vals.append(inputs[v])
+                    other_vals.append(inputs[v]['value'])
             if min(other_vals) == child_val:
-                return 0.9
-            return 0.1 / float(len(other_vals))
+                return 1.0 - epsilon
+            return epsilon / 2.0 #float(len(other_vals))
+
+    downwins: |
+        def downwins_val(inputs):
+            epsilon = 0.001
+            other_vals = []
+            child_val = None
+            for v in inputs:
+                if inputs[v]['child']:
+                    child_val = inputs[v]['value']
+                else:
+                    if inputs[v]['info']:
+                        other_vals.append(inputs[v]['value'])
+                    else:
+                        other_vals.append(2 - inputs[v]['value'])
+            if other_vals.count(2) > other_vals.count(0):
+                winner = 2
+            elif other_vals.count(0) > 0 and other_vals.count(0) >= other_vals.count(2):
+                winner = 0
+            else:
+                winner = 1
+            if winner == child_val:
+                return 1.0 - epsilon
+            else:
+                return epsilon / 2.0 #float(len(other_vals))
 
 
-#factor format:
+
+#combine_rules format:
 #Edge type
-#    dst_template_name
-#        dst_node_type
-#            probablity_table
+#    dst_node_type
+#        rules
 
-factors_fixed : 
-    -dTx> :
-        factor_table : positive
-    -dTl>:
-        factor_table : positive
-    -dAct>:
-        factor_table : positive
-    -t>:
-        factor_table : positive
-    -t|:
-        factor_table : negative
-    -a>:
-        factor_table : positive
-    -a|:
-        factor_table : negative
-    -ap>:
-        factor_table : positive
-    -ap|:
-        factor_table : negative
+combine_rules : 
 
-    'component>' :
-        factor_function : min
-        combine : 
-            method : function
-            types : [ component> ]
+    genome : 
 
-    'member>' :
-        factor_function : max
-        combine : 
-            method : function
-            types : [ member> ]
+
+    mRNA:
+        - 
+            edges : 
+                -dTx> : True 
+                -t> : True
+                -t| : False
+            split_size : 0
+            rule_type : function
+            rule_name : downwins
+
+    protein:
+        - 
+            edges: 
+                -dTl> : True
+            split_size : 0
+            rule_type : function
+            rule_name : downwins
+
+    active:
+        - 
+            dogmas : [ protein, chemical, abstract, rna, miRNA ]
+            edges : 
+                -dAct> : True
+                -a> : True
+                -a| : False
+                -ap> : True
+                -ap| : False
+                -t| : False
+            split_size : 0
+            rule_type : function
+            rule_name : downwins
+        - 
+            dogmas : [ complex ]
+            edges: 
+                component> : True
+                -a> : True
+                -a| : False
+                -ap> : True
+            split_size : 0
+            rule_type : function
+            rule_name : min
+        - 
+            dogmas : [ family ]
+            edges: 
+                member> : True
+                -a> : True
+                -a| : False
+            split_size : 0
+            rule_type : function
+            rule_name : max
