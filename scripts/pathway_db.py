@@ -38,9 +38,8 @@ class Dogma:
 
     def read(self, handle):
         self.data = yaml.load(handle.read())
-
-    def get_dogma(self, name):
-        return self.data['dogma'].get(name, None)
+    def has_edgetype(self, type_name):
+        return type_name in self.data['dogma_template']
 
 class GraphChecker:
 
@@ -220,75 +219,6 @@ def main_sync(args):
                 (args.base_dir), 
             shell=True)
 
-"""
-def main_compile(args):
-
-    gr = networkx.MultiDiGraph()
-    base_dir = args.base_dir
-
-    if len(args.pathways):
-        paths = []
-        for p in args.pathways:
-            paths.append(os.path.join(base_dir, p))
-    else:
-        paths = glob(os.path.join(base_dir, "[A-Za-z]*"))
-        if args.append:
-            paths +=args.append
-
-    type_count = {}
-    interaction_count = {}
-    duplicate_edges = 0
-    for path in paths:
-        info_path = os.path.join(path, "INFO")
-        if os.path.exists(info_path):
-            handle = open(info_path)
-            info = yaml.load(handle.read())
-            handle.close()
-            handle = open(os.path.join(path, "graph"))
-            for line in handle:
-                tmp = line.rstrip().split("\t")
-                node_type = tmp[0]
-                node_name = tmp[1]
-                if len(tmp) == 2:
-                    if node_name not in gr.node:
-                        gr.add_node( tmp[1], type=node_type )
-                        type_count[node_type] = type_count.get(node_type, 0) + 1
-                    else:
-                        if gr.node[node_name]['type'] != node_type:
-                            raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
-                    if 'pathway' not in gr.node[node_name]:
-                        gr.node[node_name]['pathway'] = []
-                        gr.node[node_name]['pid'] = []
-                    gr.node[node_name]['pathway'].append(info['DESC'])
-                    #gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
-                elif len(tmp) == 3:
-                    if tmp[0] not in gr.node:
-                        raise Exception("Missing Node Declaration: %s" % (tmp[0]))
-                    if tmp[1] not in gr.node:
-                        raise Exception("Missing Node Declaration: %s" % (tmp[1]))
-                    has_edge = False
-                    if tmp[1] in gr.edge[tmp[0]]:
-                        for i in gr.edge[tmp[0]][tmp[1]]:
-                            if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
-                                has_edge = True
-                    if not has_edge:
-                        gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
-                    else:
-                        duplicate_edges += 1
-            handle.close()
-    log("Node Count: %d" % (len(gr.nodes())))
-    log("Edge Count: %d" % (len(gr.edges())))
-    log("Duplicate Edges: %s" % (duplicate_edges))
-    log("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
-    for n_type in type_count:
-        log("Node Type %s: %d" % (n_type, type_count[n_type]))
-    if args.paradigm:
-        network_convert.write_paradigm_graph(gr, sys.stdout)
-    elif args.sif:
-        network_convert.write_sif(gr, sys.stdout)        
-    else:        
-        network_convert.write_xgmml(gr, sys.stdout)
-"""
 
 def scan_dir(base_dir):
     if os.path.isfile(base_dir):
@@ -363,6 +293,13 @@ def main_build(args):
             exclude[line.rstrip()] = True
         handle.close()
 
+    dogma = None
+    if args.dogma is not None:
+        dogma = Dogma()
+        handle = open(args.dogma)
+        dogma.read(handle)
+        handle.close()
+
     type_count = {}
     interaction_count = {}
     duplicate_edges = 0
@@ -380,6 +317,14 @@ def main_build(args):
             if 'label' not in cur_gr.node[node] or cur_gr.node[node]['label'] == 'None':
                 log("Unlabeled node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
+                    skip = True
+
+            if dogma is not None:
+                if 'type' not in cur_gr.node[node]:
+                    log("Undefined node type: %s" % (node))
+                    skip = True
+                elif not dogma.has_edgetype(cur_gr.node[node]['type']):
+                    log("Unknown node type: %s : %s" % (node, cur_gr.node[node]['type']))
                     skip = True
             
             if not skip:
@@ -427,6 +372,10 @@ def main_build(args):
 
             interaction = data['interaction']
             if src in gr.node and dst in gr.node:
+                add_edge = True
+                if dogma is not None:
+                    pass
+
                 has_edge = False
                 if dst in gr.edge[src]:
                     for i in gr.edge[src][dst]:
@@ -441,41 +390,7 @@ def main_build(args):
                 else:
                     duplicate_edges += 1
 
-            """
-
-            handle = open(os.path.join(path, "graph"))
-            for line in handle:
-                tmp = line.rstrip().split("\t")
-                node_type = tmp[0]
-                node_name = tmp[1]
-                if len(tmp) == 2:
-                    if node_name not in gr.node:
-                        gr.add_node( tmp[1], type=node_type )
-                        type_count[node_type] = type_count.get(node_type, 0) + 1
-                    else:
-                        if gr.node[node_name]['type'] != node_type:
-                            raise Exception("%s failure: Mismatch Node Type: %s :%s --> %s" % (path, node_name, gr.node[node_name]['type'], node_type ))
-                    if 'pathway' not in gr.node[node_name]:
-                        gr.node[node_name]['pathway'] = []
-                        gr.node[node_name]['pid'] = []
-                    gr.node[node_name]['pathway'].append(info['DESC'])
-                    gr.node[node_name]['pid'].append( "PID%s" % (info['PID']))
-                elif len(tmp) == 3:
-                    if tmp[0] not in gr.node:
-                        raise Exception("Missing Node Declaration: %s" % (tmp[0]))
-                    if tmp[1] not in gr.node:
-                        raise Exception("Missing Node Declaration: %s" % (tmp[1]))
-                    has_edge = False
-                    if tmp[1] in gr.edge[tmp[0]]:
-                        for i in gr.edge[tmp[0]][tmp[1]]:
-                            if gr.edge[tmp[0]][tmp[1]][i]['interaction'] == tmp[2]:
-                                has_edge = True
-                    if not has_edge:
-                        gr.add_edge(tmp[0], tmp[1], attr_dict={ 'interaction' : tmp[2] })
-                    else:
-                        duplicate_edges += 1
-            handle.close()
-            """
+            
     log("+---------------------------+")
     log("|Node Count: %15d|" % (len(gr.nodes())))
     log("|Edge Count: %15d|" % (len(gr.edges())))
@@ -678,16 +593,6 @@ if __name__ == "__main__":
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     subparsers = parser.add_subparsers(title="subcommand")
 
-    """
-    parser_compile = subparsers.add_parser('compile')
-    parser_compile.add_argument('-a', '--append', help="Default Edge Type", action="append")
-    parser_compile.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
-    parser_compile.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
-    parser_compile.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
-    parser_compile.add_argument("pathways", nargs="*")
-    parser_compile.set_defaults(func=main_compile)
-    """
-
     parser_build = subparsers.add_parser('build')
     parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
     parser_build.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
@@ -695,6 +600,7 @@ if __name__ == "__main__":
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("--merge-file", default=None)
     parser_build.add_argument("--exclude", default=None)
+    parser_build.add_argument("--dogma", default=None)    
     parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser_build.add_argument("--rename-type", action="store_true", default=False)
     parser_build.add_argument("--rename-space", action="store_true", default=False)
