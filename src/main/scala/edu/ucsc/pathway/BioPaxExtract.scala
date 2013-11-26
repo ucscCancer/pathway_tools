@@ -82,6 +82,7 @@ class BioPax_Splitter(val groups:Map[String,Int], val elementMap:Map[Resource, H
   val output_map = new HashMap[Int,FileOutputStream]();
   val writer_map = new HashMap[Int,RDFXMLWriter]();
 
+  val group_set = groups.values.toSet;
 
   def startRDF() = {
     groups.foreach( x => {
@@ -106,8 +107,10 @@ class BioPax_Splitter(val groups:Map[String,Int], val elementMap:Map[Resource, H
     val b_sets = elementMap.get(b);
     if (b_sets.isDefined) {
       for ( group <- b_sets.get) {
-        if (b_sets.get.contains(group)) {
-          writer_map(group).handleStatement(st);
+        if ( group_set.contains(group)) {
+          if (b_sets.get.contains(group)) {
+            writer_map(group).handleStatement(st);
+          }
         }
       }
     }
@@ -136,6 +139,7 @@ object BioPaxExtract {
   def main(args: Array[String]) = {
     val file_path = args(0);
     val out_dir = args(1);
+    val max_files = 500;
     val pathway_scan = new BioPax_Pathways();
     parseFile(file_path, pathway_scan);
     println("Pathway Count: " + pathway_scan.pathway_list.length)
@@ -146,10 +150,14 @@ object BioPaxExtract {
       parseFile(file_path, ng);
       println("Selection Cycle: " + ng.member_map.size + " elements");
     } while (ng.added);
-	
-	println("Writing output files")
-    val writer = new BioPax_Splitter(ng.name_map.toMap, ng.member_map.toMap, new File(out_dir));
-    parseFile(file_path, writer);
+
+    println("Writing output files")
+    for ( i <- 0 to ng.name_map.size by max_files) {
+      println("Writing file batch: " + i)
+      val cur_names = ng.name_map.slice(i, i+max_files);
+      val writer = new BioPax_Splitter(cur_names.toMap, ng.member_map.toMap, new File(out_dir));
+      parseFile(file_path, writer);
+    }
   }
 
 
