@@ -23,7 +23,7 @@ def write_sif(gr, handle, edge_type_field='interaction'):
         interaction = data.get(edge_type_field, "pp")
         handle.write("%s\t%s\t%s\n" % (e1, interaction, e2))
 
-def read_paradigm_graph(handle, strict=True):
+def read_spf(handle, strict=True):
     gr = networkx.MultiDiGraph()
     for line in handle:
         tmp = line.rstrip().split("\t")
@@ -43,7 +43,7 @@ def read_paradigm_graph(handle, strict=True):
             raise FormatException("Bad line: %s" % (line))
     return gr
 
-def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
+def write_spf(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
     node_label = {}
     for e in sorted(gr.node):
         if 'label' in gr.node[e]:
@@ -58,7 +58,7 @@ def write_paradigm_graph(gr, handle, node_type_field='type', node_type_default='
                 handle.write("%s\t%s\t%s\n" % (node_label[src], node_label[dst], gr.edge[src][dst][edge].get(edge_type_field, edge_type_default)))
 
 
-def load_paradigm_dir(base_dir):
+def load_spf_dir(base_dir):
     pid_names = {}
     handle = open(os.path.join(base_dir, "names.tab"))
     for line in handle:

@@ -15,13 +15,17 @@ if __name__ == "__main__":
     parser.add_argument('-pmf', '--pathway-member-field', help="Pathway Membership Field", default="pathway")
 
     parser.add_argument('--in-xgmml', help='Input XGMML file', default=None)
-    parser.add_argument('--in-paradigm', help='Input Paradigm file', default=None)
+    parser.add_argument('--in-spf', help='Input Simple Pathway Format', default=None)
     parser.add_argument('--in-gmt', help='Input Gene Mapping File', default=None)
-    parser.add_argument('--in-paradigm-dir', help='Input Paradigm Directory', default=None)
+    parser.add_argument('--in-spf-dir', help='Input SimplePathwayFormat Directory', default=None)
+
+    parser.add_argument('--strict', help='Strict SimplePathwayFormat input', action="store_true", default=False)
+    
         
     #parser.add_argument('-cys', help='Input Cytoscape file', default=None)    
 
-    parser.add_argument('--out-paradigm', help='Output Paradigm File', default=None)    
+    parser.add_argument('--out-spf', help='Output SimplePathwayFormat File', default=None)
+    parser.add_argument('--out-sif', help='Output SimpleInteractionFormat File', default=None)    
     parser.add_argument('--out-xgmml', help='Output XGMML File', default=None)    
     parser.add_argument('--out-gmt', help="Output Gene Mapping Table", default=None)
     
@@ -36,9 +40,9 @@ if __name__ == "__main__":
         gr = convert.read_xgmml(handle)
         handle.close()
 
-    if args.in_paradigm is not None:
-        handle = open(args.in_paradigm)
-        gr = convert.read_paradigm_graph(handle)
+    if args.in_spf is not None:
+        handle = open(args.in_spf)
+        gr = convert.read_spf_graph(handle, strict=args.strict)
         handle.close()
 
     if args.in_gmt is not None:
@@ -52,8 +56,8 @@ if __name__ == "__main__":
                     gr.node[elem][args.pathway_member_field].append(tmp[0])
         handle.close()
 
-    if args.in_paradigm_dir is not None:
-        gr = load_paradigm_dir(args.in_paradigm_dir)
+    if args.in_spf_dir is not None:
+        gr = load_spf_dir(args.in_spf_dir)
 
     """
     #not yet complete, because while cytoscape stores an xgmml file internally, it doesn't populate the 
@@ -68,12 +72,12 @@ if __name__ == "__main__":
     """
 
     if gr is not None:
-        if args.out_paradigm is not None:
-            if args.out_paradigm == "-":
+        if args.out_spf is not None:
+            if args.out_spf == "-":
                 ohandle = sys.stdout
             else:
-                ohandle = open(args.out_paradigm, "w")
-            convert.write_paradigm_graph(gr, ohandle, 
+                ohandle = open(args.out_spf, "w")
+            convert.write_spf(gr, ohandle, 
                 node_type_field=args.node_type_field, node_type_default=args.node_type_default, 
                 edge_type_field=args.edge_type_field, edge_type_default=args.edge_type_default
             )

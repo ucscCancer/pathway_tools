@@ -110,7 +110,7 @@ class RepoChecker(GraphChecker):
             errors.append(Exception("Missing required SOURCE field"))
         
         handle = open(os.path.join(self.repo, project, "graph"))
-        gr = network_convert.read_paradigm_graph(handle)
+        gr = network_convert.read_spf(handle)
         handle.close()
         if self.hugo_map is not None:
             for node in gr.node:
@@ -241,8 +241,8 @@ def pathway_opener(pathway_list):
             for path_path in scan_dir(path):
                 yield XGMMLOpener(path_path)
 
-        if path_type == 'paradigm-file':
-            yield ParadigmOpener(path)
+        if path_type == 'spf-file':
+            yield SPFOpener(path)
 
 
 
@@ -259,7 +259,7 @@ class XGMMLOpener:
         return cur_gr
 
 
-class ParadigmOpener:
+class SPFOpener:
 
     def __init__(self, path):
         self.path = path
@@ -267,7 +267,7 @@ class ParadigmOpener:
 
     def read(self):
         handle = open(self.path)
-        cur_gr = network_convert.read_paradigm_graph(handle, strict=False)
+        cur_gr = network_convert.read_spf(handle, strict=False)
         handle.close()
         return cur_gr
 
@@ -404,8 +404,8 @@ def main_build(args):
 
     for n_type in type_count:
         log("Node Type %s: %d" % (n_type, type_count[n_type]))
-    if args.paradigm:
-        network_convert.write_paradigm_graph(gr, handle)
+    if args.spf:
+        network_convert.write_spf(gr, handle)
     elif args.sif:
         network_convert.write_sif(gr, handle)        
     else:        
@@ -595,7 +595,7 @@ if __name__ == "__main__":
 
     parser_build = subparsers.add_parser('build')
     parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
-    parser_build.add_argument('-p', '--paradigm', help="Compile Paradigm File", action="store_true", default=False)   
+    parser_build.add_argument('-p', '--spf', help="Compile SimplePathayFile", action="store_true", default=False)   
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("--merge-file", default=None)

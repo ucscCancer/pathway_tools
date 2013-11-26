@@ -8,7 +8,7 @@ from pathway_tools import convert
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--paradigm', help="Paradigm File")
+    parser.add_argument('--spf', help="SimplePathwayFormat File")
     parser.add_argument('--xgmml', help="XGMML File")
     parser.add_argument('--top', help="Top Count", type=int, default=10)
 
@@ -17,9 +17,9 @@ if __name__ == "__main__":
 
     gr = None
 
-    if args.paradigm:
-        handle = open(args.paradigm)
-        gr = convert.read_paradigm_graph(handle, strict=False)
+    if args.spf:
+        handle = open(args.spf)
+        gr = convert.read_spf(handle, strict=False)
         handle.close()
     if args.xgmml:
         handle = open(args.xgmml)

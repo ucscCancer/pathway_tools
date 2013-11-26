@@ -169,7 +169,6 @@ if __name__ == "__main__":
                                 re_map[n] = relabel
                     gr = nx.relabel_nodes(gr, re_map)
                 handle = open( os.path.join(args.outdir, path + ".xgmml"), "w" )
-                #convert.write_paradigm_graph(gr, handle)            
                 convert.write_xgmml(gr, handle)            
                 handle.close()
             

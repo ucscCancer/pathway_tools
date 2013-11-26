@@ -10,8 +10,8 @@ def log(msg):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--src-paradigm', help="Source Paradigm File")
-    parser.add_argument('--dst-paradigm', help="Dest Paradigm File")
+    parser.add_argument('--src-spf', help="Source SimplePathwayFile")
+    parser.add_argument('--dst-spf', help="Dest SimplePathwayFile")
     parser.add_argument('--src-xgmml', help="Source XGMML File")
     parser.add_argument('--dst-xgmml', help="Dest XGMML File")
 
@@ -20,18 +20,18 @@ if __name__ == "__main__":
     gr1 = None
     gr2 = None
 
-    if args.src_paradigm:
-        handle1 = open(args.src_paradigm)
-        gr1 = network_convert.read_paradigm_graph(handle1, strict=False)
+    if args.src_spf:
+        handle1 = open(args.src_spf)
+        gr1 = network_convert.read_spf(handle1, strict=False)
         handle1.close()
     if args.src_xgmml:
         handle1 = open(args.src_xgmml)
         gr1 = network_convert.read_xgmml(handle1)
         handle1.close()
 
-    if args.dst_paradigm:      
-        handle2 = open(args.dst_paradigm)
-        gr2 = network_convert.read_paradigm_graph(handle2, strict=False)
+    if args.dst_spf:      
+        handle2 = open(args.dst_spf)
+        gr2 = network_convert.read_spf(handle2, strict=False)
         handle2.close()
     if args.src_xgmml:
         handle1 = open(args.dst_xgmml)
@@ -72,5 +72,3 @@ if __name__ == "__main__":
                 if t not in gr1.edge[n]:
                     log( "Graph1 Missing Edge:" + str((n,t)))
     
-    #network_convert.write_paradigm_graph(gr, sys.stdout)
-    #network_convert.write_xgmml(gr, sys.stdout)

@@ -8,7 +8,7 @@ import yaml
 
 if __name__ == "__main__":
 	handle = open(sys.argv[1])
-	gr = convert.read_paradigm_graph(handle, strict=False)
+	gr = convert.read_spf(handle, strict=False)
 	handle.close()
 
 	name_tab = {}

@@ -7,9 +7,9 @@ import argparse
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--query-paradigm', help="Input query in Paradigm graph format", default=None)
+    parser.add_argument('--query-spf', help="Input query in simple pathway format", default=None)
     parser.add_argument('--query-xgmml',  help="Input query in XGMML graph format", default=None)
-    parser.add_argument('--target-paradigm', help="Search Target in Paradigm graph format", default=None)
+    parser.add_argument('--target-sfp', help="Search Target in Simple Pathway Format", default=None)
     parser.add_argument('--target-xgmml', help="Search Target in XGMML graph format", default=None)
     parser.add_argument('--query-pathattr', default="pid")
     parser.add_argument('--target-pathattr', default="pid")
@@ -20,18 +20,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.query_paradigm:
-        handle = open(args.query_paradigm) 
-        query_net = convert.read_paradigm_graph(handle)
+    if args.query_spf:
+        handle = open(args.query_spf) 
+        query_net = convert.read_spf(handle)
     
     if args.query_xgmml:
         handle = open(args.query_xgmml) 
         query_net = convert.read_xgmml(handle)
     
 
-    if args.target_paradigm:
-        handle = open(args.target_paradigm) 
-        target_net = convert.read_paradigm_graph(handle)
+    if args.target_spf:
+        handle = open(args.target_spf) 
+        target_net = convert.read_spf(handle)
         
     if args.target_xgmml:
         handle = open(args.target_xgmml) 

@@ -49,8 +49,8 @@ class ConvertTask:
             name = re_namesplit.split(gr.graph['url'])[-1]
             handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
             
-            if args.paradigm:
-                convert.write_paradigm_graph(gr, handle)
+            if args.spf:
+                convert.write_spf(gr, handle)
             else:
                 convert.write_xgmml(gr, handle)
             
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--out-dir", default=None)
     parser.add_argument("--cpus", type=int, default=1)
     
-    parser.add_argument("--paradigm", action="store_true", default=False)
+    parser.add_argument("--spf", action="store_true", default=False)
     
     
     parser.add_argument("input", nargs="+")
