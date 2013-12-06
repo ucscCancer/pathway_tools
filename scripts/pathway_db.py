@@ -595,7 +595,7 @@ if __name__ == "__main__":
 
     parser_build = subparsers.add_parser('build')
     parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
-    parser_build.add_argument('-p', '--spf', help="Compile SimplePathayFile", action="store_true", default=False)   
+    parser_build.add_argument('-p', '--spf', help="Compile SimplePathwayFormat File", action="store_true", default=False)   
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("--merge-file", default=None)
