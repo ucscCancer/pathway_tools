@@ -1,0 +1,38 @@
+<tool id="edge_counter" name="Network Edge Counter" version="1.0.0">
+	<description>Count edges connected to a node</description>
+	<command interpreter="python">edge_counter.py 
+--in-xgmml $graph
+--out $outfile
+#if len($filter) > 0:
+--filter ${filter_file}
+#end if
+	</command>
+	<inputs>
+		<param name="graph" type="data" format="xgmml" label="Network File"/>    
+		<repeat name="filter" title="Edge Filter" min="0">
+    		<param name="field" type="text" size="50" value="" label="Field Name">
+				<sanitizer>
+        			<valid initial="string.printable"/>
+				</sanitizer>
+    		</param>
+          	<param name="value" type="text" size="50" value=".*" label="Filter Regex">
+				<sanitizer>
+        			<valid initial="string.printable"/>
+				</sanitizer>
+          	</param>
+        </repeat>
+   	</inputs>
+ 	<outputs>
+		<data name="outfile" format="tabular"/>
+	</outputs>
+	<configfiles>
+    <configfile name="filter_file">
+#for r in $filter:
+${r.field}	${r.value}
+#end for
+    </configfile>
+  </configfiles>
+	<help>
+
+	</help>
+</tool>

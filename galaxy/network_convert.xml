@@ -1,0 +1,37 @@
+<tool id="network_convert" name="Network Format Convert" version="1.0.0">
+	<description>Convert network file formats</description>
+	<command interpreter="python">network_convert.py 
+--in-xgmml $graph
+--out $outfile
+#if len($filter) > 0:
+--filter ${filter_file}
+#end if
+	</command>
+	<inputs>
+		<param name="graph" type="data" label="Network File"/>
+		<param name="input_format" type="select" label="Input Format">
+			<option value="xgmml">XGMML</option>
+			<option value="sif">SIF</option>
+			<option value="spf">SPF</option>
+		</param>
+		<param name="output_format" type="select" label="Output Format">
+			<option value="xgmml">XGMML</option>
+			<option value="sif">SIF</option>
+			<option value="spf">SPF</option>
+		</param>
+   	</inputs>
+ 	<outputs>
+		<data name="outfile" format="xgmml">
+			<filter>output_format == 'xgmml'</filter>
+		</data>
+		<data name="outfile" format="sif">
+			<filter>output_format == 'sif'</filter>
+		</data>
+		<data name="outfile" format="text">
+			<filter>output_format == 'spf'</filter>
+		</data>
+	</outputs>
+	<help>
+
+	</help>
+</tool>
