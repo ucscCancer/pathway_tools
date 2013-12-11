@@ -314,6 +314,11 @@ def main_build(args):
                 log("Untyped node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
                     skip = True
+            else:
+                if args.exclude_type is not None and cur_gr.node[node]['type'] in args.exclude_type:
+                    skip = True
+                    log("Remove node: %s of type %s" % (node, cur_gr.node[node]['type']))
+
             if 'label' not in cur_gr.node[node] or cur_gr.node[node]['label'] == 'None':
                 log("Unlabeled node: %s %s" % (node, cur_gr.node[node].get('url', '')))
                 if args.all:
@@ -600,6 +605,7 @@ if __name__ == "__main__":
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("--merge-file", default=None)
     parser_build.add_argument("--exclude", default=None)
+    parser_build.add_argument("--exclude-type", action="append")
     parser_build.add_argument("--dogma", default=None)    
     parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser_build.add_argument("--rename-type", action="store_true", default=False)
