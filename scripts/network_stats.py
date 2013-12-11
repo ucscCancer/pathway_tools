@@ -38,7 +38,12 @@ if __name__ == "__main__":
     print("Edge Count: %d" % (len(gr.edges())))
     print("Connected Components: %d" % (networkx.number_connected_components(networkx.Graph(gr))))
 
-
+    cc = networkx.connected_components(networkx.Graph(gr))
+    hist = {}
+    for c in cc:
+        count = len(c)
+        hist[count] = hist.get(count, 0) + 1
+    print hist
 
     print("Top 10 Input Connections:")
     in_degree = gr.in_degree()
