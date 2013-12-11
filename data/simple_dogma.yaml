@@ -26,16 +26,43 @@ dogma_template:
 
 #interactions define how the sub-elements of two templates are connected
 #interactions format:
-#edge_type -> [ src_node_type, dst_node_type ]
+#edge_type -> 
+#      src : [ list of source types (declared in dogma_template)]
+#      src : [ list of destination types (declared in dogma_template)]
+#      connect : [ src_node_type, dst_node_type ]
 interactions:
-    -t> : [active, mRNA]
-    -t| : [active, mRNA]
-    -a> : [active, active]
-    -a| : [active, active]
-    component> : [active, active]
-    -ap> : [active, active]
-    -ap| : [active, active]
-    member> : [active, active]
+    -t> : 
+        src : [protein, rna, miRNA, complex, family]
+        dst : [protein, rna, miRNA]
+        connect : [active, mRNA]
+    -t| : 
+        src : [protein, rna, miRNA, complex, family]
+        dst : [protein, rna, miRNA]
+        connect : [active, mRNA]
+    -a> : 
+        src : [protein, rna, miRNA, family, complex, chemical, abstract]
+        dst : [protein, rna, miRNA, family, complex, chemical, abstract]
+        connect : [active, active]
+    -a| : 
+        src : [protein, rna, miRNA, family, complex, chemical, abstract]
+        dst : [protein, rna, miRNA, family, complex, chemical, abstract]
+        connect : [active, active]
+    component> : 
+        src : [protein, rna, miRNA, family, complex, chemical, abstract]
+        dst : [complex]
+        connect : [active, active]
+    -ap> : 
+        src : [protein, rna, miRNA, complex, family]
+        dst : [protein]
+        connect : [active, active]
+    -ap| : 
+        src : [protein, rna, miRNA, complex, family]
+        dst : [protein]
+        connect : [active, active]
+    member> : 
+        src : [protein, rna, miRNA, family, complex, chemical, abstract]
+        dst : [family]
+        connect : [active, active]
 
 
 factor_tables : 
