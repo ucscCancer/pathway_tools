@@ -154,7 +154,7 @@ def main_new(args):
     }
 
     store_config(args.base_dir, pid_name, config)
-    print pid_name
+    log(pid_name)
 
 
 
@@ -240,6 +240,9 @@ def pathway_opener(pathway_list):
         if path_type == 'xgmml-dir':
             for path_path in scan_dir(path):
                 yield XGMMLOpener(path_path)
+
+        if path_type == 'xgmml-file':
+            yield XGMMLOpener(path)
 
         if path_type == 'spf-file':
             yield SPFOpener(path)
@@ -361,7 +364,7 @@ def main_build(args):
                     if 'label' in data and data['label'] in merge_map:
                         data['label'] = merge_map[data['label']]
 
-                    if data['label'] not in exclude:
+                    if 'label' not in data or data['label'] not in exclude:
                         gr.add_node(node, attr_dict=data)
                 else:
                     if 'type' in gr.node[node] and 'type' in cur_gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
@@ -519,11 +522,11 @@ def main_check(args):
         try:
             errors = checker.check_project(project)
             if len(errors) == 0:
-                print "OK: %s" % (project)
+                log("OK: %s" % (project))
             else:
                 for e in errors:
-                    print "CheckError:\t%s\t%s" % (project, str(e))
-                print "BAD: %s" % (project)
+                    log("CheckError:\t%s\t%s" % (project, str(e)))
+                log("BAD: %s" % (project))
         except Exception, e:
             sys.stderr.write("Pathway Check Error: %s : %s\n" % (project, str(e)))
 
@@ -545,7 +548,7 @@ def main_suggest(args):
         #try:
         suggestions = checker.suggest_nodes(gr)
         for sug in suggestions:
-            print "Instead of %s (from:%s) try %s" % (sug[0], sug[1], sug[2])
+            log("Instead of %s (from:%s) try %s" % (sug[0], sug[1], sug[2]))
         #except Exception, e:
         #    sys.stderr.write("Pathway Check Error: %s\n" % (str(e)))
 
