@@ -36,10 +36,19 @@ class Dogma:
     def __init__(self):
         self.data = None
 
+
     def read(self, handle):
         self.data = yaml.load(handle.read())
-    def has_edgetype(self, type_name):
-        return type_name in self.data['dogma_template']
+
+    def has_edgetype(self, src_type, edge_type, dst_type):
+        if edge_type in self.data['interactions']:
+            if src_type in self.data['interactions'][edge_type]['src']:
+                if dst_type in self.data['interactions'][edge_type]['dst']:
+                    return True
+        return False
+
+    def has_nodetype(self, node_type):
+        return node_type in self.data['dogma_template']
 
 class GraphChecker:
 
@@ -331,7 +340,7 @@ def main_build(args):
                 if 'type' not in cur_gr.node[node]:
                     log("Undefined node type: %s" % (node))
                     skip = True
-                elif not dogma.has_edgetype(cur_gr.node[node]['type']):
+                elif not dogma.has_nodetype(cur_gr.node[node]['type']):
                     log("Unknown node type: %s : %s" % (node, cur_gr.node[node]['type']))
                     skip = True
             
@@ -377,12 +386,16 @@ def main_build(args):
 
 
         for src, dst, data in cur_gr.edges(data=True):
-
             interaction = data['interaction']
+            src_node_type = cur_gr.node[src].get('type', None)
+            dst_node_type = cur_gr.node[dst].get('type', None)
+
             if src in gr.node and dst in gr.node:
                 add_edge = True
                 if dogma is not None:
-                    pass
+                    if not dogma.has_edgetype(src_node_type, interaction, dst_node_type):
+                        error("BAD_EDGETYPE: %s(%s) %s %s(%s)" % (src, src_node_type, interaction, dst, dst_node_type))
+                        add_edge = False
 
                 has_edge = False
                 if dst in gr.edge[src]:
@@ -391,12 +404,21 @@ def main_build(args):
                             has_edge = True
 
                 if not has_edge:
-                    if not (args.remove_self or args.all) or src != dst:
-                        gr.add_edge(src, dst, attr_dict=data )
-                    else:
-                        log("Removing self loop: %s" % (src))
+                    if add_edge:
+                        if not (args.remove_self or args.all) or src != dst:
+                            gr.add_edge(src, dst, attr_dict=data )
+                        else:
+                            log("Removing self loop: %s" % (src))
                 else:
                     duplicate_edges += 1
+
+    connect_list = networkx.connected_components(networkx.Graph(gr))
+    rm_list = []
+    for group in connect_list:
+        if len(group) < args.min_subgraph:
+            rm_list.extend(group)
+    for r in rm_list:
+        gr.remove_node(r)
 
             
     log("+---------------------------+")
@@ -618,6 +640,7 @@ if __name__ == "__main__":
     parser_build.add_argument("--remove-self", action="store_true", default=False)
     parser_build.add_argument("--rename-nonprotein", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
+    parser_build.add_argument("--min-subgraph", type=int, default=0)
     
     parser_build.add_argument("pathways", nargs="*")
 
