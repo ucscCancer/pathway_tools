@@ -5,6 +5,7 @@ import os
 import re
 import argparse
 import networkx
+from glob import glob
 from pathway_tools.biopax import BioPaxFile, BioPaxSparql
 from pathway_tools import convert
 
@@ -44,6 +45,7 @@ class ConvertTask:
             gr = networkx.MultiDiGraph()
             gr.graph['name'] = subnet.meta['name']
             gr.graph['url'] = subnet.meta['url']
+            gr.graph['db_xref'] = subnet.meta['db_xref']
             subnet.to_graph(gr)
 
             name = re_namesplit.split(gr.graph['url'])[-1]
@@ -79,7 +81,11 @@ if __name__ == "__main__":
     if args.sparql:
         file_list = [ BioPaxSparql(args.input) ]
     else:
-        file_list = args.input
+        for a in args.input:
+            if os.path.isdir(a):
+                file_list.extend(glob(os.path.join(a, "*")))
+            else:
+                file_list.append(a)
 
     if args.list:
         for path_file in file_list:

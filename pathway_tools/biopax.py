@@ -85,7 +85,21 @@ class BioPax_Pathway(BioPax_ElementBase):
             for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
                 name = c_info.dst
 
-        out = Subnet({'name' : name, 'url' : self.node, 'type' : self.type})
+        xref_list = []
+        for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref", get_type=False):
+            db = None
+            db_id = None
+            for rel in self.pax.query(src=xref.dst):
+                if rel.predicate == BIOPAX_BASE + "db":
+                    db = rel.dst
+                if rel.predicate == BIOPAX_BASE + "id":
+                    db_id = rel.dst
+            db_xref = "%s:%s" % (db, db_id)
+            xref_list.append(db_xref)
+        print "XREF", xref_list
+
+
+        out = Subnet({'name' : name, 'url' : self.node, 'type' : self.type, 'db_xref' : xref_list})
 
         for c in component_list:
             if component_list[c] is not None:
