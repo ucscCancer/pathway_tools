@@ -229,7 +229,7 @@ def main_sync(args):
             shell=True)
 
 
-def scan_dir(base_dir):
+def scan_dir(base_dir, suffix=".xgmml"):
     if os.path.isfile(base_dir):
         return [base_dir]
     out = []
@@ -238,7 +238,7 @@ def scan_dir(base_dir):
         if os.path.isdir(path):
             out += scan_dir(path)
         else:
-            if path.endswith(".xgmml"):
+            if path.endswith(suffix):
                 out.append(path)
     return out
 
@@ -256,6 +256,21 @@ def pathway_opener(pathway_list):
         if path_type == 'spf-file':
             yield SPFOpener(path)
 
+        if path_type == 'biopax-dir':
+            for path_path in scan_dir(path, ".owl"):
+                yield BioPaxOpener(path_path)
+
+
+
+
+class BioPaxOpener:
+
+    def __init__(self, path):
+        self.path = path
+        self.name = path
+
+    def read(self):
+        raise Exception("Can't read directly from BioPAX")
 
 
 class XGMMLOpener:
@@ -575,6 +590,37 @@ def main_suggest(args):
         #    sys.stderr.write("Pathway Check Error: %s\n" % (str(e)))
 
 
+def runner(x):
+    x.run()
+
+def main_format(args):
+    from read_biopax import ConvertTask
+    from multiprocessing import Pool
+
+    rename = {}
+    if args.rename is not None:
+        handle = open(args.rename)
+        for line in handle:
+            tmp = line.rstrip().split("\t")
+            rename[tmp[0]] = tmp[1]
+        handle.close()
+    paths = pathway_opener( list( (args.pathways[i],args.pathways[i+1]) for i in range(0, len(args.pathways),2) ) )
+    tasks = []
+    for p in paths:
+        path = p.path
+        name = os.path.basename(path)
+        if name in rename:
+            name = rename[name]
+            outdir = os.path.join(args.outdir, name + ".owl")
+            if not os.path.exists(outdir):
+                os.makedirs(outdir)
+            biopax_path = os.path.join(outdir, "biopax")
+            log("Copying: %s" % (biopax_path))
+            shutil.copy(path, biopax_path)
+            tasks.append( ConvertTask(biopax_path, outdir) )
+
+    p = Pool(args.cpus)
+    p.map(runner, tasks)
 
 def main_commit(args):
     parser = argparse.ArgumentParser(prog="pathway_db commit")
@@ -649,10 +695,17 @@ if __name__ == "__main__":
     parser_hugosync = subparsers.add_parser('hugosync')
     parser_hugosync.set_defaults(func=main_hugosync)
 
-
     parser_suggest = subparsers.add_parser('suggest')
     parser_suggest.add_argument("pathways", nargs="*")
     parser_suggest.set_defaults(func=main_suggest)
+
+    parser_format = subparsers.add_parser('format')
+    parser_format.set_defaults(func=main_format)
+    parser_format.add_argument("--rename", default=None)
+    parser_format.add_argument("--cpus", type=int, default=2)    
+    parser_format.add_argument("outdir")
+    parser_format.add_argument("pathways", nargs="*")
+
 
     args = parser.parse_args()
 
