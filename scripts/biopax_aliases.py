@@ -19,7 +19,7 @@ SELECT ?db ?id WHERE {
     ?xref <http://www.biopax.org/release/biopax-level3.owl#id> ?id 
 }
             """):
-        out.append( [os.path.basename(path), a[0], a[1]] )
+        out.append( [ os.path.basename(path), str(a[0]), str(a[1]) ] )
     for a in g.query("""
 SELECT ?dataSource ?name WHERE {
     ?path a <http://www.biopax.org/release/biopax-level3.owl#Pathway> .
@@ -27,15 +27,19 @@ SELECT ?dataSource ?name WHERE {
     ?path <http://www.biopax.org/release/biopax-level3.owl#name> ?name .
 }
             """):
-        out.append( [os.path.basename(path), os.path.basename(a[0]), a[1]] )
+        out.append( [ os.path.basename(path), os.path.basename(a[0]), str(a[1]) ] )
     return out
 
-if __name__ == "__main__":
-    indir = sys.argv[1]
+def scan(indir):
     fileset = glob(os.path.join(indir, "*.owl"))
 
     p = Pool(8)
     out = p.map(scan_biopax_file, fileset)
     for scan in out:
         for path, db, dbid in scan:
-            print "%s\t%s\t%s" % (path, db, dbid)
+            yield (path, db, dbid)
+
+if __name__ == "__main__":
+    indir = sys.argv[1]
+    for path, db, dbid in scan(indir):
+        print "%s\t%s\t%s" % (path, db, dbid)

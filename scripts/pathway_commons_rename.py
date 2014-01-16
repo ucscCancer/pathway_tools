@@ -2,6 +2,7 @@
 
 import sys
 import os
+import biopax_aliases
 
 db_order = [
 	"pid",
@@ -20,14 +21,14 @@ db_name = {
 if __name__ == "__main__":
 
 	pathmap = {}
-
-	handle = open(sys.argv[1])
-	for line in handle:
-		path, db, db_id = line.rstrip().split("\t")
+	handle = biopax_aliases.scan(sys.argv[1])
+	for path, db, db_id in handle:
 		if path not in pathmap:
 			pathmap[path] = []
 		if db in db_order:
 			pathmap[path].append( "%s_%s" % (db_name[db], db_id) )
+		else:
+			sys.stderr.write("Skipping ID: %s %s\n" % (db, db_id))
 	handle.close()
 	for path in pathmap:
 		for newname in pathmap[path]:

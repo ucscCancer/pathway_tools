@@ -16,10 +16,11 @@ re_namesplit = re.compile(r'[/ \#\&]')
 
 class ConvertTask:
 
-    def __init__(self, path_file, outdir, pathways=None):
+    def __init__(self, path_file, outdir=None, pathways=None, singlepath=None):
         self.path_file = path_file
         self.pathways = pathways
         self.outdir = outdir
+        self.singlepath = singlepath
 
     def run(self):
         path_file = self.path_file
@@ -49,12 +50,16 @@ class ConvertTask:
             subnet.to_graph(gr)
 
             name = re_namesplit.split(gr.graph['url'])[-1]
-            handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
+            if self.outdir is not None:
+                handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
+            elif self.singlepath is not None:
+                handle = open(self.singlepath, "w")
             
             convert.write_xgmml(gr, handle)
             
-            if handle != sys.stdout:
+            if self.singlepath is not None:
                 handle.close()
+                return
 
 def runner(x):
     x.run()

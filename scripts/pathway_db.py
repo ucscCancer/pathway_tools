@@ -299,33 +299,133 @@ class SPFOpener:
         return cur_gr
 
 
+class GraphBuilder:
+    def __init__(self, args):
+        self.args = args
+        self.merge_map = {}
+        if args.merge_file is not None:
+            handle = open(args.merge_file)
+            for line in handle:
+                tmp = line.rstrip("\r\n").split("\t")
+                for i in tmp:
+                    self.merge_map[i] = tmp[0]
+            handle.close()
+
+        self.exclude = {}
+        if args.exclude is not None:
+            handle = open(args.exclude)
+            for line in handle:
+                self.exclude[line.rstrip()] = True
+            handle.close()
+
+        self.dogma = None
+        if args.dogma is not None:
+            dogma = Dogma()
+            handle = open(args.dogma)
+            self.dogma.read(handle)
+            handle.close()
+
+    def fix_graph(self, graph):
+        gr = networkx.MultiDiGraph()
+
+        for node in graph.node:
+            skip = False
+
+            if 'type' not in graph.node[node]:
+                log("Untyped node: %s %s" % (node, graph.node[node].get('url', '')))
+                if self.args.all:
+                    skip = True
+            else:
+                if self.args.exclude_type is not None and graph.node[node]['type'] in self.args.exclude_type:
+                    skip = True
+                    log("Remove node: %s of type %s" % (node, graph.node[node]['type']))
+
+            if 'label' not in graph.node[node] or graph.node[node]['label'] == 'None':
+                log("Unlabeled node: %s %s" % (node, graph.node[node].get('url', '')))
+                if self.args.all:
+                    skip = True
+
+            if self.dogma is not None:
+                if 'type' not in graph.node[node]:
+                    log("Undefined node type: %s" % (node))
+                    skip = True
+                elif not self.dogma.has_nodetype(graph.node[node]['type']):
+                    log("Unknown node type: %s : %s" % (node, graph.node[node]['type']))
+                    skip = True
+            
+            if not skip:
+                if node not in gr.node:
+                    data = copy(graph.node[node])
+                    if self.args.rename_hugo or self.args.all:
+                        if 'db_xref' in data:
+                            for key in data['db_xref']:
+                                if key.startswith("HGNC Symbol:"):
+                                    log("Changing %s to %s" % (data['label'], key))
+                                    data['label'] = key.split(":")[1]
+                    if self.args.rename_type or self.args.all:
+                        if data.get('type', '') == 'complex':
+                            data['label'] += " (complex)"
+                        if data.get('type', '') == 'family':
+                            data['label'] += " (family)"
+
+                    if self.args.rename_space or self.args.all:
+                        data['label'] = data['label'].replace(" ", "_")
+
+                    if self.args.rename_prime or self.args.all:
+                        data['label'] = data['label'].replace("5'", "5prime")
+                        data['label'] = data['label'].replace("3'", "3prime")
+
+
+                    if self.args.rename_char or self.args.all:
+                        data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
+
+                    if 'label' in data and data['label'] in self.merge_map:
+                        data['label'] = self.merge_map[data['label']]
+
+                    if 'label' not in data or data['label'] not in self.exclude:
+                        gr.add_node(node, attr_dict=data)
+                else:
+                    if 'type' in gr.node[node] and 'type' in graph.node[node] and gr.node[node]['type'] != graph.node[node]['type']:
+                        error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], graph.node[node]['type'] ))
+
+                        if self.args.rename_nonprotein or self.args.all:
+                            #because 'protein' is a default node type, if we see something not protein, then change the node to match
+                            if gr.node[node]['type'] == 'protein':
+                                gr.node[node]['type'] = graph.node[node]['type']
+
+
+        for src, dst, data in graph.edges(data=True):
+            interaction = data['interaction']
+            src_node_type = graph.node[src].get('type', None)
+            dst_node_type = graph.node[dst].get('type', None)
+
+            if src in gr.node and dst in gr.node:
+                add_edge = True
+                if self.dogma is not None:
+                    if not self.dogma.has_edgetype(src_node_type, interaction, dst_node_type):
+                        error("BAD_EDGETYPE: %s(%s) %s %s(%s)" % (src, src_node_type, interaction, dst, dst_node_type))
+                        add_edge = False
+
+                has_edge = False
+                if dst in gr.edge[src]:
+                    for i in gr.edge[src][dst]:
+                        if gr.edge[src][dst][i]['interaction'] == interaction:
+                            has_edge = True
+
+                if not has_edge:
+                    if add_edge:
+                        if not (self.args.remove_self or self.args.all) or src != dst:
+                            gr.add_edge(src, dst, attr_dict=data )
+                        else:
+                            log("Removing self loop: %s" % (src))
+        return gr
+
 def main_build(args):
     gr = networkx.MultiDiGraph()
 
     paths = pathway_opener( list( (args.pathways[i],args.pathways[i+1]) for i in range(0, len(args.pathways),2) ) )
 
-    merge_map = {}
-    if args.merge_file is not None:
-        handle = open(args.merge_file)
-        for line in handle:
-            tmp = line.rstrip("\r\n").split("\t")
-            for i in tmp:
-                merge_map[i] = tmp[0]
-        handle.close()
-
-    exclude = {}
-    if args.exclude is not None:
-        handle = open(args.exclude)
-        for line in handle:
-            exclude[line.rstrip()] = True
-        handle.close()
-
-    dogma = None
-    if args.dogma is not None:
-        dogma = Dogma()
-        handle = open(args.dogma)
-        dogma.read(handle)
-        handle.close()
+    builer = GraphBuilder(args)
 
     type_count = {}
     interaction_count = {}
@@ -333,85 +433,23 @@ def main_build(args):
     for cur_path in paths:
         log("Scanning: %s" % (cur_path.name))
         cur_gr = cur_path.read()
+        fix_gr = builer.fix_graph(cur_gr)
 
-        for node in cur_gr.node:
-            skip = False
+        for node in fix_graph.node:
+            if node not in gr.node:
+                if 'type' in gr.node[node] and 'type' in fix_gr.node[node] and gr.node[node]['type'] != fix_gr.node[node]['type']:
+                    error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], fix_gr.node[node]['type'] ))
+                    if args.rename_nonprotein or args.all:
+                        #because 'protein' is a default node type, if we see something not protein, then change the node to match
+                        if gr.node[node]['type'] == 'protein':
+                            gr.node[node]['type'] = fix_gr.node[node]['type']
 
-            if 'type' not in cur_gr.node[node]:
-                log("Untyped node: %s %s" % (node, cur_gr.node[node].get('url', '')))
-                if args.all:
-                    skip = True
-            else:
-                if args.exclude_type is not None and cur_gr.node[node]['type'] in args.exclude_type:
-                    skip = True
-                    log("Remove node: %s of type %s" % (node, cur_gr.node[node]['type']))
-
-            if 'label' not in cur_gr.node[node] or cur_gr.node[node]['label'] == 'None':
-                log("Unlabeled node: %s %s" % (node, cur_gr.node[node].get('url', '')))
-                if args.all:
-                    skip = True
-
-            if dogma is not None:
-                if 'type' not in cur_gr.node[node]:
-                    log("Undefined node type: %s" % (node))
-                    skip = True
-                elif not dogma.has_nodetype(cur_gr.node[node]['type']):
-                    log("Unknown node type: %s : %s" % (node, cur_gr.node[node]['type']))
-                    skip = True
-            
-            if not skip:
-                if node not in gr.node:
-                    data = copy(cur_gr.node[node])
-                    if args.rename_hugo or args.all:
-                        if 'db_xref' in data:
-                            for key in data['db_xref']:
-                                if key.startswith("HGNC Symbol:"):
-                                    log("Changing %s to %s" % (data['label'], key))
-                                    data['label'] = key.split(":")[1]
-                    if args.rename_type or args.all:
-                        if data.get('type', '') == 'complex':
-                            data['label'] += " (complex)"
-                        if data.get('type', '') == 'family':
-                            data['label'] += " (family)"
-
-                    if args.rename_space or args.all:
-                        data['label'] = data['label'].replace(" ", "_")
-
-                    if args.rename_prime or args.all:
-                        data['label'] = data['label'].replace("5'", "5prime")
-                        data['label'] = data['label'].replace("3'", "3prime")
-
-
-                    if args.rename_char or args.all:
-                        data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
-
-                    if 'label' in data and data['label'] in merge_map:
-                        data['label'] = merge_map[data['label']]
-
-                    if 'label' not in data or data['label'] not in exclude:
-                        gr.add_node(node, attr_dict=data)
-                else:
-                    if 'type' in gr.node[node] and 'type' in cur_gr.node[node] and gr.node[node]['type'] != cur_gr.node[node]['type']:
-                        error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], cur_gr.node[node]['type'] ))
-
-                        if args.rename_nonprotein or args.all:
-                            #because 'protein' is a default node type, if we see something not protein, then change the node to match
-                            if gr.node[node]['type'] == 'protein':
-                                gr.node[node]['type'] = cur_gr.node[node]['type']
-
-
-        for src, dst, data in cur_gr.edges(data=True):
+        for src, dst, data in fix_gr.edges(data=True):
             interaction = data['interaction']
-            src_node_type = cur_gr.node[src].get('type', None)
-            dst_node_type = cur_gr.node[dst].get('type', None)
+            src_node_type = fix_gr.node[src].get('type', None)
+            dst_node_type = fix_gr.node[dst].get('type', None)
 
             if src in gr.node and dst in gr.node:
-                add_edge = True
-                if dogma is not None:
-                    if not dogma.has_edgetype(src_node_type, interaction, dst_node_type):
-                        error("BAD_EDGETYPE: %s(%s) %s %s(%s)" % (src, src_node_type, interaction, dst, dst_node_type))
-                        add_edge = False
-
                 has_edge = False
                 if dst in gr.edge[src]:
                     for i in gr.edge[src][dst]:
@@ -426,6 +464,9 @@ def main_build(args):
                             log("Removing self loop: %s" % (src))
                 else:
                     duplicate_edges += 1
+    return gr
+
+
 
     connect_list = networkx.connected_components(networkx.Graph(gr))
     rm_list = []
@@ -593,7 +634,7 @@ def main_suggest(args):
 def runner(x):
     x.run()
 
-def main_format(args):
+def main_biopax_format(args):
     from read_biopax import ConvertTask
     from multiprocessing import Pool
 
@@ -611,17 +652,68 @@ def main_format(args):
         name = os.path.basename(path)
         if name in rename:
             name = rename[name]
-            outdir = os.path.join(args.outdir, name + ".owl")
+            outdir = os.path.join(args.outdir, name)
             if not os.path.exists(outdir):
                 os.makedirs(outdir)
-            biopax_path = os.path.join(outdir, "biopax")
+            biopax_path = os.path.join(outdir, "biopax.owl")
             log("Copying: %s" % (biopax_path))
             shutil.copy(path, biopax_path)
-            tasks.append( ConvertTask(biopax_path, outdir) )
+            tasks.append( ConvertTask(
+                biopax_path, 
+                singlepath=os.path.join(outdir, "graph.xgmml") 
+            ) )
 
     p = Pool(args.cpus)
     p.map(runner, tasks)
 
+def main_library_gmt(args):
+
+    filter_map = None
+    if args.filter is not None:
+        filter_map = {}
+        handle = open(args.filter)
+        for line in handle:
+            filter_map[line.rstrip()] = True
+        handle.close()
+
+
+    for path_dir in glob(os.path.join(args.library, "*")):
+        if os.path.isdir(path_dir): 
+            path_name = os.path.basename(path_dir)
+            spf_path = os.path.join(path_dir, "graph.spf")
+            handle = open(spf_path)
+            gr = network_convert.read_spf(handle)
+            handle.close()
+            if filter_map is None:
+                out = gr.node.keys()
+            else:
+                out = []
+                for a in gr.node.keys():
+                    if a in filter_map:
+                        out.append(a)
+
+            print "%s\t%s" % (path_name, "\t".join(out))
+
+
+def main_library_compile(args):
+    builder = GraphBuilder(args)
+
+    for path_dir in glob(os.path.join(args.library, "*")):
+        if os.path.isdir(path_dir): 
+            path_name = os.path.basename(path_dir)
+            xgmml_path = os.path.join(path_dir, "graph.xgmml")
+            handle = open(xgmml_path)
+            gr = network_convert.read_xgmml(handle)
+            handle.close()
+            fix_gr = builder.fix_graph(gr)
+            spf_path = os.path.join(path_dir, "graph.spf")
+            handle = open(spf_path, "w")
+            network_convert.write_spf(gr, handle)
+            handle.close()
+            
+
+
+"""
 def main_commit(args):
     parser = argparse.ArgumentParser(prog="pathway_db commit")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
@@ -661,6 +753,21 @@ def main_commit(args):
                 (args.base_dir, message, args.project), 
             shell=True)
 
+"""
+
+def add_build_args(parser):
+    parser.add_argument("--merge-file", default=None)
+    parser.add_argument("--exclude", default=None)
+    parser.add_argument("--exclude-type", action="append")
+    parser.add_argument("--dogma", default=None)    
+    parser.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
+    parser.add_argument("--rename-type", action="store_true", default=False)
+    parser.add_argument("--rename-space", action="store_true", default=False)
+    parser.add_argument("--rename-char", action="store_true", default=False)
+    parser.add_argument("--rename-prime", action="store_true", default=False)
+    parser.add_argument("--remove-self", action="store_true", default=False)
+    parser.add_argument("--rename-nonprotein", action="store_true", default=False)
+    parser.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
 
 
 if __name__ == "__main__":
@@ -670,24 +777,12 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(title="subcommand")
 
     parser_build = subparsers.add_parser('build')
-    parser_build.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
     parser_build.add_argument('-p', '--spf', help="Compile SimplePathwayFormat File", action="store_true", default=False)   
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
-    parser_build.add_argument("--merge-file", default=None)
-    parser_build.add_argument("--exclude", default=None)
-    parser_build.add_argument("--exclude-type", action="append")
-    parser_build.add_argument("--dogma", default=None)    
-    parser_build.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
-    parser_build.add_argument("--rename-type", action="store_true", default=False)
-    parser_build.add_argument("--rename-space", action="store_true", default=False)
-    parser_build.add_argument("--rename-char", action="store_true", default=False)
-    parser_build.add_argument("--rename-prime", action="store_true", default=False)
-    parser_build.add_argument("--remove-self", action="store_true", default=False)
-    parser_build.add_argument("--rename-nonprotein", action="store_true", default=False)
     parser_build.add_argument("-o", "--output", default=None)
     parser_build.add_argument("--min-subgraph", type=int, default=0)
-    
+    add_build_args(parser_build)    
     parser_build.add_argument("pathways", nargs="*")
 
     parser_build.set_defaults(func=main_build)
@@ -699,13 +794,23 @@ if __name__ == "__main__":
     parser_suggest.add_argument("pathways", nargs="*")
     parser_suggest.set_defaults(func=main_suggest)
 
-    parser_format = subparsers.add_parser('format')
-    parser_format.set_defaults(func=main_format)
-    parser_format.add_argument("--rename", default=None)
-    parser_format.add_argument("--cpus", type=int, default=2)    
-    parser_format.add_argument("outdir")
-    parser_format.add_argument("pathways", nargs="*")
+    parser_biopax_format = subparsers.add_parser('biopax-format')
+    parser_biopax_format.set_defaults(func=main_biopax_format)
+    parser_biopax_format.add_argument("--rename", default=None)
+    parser_biopax_format.add_argument("--cpus", type=int, default=2)    
+    parser_biopax_format.add_argument("outdir")
+    parser_biopax_format.add_argument("pathways", nargs="*")
 
+    parser_library_gmt = subparsers.add_parser('library-gmt')
+    parser_library_gmt.set_defaults(func=main_library_gmt)
+    parser_library_gmt.add_argument("--filter", default=None)    
+    parser_library_gmt.add_argument("library")
+
+    parser_library_compile = subparsers.add_parser('library-compile')
+    parser_library_compile.set_defaults(func=main_library_compile)
+    parser_library_compile.add_argument("--cpus", type=int, default=2)    
+    add_build_args(parser_library_compile)
+    parser_library_compile.add_argument("library")    
 
     args = parser.parse_args()
 
