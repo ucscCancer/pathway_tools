@@ -260,6 +260,10 @@ def pathway_opener(pathway_list):
             for path_path in scan_dir(path, ".owl"):
                 yield BioPaxOpener(path_path)
 
+        if path_type == "library":
+            for path_path in glob(os.path.join(path, "*", "graph.xgmml")):
+                yield XGMMLOpener(path_path)
+
 
 
 
@@ -320,7 +324,7 @@ class GraphBuilder:
 
         self.dogma = None
         if args.dogma is not None:
-            dogma = Dogma()
+            self.dogma = Dogma()
             handle = open(args.dogma)
             self.dogma.read(handle)
             handle.close()
@@ -375,6 +379,11 @@ class GraphBuilder:
                         data['label'] = data['label'].replace("5'", "5prime")
                         data['label'] = data['label'].replace("3'", "3prime")
 
+                    if self.args.rename_ascii or self.args.all:
+                        data['label'] = re.sub("&delta;", "delta", data['label'], flags=re.IGNORECASE)
+                        data['label'] = re.sub("&alpha;", "alpha", data['label'], flags=re.IGNORECASE)
+                        data['label'] = re.sub("&beta;", "beta", data['label'], flags=re.IGNORECASE)
+                        data['label'] = re.sub("&gamma;", "gamma", data['label'], flags=re.IGNORECASE)
 
                     if self.args.rename_char or self.args.all:
                         data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
@@ -435,14 +444,16 @@ def main_build(args):
         cur_gr = cur_path.read()
         fix_gr = builer.fix_graph(cur_gr)
 
-        for node in fix_graph.node:
-            if node not in gr.node:
+        for node in fix_gr.node:
+            if node in gr.node:
                 if 'type' in gr.node[node] and 'type' in fix_gr.node[node] and gr.node[node]['type'] != fix_gr.node[node]['type']:
                     error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], fix_gr.node[node]['type'] ))
                     if args.rename_nonprotein or args.all:
                         #because 'protein' is a default node type, if we see something not protein, then change the node to match
                         if gr.node[node]['type'] == 'protein':
                             gr.node[node]['type'] = fix_gr.node[node]['type']
+            else:
+                gr.add_node(node, attr_dict=fix_gr.node[node])
 
         for src, dst, data in fix_gr.edges(data=True):
             interaction = data['interaction']
@@ -457,16 +468,12 @@ def main_build(args):
                             has_edge = True
 
                 if not has_edge:
-                    if add_edge:
-                        if not (args.remove_self or args.all) or src != dst:
-                            gr.add_edge(src, dst, attr_dict=data )
-                        else:
-                            log("Removing self loop: %s" % (src))
+                    if not (args.remove_self or args.all) or src != dst:
+                        gr.add_edge(src, dst, attr_dict=data )
+                    else:
+                        log("Removing self loop: %s" % (src))
                 else:
                     duplicate_edges += 1
-    return gr
-
-
 
     connect_list = networkx.connected_components(networkx.Graph(gr))
     rm_list = []
@@ -682,7 +689,7 @@ def main_library_gmt(args):
             path_name = os.path.basename(path_dir)
             spf_path = os.path.join(path_dir, "graph.spf")
             handle = open(spf_path)
-            gr = network_convert.read_spf(handle)
+            gr = network_convert.read_spf(handle, strict=False)
             handle.close()
             if filter_map is None:
                 out = gr.node.keys()
@@ -707,8 +714,9 @@ def main_library_compile(args):
             handle.close()
             fix_gr = builder.fix_graph(gr)
             spf_path = os.path.join(path_dir, "graph.spf")
+            log("Writing: %s" % (spf_path))
             handle = open(spf_path, "w")
-            network_convert.write_spf(gr, handle)
+            network_convert.write_spf(fix_gr, handle)
             handle.close()
             
 
@@ -766,6 +774,7 @@ def add_build_args(parser):
     parser.add_argument("--rename-char", action="store_true", default=False)
     parser.add_argument("--rename-prime", action="store_true", default=False)
     parser.add_argument("--remove-self", action="store_true", default=False)
+    parser.add_argument("--rename-ascii", action="store_true", default=False)
     parser.add_argument("--rename-nonprotein", action="store_true", default=False)
     parser.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
 
