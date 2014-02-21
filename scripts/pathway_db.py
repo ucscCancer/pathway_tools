@@ -386,7 +386,9 @@ class GraphBuilder:
                         data['label'] = re.sub("&gamma;", "gamma", data['label'], flags=re.IGNORECASE)
 
                     if self.args.rename_char or self.args.all:
-                        data['label'] = re.sub( r'[\'\\\*]', "_", data['label'])
+                        data['label'] = re.sub( r'[\'\"\:\?\\\*]', "_", data['label'])
+                        data['label'] = re.sub( r'\+', "postitive", data['label'])
+
 
                     if 'label' in data and data['label'] in self.merge_map:
                         data['label'] = self.merge_map[data['label']]
