@@ -15,7 +15,7 @@ TYPE_PRED = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 BIOPAX_BASE = "http://www.biopax.org/release/biopax-level3.owl#"
 
 
-DEBUG = True
+DEBUG = False
 
 
 def log(message):
@@ -96,10 +96,20 @@ class BioPax_Pathway(BioPax_ElementBase):
                     db_id = rel.dst
             db_xref = "%s:%s" % (db, db_id)
             xref_list.append(db_xref)
-        print "XREF", xref_list
 
+        meta = {'name' : name, 'url' : self.node, 'type' : self.type}
+        meta['db_xref'] = xref_list
 
-        out = Subnet({'name' : name, 'url' : self.node, 'type' : self.type, 'db_xref' : xref_list})
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "organism", get_type=False):
+            meta['organism'] = os.path.basename(c_info.dst)
+
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "comment", get_type=False):
+            meta['comment'] = c_info.dst
+
+        for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "displayName", get_type=False):
+            meta['displayName'] = c_info.dst
+
+        out = Subnet(meta)
 
         for c in component_list:
             if component_list[c] is not None:

@@ -264,6 +264,10 @@ def pathway_opener(pathway_list):
             for path_path in glob(os.path.join(path, "*", "graph.xgmml")):
                 yield XGMMLOpener(path_path)
 
+        if path_type == "library-biopax":
+            for path_path in glob(os.path.join(path, "*", "biopax.owl")):
+                yield XGMMLOpener(path_path)
+
 
 
 
@@ -643,8 +647,6 @@ def runner(x):
     x.run()
 
 def main_biopax_format(args):
-    from read_biopax import ConvertTask
-    from multiprocessing import Pool
 
     rename = {}
     if args.rename is not None:
@@ -666,10 +668,19 @@ def main_biopax_format(args):
             biopax_path = os.path.join(outdir, "biopax.owl")
             log("Copying: %s" % (biopax_path))
             shutil.copy(path, biopax_path)
-            tasks.append( ConvertTask(
-                biopax_path, 
-                singlepath=os.path.join(outdir, "graph.xgmml") 
-            ) )
+            
+
+def main_biopax_convert(args):
+    from read_biopax import ConvertTask
+    from multiprocessing import Pool
+    paths = pathway_opener( [ ['library-biopax', args.library] ] )
+    tasks = []
+    for p in paths:
+        outdir = os.path.dirname(p.path)
+        tasks.append( ConvertTask(
+            p.path, 
+            singlepath=os.path.join(outdir, "graph.xgmml") 
+        ) )
 
     p = Pool(args.cpus)
     p.map(runner, tasks)
@@ -810,6 +821,11 @@ if __name__ == "__main__":
     parser_biopax_format.add_argument("--cpus", type=int, default=2)    
     parser_biopax_format.add_argument("outdir")
     parser_biopax_format.add_argument("pathways", nargs="*")
+
+    parser_biopax_convert = subparsers.add_parser('biopax-convert')
+    parser_biopax_convert.set_defaults(func=main_biopax_convert)
+    parser_biopax_convert.add_argument("--cpus", type=int, default=2)    
+    parser_biopax_convert.add_argument("library")
 
     parser_library_gmt = subparsers.add_parser('library-gmt')
     parser_library_gmt.set_defaults(func=main_library_gmt)
