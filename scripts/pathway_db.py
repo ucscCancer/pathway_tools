@@ -336,6 +336,8 @@ class GraphBuilder:
     def fix_graph(self, graph):
         gr = networkx.MultiDiGraph()
 
+        node_remap = {}
+
         for node in graph.node:
             skip = False
 
@@ -361,15 +363,20 @@ class GraphBuilder:
                     log("Unknown node type: %s : %s" % (node, graph.node[node]['type']))
                     skip = True
             
+
             if not skip:
-                if node not in gr.node:
-                    data = copy(graph.node[node])
-                    if self.args.rename_hugo or self.args.all:
-                        if 'db_xref' in data:
-                            for key in data['db_xref']:
-                                if key.startswith("HGNC Symbol:"):
-                                    log("Changing %s to %s" % (data['label'], key))
-                                    data['label'] = key.split(":")[1]
+                data = copy(graph.node[node])
+                if self.args.rename_hugo or self.args.all:
+                    if 'db_xref' in data:
+                        for key in data['db_xref']:
+                            if key.startswith("HGNC Symbol:"):
+                                log("Changing %s to %s" % (data['label'], key))
+                                data['label'] = key.split(":")[1]
+                                new_node = data['label']
+                                node_remap[node] = new_node
+                                node = new_node
+
+                if node not in gr.node: 
                     if self.args.rename_type or self.args.all:
                         if data.get('type', '') == 'complex':
                             data['label'] += " (complex)"
@@ -399,19 +406,22 @@ class GraphBuilder:
                     if 'label' not in data or data['label'] not in self.exclude:
                         gr.add_node(node, attr_dict=data)
                 else:
-                    if 'type' in gr.node[node] and 'type' in graph.node[node] and gr.node[node]['type'] != graph.node[node]['type']:
-                        error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], graph.node[node]['type'] ))
+                    if 'type' in gr.node[node] and 'type' in data and gr.node[node]['type'] != data['type']:
+                        error("Mismatch Node Type: %s :%s --> %s" % (node, gr.node[node]['type'], data['type'] ))
 
                         if self.args.rename_nonprotein or self.args.all:
                             #because 'protein' is a default node type, if we see something not protein, then change the node to match
                             if gr.node[node]['type'] == 'protein':
-                                gr.node[node]['type'] = graph.node[node]['type']
-
+                                gr.node[node]['type'] = data['type']
 
         for src, dst, data in graph.edges(data=True):
-            interaction = data['interaction']
             src_node_type = graph.node[src].get('type', None)
             dst_node_type = graph.node[dst].get('type', None)
+            if src in node_remap:
+                src = node_remap[src]
+            if dst in node_remap:
+                dst = node_remap[dst]
+            interaction = data['interaction']
 
             if src in gr.node and dst in gr.node:
                 add_edge = True
@@ -447,38 +457,40 @@ def main_build(args):
     for cur_path in paths:
         log("Scanning: %s" % (cur_path.name))
         cur_gr = cur_path.read()
-        fix_gr = builer.fix_graph(cur_gr)
+        if args.organism is None or cur_gr.graph.get('organism', args.organism) == args.organism:
+            fix_gr = builer.fix_graph(cur_gr)
 
-        for node in fix_gr.node:
-            if node in gr.node:
-                if 'type' in gr.node[node] and 'type' in fix_gr.node[node] and gr.node[node]['type'] != fix_gr.node[node]['type']:
-                    error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], fix_gr.node[node]['type'] ))
-                    if args.rename_nonprotein or args.all:
-                        #because 'protein' is a default node type, if we see something not protein, then change the node to match
-                        if gr.node[node]['type'] == 'protein':
-                            gr.node[node]['type'] = fix_gr.node[node]['type']
-            else:
-                gr.add_node(node, attr_dict=fix_gr.node[node])
-
-        for src, dst, data in fix_gr.edges(data=True):
-            interaction = data['interaction']
-            src_node_type = fix_gr.node[src].get('type', None)
-            dst_node_type = fix_gr.node[dst].get('type', None)
-
-            if src in gr.node and dst in gr.node:
-                has_edge = False
-                if dst in gr.edge[src]:
-                    for i in gr.edge[src][dst]:
-                        if gr.edge[src][dst][i]['interaction'] == interaction:
-                            has_edge = True
-
-                if not has_edge:
-                    if not (args.remove_self or args.all) or src != dst:
-                        gr.add_edge(src, dst, attr_dict=data )
-                    else:
-                        log("Removing self loop: %s" % (src))
+            for node in fix_gr.node:
+                if node in gr.node:
+                    if 'type' in gr.node[node] and 'type' in fix_gr.node[node] and gr.node[node]['type'] != fix_gr.node[node]['type']:
+                        error("%s failure: Mismatch Node Type: %s :%s --> %s" % (cur_path.name, node, gr.node[node]['type'], fix_gr.node[node]['type'] ))
+                        if args.rename_nonprotein or args.all:
+                            #because 'protein' is a default node type, if we see something not protein, then change the node to match
+                            if gr.node[node]['type'] == 'protein':
+                                gr.node[node]['type'] = fix_gr.node[node]['type']
                 else:
-                    duplicate_edges += 1
+                    log("Merging: %s" % node)
+                    gr.add_node(node, attr_dict=fix_gr.node[node])
+
+            for src, dst, data in fix_gr.edges(data=True):
+                interaction = data['interaction']
+                src_node_type = fix_gr.node[src].get('type', None)
+                dst_node_type = fix_gr.node[dst].get('type', None)
+
+                if src in gr.node and dst in gr.node:
+                    has_edge = False
+                    if dst in gr.edge[src]:
+                        for i in gr.edge[src][dst]:
+                            if gr.edge[src][dst][i]['interaction'] == interaction:
+                                has_edge = True
+
+                    if not has_edge:
+                        if not (args.remove_self or args.all) or src != dst:
+                            gr.add_edge(src, dst, attr_dict=data )
+                        else:
+                            log("Removing self loop: %s" % (src))
+                    else:
+                        duplicate_edges += 1
 
     connect_list = networkx.connected_components(networkx.Graph(gr))
     rm_list = []
@@ -703,16 +715,34 @@ def main_library_gmt(args):
             handle = open(spf_path)
             gr = network_convert.read_spf(handle, strict=False)
             handle.close()
-            if filter_map is None:
-                out = gr.node.keys()
-            else:
-                out = []
-                for a in gr.node.keys():
-                    if a in filter_map:
-                        out.append(a)
+            if args.organism is None or gr.graph.get('organism', args.organism) == args.organism:
+                if filter_map is None:
+                    out = gr.node.keys()
+                else:
+                    out = []
+                    for a in gr.node.keys():
+                        if a in filter_map:
+                            out.append(a)
+                if not args.skip_empty or len(out):
+                    print "%s\t%s" % (path_name, "\t".join(out))
 
-            print "%s\t%s" % (path_name, "\t".join(out))
 
+def main_library_table(args):
+
+    for path_dir in glob(os.path.join(args.library, "*")):
+        if os.path.isdir(path_dir): 
+            path_name = os.path.basename(path_dir)
+            xgmml_path = os.path.join(path_dir, "graph.xgmml")
+            handle = open(xgmml_path)
+            gr = network_convert.read_xgmml(handle)
+            handle.close()
+
+            organism = gr.graph.get('organism', '')
+            name = gr.graph.get('displayName', None)
+            if name is None:
+                name = gr.graph.get('name', None)
+
+            print "%s\t%s\t%s" % (path_name, organism, name)
 
 def main_library_compile(args):
     builder = GraphBuilder(args)
@@ -802,6 +832,7 @@ if __name__ == "__main__":
     parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("-o", "--output", default=None)
+    parser_build.add_argument("--organism", default=None)
     parser_build.add_argument("--min-subgraph", type=int, default=0)
     add_build_args(parser_build)    
     parser_build.add_argument("pathways", nargs="*")
@@ -829,12 +860,18 @@ if __name__ == "__main__":
 
     parser_library_gmt = subparsers.add_parser('library-gmt')
     parser_library_gmt.set_defaults(func=main_library_gmt)
-    parser_library_gmt.add_argument("--filter", default=None)    
+    parser_library_gmt.add_argument("--organism", default=None)
+    parser_library_gmt.add_argument("--filter", default=None)  
+    parser_library_gmt.add_argument("--skip-empty", action="store_true", default=False)        
     parser_library_gmt.add_argument("library")
+
+    parser_library_gmt = subparsers.add_parser('library-table')
+    parser_library_gmt.set_defaults(func=main_library_table)
+    parser_library_gmt.add_argument("library")
+
 
     parser_library_compile = subparsers.add_parser('library-compile')
     parser_library_compile.set_defaults(func=main_library_compile)
-    parser_library_compile.add_argument("--cpus", type=int, default=2)    
     add_build_args(parser_library_compile)
     parser_library_compile.add_argument("library")    
 
