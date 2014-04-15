@@ -44,9 +44,10 @@ class ConvertTask:
 
         for subnet in path_file.toNet(paths):                
             gr = networkx.MultiDiGraph()
-            gr.graph['name'] = subnet.meta['name']
-            gr.graph['url'] = subnet.meta['url']
-            gr.graph['db_xref'] = subnet.meta['db_xref']
+
+            for k, v in subnet.meta.items():
+                if k != 'type':
+                    gr.graph[k] = v
             subnet.to_graph(gr)
 
             name = re_namesplit.split(gr.graph['url'])[-1]
@@ -54,6 +55,8 @@ class ConvertTask:
                 handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
             elif self.singlepath is not None:
                 handle = open(self.singlepath, "w")
+            else:
+                handle = sys.stdout
             
             convert.write_xgmml(gr, handle)
             

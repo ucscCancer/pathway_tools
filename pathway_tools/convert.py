@@ -45,12 +45,15 @@ def read_spf(handle, strict=True):
 
 def write_spf(gr, handle, node_type_field='type', node_type_default='protein', edge_type_field='interaction', edge_type_default='-a>'):
     node_label = {}
+    added = {}
     for e in sorted(gr.node):
         if 'label' in gr.node[e]:
             node_label[e] = gr.node[e]['label']
         else:
             node_label[e] = e
-        handle.write("%s\t%s\n" % (gr.node[e].get(node_type_field, node_type_default), node_label[e]))
+        if node_label[e] not in added:
+            added[node_label[e]] = True
+            handle.write("%s\t%s\n" % (gr.node[e].get(node_type_field, node_type_default), node_label[e]))
 
     for src in gr.edge:
         for dst in gr.edge[src]:
