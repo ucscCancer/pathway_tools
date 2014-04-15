@@ -15,6 +15,8 @@ from glob import glob
 from StringIO import StringIO
 from urllib2 import urlopen
 
+import zipfile
+
 def log(message):
     sys.stderr.write(message + "\n")
 
@@ -719,7 +721,25 @@ def main_library_compile(args):
             handle = open(spf_path, "w")
             network_convert.write_spf(fix_gr, handle)
             handle.close()
-            
+
+def main_library_copy(args):
+    builder = GraphBuilder(args)
+    out_zip = zipfile.ZipFile(args.out, "w")
+    out_base = re.sub( r'.zip$', '', os.path.basename(args.out))
+    for path_dir in glob(os.path.join(args.library, "*")):
+        if os.path.isdir(path_dir): 
+            path_name = os.path.basename(path_dir)
+            xgmml_path = os.path.join(path_dir, "graph.xgmml")
+            handle = open(xgmml_path)
+            gr = network_convert.read_xgmml(handle)
+            handle.close()
+            fix_gr = builder.fix_graph(gr)
+            log("Writing: %s" % (path_name))
+            text = StringIO()
+            network_convert.write_spf(fix_gr, text)
+            if len(text.getvalue()) > 0:
+                out_zip.writestr( os.path.join(out_base, path_name + ".spf"), text.getvalue())
+    out_zip.close()
 
 
 """
@@ -821,6 +841,13 @@ if __name__ == "__main__":
     parser_library_compile.add_argument("--cpus", type=int, default=2)    
     add_build_args(parser_library_compile)
     parser_library_compile.add_argument("library")    
+
+    parser_library_copy = subparsers.add_parser('library-copy')
+    parser_library_copy.set_defaults(func=main_library_copy)
+    parser_library_copy.add_argument("--cpus", type=int, default=2)    
+    add_build_args(parser_library_copy)
+    parser_library_copy.add_argument("library")    
+    parser_library_copy.add_argument("out")    
 
     args = parser.parse_args()
 
