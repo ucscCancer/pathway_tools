@@ -3,7 +3,7 @@ package edu.ucsc.pathway
 
 import org.openrdf.rio.{RDFHandler, ParserConfig, RDFParser}
 import java.util.zip.GZIPInputStream
-import java.io.{FileOutputStream, FileInputStream, File}
+import java.io.{OutputStream, FileOutputStream, FileInputStream, File}
 import org.openrdf.rio.rdfxml.{RDFXMLWriter, RDFXMLParser}
 import org.openrdf.model.{Statement,Resource}
 import scala.collection.mutable.HashMap
@@ -72,6 +72,9 @@ class NetworkGrouper(seeds : Array[Resource]) extends RDFHandler {
 }
 
 
+class BioPaxWriter(in: OutputStream) extends RDFXMLWriter(in) {
+  namespaceTable.put("http://www.biopax.org/release/biopax-level3.owl#", "bp" )
+}
 
 
 class BioPax_Splitter(val groups:Map[String,Int], val elementMap:Map[Resource, HashSet[Int]], val outdir:File) extends RDFHandler {
@@ -88,7 +91,7 @@ class BioPax_Splitter(val groups:Map[String,Int], val elementMap:Map[Resource, H
     groups.foreach( x => {
       val f = new FileOutputStream( new File(outdir, x._1 + ".owl") );
       output_map(x._2) = f;
-      val w = new RDFXMLWriter(f);
+      val w = new BioPaxWriter(f);
       w.startRDF();
       writer_map(x._2) = w;
     })
