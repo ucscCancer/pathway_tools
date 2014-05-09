@@ -86,7 +86,7 @@ class GraphChecker:
                                     found = True
                         if not found:
                             for alt in self.hugo_map:
-                                if len(alt) > 2:    
+                                if len(alt) > 2:
                                     if node.startswith(alt):
                                         yield [node, 'name prefix', alt]
 
@@ -103,23 +103,23 @@ class RepoChecker(GraphChecker):
         self.dogma.read(handle)
         handle.close()
 
-    
+
     def check_project(self, project):
 
         handle = open(os.path.join(self.repo, project, "INFO"))
         conf = yaml.load(handle.read())
         handle.close()
-        
+
         errors = []
         if 'PID' not in conf:
             errors.append(Exception("Missing required PID field"))
 
         if 'DESC' not in conf:
             errors.append(Exception("Missing required DESC description field"))
-            
+
         if 'SOURCE' not in conf:
             errors.append(Exception("Missing required SOURCE field"))
-        
+
         handle = open(os.path.join(self.repo, project, "graph"))
         gr = network_convert.read_spf(handle)
         handle.close()
@@ -144,14 +144,14 @@ def main_new(args):
     parser = argparse.ArgumentParser(prog="pathway_db new")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser.add_argument("-m", "--manual-id", help="Manual ID", default=None)
-    args = parser.parse_args(args)    
+    args = parser.parse_args(args)
 
     pid = None
     if pid is None:
         pid = 0
         for p in get_project_list(args.base_dir):
             pid = max(int(p.replace("PID", "")), pid)
-        pid += 1 
+        pid += 1
     else:
         pid = int(args.manual_id.replace("PID", ""))
 
@@ -183,18 +183,18 @@ def main_add(args):
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser.add_argument("input", help="Input Directory")
     args = parser.parse_args(args)
-    
+
     if args.base_dir is None or not os.path.exists(args.base_dir):
         sys.stderr.write("Define Pathway REPO\n")
         sys.exit(1)
-    
+
     try:
         pid_name = None
         dstdir = os.path.join(args.base_dir, args.input)
         if os.path.exists(dstdir):
             pid_name = args.input
         else:
-            if os.path.exists(args.input):                
+            if os.path.exists(args.input):
                 handle = open(os.path.join(args.input, "INFO"))
                 conf = yaml.load(handle.read())
                 handle.close()
@@ -216,18 +216,18 @@ def main_sync(args):
     parser = argparse.ArgumentParser(prog="pathway_db sync")
     parser.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     args = parser.parse_args(args)
-    
+
     if args.base_dir is None:
         sys.stderr.write("Define Pathway REPO\n")
         sys.exit(1)
 
     if not os.path.exists(args.base_dir):
-        subprocess.check_call("git clone %s %s" % 
-                (CENTRAL_REPO, args.base_dir), 
+        subprocess.check_call("git clone %s %s" %
+                (CENTRAL_REPO, args.base_dir),
             shell=True)
 
-    subprocess.check_call("cd %s ; git pull origin" % 
-                (args.base_dir), 
+    subprocess.check_call("cd %s ; git pull origin" %
+                (args.base_dir),
             shell=True)
 
 
@@ -364,7 +364,7 @@ class GraphBuilder:
                 elif not self.dogma.has_nodetype(graph.node[node]['type']):
                     log("Unknown node type: %s : %s" % (node, graph.node[node]['type']))
                     skip = True
-            
+
 
             if not skip:
                 data = copy(graph.node[node])
@@ -378,7 +378,7 @@ class GraphBuilder:
                                 node_remap[node] = new_node
                                 node = new_node
 
-                if node not in gr.node: 
+                if node not in gr.node:
                     if self.args.rename_type or self.args.all:
                         if data.get('type', '') == 'complex':
                             data['label'] += " (complex)"
@@ -502,7 +502,7 @@ def main_build(args):
     for r in rm_list:
         gr.remove_node(r)
 
-            
+
     log("+---------------------------+")
     log("|Node Count: %15d|" % (len(gr.nodes())))
     log("|Edge Count: %15d|" % (len(gr.edges())))
@@ -519,14 +519,14 @@ def main_build(args):
     if args.spf:
         network_convert.write_spf(gr, handle)
     elif args.sif:
-        network_convert.write_sif(gr, handle)        
-    else:        
+        network_convert.write_sif(gr, handle)
+    else:
         network_convert.write_xgmml(gr, handle)
     handle.close()
 
 
 def get_modified(base_dir):
-    output = subprocess.check_output("cd %s; git status" % (base_dir), 
+    output = subprocess.check_output("cd %s; git status" % (base_dir),
         shell=True)
 
     pid_list = {}
@@ -561,7 +561,7 @@ def load_config(base_dir, project):
     return conf
 
 def load_stored_config(base_dir, project):
-    output = subprocess.check_output("cd %s; git show HEAD:%s/INFO" % (base_dir, project), 
+    output = subprocess.check_output("cd %s; git show HEAD:%s/INFO" % (base_dir, project),
         shell=True)
     outs = StringIO(output)
     conf = yaml.load(outs.read())
@@ -676,13 +676,13 @@ def main_biopax_format(args):
         name = os.path.basename(path)
         if name in rename:
             name = rename[name]
-            outdir = os.path.join(args.outdir, name)
-            if not os.path.exists(outdir):
-                os.makedirs(outdir)
-            biopax_path = os.path.join(outdir, "biopax.owl")
-            log("Copying: %s" % (biopax_path))
-            shutil.copy(path, biopax_path)
-            
+        outdir = os.path.join(args.outdir, name)
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
+        biopax_path = os.path.join(outdir, "biopax.owl")
+        log("Copying: %s" % (biopax_path))
+        shutil.copy(path, biopax_path)
+
 
 def main_biopax_convert(args):
     from read_biopax import ConvertTask
@@ -692,8 +692,8 @@ def main_biopax_convert(args):
     for p in paths:
         outdir = os.path.dirname(p.path)
         tasks.append( ConvertTask(
-            p.path, 
-            singlepath=os.path.join(outdir, "graph.xgmml") 
+            p.path,
+            singlepath=os.path.join(outdir, "graph.xgmml")
         ) )
 
     p = Pool(args.cpus)
@@ -711,7 +711,7 @@ def main_library_gmt(args):
 
 
     for path_dir in glob(os.path.join(args.library, "*")):
-        if os.path.isdir(path_dir): 
+        if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             spf_path = os.path.join(path_dir, "graph.spf")
             handle = open(spf_path)
@@ -732,7 +732,7 @@ def main_library_gmt(args):
 def main_library_table(args):
 
     for path_dir in glob(os.path.join(args.library, "*")):
-        if os.path.isdir(path_dir): 
+        if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
             handle = open(xgmml_path)
@@ -750,7 +750,7 @@ def main_library_compile(args):
     builder = GraphBuilder(args)
 
     for path_dir in glob(os.path.join(args.library, "*")):
-        if os.path.isdir(path_dir): 
+        if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
             handle = open(xgmml_path)
@@ -768,7 +768,7 @@ def main_library_copy(args):
     out_zip = zipfile.ZipFile(args.out, "w")
     out_base = re.sub( r'.zip$', '', os.path.basename(args.out))
     for path_dir in glob(os.path.join(args.library, "*")):
-        if os.path.isdir(path_dir): 
+        if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
             handle = open(xgmml_path)
@@ -819,8 +819,8 @@ def main_commit(args):
     if message is None:
         message = "Updating pathway %s" % (args.project)
 
-    subprocess.check_call("cd %s ; git commit -m '%s' %s" % 
-                (args.base_dir, message, args.project), 
+    subprocess.check_call("cd %s ; git commit -m '%s' %s" %
+                (args.base_dir, message, args.project),
             shell=True)
 
 """
@@ -829,7 +829,7 @@ def add_build_args(parser):
     parser.add_argument("--merge-file", default=None)
     parser.add_argument("--exclude", default=None)
     parser.add_argument("--exclude-type", action="append")
-    parser.add_argument("--dogma", default=None)    
+    parser.add_argument("--dogma", default=None)
     parser.add_argument("-r", "--rename-hugo", help="Rename nodes to HUGO codes if possible", action="store_true", default=False)
     parser.add_argument("--rename-type", action="store_true", default=False)
     parser.add_argument("--rename-space", action="store_true", default=False)
@@ -838,7 +838,7 @@ def add_build_args(parser):
     parser.add_argument("--remove-self", action="store_true", default=False)
     parser.add_argument("--rename-ascii", action="store_true", default=False)
     parser.add_argument("--rename-nonprotein", action="store_true", default=False)
-    parser.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)   
+    parser.add_argument('-a', '--all', help="All processing options on", action="store_true", default=False)
 
 
 if __name__ == "__main__":
@@ -848,13 +848,13 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(title="subcommand")
 
     parser_build = subparsers.add_parser('build')
-    parser_build.add_argument('-p', '--spf', help="Compile SimplePathwayFormat File", action="store_true", default=False)   
-    parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)   
+    parser_build.add_argument('-p', '--spf', help="Compile SimplePathwayFormat File", action="store_true", default=False)
+    parser_build.add_argument('-s', '--sif', help="Compile SIF File", action="store_true", default=False)
     parser_build.add_argument("-b", "--base-dir", help="BaseDir", default=LOCAL_REPO)
     parser_build.add_argument("-o", "--output", default=None)
     parser_build.add_argument("--organism", default=None)
     parser_build.add_argument("--min-subgraph", type=int, default=0)
-    add_build_args(parser_build)    
+    add_build_args(parser_build)
     parser_build.add_argument("pathways", nargs="*")
 
     parser_build.set_defaults(func=main_build)
@@ -869,20 +869,20 @@ if __name__ == "__main__":
     parser_biopax_format = subparsers.add_parser('biopax-format')
     parser_biopax_format.set_defaults(func=main_biopax_format)
     parser_biopax_format.add_argument("--rename", default=None)
-    parser_biopax_format.add_argument("--cpus", type=int, default=2)    
+    parser_biopax_format.add_argument("--cpus", type=int, default=2)
     parser_biopax_format.add_argument("outdir")
     parser_biopax_format.add_argument("pathways", nargs="*")
 
     parser_biopax_convert = subparsers.add_parser('biopax-convert')
     parser_biopax_convert.set_defaults(func=main_biopax_convert)
-    parser_biopax_convert.add_argument("--cpus", type=int, default=2)    
+    parser_biopax_convert.add_argument("--cpus", type=int, default=2)
     parser_biopax_convert.add_argument("library")
 
     parser_library_gmt = subparsers.add_parser('library-gmt')
     parser_library_gmt.set_defaults(func=main_library_gmt)
     parser_library_gmt.add_argument("--organism", default=None)
-    parser_library_gmt.add_argument("--filter", default=None)  
-    parser_library_gmt.add_argument("--skip-empty", action="store_true", default=False)        
+    parser_library_gmt.add_argument("--filter", default=None)
+    parser_library_gmt.add_argument("--skip-empty", action="store_true", default=False)
     parser_library_gmt.add_argument("library")
 
     parser_library_gmt = subparsers.add_parser('library-table')
@@ -893,16 +893,14 @@ if __name__ == "__main__":
     parser_library_compile = subparsers.add_parser('library-compile')
     parser_library_compile.set_defaults(func=main_library_compile)
     add_build_args(parser_library_compile)
-    parser_library_compile.add_argument("library")    
+    parser_library_compile.add_argument("library")
 
     parser_library_copy = subparsers.add_parser('library-copy')
     parser_library_copy.set_defaults(func=main_library_copy)
-    parser_library_copy.add_argument("--cpus", type=int, default=2)    
     add_build_args(parser_library_copy)
-    parser_library_copy.add_argument("library")    
-    parser_library_copy.add_argument("out")    
+    parser_library_copy.add_argument("library")
+    parser_library_copy.add_argument("out")
 
     args = parser.parse_args()
 
     args.func(args)
-
