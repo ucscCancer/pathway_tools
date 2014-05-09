@@ -92,7 +92,7 @@ class PathwayScanner(seeds : Set[Long], edges : Map[Long,HashSet[Long]])  {
               newset ++= dst
             }
           }
-          newset --= seeds
+          //newset --= seeds
           newset += group
           if (newset.size != curset.size) {
             //println(group, curset.size, newset.size)
@@ -129,7 +129,6 @@ class BioPax_Splitter(val group_names:Map[Long,String], val elementMap:Map[Long,
 
   elementMap.foreach( x => x._2.foreach( y => group_set(y) = new HashSet[Long]()))
   elementMap.foreach( x => x._2.foreach( y => group_set(y) += x._1))
-
 
   def startRDF() = {
     group_names.foreach( x => {
