@@ -268,7 +268,10 @@ def pathway_opener(pathway_list):
 
         if path_type == "library-biopax":
             for path_path in glob(os.path.join(path, "*", "biopax.owl")):
-                yield XGMMLOpener(path_path)
+                yield BioPaxOpener(path_path)
+
+            for path_path in glob(os.path.join(path, "*", "biopax.owl.gz")):
+                yield BioPaxOpener(path_path)
 
 
 
@@ -681,7 +684,12 @@ def main_biopax_format(args):
             os.makedirs(outdir)
         biopax_path = os.path.join(outdir, "biopax.owl")
         log("Copying: %s" % (biopax_path))
+        if os.path.exists(biopax_path):
+            os.unlink(biopax_path)
         shutil.copy(path, biopax_path)
+        if os.path.exists(biopax_path + ".gz"):
+            os.unlink(biopax_path + ".gz")
+        subprocess.check_call("gzip %s" % (biopax_path), shell=True)
 
 
 def main_biopax_convert(args):

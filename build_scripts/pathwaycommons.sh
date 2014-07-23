@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATADIR=work
-
+./scripts/pathway_db.py hugosync
 ./scripts/pathway_db.py library-compile --dogma data/simple_dogma.yaml --exclude data/exclude.list --merge-file data/merge.gmt --all $DATADIR/Pathway_Commons.4.All.BIOPAX.library --exclude-type chemical
 
 ./scripts/pathway_db.py build --organism 9606 --dogma data/simple_dogma.yaml --exclude data/exclude.list --merge-file data/merge.gmt --all library $DATADIR/Pathway_Commons.4.All.BIOPAX.library --spf --min-subgraph 2 --exclude-type chemical > $DATADIR/Pathway_Commons.4.All.BIOPAX.library.9606.spf

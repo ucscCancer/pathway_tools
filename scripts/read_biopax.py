@@ -8,7 +8,7 @@ import networkx
 from glob import glob
 from pathway_tools.biopax import BioPaxFile, BioPaxSparql
 from pathway_tools import convert
-
+import gzip
 from multiprocessing import Pool
 
 re_clean = re.compile(r'[/\\ \n;]')
@@ -26,7 +26,11 @@ class ConvertTask:
         path_file = self.path_file
         if isinstance(path_file, basestring):
             t = BioPaxFile()
-            t.load(path_file)
+            if path_file.endswith(".gz"):
+                handle = gzip.GzipFile(path_file)
+                t.load(handle)
+            else:
+                t.load(path_file)
             path_file = t
         paths = []
         for key,value in path_file.pathways().iteritems():
