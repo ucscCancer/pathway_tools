@@ -15,7 +15,7 @@ TYPE_PRED = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 BIOPAX_BASE = "http://www.biopax.org/release/biopax-level3.owl#"
 
 
-DEBUG = False
+DEBUG=False
 
 
 def log(message):
@@ -188,7 +188,7 @@ class BioPax_RnaReference(BioPax_ElementBase):
     type = "Rna"
 
     def process(self):
-        
+
         xref_list = []
         for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref", get_type=False):
             db = None
@@ -239,7 +239,7 @@ class BioPax_DnaReference(BioPax_ElementBase):
     type = "DnaReference"
 
     def process(self):
-        
+
         xref_list = []
         for xref in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "xref", get_type=False):
             db = None
@@ -274,11 +274,11 @@ class BioPax_DnaReference(BioPax_ElementBase):
 
 class BioPax_RnaRegion(BioPax_ElementBase):
     def process(self):
-        return None    
+        return None
 
 class BioPax_DnaRegion(BioPax_ElementBase):
     def process(self):
-        return None    
+        return None
 
 
 class BioPax_Protein(BioPax_ElementBase):
@@ -295,7 +295,7 @@ class BioPax_Protein(BioPax_ElementBase):
             return self.process_child(entity_ref, entity_type)
 
         #Alternate to entityReference is memberPhysicalEntity which may have multiple proteins
-        #that can be used for this purpose 
+        #that can be used for this purpose
         #check http://www.biopax.org/release/biopax-level3-documentation.pdf page 51
 
         ref_list = []
@@ -315,7 +315,7 @@ class BioPax_Protein(BioPax_ElementBase):
                     self.debug("memberLink %s %s" % (c_info.dst, c))
                     out.add_node(c_info.dst, c)
                     out.add_edge(c_info.dst, self.node, {"interaction" : "member>", 'class' : self.type, 'src_url' : self.node} )
-            return out        
+            return out
 
 
 class BioPax_ProteinReference(BioPax_ElementBase):
@@ -380,7 +380,7 @@ class BioPax_Catalysis(BioPax_ElementBase):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_input=True)
             controller.append( c_info.dst )
-            
+
         controlled = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "controlled"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
@@ -390,8 +390,8 @@ class BioPax_Catalysis(BioPax_ElementBase):
 
         interaction = "-a>"
         for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType', get_type=False):
-            interaction = control.dst 
-        
+            interaction = control.dst
+
         for l in controller:
             for r in controlled:
                 out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
@@ -415,42 +415,63 @@ class BioPax_BiochemicalReaction(BioPax_ElementBase):
                 out.add_node(c_info.dst, elem, is_input=True)
                 left.append( c_info.dst )
                 left_elem.append(elem)
-                
+
         right = []
         right_elem = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             if elem is not None:
-                out.add_node(c_info.dst, elem, is_output=True)           
+                out.add_node(c_info.dst, elem, is_output=True)
                 right.append( c_info.dst )
                 right_elem.append(elem)
 
 
 
         #self.debug( "REACT" + str(list(a.meta for a in left_elem)) + str(list(a.meta for a in right_elem)) )
-        left_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in left_elem))))
-        right_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in right_elem))))
-        
+        left_protein_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in left_elem))))
+        right_protein_set = sorted(list(itertools.chain( *list(a.node_set('protein') for a in right_elem))))
+
+        left_type_set = set(list(a.meta['type'] for a in left_elem))
+        right_type_set = set(list(a.meta['type'] for a in right_elem))
+        print self.node, left_type_set, right_type_set
+
         #self.debug( "REACT_LEFT" + str( left_set ) )
         #self.debug( "REACT_RIGHT" + str( right_set ) )
         #self.debug( "REACT:" + str(len(left_set)) + " " + str(len(right_set)) )
         #self.debug( "REACT:" + str(left_set == right_set))
 
-        #self.debug( "REACT: %s %s %s %s %s" % (len(right_elem), right_elem[0].meta['type'] == 'Complex', left_set == right_set, left_set, right_set) )
-        if len(right_elem) and right_elem[0].meta['type'] == 'Complex' and len(left_set) and left_set == right_set:
-            #it appears that all of the elements on the left side, moved to the right side to form a complex, 
-            #don't report this as an interaction
-            return right_elem[0]
-        else:
-            interaction = "-a>"
-            for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType", get_type=False):
-                interaction = c_info.dst
-                for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term", get_type=False):
-                    interaction = d_info.dst
 
-            for l in left:
-                for r in right:
-                    out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
+        #self.debug( "REACT: %s %s %s %s %s" % (len(right_elem), right_elem[0].meta['type'] == 'Complex', left_set == right_set, left_set, right_set) )
+        if len(right_elem) and right_elem[0].meta['type'] == 'Complex' and len(left_protein_set) and left_protein_set == right_protein_set:
+            #it appears that all of the elements on the left side, moved to the right side to form a complex,
+            #don't report this as an interaction
+            print "reporting Complex", left_protein_set, right_protein_set
+            out = right_elem[0]
+        else:
+
+            if 'DnaReference' in left_type_set and ('Complex' in left_type_set or 'ProteinReference' in left_type_set):
+                print "transcription reaction"
+            else:
+                interaction = "-a>"
+                for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "interactionType", get_type=False):
+                    interaction = c_info.dst
+                    for d_info in self.pax.query(src=c_info.dst, predicate=BIOPAX_BASE + "term", get_type=False):
+                        interaction = d_info.dst
+                for l in left:
+                    for r in right:
+                        out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
+
+        controller = None
+        #see if this reaction is controlled by anything
+        for c_info in self.pax.query(dst=self.node, predicate=BIOPAX_BASE + "controlled"):
+            for p_info in self.pax.query(src=c_info.src, predicate=BIOPAX_BASE + "controller"):
+                controller = elem = self.process_child(p_info.dst, p_info.dst_type)
+        if controller is not None:
+            n = Subnet({'name' : node_label, 'url' : self.node, 'type' : self.type})
+            n.add_node(controller.meta['url'], controller)
+            n.add_node(out.meta['url'], out)
+            n.add_edge(controller.meta['url'], out.meta['url'], {'interaction' : "-a>"})
+            out = n
         return out
 
 
@@ -472,7 +493,7 @@ class BioPax_MolecularInteraction(BioPax_ElementBase):
         for p1 in part:
             for p2 in part:
                 if p1 != p2:
-                    out.add_edge(p1, p2, {'interaction' : "--"} ) 
+                    out.add_edge(p1, p2, {'interaction' : "--"} )
         return out
 
 class BioPax_Transport(BioPax_ElementBase):
@@ -489,11 +510,11 @@ class BioPax_Transport(BioPax_ElementBase):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_input=True)
             left.append( c_info.dst )
-                
+
         right = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_output=True)           
+            out.add_node(c_info.dst, elem, is_output=True)
             right.append( c_info.dst )
 
         interaction = "transport"
@@ -519,11 +540,11 @@ class BioPax_Degradation(BioPax_ElementBase):
             out.add_node(c_info.dst, elem, is_input=True)
             left.append( c_info.dst )
 
-        """     
+        """
         right = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_output=True)           
+            out.add_node(c_info.dst, elem, is_output=True)
             right.append( c_info.dst )
         interaction = "transport"
 
@@ -548,17 +569,21 @@ class BioPax_Control(BioPax_ElementBase):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_input=True)
             controller.append( c_info.dst )
-            
+
         controlled = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "controlled"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_output=True)
+            if elem is not None and elem.meta['type'] == 'Pathway':
+                #pathways don't have defined input/output points
+                #so they can't be connected to the network, turn this into an abstract node instead
+                out.add_node(c_info.dst, {'label' : elem.meta['name'], 'url' : c_info.dst, 'type': 'abstract'}, is_input=True)
+            else:
+                out.add_node(c_info.dst, elem, is_output=True)
             controlled.append( c_info.dst )
-
         interaction = "-a>"
         for control in self.pax.query(src=self.node, predicate=BIOPAX_BASE + 'controlType', get_type=False):
-            interaction = control.dst 
-        
+            interaction = control.dst
+
         for l in controller:
             for r in controlled:
                 out.add_edge( l, r, {'interaction' : iteraction_map[interaction], 'class' : self.type, 'src_url' : self.node} )
@@ -599,11 +624,11 @@ class BioPax_TransportWithBiochemicalReaction(BioPax_ElementBase):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem, is_input=True)
             left.append( c_info.dst )
-                
+
         right = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
-            out.add_node(c_info.dst, elem, is_output=True)           
+            out.add_node(c_info.dst, elem, is_output=True)
             right.append( c_info.dst )
 
         interaction = "transport"
@@ -657,7 +682,7 @@ class BioPax_ComplexAssembly(BioPax_ElementBase):
     type = "ComplexAssembly"
 
     def process(self):
-        
+
         """
         out = Subnet()
         left = []
@@ -665,7 +690,7 @@ class BioPax_ComplexAssembly(BioPax_ElementBase):
             elem = self.process_child(c_info.dst, c_info.dst_type)
             out.add_node(c_info.dst, elem)
             left.append( c_info.dst )
-        
+
         right = []
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
             elem = self.process_child(c_info.dst, c_info.dst_type)
@@ -674,10 +699,10 @@ class BioPax_ComplexAssembly(BioPax_ElementBase):
 
         if len(right) != 1:
             self.debug("Weird product set")
-        
+
         for l in left:
             for r in right:
-                out.add_edge(l, r, {"interaction" : "component>", 'class' : self.type, 'src_url' : self.node} )        
+                out.add_edge(l, r, {"interaction" : "component>", 'class' : self.type, 'src_url' : self.node} )
         return out
         """
         for c_info in self.pax.query(src=self.node, predicate=BIOPAX_BASE + "right"):
@@ -822,11 +847,17 @@ class BioPax:
             if pathways is None or a.src in pathways:
                 start_set[a.src] = True
 
+        ignore_set = {}
+        for a in self.query(dst_type=BIOPAX_BASE + "Pathway"):
+            if pathways is None or a.dst in pathways:
+                ignore_set[a.dst] = True
+
         for pathway in start_set:
-            p_elem = BioPax_Pathway(self, pathway, [])
-            gr = p_elem.process()
-            yield gr
-    
+            if pathway not in ignore_set:
+                p_elem = BioPax_Pathway(self, pathway, [])
+                gr = p_elem.process()
+                yield gr
+
 
 
 class BioPaxFile(BioPax):
@@ -837,13 +868,13 @@ class BioPaxFile(BioPax):
         g = rdflib.Graph()
         result = g.parse(path)
         self._graph_parse(g)
-    
+
     def parse(self, text):
         handle = StringIO(text)
         g = rdflib.Graph()
         result = g.parse(handle)
         self._graph_parse(g)
-    
+
     def _graph_parse(self, g):
         for subj, pred, obj in g:
             subj_text = ("%s" % (subj)).encode('ascii', errors='ignore').rstrip()
@@ -857,7 +888,7 @@ class BioPaxFile(BioPax):
 
     def get_node_type(self, node):
         return self.graph.get(node, {}).get(TYPE_PRED, [None])[0]
-    
+
     def str_compare(self, str1, str2, check_case):
         if check_case:
             return str1 == str2
@@ -874,7 +905,7 @@ class BioPaxFile(BioPax):
             if include[0]:
                 include[1] = False
                 if src is None or self.str_compare(src_cmp, src, check_case):
-                    include[1] = True                
+                    include[1] = True
                 if include[1]:
                     for pred_cmp in self.graph[src_cmp]:
                         include[2] = False
@@ -891,9 +922,9 @@ class BioPaxFile(BioPax):
                                         include[4] = True
                                     if include[4]:
                                         out.append( Link(
-                                            self.get_node_type(src_cmp), src_cmp, 
-                                            pred_cmp, 
-                                            self.get_node_type(dst_cmp), dst_cmp) 
+                                            self.get_node_type(src_cmp), src_cmp,
+                                            pred_cmp,
+                                            self.get_node_type(dst_cmp), dst_cmp)
                                         )
         return out
 
@@ -986,7 +1017,7 @@ def write_biopax(gr, handle):
     node_map = {}
     for n in gr.node:
         if gr.node[n]['type'] == 'family':
-            pnode = gene[n] #rdflib.BNode()            
+            pnode = gene[n] #rdflib.BNode()
             node_map[n] = pnode
             pax.add( (pnode, rdf.type, bp.Protein) )
             pax.add( (pnode, bp.displayName, rdflib.Literal(n)) )
@@ -1017,7 +1048,7 @@ def write_biopax(gr, handle):
             node_map[n] = pnode
             pax.add( (pnode, rdf.type, bp.Protein) )
             pax.add( (pnode, bp.displayName, rdflib.Literal(n)) )
-        
+
 
     i = 0
     reaction_list = {}
@@ -1058,4 +1089,3 @@ def write_biopax(gr, handle):
 
 
     handle.write(pax.serialize(format="pretty-xml"))
-

@@ -474,7 +474,7 @@ def main_build(args):
                             if gr.node[node]['type'] == 'protein':
                                 gr.node[node]['type'] = fix_gr.node[node]['type']
                 else:
-                    log("Merging: %s" % node)
+                    log("Adding: %s" % node)
                     gr.add_node(node, attr_dict=fix_gr.node[node])
 
             for src, dst, data in fix_gr.edges(data=True):
@@ -722,19 +722,20 @@ def main_library_gmt(args):
         if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             spf_path = os.path.join(path_dir, "graph.spf")
-            handle = open(spf_path)
-            gr = network_convert.read_spf(handle, strict=False)
-            handle.close()
-            if args.organism is None or gr.graph.get('organism', args.organism) == args.organism:
-                if filter_map is None:
-                    out = gr.node.keys()
-                else:
-                    out = []
-                    for a in gr.node.keys():
-                        if a in filter_map:
-                            out.append(a)
-                if not args.skip_empty or len(out):
-                    print "%s\t%s" % (path_name, "\t".join(out))
+            if os.path.exists(spf_path):
+                handle = open(spf_path)
+                gr = network_convert.read_spf(handle, strict=False)
+                handle.close()
+                if args.organism is None or gr.graph.get('organism', args.organism) == args.organism:
+                    if filter_map is None:
+                        out = gr.node.keys()
+                    else:
+                        out = []
+                        for a in gr.node.keys():
+                            if a in filter_map:
+                                out.append(a)
+                    if not args.skip_empty or len(out):
+                        print "%s\t%s" % (path_name, "\t".join(out))
 
 
 def main_library_table(args):
@@ -743,16 +744,17 @@ def main_library_table(args):
         if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
-            handle = open(xgmml_path)
-            gr = network_convert.read_xgmml(handle)
-            handle.close()
+            if os.path.exists(xgmml_path):
+                handle = open(xgmml_path)
+                gr = network_convert.read_xgmml(handle)
+                handle.close()
 
-            organism = gr.graph.get('organism', '')
-            name = gr.graph.get('displayName', None)
-            if name is None:
-                name = gr.graph.get('name', None)
+                organism = gr.graph.get('organism', '')
+                name = gr.graph.get('displayName', None)
+                if name is None:
+                    name = gr.graph.get('name', None)
 
-            print "%s\t%s\t%s" % (path_name, organism, name)
+                print "%s\t%s\t%s" % (path_name, organism, name)
 
 def main_library_compile(args):
     builder = GraphBuilder(args)
@@ -761,15 +763,16 @@ def main_library_compile(args):
         if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
-            handle = open(xgmml_path)
-            gr = network_convert.read_xgmml(handle)
-            handle.close()
-            fix_gr = builder.fix_graph(gr)
-            spf_path = os.path.join(path_dir, "graph.spf")
-            log("Writing: %s" % (spf_path))
-            handle = open(spf_path, "w")
-            network_convert.write_spf(fix_gr, handle)
-            handle.close()
+            if os.path.exists(xgmml_path):
+                handle = open(xgmml_path)
+                gr = network_convert.read_xgmml(handle)
+                handle.close()
+                fix_gr = builder.fix_graph(gr)
+                spf_path = os.path.join(path_dir, "graph.spf")
+                log("Writing: %s" % (spf_path))
+                handle = open(spf_path, "w")
+                network_convert.write_spf(fix_gr, handle)
+                handle.close()
 
 def main_library_copy(args):
     builder = GraphBuilder(args)
@@ -779,15 +782,16 @@ def main_library_copy(args):
         if os.path.isdir(path_dir):
             path_name = os.path.basename(path_dir)
             xgmml_path = os.path.join(path_dir, "graph.xgmml")
-            handle = open(xgmml_path)
-            gr = network_convert.read_xgmml(handle)
-            handle.close()
-            fix_gr = builder.fix_graph(gr)
-            log("Writing: %s" % (path_name))
-            text = StringIO()
-            network_convert.write_spf(fix_gr, text)
-            if len(text.getvalue()) > 0:
-                out_zip.writestr( os.path.join(out_base, path_name + ".spf"), text.getvalue())
+            if os.path.exists(xgmml_path):
+                handle = open(xgmml_path)
+                gr = network_convert.read_xgmml(handle)
+                handle.close()
+                fix_gr = builder.fix_graph(gr)
+                log("Writing: %s" % (path_name))
+                text = StringIO()
+                network_convert.write_spf(fix_gr, text)
+                if len(text.getvalue()) > 0:
+                    out_zip.writestr( os.path.join(out_base, path_name + ".spf"), text.getvalue())
     out_zip.close()
 
 

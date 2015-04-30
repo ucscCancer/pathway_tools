@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
 import sys
 import os
@@ -46,27 +46,27 @@ class ConvertTask:
             if add:
                 paths.append(key)
 
-        for subnet in path_file.toNet(paths):                
+        for subnet in path_file.toNet(paths):
             gr = networkx.MultiDiGraph()
 
             for k, v in subnet.meta.items():
                 if k != 'type':
                     gr.graph[k] = v
             subnet.to_graph(gr)
+            if len(gr.node):
+                name = re_namesplit.split(gr.graph['url'])[-1]
+                if self.outdir is not None:
+                  handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
+                elif self.singlepath is not None:
+                  handle = open(self.singlepath, "w")
+                else:
+                  handle = sys.stdout
 
-            name = re_namesplit.split(gr.graph['url'])[-1]
-            if self.outdir is not None:
-                handle = open(os.path.join(self.outdir, name + ".xgmml"), "w")
-            elif self.singlepath is not None:
-                handle = open(self.singlepath, "w")
-            else:
-                handle = sys.stdout
-            
-            convert.write_xgmml(gr, handle)
-            
-            if self.singlepath is not None:
-                handle.close()
-                return
+                convert.write_xgmml(gr, handle)
+
+                if self.singlepath is not None:
+                  handle.close()
+                  return
 
 def runner(x):
     x.run()
@@ -78,8 +78,8 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--list", action="store_true", default=False)
     parser.add_argument("-d", "--out-dir", default=None)
     parser.add_argument("--cpus", type=int, default=1)
-   
-    
+
+
     parser.add_argument("input", nargs="+")
     args = parser.parse_args()
 
@@ -113,5 +113,3 @@ if __name__ == "__main__":
         else:
             for path_file in file_list:
                 ConvertTask(path_file, args.out_dir, args.pathways).run()
-
-
